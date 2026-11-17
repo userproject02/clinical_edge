@@ -1,0 +1,16 @@
+# Install once per clone: brew install lefthook && lefthook install
+pre-commit:
+  parallel: false
+  commands:
+    format:
+      glob: "*.dart"
+      run: dart format --output=none --set-exit-if-changed {staged_files}
+    analyze:
+      glob: "*.dart"
+      run: flutter analyze
+    claude-context:
+      run: bash tool/ci/context_guard.sh staged
+commit-msg:
+  commands:
+    no-ai-trailers:
+      run: '! grep -qiE "^(co-authored-by: claude|claude-session:)" {1}'
