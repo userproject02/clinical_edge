@@ -1137,5 +1137,160 @@
         "type": "String"
       }
     }
+  },
+  "signoffRequestAction": "Request sign-off",
+  "@signoffRequestAction": {
+    "description": "Button."
+  },
+  "signoffGoesTo": "Goes to {name} · {department}",
+  "@signoffGoesTo": {
+    "description": "Note under the request button.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "department": {
+        "type": "String"
+      }
+    }
+  },
+  "signoffWaiting": "Waiting for supervisor · requested {date}",
+  "@signoffWaiting": {
+    "description": "Pending footer.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "signoffApprovedBy": "Approved by {name} · {date}",
+  "@signoffApprovedBy": {
+    "description": "Decided footer.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "signoffReturnedBy": "Returned by {name} · {date}",
+  "@signoffReturnedBy": {
+    "description": "Decided footer.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "signoffRequestedTitle": "Sign-off requested",
+  "@signoffRequestedTitle": {
+    "description": "Snackbar title."
+  },
+  "signoffRequestedMessage": "Sent to {name}",
+  "@signoffRequestedMessage": {
+    "description": "Snackbar message.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "signoffSelfAssessed": "Self-assessed",
+  "@signoffSelfAssessed": {
+    "description": "Item check semantics."
+  },
+  "queueStatPending": "Pending",
+  "@queueStatPending": {
+    "description": "Stat tile."
+  },
+  "queueStatThisMonth": "This month",
+  "@queueStatThisMonth": {
+    "description": "Stat tile."
+  },
+  "queueStatTurnaround": "Turnaround",
+  "@queueStatTurnaround": {
+    "description": "Stat tile."
+  },
+  "queueTurnaroundValue": "{days}d",
+  "@queueTurnaroundValue": {
+    "description": "Turnaround in days, e.g. 1.4d.",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "queueSkillsRequested": "{count} skills · requested {date}",
+  "@queueSkillsRequested": {
+    "description": "Queue card line.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "queueEmptyTitle": "All caught up",
+  "@queueEmptyTitle": {
+    "description": "Empty queue."
+  },
+  "queueEmptyBody": "New sign-off requests appear here.",
+  "@queueEmptyBody": {
+    "description": "Empty queue."
+  },
+  "reviewObserved": "Observed",
+  "@reviewObserved": {
+    "description": "Item tag."
+  },
+  "reviewCommentLabel": "Comment for the learner",
+  "@reviewCommentLabel": {
+    "description": "Field label."
+  },
+  "reviewCommentHint": "Observed technique, feedback, follow-up…",
+  "@reviewCommentHint": {
+    "description": "Field placeholder."
+  },
+  "reviewLockNote": "Your decision is written to the append-only audit chain.",
+  "@reviewLockNote": {
+    "description": "Lock note."
+  },
+  "reviewReject": "Reject",
+  "@reviewReject": {
+    "description": "Button."
+  },
+  "reviewApprove": "Approve",
+  "@reviewApprove": {
+    "description": "Button."
+  },
+  "reviewCommentRequired": "A comment is required to reject.",
+  "@reviewCommentRequired": {
+    "description": "Validation."
+  },
+  "reviewDefaultApproval": "Competent. Observed and signed off.",
+  "@reviewDefaultApproval": {
+    "description": "Stored comment when approving without one."
+  },
+  "reviewApprovedSnack": "Competency approved",
+  "@reviewApprovedSnack": {
+    "description": "Snackbar."
+  },
+  "reviewRejectedSnack": "Returned with comments",
+  "@reviewRejectedSnack": {
+    "description": "Snackbar."
+  },
+  "decidedEmptyTitle": "No decisions yet",
+  "@decidedEmptyTitle": {
+    "description": "Empty decided list."
+  },
+  "decidedEmptyBody": "Approved and returned sign-offs appear here.",
+  "@decidedEmptyBody": {
+    "description": "Empty decided list."
   }
 }

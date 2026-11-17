@@ -758,4 +758,100 @@ class AppLocalizationsAr extends AppLocalizations {
   String uploadDoneMessage(String code) {
     return '$code قيد التحقق';
   }
+
+  @override
+  String get signoffRequestAction => 'طلب الاعتماد';
+
+  @override
+  String signoffGoesTo(String name, String department) {
+    return 'يُرسَل إلى $name · $department';
+  }
+
+  @override
+  String signoffWaiting(String date) {
+    return 'بانتظار المشرف · طُلب في $date';
+  }
+
+  @override
+  String signoffApprovedBy(String name, String date) {
+    return 'اعتمده $name · $date';
+  }
+
+  @override
+  String signoffReturnedBy(String name, String date) {
+    return 'أعاده $name · $date';
+  }
+
+  @override
+  String get signoffRequestedTitle => 'تم طلب الاعتماد';
+
+  @override
+  String signoffRequestedMessage(String name) {
+    return 'أُرسل إلى $name';
+  }
+
+  @override
+  String get signoffSelfAssessed => 'تقييم ذاتي';
+
+  @override
+  String get queueStatPending => 'قيد الانتظار';
+
+  @override
+  String get queueStatThisMonth => 'هذا الشهر';
+
+  @override
+  String get queueStatTurnaround => 'مدة الإنجاز';
+
+  @override
+  String queueTurnaroundValue(String days) {
+    return '$days يوم';
+  }
+
+  @override
+  String queueSkillsRequested(int count, String date) {
+    return '$count مهارات · طُلب في $date';
+  }
+
+  @override
+  String get queueEmptyTitle => 'لا طلبات معلّقة';
+
+  @override
+  String get queueEmptyBody => 'تظهر طلبات الاعتماد الجديدة هنا.';
+
+  @override
+  String get reviewObserved => 'تمت الملاحظة';
+
+  @override
+  String get reviewCommentLabel => 'تعليق للمتعلّم';
+
+  @override
+  String get reviewCommentHint => 'التقنية الملاحَظة، الملاحظات، المتابعة…';
+
+  @override
+  String get reviewLockNote =>
+      'يُسجَّل قرارك في سجل التدقيق غير القابل للتعديل.';
+
+  @override
+  String get reviewReject => 'رفض';
+
+  @override
+  String get reviewApprove => 'اعتماد';
+
+  @override
+  String get reviewCommentRequired => 'التعليق مطلوب عند الرفض.';
+
+  @override
+  String get reviewDefaultApproval => 'كفء. تمت الملاحظة والاعتماد.';
+
+  @override
+  String get reviewApprovedSnack => 'تم اعتماد الكفاءة';
+
+  @override
+  String get reviewRejectedSnack => 'أُعيد مع ملاحظات';
+
+  @override
+  String get decidedEmptyTitle => 'لا قرارات بعد';
+
+  @override
+  String get decidedEmptyBody => 'تظهر هنا طلبات الاعتماد المعتمدة والمعادة.';
 }

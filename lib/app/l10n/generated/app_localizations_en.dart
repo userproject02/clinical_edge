@@ -759,4 +759,100 @@ class AppLocalizationsEn extends AppLocalizations {
   String uploadDoneMessage(String code) {
     return '$code is pending verification';
   }
+
+  @override
+  String get signoffRequestAction => 'Request sign-off';
+
+  @override
+  String signoffGoesTo(String name, String department) {
+    return 'Goes to $name · $department';
+  }
+
+  @override
+  String signoffWaiting(String date) {
+    return 'Waiting for supervisor · requested $date';
+  }
+
+  @override
+  String signoffApprovedBy(String name, String date) {
+    return 'Approved by $name · $date';
+  }
+
+  @override
+  String signoffReturnedBy(String name, String date) {
+    return 'Returned by $name · $date';
+  }
+
+  @override
+  String get signoffRequestedTitle => 'Sign-off requested';
+
+  @override
+  String signoffRequestedMessage(String name) {
+    return 'Sent to $name';
+  }
+
+  @override
+  String get signoffSelfAssessed => 'Self-assessed';
+
+  @override
+  String get queueStatPending => 'Pending';
+
+  @override
+  String get queueStatThisMonth => 'This month';
+
+  @override
+  String get queueStatTurnaround => 'Turnaround';
+
+  @override
+  String queueTurnaroundValue(String days) {
+    return '${days}d';
+  }
+
+  @override
+  String queueSkillsRequested(int count, String date) {
+    return '$count skills · requested $date';
+  }
+
+  @override
+  String get queueEmptyTitle => 'All caught up';
+
+  @override
+  String get queueEmptyBody => 'New sign-off requests appear here.';
+
+  @override
+  String get reviewObserved => 'Observed';
+
+  @override
+  String get reviewCommentLabel => 'Comment for the learner';
+
+  @override
+  String get reviewCommentHint => 'Observed technique, feedback, follow-up…';
+
+  @override
+  String get reviewLockNote =>
+      'Your decision is written to the append-only audit chain.';
+
+  @override
+  String get reviewReject => 'Reject';
+
+  @override
+  String get reviewApprove => 'Approve';
+
+  @override
+  String get reviewCommentRequired => 'A comment is required to reject.';
+
+  @override
+  String get reviewDefaultApproval => 'Competent. Observed and signed off.';
+
+  @override
+  String get reviewApprovedSnack => 'Competency approved';
+
+  @override
+  String get reviewRejectedSnack => 'Returned with comments';
+
+  @override
+  String get decidedEmptyTitle => 'No decisions yet';
+
+  @override
+  String get decidedEmptyBody => 'Approved and returned sign-offs appear here.';
 }

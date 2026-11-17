@@ -14,6 +14,9 @@ import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/auth/presentation/sign_in_screen.dart';
 import 'package:clinical_edge/features/certifications/presentation/certs_screen.dart';
 import 'package:clinical_edge/features/certifications/presentation/upload_sheet.dart';
+import 'package:clinical_edge/features/competencies/presentation/queue_screens.dart';
+import 'package:clinical_edge/features/competencies/presentation/signoff_providers.dart';
+import 'package:clinical_edge/features/competencies/presentation/signoffs_screen.dart';
 import 'package:clinical_edge/features/courses/presentation/catalogue_screen.dart';
 import 'package:clinical_edge/features/courses/presentation/course_detail_screen.dart';
 import 'package:clinical_edge/features/courses/presentation/lesson_screen.dart';
@@ -207,6 +210,7 @@ RouteBase _learnerShell(GlobalKey<NavigatorState> rootKey) {
           AppRoutes.signoffs,
           (l) => l.titleCompetencies,
           Icons.fact_check_outlined,
+          screen: (_) => const SignOffsScreen(),
         ),
       ),
     ],
@@ -217,25 +221,29 @@ RouteBase _supervisorShell() {
   return StatefulShellRoute.indexedStack(
     builder: (context, state, shell) {
       final l = AppLocalizations.of(context);
-      return RoleShell(
-        navigationShell: shell,
-        items: <NavItem>[
-          NavItem(
-            icon: Icons.inbox_outlined,
-            selectedIcon: Icons.inbox_rounded,
-            label: l.navQueue,
-          ),
-          NavItem(
-            icon: Icons.task_alt_outlined,
-            selectedIcon: Icons.task_alt_rounded,
-            label: l.navDecided,
-          ),
-          NavItem(
-            icon: Icons.menu_book_outlined,
-            selectedIcon: Icons.menu_book_rounded,
-            label: l.navLearn,
-          ),
-        ],
+      return Consumer(
+        builder: (context, ref, _) => RoleShell(
+          navigationShell: shell,
+          items: <NavItem>[
+            NavItem(
+              icon: Icons.inbox_outlined,
+              selectedIcon: Icons.inbox_rounded,
+              label: l.navQueue,
+              // Pending sign-off requests.
+              badge: ref.watch(signOffQueueProvider).value?.length ?? 0,
+            ),
+            NavItem(
+              icon: Icons.task_alt_outlined,
+              selectedIcon: Icons.task_alt_rounded,
+              label: l.navDecided,
+            ),
+            NavItem(
+              icon: Icons.menu_book_outlined,
+              selectedIcon: Icons.menu_book_rounded,
+              label: l.navLearn,
+            ),
+          ],
+        ),
       );
     },
     branches: <StatefulShellBranch>[
@@ -244,17 +252,25 @@ RouteBase _supervisorShell() {
           AppRoutes.queue,
           (l) => l.titleQueue,
           Icons.inbox_outlined,
+          screen: (_) => const QueueScreen(),
           routes: <RouteBase>[
             _detail(
               ':requestId',
               (l) => l.titleReview,
               Icons.rate_review_outlined,
+              screen: (state) =>
+                  ReviewScreen(requestId: state.pathParameters['requestId']!),
             ),
           ],
         ),
       ),
       _branch(
-        _tab(AppRoutes.decided, (l) => l.titleDecided, Icons.task_alt_outlined),
+        _tab(
+          AppRoutes.decided,
+          (l) => l.titleDecided,
+          Icons.task_alt_outlined,
+          screen: (_) => const DecidedScreen(),
+        ),
       ),
       _branch(_learnRoute(learnerOnly: false)),
     ],

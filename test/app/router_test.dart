@@ -146,7 +146,7 @@ void main() {
 
       await _signInAs(tester, c, Role.supervisor);
       expect(_location(c), '/queue');
-      expect(find.text('Sign-off queue'), findsWidgets);
+      expect(find.byKey(const Key('queue.list')), findsOneWidget);
       expect(
         tester.widget<NavigationBar>(find.byType(NavigationBar)).destinations,
         hasLength(3),
@@ -269,7 +269,6 @@ void main() {
       final expected = <String, String>{
         '/learn/c3/checkout': 'Checkout',
         '/learn/c3/receipt/o1': 'Receipt',
-        '/signoffs': 'Competencies',
       };
       for (final MapEntry(key: path, value: title) in expected.entries) {
         router.go(path);

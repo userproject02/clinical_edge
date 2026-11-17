@@ -1417,6 +1417,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{code} is pending verification'**
   String uploadDoneMessage(String code);
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Request sign-off'**
+  String get signoffRequestAction;
+
+  /// Note under the request button.
+  ///
+  /// In en, this message translates to:
+  /// **'Goes to {name} · {department}'**
+  String signoffGoesTo(String name, String department);
+
+  /// Pending footer.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for supervisor · requested {date}'**
+  String signoffWaiting(String date);
+
+  /// Decided footer.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved by {name} · {date}'**
+  String signoffApprovedBy(String name, String date);
+
+  /// Decided footer.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned by {name} · {date}'**
+  String signoffReturnedBy(String name, String date);
+
+  /// Snackbar title.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-off requested'**
+  String get signoffRequestedTitle;
+
+  /// Snackbar message.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent to {name}'**
+  String signoffRequestedMessage(String name);
+
+  /// Item check semantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Self-assessed'**
+  String get signoffSelfAssessed;
+
+  /// Stat tile.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get queueStatPending;
+
+  /// Stat tile.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get queueStatThisMonth;
+
+  /// Stat tile.
+  ///
+  /// In en, this message translates to:
+  /// **'Turnaround'**
+  String get queueStatTurnaround;
+
+  /// Turnaround in days, e.g. 1.4d.
+  ///
+  /// In en, this message translates to:
+  /// **'{days}d'**
+  String queueTurnaroundValue(String days);
+
+  /// Queue card line.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} skills · requested {date}'**
+  String queueSkillsRequested(int count, String date);
+
+  /// Empty queue.
+  ///
+  /// In en, this message translates to:
+  /// **'All caught up'**
+  String get queueEmptyTitle;
+
+  /// Empty queue.
+  ///
+  /// In en, this message translates to:
+  /// **'New sign-off requests appear here.'**
+  String get queueEmptyBody;
+
+  /// Item tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Observed'**
+  String get reviewObserved;
+
+  /// Field label.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment for the learner'**
+  String get reviewCommentLabel;
+
+  /// Field placeholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Observed technique, feedback, follow-up…'**
+  String get reviewCommentHint;
+
+  /// Lock note.
+  ///
+  /// In en, this message translates to:
+  /// **'Your decision is written to the append-only audit chain.'**
+  String get reviewLockNote;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reviewReject;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get reviewApprove;
+
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'A comment is required to reject.'**
+  String get reviewCommentRequired;
+
+  /// Stored comment when approving without one.
+  ///
+  /// In en, this message translates to:
+  /// **'Competent. Observed and signed off.'**
+  String get reviewDefaultApproval;
+
+  /// Snackbar.
+  ///
+  /// In en, this message translates to:
+  /// **'Competency approved'**
+  String get reviewApprovedSnack;
+
+  /// Snackbar.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned with comments'**
+  String get reviewRejectedSnack;
+
+  /// Empty decided list.
+  ///
+  /// In en, this message translates to:
+  /// **'No decisions yet'**
+  String get decidedEmptyTitle;
+
+  /// Empty decided list.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved and returned sign-offs appear here.'**
+  String get decidedEmptyBody;
 }
 
 class _AppLocalizationsDelegate

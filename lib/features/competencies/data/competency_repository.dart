@@ -162,10 +162,17 @@ class MockCompetencyRepository implements CompetencyRepository {
         comment != null &&
         (comment.en.trim().isNotEmpty || comment.ar.trim().isNotEmpty);
     if (!approve && !hasComment) throw const CommentRequiredException();
+    // "Newest first" must stay strict under the fixed demo clock: keep each
+    // decision after the latest one.
+    var at = clock.now();
+    final latest = (await decided()).firstOrNull?.decidedAt;
+    if (latest != null && !at.isAfter(latest)) {
+      at = latest.add(const Duration(seconds: 1));
+    }
     final updated = r.copyWith(
       status: approve ? SignOffStatus.approved : SignOffStatus.rejected,
       decidedBy: supervisorId,
-      decidedAt: clock.now(),
+      decidedAt: at,
       comment: hasComment ? comment : null,
     );
     await _save(updated);
