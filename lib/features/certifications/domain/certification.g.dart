@@ -18,6 +18,7 @@ _Certification _$CertificationFromJson(Map<String, dynamic> json) =>
       ),
       verification: $enumDecode(_$VerificationEnumMap, json['verification']),
       fileRef: json['fileRef'] as String?,
+      code: json['code'] as String?,
     );
 
 Map<String, dynamic> _$CertificationToJson(_Certification instance) =>
@@ -30,6 +31,7 @@ Map<String, dynamic> _$CertificationToJson(_Certification instance) =>
       'expiresOn': const DateOnlyConverter().toJson(instance.expiresOn),
       'verification': _$VerificationEnumMap[instance.verification]!,
       'fileRef': instance.fileRef,
+      'code': instance.code,
     };
 
 const _$VerificationEnumMap = {

@@ -16,7 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Certification {
 
- String get id; String get userId; LocalizedText get name; LocalizedText get issuer;@DateOnlyConverter() DateTime get issuedOn;@DateOnlyConverter() DateTime get expiresOn; Verification get verification; String? get fileRef;
+ String get id; String get userId; LocalizedText get name; LocalizedText get issuer;@DateOnlyConverter() DateTime get issuedOn;@DateOnlyConverter() DateTime get expiresOn; Verification get verification; String? get fileRef;/// Short code shown in alerts ("BLS").
+ String? get code;
 /// Create a copy of Certification
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +31,20 @@ $CertificationCopyWith<Certification> get copyWith => _$CertificationCopyWithImp
 @override
 bool operator ==(Object other) {
   final _this = this as Certification;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certification&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.issuer, _this.issuer) || other.issuer == _this.issuer)&&(identical(other.issuedOn, _this.issuedOn) || other.issuedOn == _this.issuedOn)&&(identical(other.expiresOn, _this.expiresOn) || other.expiresOn == _this.expiresOn)&&(identical(other.verification, _this.verification) || other.verification == _this.verification)&&(identical(other.fileRef, _this.fileRef) || other.fileRef == _this.fileRef));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Certification&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.issuer, _this.issuer) || other.issuer == _this.issuer)&&(identical(other.issuedOn, _this.issuedOn) || other.issuedOn == _this.issuedOn)&&(identical(other.expiresOn, _this.expiresOn) || other.expiresOn == _this.expiresOn)&&(identical(other.verification, _this.verification) || other.verification == _this.verification)&&(identical(other.fileRef, _this.fileRef) || other.fileRef == _this.fileRef)&&(identical(other.code, _this.code) || other.code == _this.code));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Certification;
-  return Object.hash(runtimeType,_this.id,_this.userId,_this.name,_this.issuer,_this.issuedOn,_this.expiresOn,_this.verification,_this.fileRef);
+  return Object.hash(runtimeType,_this.id,_this.userId,_this.name,_this.issuer,_this.issuedOn,_this.expiresOn,_this.verification,_this.fileRef,_this.code);
 }
 
 @override
 String toString() {
   final _this = this as Certification;
-  return 'Certification(id: ${_this.id}, userId: ${_this.userId}, name: ${_this.name}, issuer: ${_this.issuer}, issuedOn: ${_this.issuedOn}, expiresOn: ${_this.expiresOn}, verification: ${_this.verification}, fileRef: ${_this.fileRef})';
+  return 'Certification(id: ${_this.id}, userId: ${_this.userId}, name: ${_this.name}, issuer: ${_this.issuer}, issuedOn: ${_this.issuedOn}, expiresOn: ${_this.expiresOn}, verification: ${_this.verification}, fileRef: ${_this.fileRef}, code: ${_this.code})';
 }
 
 
@@ -54,7 +55,7 @@ abstract mixin class $CertificationCopyWith<$Res>  {
   factory $CertificationCopyWith(Certification value, $Res Function(Certification) _then) = _$CertificationCopyWithImpl;
 @useResult
 $Res call({
- String id, String userId, LocalizedText name, LocalizedText issuer,@DateOnlyConverter() DateTime issuedOn,@DateOnlyConverter() DateTime expiresOn, Verification verification, String? fileRef
+ String id, String userId, LocalizedText name, LocalizedText issuer,@DateOnlyConverter() DateTime issuedOn,@DateOnlyConverter() DateTime expiresOn, Verification verification, String? fileRef, String? code
 });
 
 
@@ -71,7 +72,7 @@ class _$CertificationCopyWithImpl<$Res>
 
 /// Create a copy of Certification
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? name = null,Object? issuer = null,Object? issuedOn = null,Object? expiresOn = null,Object? verification = null,Object? fileRef = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? name = null,Object? issuer = null,Object? issuedOn = null,Object? expiresOn = null,Object? verification = null,Object? fileRef = freezed,Object? code = freezed,}) {
   return _then(Certification(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -81,6 +82,7 @@ as LocalizedText,issuedOn: null == issuedOn ? _self.issuedOn : issuedOn // ignor
 as DateTime,expiresOn: null == expiresOn ? _self.expiresOn : expiresOn // ignore: cast_nullable_to_non_nullable
 as DateTime,verification: null == verification ? _self.verification : verification // ignore: cast_nullable_to_non_nullable
 as Verification,fileRef: freezed == fileRef ? _self.fileRef : fileRef // ignore: cast_nullable_to_non_nullable
+as String?,code: freezed == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -184,10 +186,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String userId,  LocalizedText name,  LocalizedText issuer, @DateOnlyConverter()  DateTime issuedOn, @DateOnlyConverter()  DateTime expiresOn,  Verification verification,  String? fileRef)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String userId,  LocalizedText name,  LocalizedText issuer, @DateOnlyConverter()  DateTime issuedOn, @DateOnlyConverter()  DateTime expiresOn,  Verification verification,  String? fileRef,  String? code)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Certification() when $default != null:
-return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_that.expiresOn,_that.verification,_that.fileRef);case _:
+return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_that.expiresOn,_that.verification,_that.fileRef,_that.code);case _:
   return orElse();
 
 }
@@ -205,10 +207,10 @@ return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String userId,  LocalizedText name,  LocalizedText issuer, @DateOnlyConverter()  DateTime issuedOn, @DateOnlyConverter()  DateTime expiresOn,  Verification verification,  String? fileRef)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String userId,  LocalizedText name,  LocalizedText issuer, @DateOnlyConverter()  DateTime issuedOn, @DateOnlyConverter()  DateTime expiresOn,  Verification verification,  String? fileRef,  String? code)  $default,) {final _that = this;
 switch (_that) {
 case _Certification():
-return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_that.expiresOn,_that.verification,_that.fileRef);case _:
+return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_that.expiresOn,_that.verification,_that.fileRef,_that.code);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -225,10 +227,10 @@ return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String userId,  LocalizedText name,  LocalizedText issuer, @DateOnlyConverter()  DateTime issuedOn, @DateOnlyConverter()  DateTime expiresOn,  Verification verification,  String? fileRef)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String userId,  LocalizedText name,  LocalizedText issuer, @DateOnlyConverter()  DateTime issuedOn, @DateOnlyConverter()  DateTime expiresOn,  Verification verification,  String? fileRef,  String? code)?  $default,) {final _that = this;
 switch (_that) {
 case _Certification() when $default != null:
-return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_that.expiresOn,_that.verification,_that.fileRef);case _:
+return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_that.expiresOn,_that.verification,_that.fileRef,_that.code);case _:
   return null;
 
 }
@@ -240,7 +242,7 @@ return $default(_that.id,_that.userId,_that.name,_that.issuer,_that.issuedOn,_th
 @JsonSerializable()
 
 class _Certification extends Certification {
-  const _Certification({required this.id, required this.userId, required this.name, required this.issuer, @DateOnlyConverter() required this.issuedOn, @DateOnlyConverter() required this.expiresOn, required this.verification, this.fileRef}): super._();
+  const _Certification({required this.id, required this.userId, required this.name, required this.issuer, @DateOnlyConverter() required this.issuedOn, @DateOnlyConverter() required this.expiresOn, required this.verification, this.fileRef, this.code}): super._();
   factory _Certification.fromJson(Map<String, dynamic> json) => _$CertificationFromJson(json);
 
 @override final  String id;
@@ -251,6 +253,8 @@ class _Certification extends Certification {
 @override@DateOnlyConverter() final  DateTime expiresOn;
 @override final  Verification verification;
 @override final  String? fileRef;
+/// Short code shown in alerts ("BLS").
+@override final  String? code;
 
 /// Create a copy of Certification
 /// with the given fields replaced by the non-null parameter values.
@@ -265,18 +269,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Certification&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.issuer, issuer) || other.issuer == issuer)&&(identical(other.issuedOn, issuedOn) || other.issuedOn == issuedOn)&&(identical(other.expiresOn, expiresOn) || other.expiresOn == expiresOn)&&(identical(other.verification, verification) || other.verification == verification)&&(identical(other.fileRef, fileRef) || other.fileRef == fileRef));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Certification&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.issuer, issuer) || other.issuer == issuer)&&(identical(other.issuedOn, issuedOn) || other.issuedOn == issuedOn)&&(identical(other.expiresOn, expiresOn) || other.expiresOn == expiresOn)&&(identical(other.verification, verification) || other.verification == verification)&&(identical(other.fileRef, fileRef) || other.fileRef == fileRef)&&(identical(other.code, code) || other.code == code));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,userId,name,issuer,issuedOn,expiresOn,verification,fileRef);
+    return Object.hash(runtimeType,id,userId,name,issuer,issuedOn,expiresOn,verification,fileRef,code);
 }
 
 @override
 String toString() {
-    return 'Certification(id: $id, userId: $userId, name: $name, issuer: $issuer, issuedOn: $issuedOn, expiresOn: $expiresOn, verification: $verification, fileRef: $fileRef)';
+    return 'Certification(id: $id, userId: $userId, name: $name, issuer: $issuer, issuedOn: $issuedOn, expiresOn: $expiresOn, verification: $verification, fileRef: $fileRef, code: $code)';
 }
 
 
@@ -287,7 +291,7 @@ abstract mixin class _$CertificationCopyWith<$Res> implements $CertificationCopy
   factory _$CertificationCopyWith(_Certification value, $Res Function(_Certification) _then) = __$CertificationCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String userId, LocalizedText name, LocalizedText issuer,@DateOnlyConverter() DateTime issuedOn,@DateOnlyConverter() DateTime expiresOn, Verification verification, String? fileRef
+ String id, String userId, LocalizedText name, LocalizedText issuer,@DateOnlyConverter() DateTime issuedOn,@DateOnlyConverter() DateTime expiresOn, Verification verification, String? fileRef, String? code
 });
 
 
@@ -304,7 +308,7 @@ class __$CertificationCopyWithImpl<$Res>
 
 /// Create a copy of Certification
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? name = null,Object? issuer = null,Object? issuedOn = null,Object? expiresOn = null,Object? verification = null,Object? fileRef = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? name = null,Object? issuer = null,Object? issuedOn = null,Object? expiresOn = null,Object? verification = null,Object? fileRef = freezed,Object? code = freezed,}) {
   return _then(_Certification(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -314,6 +318,7 @@ as LocalizedText,issuedOn: null == issuedOn ? _self.issuedOn : issuedOn // ignor
 as DateTime,expiresOn: null == expiresOn ? _self.expiresOn : expiresOn // ignore: cast_nullable_to_non_nullable
 as DateTime,verification: null == verification ? _self.verification : verification // ignore: cast_nullable_to_non_nullable
 as Verification,fileRef: freezed == fileRef ? _self.fileRef : fileRef // ignore: cast_nullable_to_non_nullable
+as String?,code: freezed == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

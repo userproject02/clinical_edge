@@ -65,6 +65,7 @@ abstract class Course with _$Course {
   const factory({
     required String id,
     required LocalizedText title,
+    required LocalizedText blurb,
     required String category,
     required CourseCover cover,
     required int durationMin,

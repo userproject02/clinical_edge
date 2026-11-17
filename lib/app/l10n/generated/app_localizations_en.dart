@@ -288,4 +288,213 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appVersion => 'ClinicalEdge 0.1.0 (prototype) · mock data only';
+
+  @override
+  String get homeOverall => 'Overall progress';
+
+  @override
+  String homeLessonsSummary(int done, int total, int courses) {
+    return '$done of $total lessons · $courses courses';
+  }
+
+  @override
+  String homeResume(String title) {
+    return 'Resume: $title';
+  }
+
+  @override
+  String get homeAllDone => 'All lessons complete';
+
+  @override
+  String homeExpiryTitle(String code, int days) {
+    return '$code expires in $days days';
+  }
+
+  @override
+  String homeRenewBefore(String date) {
+    return 'Renew before $date';
+  }
+
+  @override
+  String homeCredits(String cycle) {
+    return 'CPD/CME credits · $cycle';
+  }
+
+  @override
+  String homeCreditsToGo(int left, String date) {
+    return '$left credits to go · cycle ends $date';
+  }
+
+  @override
+  String homeCreditsReached(String date) {
+    return 'Target reached · cycle ends $date';
+  }
+
+  @override
+  String get homeContinue => 'Continue learning';
+
+  @override
+  String get homeViewAll => 'View all';
+
+  @override
+  String get homeRecentScores => 'Recent scores';
+
+  @override
+  String get homePassLine => 'Pass 80%';
+
+  @override
+  String get homeNoScores => 'No attempts yet';
+
+  @override
+  String get homeSignoffs => 'Supervisor sign-off';
+
+  @override
+  String lessonOfTotal(int n, int total) {
+    return 'Lesson $n of $total';
+  }
+
+  @override
+  String get courseCompleted => 'Completed';
+
+  @override
+  String get signoffNone => 'Not requested';
+
+  @override
+  String get signoffPending => 'Pending';
+
+  @override
+  String get signoffApproved => 'Approved';
+
+  @override
+  String get signoffRejected => 'Changes requested';
+
+  @override
+  String get catalogueSearch => 'Search courses';
+
+  @override
+  String get catalogueAll => 'All';
+
+  @override
+  String get catalogueEmptyTitle => 'No courses match';
+
+  @override
+  String get catalogueEmptyBody => 'Try another search or category.';
+
+  @override
+  String courseLessons(int n) {
+    return '$n lessons';
+  }
+
+  @override
+  String courseCpd(int n) {
+    return '$n CPD';
+  }
+
+  @override
+  String get coursePlusVat => '+5% VAT';
+
+  @override
+  String durationHm(int h, int m) {
+    return '${h}h ${m}m';
+  }
+
+  @override
+  String get courseQuiz => '8-question quiz';
+
+  @override
+  String get courseYourProgress => 'Your progress';
+
+  @override
+  String courseLessonsDone(int done, int total) {
+    return '$done of $total lessons completed';
+  }
+
+  @override
+  String get courseLessonsHeading => 'Lessons';
+
+  @override
+  String get lessonStateDone => 'Done';
+
+  @override
+  String get lessonStateNow => 'Now';
+
+  @override
+  String get lessonStateTodo => 'To do';
+
+  @override
+  String get lessonStateLocked => 'Locked';
+
+  @override
+  String get lessonTypeVideo => 'Video';
+
+  @override
+  String get lessonTypePdf => 'PDF';
+
+  @override
+  String get lessonTypeReading => 'Reading';
+
+  @override
+  String minutesShort(int n) {
+    return '$n min';
+  }
+
+  @override
+  String ctaContinue(int n) {
+    return 'Continue · lesson $n';
+  }
+
+  @override
+  String get ctaStart => 'Start course';
+
+  @override
+  String get ctaReview => 'Review course';
+
+  @override
+  String ctaBuy(String price) {
+    return 'Buy · $price';
+  }
+
+  @override
+  String lessonMeta(int n, int total, String type) {
+    return 'Lesson $n of $total · $type';
+  }
+
+  @override
+  String get lessonPdfPlaceholder => 'PDF placeholder · page 1 of 6';
+
+  @override
+  String get lessonReadingPlaceholder =>
+      'Reading lesson placeholder. Authored content renders here with headings, callouts and inline knowledge checks; learners can bookmark and resume.';
+
+  @override
+  String get lessonKeyPoint => 'Key point callout placeholder';
+
+  @override
+  String get lessonFurther => 'Further body text placeholder.';
+
+  @override
+  String get lessonUpNext => 'Up next';
+
+  @override
+  String get lessonPrevious => 'Previous';
+
+  @override
+  String get lessonMarkComplete => 'Mark complete';
+
+  @override
+  String get lessonNext => 'Next lesson';
+
+  @override
+  String get lessonCompleted => 'Completed';
+
+  @override
+  String get lessonPlay => 'Play video';
+
+  @override
+  String get courseCompleteTitle => 'Course complete';
+
+  @override
+  String courseCompleteBody(int n) {
+    return '+$n CPD/CME credits added';
+  }
 }

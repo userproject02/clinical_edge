@@ -63,12 +63,16 @@ Future<ProviderContainer> pumpClinicalEdge(
   return container;
 }
 
-/// Lets real async repository work finish, then settles frames.
+/// Lets real async repository work finish and settles frames, alternating
+/// real-time ticks with frames (some repository futures complete only on a
+/// real event-loop turn, which pumpAndSettle alone never gives).
 Future<void> settle(WidgetTester tester) async {
-  for (var i = 0; i < 3; i++) {
+  var idle = 0;
+  for (var i = 0; i < 40 && idle < 3; i++) {
     await tester.runAsync(
       () => Future<void>.delayed(const Duration(milliseconds: 5)),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 50));
+    idle = tester.binding.hasScheduledFrame ? 0 : idle + 1;
   }
 }

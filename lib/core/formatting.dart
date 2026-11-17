@@ -41,6 +41,10 @@ abstract final class Formats {
     return _westernDigits(pattern.format(date));
   }
 
+  /// Day and month for the locale: "31 Dec" / "31 ديسمبر".
+  static String dayMonth(DateTime date, Locale locale) =>
+      _westernDigits(DateFormat('d MMM', locale.toLanguageTag()).format(date));
+
   /// Date and time for the locale: "17 Nov 2026, 09:02".
   static String dateTime(DateTime date, Locale locale) {
     final tag = locale.toLanguageTag();

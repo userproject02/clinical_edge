@@ -610,7 +610,7 @@ $LocalizedTextCopyWith<$Res> get title {
 /// @nodoc
 mixin _$Course {
 
- String get id; LocalizedText get title; String get category; CourseCover get cover; int get durationMin; int get cpdCredits; int get priceFils; List<Lesson> get lessons;
+ String get id; LocalizedText get title; LocalizedText get blurb; String get category; CourseCover get cover; int get durationMin; int get cpdCredits; int get priceFils; List<Lesson> get lessons;
 /// Create a copy of Course
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -624,20 +624,20 @@ $CourseCopyWith<Course> get copyWith => _$CourseCopyWithImpl<Course>(this as Cou
 @override
 bool operator ==(Object other) {
   final _this = this as Course;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Course&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.cover, _this.cover) || other.cover == _this.cover)&&(identical(other.durationMin, _this.durationMin) || other.durationMin == _this.durationMin)&&(identical(other.cpdCredits, _this.cpdCredits) || other.cpdCredits == _this.cpdCredits)&&(identical(other.priceFils, _this.priceFils) || other.priceFils == _this.priceFils)&&const DeepCollectionEquality().equals(other.lessons, _this.lessons));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Course&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.blurb, _this.blurb) || other.blurb == _this.blurb)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.cover, _this.cover) || other.cover == _this.cover)&&(identical(other.durationMin, _this.durationMin) || other.durationMin == _this.durationMin)&&(identical(other.cpdCredits, _this.cpdCredits) || other.cpdCredits == _this.cpdCredits)&&(identical(other.priceFils, _this.priceFils) || other.priceFils == _this.priceFils)&&const DeepCollectionEquality().equals(other.lessons, _this.lessons));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Course;
-  return Object.hash(runtimeType,_this.id,_this.title,_this.category,_this.cover,_this.durationMin,_this.cpdCredits,_this.priceFils,const DeepCollectionEquality().hash(_this.lessons));
+  return Object.hash(runtimeType,_this.id,_this.title,_this.blurb,_this.category,_this.cover,_this.durationMin,_this.cpdCredits,_this.priceFils,const DeepCollectionEquality().hash(_this.lessons));
 }
 
 @override
 String toString() {
   final _this = this as Course;
-  return 'Course(id: ${_this.id}, title: ${_this.title}, category: ${_this.category}, cover: ${_this.cover}, durationMin: ${_this.durationMin}, cpdCredits: ${_this.cpdCredits}, priceFils: ${_this.priceFils}, lessons: ${_this.lessons})';
+  return 'Course(id: ${_this.id}, title: ${_this.title}, blurb: ${_this.blurb}, category: ${_this.category}, cover: ${_this.cover}, durationMin: ${_this.durationMin}, cpdCredits: ${_this.cpdCredits}, priceFils: ${_this.priceFils}, lessons: ${_this.lessons})';
 }
 
 
@@ -648,11 +648,11 @@ abstract mixin class $CourseCopyWith<$Res>  {
   factory $CourseCopyWith(Course value, $Res Function(Course) _then) = _$CourseCopyWithImpl;
 @useResult
 $Res call({
- String id, LocalizedText title, String category, CourseCover cover, int durationMin, int cpdCredits, int priceFils, List<Lesson> lessons
+ String id, LocalizedText title, LocalizedText blurb, String category, CourseCover cover, int durationMin, int cpdCredits, int priceFils, List<Lesson> lessons
 });
 
 
-$LocalizedTextCopyWith<$Res> get title;
+$LocalizedTextCopyWith<$Res> get title;$LocalizedTextCopyWith<$Res> get blurb;
 
 }
 /// @nodoc
@@ -665,10 +665,11 @@ class _$CourseCopyWithImpl<$Res>
 
 /// Create a copy of Course
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? category = null,Object? cover = null,Object? durationMin = null,Object? cpdCredits = null,Object? priceFils = null,Object? lessons = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? blurb = null,Object? category = null,Object? cover = null,Object? durationMin = null,Object? cpdCredits = null,Object? priceFils = null,Object? lessons = null,}) {
   return _then(Course(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as LocalizedText,blurb: null == blurb ? _self.blurb : blurb // ignore: cast_nullable_to_non_nullable
 as LocalizedText,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,cover: null == cover ? _self.cover : cover // ignore: cast_nullable_to_non_nullable
 as CourseCover,durationMin: null == durationMin ? _self.durationMin : durationMin // ignore: cast_nullable_to_non_nullable
@@ -686,6 +687,15 @@ $LocalizedTextCopyWith<$Res> get title {
   
   return $LocalizedTextCopyWith<$Res>(_self.title, (value) {
     return _then(_self.copyWith(title: value));
+  });
+}/// Create a copy of Course
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocalizedTextCopyWith<$Res> get blurb {
+  
+  return $LocalizedTextCopyWith<$Res>(_self.blurb, (value) {
+    return _then(_self.copyWith(blurb: value));
   });
 }
 }
@@ -769,10 +779,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  LocalizedText title,  String category,  CourseCover cover,  int durationMin,  int cpdCredits,  int priceFils,  List<Lesson> lessons)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  LocalizedText title,  LocalizedText blurb,  String category,  CourseCover cover,  int durationMin,  int cpdCredits,  int priceFils,  List<Lesson> lessons)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Course() when $default != null:
-return $default(_that.id,_that.title,_that.category,_that.cover,_that.durationMin,_that.cpdCredits,_that.priceFils,_that.lessons);case _:
+return $default(_that.id,_that.title,_that.blurb,_that.category,_that.cover,_that.durationMin,_that.cpdCredits,_that.priceFils,_that.lessons);case _:
   return orElse();
 
 }
@@ -790,10 +800,10 @@ return $default(_that.id,_that.title,_that.category,_that.cover,_that.durationMi
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  LocalizedText title,  String category,  CourseCover cover,  int durationMin,  int cpdCredits,  int priceFils,  List<Lesson> lessons)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  LocalizedText title,  LocalizedText blurb,  String category,  CourseCover cover,  int durationMin,  int cpdCredits,  int priceFils,  List<Lesson> lessons)  $default,) {final _that = this;
 switch (_that) {
 case _Course():
-return $default(_that.id,_that.title,_that.category,_that.cover,_that.durationMin,_that.cpdCredits,_that.priceFils,_that.lessons);case _:
+return $default(_that.id,_that.title,_that.blurb,_that.category,_that.cover,_that.durationMin,_that.cpdCredits,_that.priceFils,_that.lessons);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -810,10 +820,10 @@ return $default(_that.id,_that.title,_that.category,_that.cover,_that.durationMi
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  LocalizedText title,  String category,  CourseCover cover,  int durationMin,  int cpdCredits,  int priceFils,  List<Lesson> lessons)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  LocalizedText title,  LocalizedText blurb,  String category,  CourseCover cover,  int durationMin,  int cpdCredits,  int priceFils,  List<Lesson> lessons)?  $default,) {final _that = this;
 switch (_that) {
 case _Course() when $default != null:
-return $default(_that.id,_that.title,_that.category,_that.cover,_that.durationMin,_that.cpdCredits,_that.priceFils,_that.lessons);case _:
+return $default(_that.id,_that.title,_that.blurb,_that.category,_that.cover,_that.durationMin,_that.cpdCredits,_that.priceFils,_that.lessons);case _:
   return null;
 
 }
@@ -825,11 +835,12 @@ return $default(_that.id,_that.title,_that.category,_that.cover,_that.durationMi
 @JsonSerializable()
 
 class _Course extends Course {
-  const _Course({required this.id, required this.title, required this.category, required this.cover, required this.durationMin, required this.cpdCredits, required this.priceFils, required  List<Lesson> lessons}): _lessons = lessons,super._();
+  const _Course({required this.id, required this.title, required this.blurb, required this.category, required this.cover, required this.durationMin, required this.cpdCredits, required this.priceFils, required  List<Lesson> lessons}): _lessons = lessons,super._();
   factory _Course.fromJson(Map<String, dynamic> json) => _$CourseFromJson(json);
 
 @override final  String id;
 @override final  LocalizedText title;
+@override final  LocalizedText blurb;
 @override final  String category;
 @override final  CourseCover cover;
 @override final  int durationMin;
@@ -856,18 +867,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Course&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.category, category) || other.category == category)&&(identical(other.cover, cover) || other.cover == cover)&&(identical(other.durationMin, durationMin) || other.durationMin == durationMin)&&(identical(other.cpdCredits, cpdCredits) || other.cpdCredits == cpdCredits)&&(identical(other.priceFils, priceFils) || other.priceFils == priceFils)&&const DeepCollectionEquality().equals(other.lessons, _lessons));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Course&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.blurb, blurb) || other.blurb == blurb)&&(identical(other.category, category) || other.category == category)&&(identical(other.cover, cover) || other.cover == cover)&&(identical(other.durationMin, durationMin) || other.durationMin == durationMin)&&(identical(other.cpdCredits, cpdCredits) || other.cpdCredits == cpdCredits)&&(identical(other.priceFils, priceFils) || other.priceFils == priceFils)&&const DeepCollectionEquality().equals(other.lessons, _lessons));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,title,category,cover,durationMin,cpdCredits,priceFils,const DeepCollectionEquality().hash(_lessons));
+    return Object.hash(runtimeType,id,title,blurb,category,cover,durationMin,cpdCredits,priceFils,const DeepCollectionEquality().hash(_lessons));
 }
 
 @override
 String toString() {
-    return 'Course(id: $id, title: $title, category: $category, cover: $cover, durationMin: $durationMin, cpdCredits: $cpdCredits, priceFils: $priceFils, lessons: $lessons)';
+    return 'Course(id: $id, title: $title, blurb: $blurb, category: $category, cover: $cover, durationMin: $durationMin, cpdCredits: $cpdCredits, priceFils: $priceFils, lessons: $lessons)';
 }
 
 
@@ -878,11 +889,11 @@ abstract mixin class _$CourseCopyWith<$Res> implements $CourseCopyWith<$Res> {
   factory _$CourseCopyWith(_Course value, $Res Function(_Course) _then) = __$CourseCopyWithImpl;
 @override @useResult
 $Res call({
- String id, LocalizedText title, String category, CourseCover cover, int durationMin, int cpdCredits, int priceFils, List<Lesson> lessons
+ String id, LocalizedText title, LocalizedText blurb, String category, CourseCover cover, int durationMin, int cpdCredits, int priceFils, List<Lesson> lessons
 });
 
 
-@override $LocalizedTextCopyWith<$Res> get title;
+@override $LocalizedTextCopyWith<$Res> get title;@override $LocalizedTextCopyWith<$Res> get blurb;
 
 }
 /// @nodoc
@@ -895,10 +906,11 @@ class __$CourseCopyWithImpl<$Res>
 
 /// Create a copy of Course
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? category = null,Object? cover = null,Object? durationMin = null,Object? cpdCredits = null,Object? priceFils = null,Object? lessons = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? blurb = null,Object? category = null,Object? cover = null,Object? durationMin = null,Object? cpdCredits = null,Object? priceFils = null,Object? lessons = null,}) {
   return _then(_Course(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as LocalizedText,blurb: null == blurb ? _self.blurb : blurb // ignore: cast_nullable_to_non_nullable
 as LocalizedText,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,cover: null == cover ? _self.cover : cover // ignore: cast_nullable_to_non_nullable
 as CourseCover,durationMin: null == durationMin ? _self.durationMin : durationMin // ignore: cast_nullable_to_non_nullable
@@ -917,6 +929,15 @@ $LocalizedTextCopyWith<$Res> get title {
   
   return $LocalizedTextCopyWith<$Res>(_self.title, (value) {
     return _then(_self.copyWith(title: value));
+  });
+}/// Create a copy of Course
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocalizedTextCopyWith<$Res> get blurb {
+  
+  return $LocalizedTextCopyWith<$Res>(_self.blurb, (value) {
+    return _then(_self.copyWith(blurb: value));
   });
 }
 }

@@ -42,6 +42,7 @@ const _$LessonTypeEnumMap = {
 _Course _$CourseFromJson(Map<String, dynamic> json) => _Course(
   id: json['id'] as String,
   title: LocalizedText.fromJson(json['title'] as Map<String, dynamic>),
+  blurb: LocalizedText.fromJson(json['blurb'] as Map<String, dynamic>),
   category: json['category'] as String,
   cover: $enumDecode(_$CourseCoverEnumMap, json['cover']),
   durationMin: (json['durationMin'] as num).toInt(),
@@ -55,6 +56,7 @@ _Course _$CourseFromJson(Map<String, dynamic> json) => _Course(
 Map<String, dynamic> _$CourseToJson(_Course instance) => <String, dynamic>{
   'id': instance.id,
   'title': instance.title.toJson(),
+  'blurb': instance.blurb.toJson(),
   'category': instance.category,
   'cover': _$CourseCoverEnumMap[instance.cover]!,
   'durationMin': instance.durationMin,

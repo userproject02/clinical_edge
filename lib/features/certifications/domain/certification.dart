@@ -64,6 +64,9 @@ abstract class Certification with _$Certification {
     @DateOnlyConverter() required DateTime expiresOn,
     required Verification verification,
     String? fileRef,
+
+    /// Short code shown in alerts ("BLS").
+    String? code,
   }) = _Certification;
 
   const new _();

@@ -70,7 +70,7 @@ final class RouterProvider
   }
 }
 
-String _$routerHash() => r'a2967f17890f92814b7074c9a6677b9e040acbe4';
+String _$routerHash() => r'bebadbaa7e5b6d07d8a57b0e36b35bd9b7bc33d3';
 
 /// Context of the current root navigator (for overlays shown after the
 /// router was rebuilt, e.g. the role-switch snackbar).
@@ -126,4 +126,4 @@ final class RootNavigatorContextProvider
 }
 
 String _$rootNavigatorContextHash() =>
-    r'3921aeab998662b880b1a2ce5cbe9d046e62f914';
+    r'eab7d58a50e19347691878a7f0fc6c322480b4cf';

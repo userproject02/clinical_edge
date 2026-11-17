@@ -637,6 +637,354 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'ClinicalEdge 0.1.0 (prototype) · mock data only'**
   String get appVersion;
+
+  /// Home hero ring caption.
+  ///
+  /// In en, this message translates to:
+  /// **'Overall progress'**
+  String get homeOverall;
+
+  /// Home hero summary.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total} lessons · {courses} courses'**
+  String homeLessonsSummary(int done, int total, int courses);
+
+  /// Home hero button: next lesson.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume: {title}'**
+  String homeResume(String title);
+
+  /// Home hero button when nothing is left.
+  ///
+  /// In en, this message translates to:
+  /// **'All lessons complete'**
+  String get homeAllDone;
+
+  /// Expiry alert title.
+  ///
+  /// In en, this message translates to:
+  /// **'{code} expires in {days} days'**
+  String homeExpiryTitle(String code, int days);
+
+  /// Expiry alert body.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew before {date}'**
+  String homeRenewBefore(String date);
+
+  /// CPD card title.
+  ///
+  /// In en, this message translates to:
+  /// **'CPD/CME credits · {cycle}'**
+  String homeCredits(String cycle);
+
+  /// CPD card footer.
+  ///
+  /// In en, this message translates to:
+  /// **'{left} credits to go · cycle ends {date}'**
+  String homeCreditsToGo(int left, String date);
+
+  /// CPD card footer when the target is met.
+  ///
+  /// In en, this message translates to:
+  /// **'Target reached · cycle ends {date}'**
+  String homeCreditsReached(String date);
+
+  /// Home section title.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue learning'**
+  String get homeContinue;
+
+  /// Link to the catalogue.
+  ///
+  /// In en, this message translates to:
+  /// **'View all'**
+  String get homeViewAll;
+
+  /// Home section title.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent scores'**
+  String get homeRecentScores;
+
+  /// Label of the pass-mark line.
+  ///
+  /// In en, this message translates to:
+  /// **'Pass 80%'**
+  String get homePassLine;
+
+  /// Recent scores empty state.
+  ///
+  /// In en, this message translates to:
+  /// **'No attempts yet'**
+  String get homeNoScores;
+
+  /// Home section title.
+  ///
+  /// In en, this message translates to:
+  /// **'Supervisor sign-off'**
+  String get homeSignoffs;
+
+  /// Course progress tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson {n} of {total}'**
+  String lessonOfTotal(int n, int total);
+
+  /// Tag for a finished course.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get courseCompleted;
+
+  /// Sign-off status.
+  ///
+  /// In en, this message translates to:
+  /// **'Not requested'**
+  String get signoffNone;
+
+  /// Sign-off status.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get signoffPending;
+
+  /// Sign-off status.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get signoffApproved;
+
+  /// Sign-off status.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes requested'**
+  String get signoffRejected;
+
+  /// Search bar hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search courses'**
+  String get catalogueSearch;
+
+  /// Category chip: all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get catalogueAll;
+
+  /// Empty search result.
+  ///
+  /// In en, this message translates to:
+  /// **'No courses match'**
+  String get catalogueEmptyTitle;
+
+  /// Empty search result body.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another search or category.'**
+  String get catalogueEmptyBody;
+
+  /// Lesson count tag.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} lessons'**
+  String courseLessons(int n);
+
+  /// CPD credits tag.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} CPD'**
+  String courseCpd(int n);
+
+  /// Tag next to a price before VAT.
+  ///
+  /// In en, this message translates to:
+  /// **'+5% VAT'**
+  String get coursePlusVat;
+
+  /// Duration hours and minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{h}h {m}m'**
+  String durationHm(int h, int m);
+
+  /// Course detail tag.
+  ///
+  /// In en, this message translates to:
+  /// **'8-question quiz'**
+  String get courseQuiz;
+
+  /// Course detail card title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get courseYourProgress;
+
+  /// Course detail progress text.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total} lessons completed'**
+  String courseLessonsDone(int done, int total);
+
+  /// Course detail section title.
+  ///
+  /// In en, this message translates to:
+  /// **'Lessons'**
+  String get courseLessonsHeading;
+
+  /// Lesson state.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get lessonStateDone;
+
+  /// Lesson state: next to take.
+  ///
+  /// In en, this message translates to:
+  /// **'Now'**
+  String get lessonStateNow;
+
+  /// Lesson state.
+  ///
+  /// In en, this message translates to:
+  /// **'To do'**
+  String get lessonStateTodo;
+
+  /// Lesson state: course not owned.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get lessonStateLocked;
+
+  /// Lesson type.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get lessonTypeVideo;
+
+  /// Lesson type.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF'**
+  String get lessonTypePdf;
+
+  /// Lesson type.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get lessonTypeReading;
+
+  /// Minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} min'**
+  String minutesShort(int n);
+
+  /// Course CTA.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue · lesson {n}'**
+  String ctaContinue(int n);
+
+  /// Course CTA.
+  ///
+  /// In en, this message translates to:
+  /// **'Start course'**
+  String get ctaStart;
+
+  /// Course CTA when complete.
+  ///
+  /// In en, this message translates to:
+  /// **'Review course'**
+  String get ctaReview;
+
+  /// Course CTA for unowned course; price incl. VAT.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy · {price}'**
+  String ctaBuy(String price);
+
+  /// Lesson meta line.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson {n} of {total} · {type}'**
+  String lessonMeta(int n, int total, String type);
+
+  /// PDF lesson placeholder.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF placeholder · page 1 of 6'**
+  String get lessonPdfPlaceholder;
+
+  /// Reading lesson placeholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading lesson placeholder. Authored content renders here with headings, callouts and inline knowledge checks; learners can bookmark and resume.'**
+  String get lessonReadingPlaceholder;
+
+  /// Reading lesson callout.
+  ///
+  /// In en, this message translates to:
+  /// **'Key point callout placeholder'**
+  String get lessonKeyPoint;
+
+  /// Reading lesson body.
+  ///
+  /// In en, this message translates to:
+  /// **'Further body text placeholder.'**
+  String get lessonFurther;
+
+  /// Lesson outline title.
+  ///
+  /// In en, this message translates to:
+  /// **'Up next'**
+  String get lessonUpNext;
+
+  /// Lesson button.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get lessonPrevious;
+
+  /// Lesson button.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark complete'**
+  String get lessonMarkComplete;
+
+  /// Lesson button after completion.
+  ///
+  /// In en, this message translates to:
+  /// **'Next lesson'**
+  String get lessonNext;
+
+  /// Lesson button on the last completed lesson.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get lessonCompleted;
+
+  /// Accessibility label of the play button.
+  ///
+  /// In en, this message translates to:
+  /// **'Play video'**
+  String get lessonPlay;
+
+  /// Snackbar title.
+  ///
+  /// In en, this message translates to:
+  /// **'Course complete'**
+  String get courseCompleteTitle;
+
+  /// Snackbar body.
+  ///
+  /// In en, this message translates to:
+  /// **'+{n} CPD/CME credits added'**
+  String courseCompleteBody(int n);
 }
 
 class _AppLocalizationsDelegate

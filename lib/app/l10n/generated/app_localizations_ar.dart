@@ -288,4 +288,213 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get appVersion =>
       'ClinicalEdge 0.1.0 (نموذج أولي) · بيانات تجريبية فقط';
+
+  @override
+  String get homeOverall => 'التقدّم العام';
+
+  @override
+  String homeLessonsSummary(int done, int total, int courses) {
+    return '$done من $total درساً · $courses دورات';
+  }
+
+  @override
+  String homeResume(String title) {
+    return 'متابعة: $title';
+  }
+
+  @override
+  String get homeAllDone => 'اكتملت جميع الدروس';
+
+  @override
+  String homeExpiryTitle(String code, int days) {
+    return 'تنتهي شهادة $code خلال $days يوماً';
+  }
+
+  @override
+  String homeRenewBefore(String date) {
+    return 'جدّد قبل $date';
+  }
+
+  @override
+  String homeCredits(String cycle) {
+    return 'ساعات التطوير المهني · $cycle';
+  }
+
+  @override
+  String homeCreditsToGo(int left, String date) {
+    return 'متبقٍ $left ساعة · تنتهي الدورة في $date';
+  }
+
+  @override
+  String homeCreditsReached(String date) {
+    return 'تم بلوغ الهدف · تنتهي الدورة في $date';
+  }
+
+  @override
+  String get homeContinue => 'متابعة التعلّم';
+
+  @override
+  String get homeViewAll => 'عرض الكل';
+
+  @override
+  String get homeRecentScores => 'أحدث النتائج';
+
+  @override
+  String get homePassLine => 'النجاح 80%';
+
+  @override
+  String get homeNoScores => 'لا توجد محاولات بعد';
+
+  @override
+  String get homeSignoffs => 'اعتماد المشرف';
+
+  @override
+  String lessonOfTotal(int n, int total) {
+    return 'الدرس $n من $total';
+  }
+
+  @override
+  String get courseCompleted => 'مكتملة';
+
+  @override
+  String get signoffNone => 'لم يُطلب';
+
+  @override
+  String get signoffPending => 'قيد الانتظار';
+
+  @override
+  String get signoffApproved => 'معتمد';
+
+  @override
+  String get signoffRejected => 'مطلوب تعديلات';
+
+  @override
+  String get catalogueSearch => 'ابحث في الدورات';
+
+  @override
+  String get catalogueAll => 'الكل';
+
+  @override
+  String get catalogueEmptyTitle => 'لا توجد دورات مطابقة';
+
+  @override
+  String get catalogueEmptyBody => 'جرّب بحثاً أو فئة أخرى.';
+
+  @override
+  String courseLessons(int n) {
+    return '$n دروس';
+  }
+
+  @override
+  String courseCpd(int n) {
+    return '$n ساعات';
+  }
+
+  @override
+  String get coursePlusVat => '+5% ضريبة';
+
+  @override
+  String durationHm(int h, int m) {
+    return '$h س $m د';
+  }
+
+  @override
+  String get courseQuiz => 'اختبار من 8 أسئلة';
+
+  @override
+  String get courseYourProgress => 'تقدّمك';
+
+  @override
+  String courseLessonsDone(int done, int total) {
+    return 'أكملت $done من $total دروس';
+  }
+
+  @override
+  String get courseLessonsHeading => 'الدروس';
+
+  @override
+  String get lessonStateDone => 'مكتمل';
+
+  @override
+  String get lessonStateNow => 'الآن';
+
+  @override
+  String get lessonStateTodo => 'قادم';
+
+  @override
+  String get lessonStateLocked => 'مقفل';
+
+  @override
+  String get lessonTypeVideo => 'فيديو';
+
+  @override
+  String get lessonTypePdf => 'ملف PDF';
+
+  @override
+  String get lessonTypeReading => 'قراءة';
+
+  @override
+  String minutesShort(int n) {
+    return '$n د';
+  }
+
+  @override
+  String ctaContinue(int n) {
+    return 'متابعة · الدرس $n';
+  }
+
+  @override
+  String get ctaStart => 'ابدأ الدورة';
+
+  @override
+  String get ctaReview => 'مراجعة الدورة';
+
+  @override
+  String ctaBuy(String price) {
+    return 'شراء · $price';
+  }
+
+  @override
+  String lessonMeta(int n, int total, String type) {
+    return 'الدرس $n من $total · $type';
+  }
+
+  @override
+  String get lessonPdfPlaceholder => 'ملف PDF تجريبي · صفحة 1 من 6';
+
+  @override
+  String get lessonReadingPlaceholder =>
+      'محتوى تجريبي لدرس القراءة. يظهر هنا المحتوى المُعدّ بعناوين وملاحظات واختبارات قصيرة، ويمكن للمتعلّم حفظ موضعه والمتابعة لاحقاً.';
+
+  @override
+  String get lessonKeyPoint => 'ملاحظة النقطة الرئيسية';
+
+  @override
+  String get lessonFurther => 'نص إضافي تجريبي.';
+
+  @override
+  String get lessonUpNext => 'الدروس التالية';
+
+  @override
+  String get lessonPrevious => 'السابق';
+
+  @override
+  String get lessonMarkComplete => 'وضع علامة مكتمل';
+
+  @override
+  String get lessonNext => 'الدرس التالي';
+
+  @override
+  String get lessonCompleted => 'مكتمل';
+
+  @override
+  String get lessonPlay => 'تشغيل الفيديو';
+
+  @override
+  String get courseCompleteTitle => 'اكتملت الدورة';
+
+  @override
+  String courseCompleteBody(int n) {
+    return 'أُضيفت $n ساعات تطوير مهني';
+  }
 }

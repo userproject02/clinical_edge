@@ -184,7 +184,7 @@ void main() {
       );
       c.read(routerProvider).go(AppRoutes.course('c1'));
       await settle(tester);
-      expect(find.text('Course'), findsWidgets);
+      expect(find.text('Basic Life Support Refresher'), findsWidgets);
       await tester.tap(find.byTooltip('Back'));
       await settle(tester);
       expect(_location(c), '/learn');
@@ -261,14 +261,10 @@ void main() {
       expect(back.left, greaterThan(195), reason: 'back arrow on the right');
     });
 
-    testWidgets('TC-PH1-49 every placeholder shows its title', (tester) async {
+    testWidgets('TC-PH1-49 every remaining placeholder shows its title', (tester) async {
       final c = await _pumpApp(tester, signedInAs: Role.learner);
       final router = c.read(routerProvider);
       final expected = <String, String>{
-        '/home': 'Home',
-        '/learn': 'Courses',
-        '/learn/c1': 'Course',
-        '/learn/c1/lesson/1': 'Lesson',
         '/learn/c3/checkout': 'Checkout',
         '/learn/c3/receipt/o1': 'Receipt',
         '/assess': 'Assessments',

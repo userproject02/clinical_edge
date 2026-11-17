@@ -8,11 +8,11 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-AUTH-1-02 | AUTH-1 | Widget | Sign in with any non-empty password | Learner → /home, supervisor → /queue, admin → /cohort; email pre-filled per role; ~900 ms skeleton; greeting + first name; auth.signin logged | `test/features/auth_settings_test.dart` | Passing |
 | TC-AUTH-2-01 | AUTH-2 | Widget | Switch role from sign-in and from Profile | Profile switch: session + tabs change, stays on Profile, snackbar "Role switched · Now viewing as …", audit role.change "Learner → Supervisor (demo)" | `test/features/auth_settings_test.dart` | Passing |
 | TC-AUTH-3-01 | AUTH-3 | Widget | Sign out from Profile | Back to /sign-in, session cleared (also after restart), auth.signout logged | `test/features/auth_settings_test.dart` | Passing |
-| TC-HOME-1-01 | HOME-1 | Widget | Learner home with seed data | 55% ring, 6/11 lessons, 26/40 credits, BLS 56 days; skeleton while loading | — | Planned |
-| TC-CRS-1-01 | CRS-1 | Widget | Catalogue search and category chips | Filters the 3 seed courses; owned show progress, unowned show AED + VAT note | — | Planned |
-| TC-CRS-2-01 | CRS-2 | Widget | Course detail CTA and lesson states | Continue / Start / Buy labels; locked lessons route to checkout | — | Planned |
-| TC-CRS-3-01 | CRS-3 | Widget | Mark lesson complete | Progress updates everywhere; lesson.view and lesson.complete logged | — | Planned |
-| TC-CRS-4-01 | CRS-4 | Unit | Finish all lessons of c1 | Credits 26 → 30; course.complete audit event | — | Planned |
+| TC-HOME-1-01 | HOME-1 | Widget | Learner home with seed data | 55% ring, 6 of 11 lessons · 2 courses, 26 / 40, BLS 56 days, resume lesson 5, carousel tag, scores 63/75, sign-off tags; skeleton on first load (TC-AUTH-1-02) | `test/features/courses_test.dart` | Passing |
+| TC-CRS-1-01 | CRS-1 | Widget | Catalogue search and category chips | Category chips and search filter the 3 seed courses; unowned shows AED 300.00 + "+5% VAT"; tap logs course.view | `test/features/courses_test.dart` | Passing |
+| TC-CRS-2-01 | CRS-2 | Widget | Course detail CTA and lesson states | Continue · lesson 5 / 3, Buy · AED 315.00 (incl. VAT), Locked lessons route to checkout | `test/features/courses_test.dart` | Passing |
+| TC-CRS-3-01 | CRS-3 | Widget | Mark lesson complete | Mark complete advances to the next lesson; lesson.view + lesson.complete logged; home ring 64 %, 7 of 11, carousel update | `test/features/courses_test.dart` | Passing |
+| TC-CRS-4-01 | CRS-4 | Unit | Finish all lessons of c1 | Finishing c1: snackbar "+4 CPD/CME credits added", course.complete audit, CPD 26 → 30, CTA Review course | `test/features/courses_test.dart` | Passing |
 | TC-QZ-1-01 | QZ-1 | Widget | Answer a question | Answer locks; correct/incorrect shown with explanation | — | Planned |
 | TC-QZ-2-01 | QZ-2 | Unit | Score 7/8 and 6/8 | 88% pass, 75% fail; quiz.score audit event | — | Planned |
 | TC-QZ-3-01 | QZ-3 | Widget | Score history | Newest first; best score and attempt count | — | Planned |
@@ -126,6 +126,9 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-AUTH-1-05 | AUTH-1 | Widget | Language toggle on sign-in | Switches to Arabic RTL at once | `test/features/auth_settings_test.dart` | Passing |
 | TC-SET-1-02 | SET-1 | Unit | Greeting by clock | Morning before 12:00, afternoon before 17:00, evening after (Dubai time) | `test/features/auth_settings_test.dart` | Passing |
 | TC-PH3-01 | Phase 3 | Golden | Sign-in and Profile & settings screens | Pixel match, EN/AR × light/dark (8 images) | `test/features/goldens/` | Passing |
+| TC-CRS-1-02 | CRS-1 | Widget | Arabic search | Arabic query matches Arabic titles | `test/features/courses_test.dart` | Passing |
+| TC-CRS-2-02 | CRS-2 | Widget | CTA rule | Start / Continue · lesson N / Review / Buy with VAT | `test/features/courses_test.dart` | Passing |
+| TC-PH4-01 | Phase 4 | Golden | Home, catalogue, course detail, lesson video/reading/PDF | Pixel match, EN/AR × light/dark (24 images) | `test/features/courses_test.dart` | Passing |
 
 ## Review notes
 

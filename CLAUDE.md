@@ -10,9 +10,9 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 
 ## Current status
 
-- Phase: **Phase 3 done, next: Phase 4 Home and courses**
-- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings (sign-in, persisted session, audited demo role switch, Profile & settings, real tab app bar)
-- App code: sign-in and Profile & settings are real; other routes are placeholders on the real tab app bar
+- Phase: **Phase 4 done, next: Phase 5 Assessments**
+- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award)
+- App code: sign-in, Profile & settings, home, catalogue, course detail and lesson player are real; assess, certs, sign-offs, checkout, staff screens are placeholders
 - Last updated: 2026-11-17 · claude/cloud-session
 
 ## Module map
@@ -34,7 +34,8 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 | core: payments | — (`lib/core/payments/`) | paymentGatewayProvider, mockGatewayModeProvider | PaymentGateway (MockGateway) | test/core/payments_test.dart |
 | core: persistence + seed | — (`lib/core/persistence/`, `lib/seed/`) | localDbProvider, seedLoaderProvider, demoSeederProvider | LocalDb (HiveLocalDb / InMemoryLocalDb) | test/core/hive_local_db_test.dart, test/seed/seed_test.dart |
 | auth (data) | `/sign-in` (Phase 3 UI) | authRepositoryProvider | AuthRepository | test/features/repositories_test.dart |
-| courses (data) | `/learn` (Phase 4 UI) | courseRepositoryProvider, progressRepositoryProvider | CourseRepository, ProgressRepository | test/features/repositories_test.dart |
+| home | `/home` | learnerOverviewProvider, myCertificationsProvider, cpdConfigProvider, cpdLedgerProvider, quizHistoryProvider, checklistsProvider, mySignOffsProvider | Course/Progress/Certification/Cpd/Assessment/Competency | test/features/courses_test.dart |
+| courses | `/learn`, `/learn/:courseId`, `/learn/:courseId/lesson/:n` | catalogueProvider, categoriesProvider, courseProgressListProvider, courseProgressProvider, completeLessonProvider, logCourseViewProvider, logLessonViewProvider | CourseRepository, ProgressRepository, CpdRepository | test/features/courses_test.dart |
 | assessments (data) | `/assess` (Phase 5 UI) | assessmentRepositoryProvider | AssessmentRepository | test/features/repositories_test.dart |
 | certifications (data) | `/certs` (Phase 6 UI) | certificationRepositoryProvider, cpdRepositoryProvider | CertificationRepository, CpdRepository | test/features/repositories_test.dart |
 | competencies (data) | `/signoffs`, `/queue` (Phase 7 UI) | competencyRepositoryProvider | CompetencyRepository | test/features/repositories_test.dart |
@@ -67,6 +68,12 @@ Implemented:
 - Demo clock: `FixedClock(demoNow)` = 2026-11-17 09:00 Asia/Dubai; calendar maths in Dubai time (UTC+4). Cert status: ≤ 0 days expired, ≤ 90 renew soon, else valid; pending verification → verifying.
 
 ## Decisions (newest first)
+
+- 2026-11-17 · Progress is derived, never stored twice: `courseProgressListProvider` combines catalogue + ownership + lesson progress; `completeLessonProvider` invalidates `lessonProgressProvider` and `cpdLedgerProvider`, so home, carousel, catalogue, detail and CPD update together. Why: CRS-3 "updates everywhere".
+- 2026-11-17 · `MarkLessonComplete` awards credits only on the transition to all-done (ledger id `cpd-course-<course>-<user>`), so re-completing cannot double count. Why: CRS-4.
+- 2026-11-17 · Opening a course always uses `go` (Learn tab) even from Home. Why: the course routes live in the Learn branch; back returns to `/learn`.
+- 2026-11-17 · Seed additions: course `blurb` ({en, ar}) and certificate `code` ("BLS"); `DemoSeeder.seedVersion` → 2. Why: course header copy and the "BLS expires in 56 days" alert.
+- 2026-11-17 · Test helper `settle()` alternates real-time ticks with frames. Why: some repository futures complete only on a real event-loop turn, which pumpAndSettle never gives while a spinner animates.
 
 - 2026-11-17 · `sessionProvider` is now an AsyncNotifier over `AuthRepository` (stub removed). Why: Phase 3 brief; the session persists via the repository. BREAKING for callers of the Phase 1 stub (fixed in the same commit).
 - 2026-11-17 · Switching role on Profile sets `resumeLocationProvider` so the rebuilt router lands back on `/profile`; Profile's back falls back to the role home when there is nothing to pop. Why: the router is rebuilt per role (Phase 1 decision) and the brief says stay on Profile.
@@ -111,9 +118,11 @@ Implemented:
 
 ## Next up
 
-Phase 4 — Home and courses: learner home dashboard (HOME-1) inside `FirstLoadSkeleton`/`TabScaffold`, catalogue with search and category chips (CRS-1), course detail (CRS-2), lesson player with mark complete (CRS-3), course completion awarding CPD (CRS-4). Test cases TC-HOME-1-01, TC-CRS-*.
+Phase 5 — Assessments: `/assess` with pass mark, best score, history (QZ-3), `/assess/:quizId/run` quiz with instant feedback and explanation (QZ-1), scoring + result ring + `quiz.score` audit (QZ-2), using `AssessmentRepository.drawQuiz` and `QuizRules`. Test cases TC-QZ-*.
 
 ## Change log (newest first; last 30 entries, older in docs/changelog/)
+
+- 2026-11-17 · claude/cloud-session · Phase 4: learner home (hero ring + resume, expiry alert, CPD meter, continue-learning carousel, recent-scores chart with pass line, sign-off status), catalogue (search, category chips, owned/unowned cards), course detail (coloured header, progress, lesson states, sticky CTA incl. Buy with VAT → checkout), lesson player (video/PDF/reading placeholders, up-next outline, previous/mark complete), MarkLessonComplete use case (lesson.complete, course.complete audit, CPD award), course.view/lesson.view usage · lib/features/home, lib/features/courses, lib/app/router.dart, lib/seed (blurb, code), test/features/courses_test.dart · HOME-1, CRS-1..4
 
 - 2026-11-17 · claude/cloud-session · Phase 3: sign-in screen (hero, ECG, language toggle, validation, demo role picker), AsyncNotifier session persisted via AuthRepository, use cases SignIn/SwitchRole/SignOut with auth.signin, role.change (audit) and auth.signout, Profile & settings (role, language, theme, notifications, under-the-hood, sign out, version), real tab app bar (greeting by clock, first name, avatar), 900 ms first-home skeleton, kDemoRoleSwitcher flag, trimmed debug menu · lib/features/auth/presentation, lib/features/settings, lib/app (router, screens, state), test/features/auth_settings_test.dart · AUTH-1..3, SET-1 · BREAKING: `sessionProvider` is now `AsyncValue<Session?>` (user + role) with async signIn/switchRole/signOut; `redirectFor` takes `Session?` — all callers updated
 

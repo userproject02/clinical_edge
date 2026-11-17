@@ -374,5 +374,349 @@
   "appVersion": "ClinicalEdge 0.1.0 (prototype) · mock data only",
   "@appVersion": {
     "description": "Version line on Profile & settings."
+  },
+  "homeOverall": "Overall progress",
+  "@homeOverall": {
+    "description": "Home hero ring caption."
+  },
+  "homeLessonsSummary": "{done} of {total} lessons · {courses} courses",
+  "@homeLessonsSummary": {
+    "description": "Home hero summary.",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "courses": {
+        "type": "int"
+      }
+    }
+  },
+  "homeResume": "Resume: {title}",
+  "@homeResume": {
+    "description": "Home hero button: next lesson.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "homeAllDone": "All lessons complete",
+  "@homeAllDone": {
+    "description": "Home hero button when nothing is left."
+  },
+  "homeExpiryTitle": "{code} expires in {days} days",
+  "@homeExpiryTitle": {
+    "description": "Expiry alert title.",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "homeRenewBefore": "Renew before {date}",
+  "@homeRenewBefore": {
+    "description": "Expiry alert body.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "homeCredits": "CPD/CME credits · {cycle}",
+  "@homeCredits": {
+    "description": "CPD card title.",
+    "placeholders": {
+      "cycle": {
+        "type": "String"
+      }
+    }
+  },
+  "homeCreditsToGo": "{left} credits to go · cycle ends {date}",
+  "@homeCreditsToGo": {
+    "description": "CPD card footer.",
+    "placeholders": {
+      "left": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "homeCreditsReached": "Target reached · cycle ends {date}",
+  "@homeCreditsReached": {
+    "description": "CPD card footer when the target is met.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "homeContinue": "Continue learning",
+  "@homeContinue": {
+    "description": "Home section title."
+  },
+  "homeViewAll": "View all",
+  "@homeViewAll": {
+    "description": "Link to the catalogue."
+  },
+  "homeRecentScores": "Recent scores",
+  "@homeRecentScores": {
+    "description": "Home section title."
+  },
+  "homePassLine": "Pass 80%",
+  "@homePassLine": {
+    "description": "Label of the pass-mark line."
+  },
+  "homeNoScores": "No attempts yet",
+  "@homeNoScores": {
+    "description": "Recent scores empty state."
+  },
+  "homeSignoffs": "Supervisor sign-off",
+  "@homeSignoffs": {
+    "description": "Home section title."
+  },
+  "lessonOfTotal": "Lesson {n} of {total}",
+  "@lessonOfTotal": {
+    "description": "Course progress tag.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "courseCompleted": "Completed",
+  "@courseCompleted": {
+    "description": "Tag for a finished course."
+  },
+  "signoffNone": "Not requested",
+  "@signoffNone": {
+    "description": "Sign-off status."
+  },
+  "signoffPending": "Pending",
+  "@signoffPending": {
+    "description": "Sign-off status."
+  },
+  "signoffApproved": "Approved",
+  "@signoffApproved": {
+    "description": "Sign-off status."
+  },
+  "signoffRejected": "Changes requested",
+  "@signoffRejected": {
+    "description": "Sign-off status."
+  },
+  "catalogueSearch": "Search courses",
+  "@catalogueSearch": {
+    "description": "Search bar hint."
+  },
+  "catalogueAll": "All",
+  "@catalogueAll": {
+    "description": "Category chip: all."
+  },
+  "catalogueEmptyTitle": "No courses match",
+  "@catalogueEmptyTitle": {
+    "description": "Empty search result."
+  },
+  "catalogueEmptyBody": "Try another search or category.",
+  "@catalogueEmptyBody": {
+    "description": "Empty search result body."
+  },
+  "courseLessons": "{n} lessons",
+  "@courseLessons": {
+    "description": "Lesson count tag.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "courseCpd": "{n} CPD",
+  "@courseCpd": {
+    "description": "CPD credits tag.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "coursePlusVat": "+5% VAT",
+  "@coursePlusVat": {
+    "description": "Tag next to a price before VAT."
+  },
+  "durationHm": "{h}h {m}m",
+  "@durationHm": {
+    "description": "Duration hours and minutes.",
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "courseQuiz": "8-question quiz",
+  "@courseQuiz": {
+    "description": "Course detail tag."
+  },
+  "courseYourProgress": "Your progress",
+  "@courseYourProgress": {
+    "description": "Course detail card title."
+  },
+  "courseLessonsDone": "{done} of {total} lessons completed",
+  "@courseLessonsDone": {
+    "description": "Course detail progress text.",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "courseLessonsHeading": "Lessons",
+  "@courseLessonsHeading": {
+    "description": "Course detail section title."
+  },
+  "lessonStateDone": "Done",
+  "@lessonStateDone": {
+    "description": "Lesson state."
+  },
+  "lessonStateNow": "Now",
+  "@lessonStateNow": {
+    "description": "Lesson state: next to take."
+  },
+  "lessonStateTodo": "To do",
+  "@lessonStateTodo": {
+    "description": "Lesson state."
+  },
+  "lessonStateLocked": "Locked",
+  "@lessonStateLocked": {
+    "description": "Lesson state: course not owned."
+  },
+  "lessonTypeVideo": "Video",
+  "@lessonTypeVideo": {
+    "description": "Lesson type."
+  },
+  "lessonTypePdf": "PDF",
+  "@lessonTypePdf": {
+    "description": "Lesson type."
+  },
+  "lessonTypeReading": "Reading",
+  "@lessonTypeReading": {
+    "description": "Lesson type."
+  },
+  "minutesShort": "{n} min",
+  "@minutesShort": {
+    "description": "Minutes.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ctaContinue": "Continue · lesson {n}",
+  "@ctaContinue": {
+    "description": "Course CTA.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ctaStart": "Start course",
+  "@ctaStart": {
+    "description": "Course CTA."
+  },
+  "ctaReview": "Review course",
+  "@ctaReview": {
+    "description": "Course CTA when complete."
+  },
+  "ctaBuy": "Buy · {price}",
+  "@ctaBuy": {
+    "description": "Course CTA for unowned course; price incl. VAT.",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "lessonMeta": "Lesson {n} of {total} · {type}",
+  "@lessonMeta": {
+    "description": "Lesson meta line.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "lessonPdfPlaceholder": "PDF placeholder · page 1 of 6",
+  "@lessonPdfPlaceholder": {
+    "description": "PDF lesson placeholder."
+  },
+  "lessonReadingPlaceholder": "Reading lesson placeholder. Authored content renders here with headings, callouts and inline knowledge checks; learners can bookmark and resume.",
+  "@lessonReadingPlaceholder": {
+    "description": "Reading lesson placeholder."
+  },
+  "lessonKeyPoint": "Key point callout placeholder",
+  "@lessonKeyPoint": {
+    "description": "Reading lesson callout."
+  },
+  "lessonFurther": "Further body text placeholder.",
+  "@lessonFurther": {
+    "description": "Reading lesson body."
+  },
+  "lessonUpNext": "Up next",
+  "@lessonUpNext": {
+    "description": "Lesson outline title."
+  },
+  "lessonPrevious": "Previous",
+  "@lessonPrevious": {
+    "description": "Lesson button."
+  },
+  "lessonMarkComplete": "Mark complete",
+  "@lessonMarkComplete": {
+    "description": "Lesson button."
+  },
+  "lessonNext": "Next lesson",
+  "@lessonNext": {
+    "description": "Lesson button after completion."
+  },
+  "lessonCompleted": "Completed",
+  "@lessonCompleted": {
+    "description": "Lesson button on the last completed lesson."
+  },
+  "lessonPlay": "Play video",
+  "@lessonPlay": {
+    "description": "Accessibility label of the play button."
+  },
+  "courseCompleteTitle": "Course complete",
+  "@courseCompleteTitle": {
+    "description": "Snackbar title."
+  },
+  "courseCompleteBody": "+{n} CPD/CME credits added",
+  "@courseCompleteBody": {
+    "description": "Snackbar body.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   }
 }

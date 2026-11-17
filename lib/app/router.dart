@@ -10,6 +10,10 @@ import 'package:clinical_edge/core/widgets/app_bottom_sheet.dart';
 import 'package:clinical_edge/core/widgets/bottom_nav_bar.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/auth/presentation/sign_in_screen.dart';
+import 'package:clinical_edge/features/courses/presentation/catalogue_screen.dart';
+import 'package:clinical_edge/features/courses/presentation/course_detail_screen.dart';
+import 'package:clinical_edge/features/courses/presentation/lesson_screen.dart';
+import 'package:clinical_edge/features/home/presentation/home_screen.dart';
 import 'package:clinical_edge/features/settings/presentation/profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -146,7 +150,14 @@ RouteBase _learnerShell(GlobalKey<NavigatorState> rootKey) {
       );
     },
     branches: <StatefulShellBranch>[
-      _branch(_tab(AppRoutes.home, (l) => l.titleHome, Icons.home_outlined)),
+      _branch(
+        _tab(
+          AppRoutes.home,
+          (l) => l.titleHome,
+          Icons.home_outlined,
+          screen: (_) => const HomeScreen(),
+        ),
+      ),
       _branch(_learnRoute(learnerOnly: true)),
       _branch(
         _tab(
@@ -288,12 +299,15 @@ GoRoute _learnRoute({required bool learnerOnly}) {
     AppRoutes.learn,
     (l) => l.titleCourses,
     Icons.menu_book_outlined,
+    screen: (_) => const CatalogueScreen(),
     routes: <RouteBase>[
       _detail(
         ':courseId',
         (l) => l.titleCourseDetail,
         Icons.school_outlined,
         hero: true,
+        screen: (state) =>
+            CourseDetailScreen(courseId: state.pathParameters['courseId']!),
         routes: <RouteBase>[
           if (learnerOnly) ...<RouteBase>[
             _detail(
@@ -301,6 +315,10 @@ GoRoute _learnRoute({required bool learnerOnly}) {
               (l) => l.titleLesson,
               Icons.play_circle_outline_rounded,
               hero: true,
+              screen: (state) => LessonScreen(
+                courseId: state.pathParameters['courseId']!,
+                number: int.tryParse(state.pathParameters['n']!) ?? 1,
+              ),
             ),
             _detail(
               'checkout',
@@ -329,6 +347,7 @@ GoRoute _tab(
   TitleOf title,
   IconData icon, {
   List<RouteBase> routes = const <RouteBase>[],
+  Widget Function(GoRouterState state)? screen,
 }) {
   return GoRoute(
     path: path,
@@ -336,7 +355,9 @@ GoRoute _tab(
     pageBuilder: (context, state) => NoTransitionPage<void>(
       key: state.pageKey,
       name: state.uri.path,
-      child: TabPlaceholder(title: title, path: state.uri.path, icon: icon),
+      child:
+          screen?.call(state) ??
+          TabPlaceholder(title: title, path: state.uri.path, icon: icon),
     ),
     routes: routes,
   );
@@ -348,18 +369,20 @@ GoRoute _detail(
   IconData icon, {
   bool hero = false,
   List<RouteBase> routes = const <RouteBase>[],
+  Widget Function(GoRouterState state)? screen,
 }) {
   return GoRoute(
     path: path,
     pageBuilder: (context, state) => pushPage(
       context,
       state,
-      DetailPlaceholder(
-        title: title,
-        path: state.uri.path,
-        icon: icon,
-        hero: hero,
-      ),
+      screen?.call(state) ??
+          DetailPlaceholder(
+            title: title,
+            path: state.uri.path,
+            icon: icon,
+            hero: hero,
+          ),
     ),
     routes: routes,
   );
