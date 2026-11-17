@@ -50,3 +50,6 @@ app.*.map.json
 # ClinicalEdge
 .claude/settings.local.json
 coverage/
+
+# Gradle output
+/android/build/

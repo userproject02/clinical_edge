@@ -1,0 +1,4 @@
+tags:
+  golden:
+    # Pixel comparisons. Goldens are generated on Linux (CI). On macOS run
+    # `flutter test --exclude-tags golden` if font anti-aliasing differs.

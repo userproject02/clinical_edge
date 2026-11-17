@@ -1,26 +1,17 @@
+import 'package:clinical_edge/app/app.dart';
+import 'package:clinical_edge/app/state/preferences.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const ClinicalEdgeApp());
-}
-
-/// Root widget of ClinicalEdge.
-///
-/// Phase 0 placeholder. Phase 1 replaces it with the themed, localised,
-/// routed app shell (see docs/REQUIREMENTS.md and CLAUDE.md).
-class ClinicalEdgeApp extends StatelessWidget {
-  /// Creates the root widget.
-  const new({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ClinicalEdge',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0A6E73)),
-      ),
-      home: const Scaffold(body: Center(child: Text('ClinicalEdge'))),
-    );
-  }
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  runApp(
+    ProviderScope(
+      // Mock implementations are chosen here (Firebase later, AGENTS.md).
+      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+      child: const ClinicalEdgeApp(),
+    ),
+  );
 }

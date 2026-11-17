@@ -32,4 +32,56 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-LOG-01 | Audit | Unit | Edit a stored audit event | AuditChain.verify() reports the first broken event | — | Planned |
 | TC-E2E-01 | All | Integration | Full demo journey across three roles | Every audit action appears in the log with a verified chain | — | Planned |
 | TC-PH0-01 | Phase 0 | Script | context_guard.sh: app change without CLAUDE.md | Blocked in worktree, staged and range modes; passes when CLAUDE.md changes | `tool/ci/context_guard.sh` (manual + CI) | Passing |
-| TC-PH0-02 | Phase 0 | Widget | App smoke test | Placeholder app renders the ClinicalEdge title | `test/app_smoke_test.dart` | Passing |
+| TC-PH0-02 | Phase 0 | Widget | App smoke test | App boots to the sign-in placeholder with the ClinicalEdge title (updated in Phase 1) | `test/app_smoke_test.dart` | Passing |
+| TC-PH1-01 | NFR Localisation | Unit | AED formatting | AED 315.00 (en), 315.00 د.إ (ar), LTR-isolated | `test/core/formatting_and_motion_test.dart` | Passing |
+| TC-PH1-02 | NFR Localisation | Unit | Percent, integer, dates | Western digits, locale month names | `test/core/formatting_and_motion_test.dart` | Passing |
+| TC-PH1-03 | NFR Motion | Widget | Reduced motion | Motion.duration returns zero when disableAnimations | `test/core/formatting_and_motion_test.dart` | Passing |
+| TC-PH1-04 | NFR Motion | Unit | Motion constants | Durations and curve match the prototype | `test/core/formatting_and_motion_test.dart` | Passing |
+| TC-PH1-05 | NFR Motion | Widget | Push transition direction | Slides from the end edge; mirrored in RTL | `test/core/formatting_and_motion_test.dart` | Passing |
+| TC-PH1-06 | NFR Motion | Widget | Shake | Moves sideways then settles | `test/core/formatting_and_motion_test.dart` | Passing |
+| TC-PH1-07 | NFR Design system | Unit | Colour tokens | Light/dark/hero/course tokens match the prototype | `test/app/theme_test.dart` | Passing |
+| TC-PH1-08 | NFR Design system | Unit | ColorScheme + AppColors | Scheme roles and extension built from tokens; Material 3 | `test/app/theme_test.dart` | Passing |
+| TC-PH1-09 | NFR Design system | Unit | Typography | Type scale; Inter vs IBM Plex Sans Arabic; no tracking in Arabic | `test/app/theme_test.dart` | Passing |
+| TC-PH1-10 | NFR Design system | Widget | AppScaffold tab bar | Subtitle, title, bell, avatar callbacks | `test/core/widgets/app_scaffold_test.dart` | Passing |
+| TC-PH1-11 | NFR Localisation | Widget | AppScaffold detail back arrow | Arrow on the start edge, mirrors in RTL, pops | `test/core/widgets/app_scaffold_test.dart` | Passing |
+| TC-PH1-12 | NFR Design system | Widget | AppScaffold coloured detail bar | Uses the given colour | `test/core/widgets/app_scaffold_test.dart` | Passing |
+| TC-PH1-13 | NFR Design system | Widget | BottomNavBar | Selects, badge with semantics | `test/core/widgets/bottom_nav_bar_test.dart` | Passing |
+| TC-PH1-14 | NFR Accessibility | Widget | PrimaryButton | 52 dp, stadium, tappable | `test/core/widgets/buttons_test.dart` | Passing |
+| TC-PH1-15 | NFR Design system | Widget | PrimaryButton loading | Spinner, same width, taps ignored, semantics | `test/core/widgets/buttons_test.dart` | Passing |
+| TC-PH1-16 | NFR Design system | Widget | SecondaryButton | Disabled when no handler; 52 dp | `test/core/widgets/buttons_test.dart` | Passing |
+| TC-PH1-17 | NFR Accessibility | Widget | SegmentedPicker | Selects; ≥ 48 dp | `test/core/widgets/pickers_test.dart` | Passing |
+| TC-PH1-18 | NFR Localisation | Widget | SegmentedPicker RTL | Order follows text direction | `test/core/widgets/pickers_test.dart` | Passing |
+| TC-PH1-19 | NFR Design system | Widget | FilterChipRow | Selects; horizontal scroll | `test/core/widgets/pickers_test.dart` | Passing |
+| TC-PH1-20 | NFR Design system | Widget | StatusTag tones | Foreground/background per tone | `test/core/widgets/status_and_tiles_test.dart` | Passing |
+| TC-PH1-21 | NFR Design system | Widget | StatTile | Label, value, caption, tap | `test/core/widgets/status_and_tiles_test.dart` | Passing |
+| TC-PH1-22 | NFR Design system | Widget | EmptyState | Title, message, action | `test/core/widgets/status_and_tiles_test.dart` | Passing |
+| TC-PH1-23 | NFR Motion | Widget | ProgressRing sweep | 100 ms delay, 1.3 s sweep, semantics label + value | `test/core/widgets/meters_test.dart` | Passing |
+| TC-PH1-24 | NFR Accessibility | Widget | ProgressRing label at 1.3× text | One line, never wraps, stays centred | `test/core/widgets/meters_test.dart` | Passing |
+| TC-PH1-25 | NFR Motion | Widget | ProgressRing reduced motion | Final value drawn at once | `test/core/widgets/meters_test.dart` | Passing |
+| TC-PH1-26 | NFR Localisation | Widget | LinearMeter direction | Grows from left (LTR) / right (RTL) | `test/core/widgets/meters_test.dart` | Passing |
+| TC-PH1-27 | NFR Motion | Widget | LinearMeter growth | Animates over ~1.15 s | `test/core/widgets/meters_test.dart` | Passing |
+| TC-PH1-28 | NFR Motion | Widget | AppSnackBar | Slides up, stays, auto-dismisses | `test/core/widgets/feedback_test.dart` | Passing |
+| TC-PH1-29 | NFR Motion | Widget | NotificationBanner | Drops from top, auto-dismisses | `test/core/widgets/feedback_test.dart` | Passing |
+| TC-PH1-30 | NFR Motion | Widget | AppBottomSheet | Opens over scrim; scrim tap closes | `test/core/widgets/feedback_test.dart` | Passing |
+| TC-PH1-31 | NFR Accessibility | Widget | EcgLine | Loops; excluded from semantics | `test/core/widgets/animated_decor_test.dart` | Passing |
+| TC-PH1-32 | NFR Motion | Widget | Looping widgets + reduced motion | ECG, pulse, shimmer stop; skeleton static | `test/core/widgets/animated_decor_test.dart` | Passing |
+| TC-PH1-33 | NFR Accessibility | Widget | SkeletonBox | Announces Loading | `test/core/widgets/animated_decor_test.dart` | Passing |
+| TC-PH1-34 | NFR Accessibility | Unit | Text contrast | Every text/background token pair ≥ 4.5:1 in both themes | `test/app/theme_test.dart` | Passing |
+| TC-PH1-35 | SET-1 (part) | Unit | Theme mode persistence | Defaults to system; saved and restored | `test/app/state_test.dart` | Passing |
+| TC-PH1-36 | SET-1 (part) | Unit | Locale persistence | Defaults to English; toggles; saved and restored | `test/app/state_test.dart` | Passing |
+| TC-PH1-37 | Phase 1 | Unit | Session stub | Sign in, switch role, sign out | `test/app/state_test.dart` | Passing |
+| TC-PH1-38 | Phase 1 routing | Unit | Redirect signed out | Any route → /sign-in | `test/app/router_test.dart` | Passing |
+| TC-PH1-39 | Phase 1 routing | Unit | Redirect signed in | /sign-in and / → role home | `test/app/router_test.dart` | Passing |
+| TC-PH1-40 | Phase 1 routing | Unit | Wrong role | Other role's route → own home | `test/app/router_test.dart` | Passing |
+| TC-PH1-41 | Phase 1 routing | Unit | Allowed routes | Every table route passes for its role | `test/app/router_test.dart` | Passing |
+| TC-PH1-42 | Phase 1 routing | Widget | Cold start | Signed out starts on sign-in | `test/app/router_test.dart` | Passing |
+| TC-PH1-43 | Phase 1 routing | Widget | Role shells | Learner 5 tabs, supervisor 3, admin 3; homes | `test/app/router_test.dart` | Passing |
+| TC-PH1-44 | Phase 1 routing | Widget | Shared /learn | Supervisor /learn opens the supervisor Learn tab | `test/app/router_test.dart` | Passing |
+| TC-PH1-45 | Phase 1 routing | Widget | Back from detail | Selects the tab the detail belongs to | `test/app/router_test.dart` | Passing |
+| TC-PH1-46 | Phase 1 routing | Widget | Tab back stacks | Each tab keeps its own stack | `test/app/router_test.dart` | Passing |
+| TC-PH1-47 | Phase 1 routing | Widget | Profile + upload sheet | Avatar pushes /profile; /certs/upload is a sheet | `test/app/router_test.dart` | Passing |
+| TC-PH1-48 | NFR Localisation | Widget | Arabic app | Whole app RTL; tabs and back arrow mirrored | `test/app/router_test.dart` | Passing |
+| TC-PH1-49 | Phase 1 routing | Widget | Placeholders | Every route shows its title | `test/app/router_test.dart` | Passing |
+| TC-PH1-50 | Phase 1 routing | Widget | Sign out | Returns to sign-in | `test/app/router_test.dart` | Passing |
+| TC-PH1-51 | Phase 1 | Integration | On device | Roles, dark mode and Arabic RTL on a simulator/emulator | `integration_test/scaffold_test.dart` | Planned (device) |
+| TC-PH1-52 | NFR Design system | Golden | 18 shared-widget compositions × light/dark × LTR/RTL (72 images) | Pixel match within 0.5 % | `test/core/widgets/*_test.dart` → `test/core/widgets/goldens/` | Passing |

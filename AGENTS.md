@@ -33,11 +33,31 @@ Read this file and `CLAUDE.md` before every change. These rules apply to any age
 
 ## Packages
 
-Pin versions here when they are added (Phase 1 adds the main set).
+Resolved versions (pubspec.yaml uses caret ranges; pubspec.lock is committed). Update this table when a package is added or bumped.
 
 | Package | Version | Why |
 | --- | --- | --- |
-| very_good_analysis | see pubspec.yaml | lint rules |
+| material_ui | 1.11.1 | Material 3 widgets (moved out of the SDK in Flutter 3.47+; import `package:material_ui/material_ui.dart`, never `package:flutter/material.dart`) |
+| flutter_riverpod | 3.5.0 | state and DI |
+| riverpod_annotation / riverpod_generator | 4.0.8 / 4.0.10 | `@riverpod` providers (dev: generator) |
+| go_router | 18.1.4 | routing, role shells, guards |
+| freezed / freezed_annotation | 4.0.3 / 3.1.0 | immutable models (dev: freezed) |
+| json_annotation / json_serializable | 4.12.0 / 6.15.2 | JSON for seed files (dev: json_serializable) |
+| build_runner | 2.17.1 | code generation (dev) |
+| flutter_localizations (SDK) + intl | 0.20.3 | ARB strings, dates, numbers |
+| shared_preferences | 2.5.6 | persisted settings (theme, locale) |
+| hive_ce / hive_ce_generator | 2.23.3 / 1.12.1 | mock stores from Phase 2 (dev: generator) |
+| fl_chart | 1.3.1 | admin charts (still on `flutter/material`; bridged, see CLAUDE.md) |
+| file_picker | 13.4.0 | mocked certificate pick |
+| share_plus | 13.3.1 | CSV export, receipt share |
+| flutter_local_notifications | 23.0.2 | expiry reminders (Android needs core-library desugaring) |
+| crypto | 3.0.8 | SHA-256 audit hash chain |
+| uuid | 4.6.0 | IDs |
+| mocktail | 1.0.5 | test doubles (dev) |
+| integration_test (SDK) | — | device journeys (dev) |
+| very_good_analysis | 11.0.0 | lint rules (dev) |
+
+Not used, on purpose: `google_fonts` (fonts are bundled as pubspec families instead) and `golden_toolkit`/`alchemist` (their APIs take `flutter/material` types); see CLAUDE.md → Decisions.
 
 ## Coding conventions
 
@@ -47,6 +67,8 @@ Pin versions here when they are added (Phase 1 adds the main set).
 - No hard-coded colours in widgets: use `Theme.of(context)` and the `AppColors` theme extension.
 - RTL-safe layout only: `EdgeInsetsDirectional`, `AlignmentDirectional`, `start`/`end`, never `left`/`right`. Numbers, percentages, AED amounts, emails, card numbers and hashes are isolated LTR.
 - Accessibility: touch targets ≥ 48 dp, `Semantics` labels on icon buttons, rings and charts, text contrast ≥ 4.5:1, works at 1.3× text scale.
+- Imports: `package:material_ui/material_ui.dart` for Material widgets (the SDK's `flutter/material.dart` is deprecated on our channel). Shared widgets come from `package:clinical_edge/core/widgets/widgets.dart`.
+- Constructors use the Dart 3.14 `new` form (`const new({super.key})`); `dart fix --apply` converts old ones.
 - Motion: use the constants in `lib/core/motion.dart`; respect `MediaQuery.disableAnimations`; **never animate scale on widgets that contain text** (it renders blurry). Use opacity and translate.
 - Dart: `very_good_analysis` must pass with zero issues; `dart format` with default settings.
 
@@ -68,7 +90,9 @@ Pin versions here when they are added (Phase 1 adds the main set).
 | Analyze | `flutter analyze` |
 | Format | `dart format .` (CI: `dart format --output=none --set-exit-if-changed .`) |
 | Unit + widget tests | `flutter test` |
-| Update goldens | `flutter test --update-goldens` |
+| Update goldens | `flutter test --update-goldens --tags golden` (on Linux, the CI platform) |
+| Tests without goldens (e.g. on macOS) | `flutter test --exclude-tags golden` |
+| Regenerate ARB strings | `flutter gen-l10n` (also runs on `flutter pub get`) |
 | Integration test | `flutter test integration_test` |
 | Install git hooks | `lefthook install` (once per clone; needs `brew install lefthook`) |
 | Context check (same as CI) | `tool/ci/context_guard.sh worktree` |
