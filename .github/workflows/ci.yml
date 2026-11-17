@@ -11,8 +11,9 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # Project needs Dart ^3.14; see CLAUDE.md → Decisions. Switch to stable once it satisfies the constraint.
-  FLUTTER_CHANNEL: master
+  # Same SDK as local development (Flutter 3.50.0 stable, Dart 3.14). See CLAUDE.md → Decisions.
+  FLUTTER_CHANNEL: stable
+  FLUTTER_VERSION: "3.50.0"
 
 jobs:
   context:
@@ -44,6 +45,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
       - run: flutter pub get
       - run: dart format --output=none --set-exit-if-changed .
@@ -68,6 +70,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
       - run: flutter pub get
       - run: flutter build apk --debug
@@ -85,6 +88,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
       - run: flutter pub get
       - run: flutter build ios --debug --no-codesign

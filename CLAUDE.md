@@ -40,11 +40,10 @@ None are implemented yet. These become contracts as they land (change only with 
 - 2026-11-17 · Removed web, linux, macos and windows targets. Why: v1 is iOS + Android only.
 - 2026-11-17 · Bundle IDs `ae.clinicaledge.clinicalEdge` (iOS) and `ae.clinicaledge.clinical_edge` (Android); Android minSdk 26, iOS 15. Why: requirements NFR "Platforms".
 - 2026-11-17 · Lints: `very_good_analysis` replaces `flutter_lints`. Why: stricter, matches requirements.
-- 2026-11-17 · CI uses the Flutter **master** channel because the project needs Dart ^3.14 (local SDK is a source checkout). Why: stable did not satisfy the SDK constraint at setup time.
+- 2026-11-17 · SDK pinned to Flutter 3.50.0 stable (Dart 3.14) locally and in CI. Why: reproducible builds; the template needs Dart ^3.14.
 
 ## Known issues / TODO
 
-- [ ] Local Flutter SDK at `~/projects/flutter` is on a contribution branch (`flutter-driver-screenshot-format`). Use a stable/master checkout for app work so builds are reproducible; then align CI.
 - [ ] `docs/design/` screenshots of the prototype still to be added (needed from Phase 1).
 - [ ] Push to GitHub and enable branch protection with the CI checks required.
 
@@ -54,6 +53,7 @@ Phase 1 — Scaffold and design system: themes (light/dark tokens), fonts, EN/AR
 
 ## Change log (newest first; last 30 entries, older in docs/changelog/)
 
+- 2026-11-17 · claude/gurus-macbook-air · CI pinned to Flutter 3.50.0 stable; removed one-off bootstrap script · .github/workflows/ci.yml, CLAUDE.md · match local SDK
 - 2026-11-17 · claude/gurus-macbook-air · Phase 0: AGENTS.md, CLAUDE.md, subagents, TESTCASES.md, hooks, lefthook, CI, placeholder app, iOS/Android only · repo root, .claude/, tool/, .github/, docs/ · bootstrap context so any session can work safely
 
 ## Commands
