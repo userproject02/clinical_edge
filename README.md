@@ -15,6 +15,14 @@ ClinicalEdge is a Flutter mobile app (iOS and Android) for healthcare profession
 
 There is no patient data anywhere in the app.
 
+## Quick start on a new laptop
+
+```sh
+bash tool/setup.sh
+```
+
+See [DEPLOY.md](DEPLOY.md) for setup details and deploying builds to Google Cloud, and [FEATURES.md](FEATURES.md) for a one-page tour of every screen.
+
 ## Prerequisites
 
 - Flutter **3.50.0** stable (Dart 3.14). CI uses the same version.

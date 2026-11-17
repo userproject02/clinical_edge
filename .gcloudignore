@@ -1,0 +1,6 @@
+#!include:.gitignore
+.git/
+.dart_tool/
+build/
+coverage/
+*.log
