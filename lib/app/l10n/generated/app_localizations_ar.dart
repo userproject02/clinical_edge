@@ -854,4 +854,154 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get decidedEmptyBody => 'تظهر هنا طلبات الاعتماد المعتمدة والمعادة.';
+
+  @override
+  String get checkoutOrderSummary => 'ملخص الطلب';
+
+  @override
+  String checkoutLessonsCredits(int lessons, int credits) {
+    return '$lessons دروس · $credits نقاط تطوير مهني';
+  }
+
+  @override
+  String get checkoutSubtotal => 'المجموع الفرعي';
+
+  @override
+  String checkoutVat(String pct) {
+    return 'ضريبة القيمة المضافة ($pct)';
+  }
+
+  @override
+  String get checkoutTotal => 'الإجمالي';
+
+  @override
+  String get checkoutMethod => 'طريقة الدفع';
+
+  @override
+  String get checkoutCard => 'بطاقة';
+
+  @override
+  String get checkoutApplePay => 'Apple Pay';
+
+  @override
+  String get checkoutCardNumber => 'رقم البطاقة';
+
+  @override
+  String get checkoutCardHint => '4242 4242 4242 4242 (تجريبي)';
+
+  @override
+  String get checkoutExpiry => 'تاريخ الانتهاء';
+
+  @override
+  String get checkoutExpiryHint => 'MM / YY';
+
+  @override
+  String get checkoutCvc => 'CVC';
+
+  @override
+  String get checkoutErrorNumber => 'تحقّق من رقم البطاقة';
+
+  @override
+  String get checkoutErrorExpiry => 'أدخل تاريخًا صالحًا غير منتهٍ';
+
+  @override
+  String get checkoutErrorCvc => '3 أو 4 أرقام';
+
+  @override
+  String get checkoutApplePaySheet => 'واجهة Apple Pay (تجريبية)';
+
+  @override
+  String get checkoutApplePayHint => 'أكّد باستخدام Face ID على الجهاز';
+
+  @override
+  String get checkoutLockNote =>
+      'PaymentGateway ← MockGateway حاليًا. يمكن إضافة محوّل Network International خلف الواجهة نفسها. لا تُسجَّل بيانات البطاقة أبدًا.';
+
+  @override
+  String checkoutPay(String amount) {
+    return 'ادفع $amount';
+  }
+
+  @override
+  String checkoutPayApple(String amount) {
+    return 'ادفع عبر Apple Pay · $amount';
+  }
+
+  @override
+  String get checkoutProcessing => 'جارٍ المعالجة…';
+
+  @override
+  String get checkoutDeclinedTitle => 'تم رفض الدفع';
+
+  @override
+  String get checkoutDeclinedBody =>
+      'لم يُخصم أي مبلغ. تحقّق من البيانات أو جرّب طريقة أخرى.';
+
+  @override
+  String get checkoutCancelledBody =>
+      'أُلغي الدفع عند التحقق ثلاثي الأبعاد. لم يُخصم أي مبلغ.';
+
+  @override
+  String get checkoutRetry => 'حاول مرة أخرى';
+
+  @override
+  String get threeDsTitle => 'التحقق ثلاثي الأبعاد (تجريبي)';
+
+  @override
+  String threeDsBody(String amount) {
+    return 'يطلب منك المصرف تأكيد دفعة بقيمة $amount إلى ClinicalEdge.';
+  }
+
+  @override
+  String get threeDsApprove => 'موافقة';
+
+  @override
+  String get threeDsCancel => 'إلغاء';
+
+  @override
+  String get receiptSuccess => 'تم الدفع بنجاح';
+
+  @override
+  String receiptInvoice(String number, String date) {
+    return 'فاتورة ضريبية $number · $date';
+  }
+
+  @override
+  String get receiptSeller => 'البائع';
+
+  @override
+  String receiptSellerValue(String name, String trn) {
+    return '$name · الرقم الضريبي $trn';
+  }
+
+  @override
+  String get receiptBilledTo => 'فوترة إلى';
+
+  @override
+  String get receiptItem => 'البند';
+
+  @override
+  String get receiptMethod => 'طريقة الدفع';
+
+  @override
+  String receiptCardMethod(String last4) {
+    return 'بطاقة •••• $last4 (تجريبي)';
+  }
+
+  @override
+  String get receiptApplePay => 'Apple Pay (تجريبي)';
+
+  @override
+  String receiptVat(String pct) {
+    return 'ضريبة القيمة المضافة $pct';
+  }
+
+  @override
+  String get receiptTotalPaid => 'الإجمالي المدفوع';
+
+  @override
+  String get receiptShare => 'مشاركة PDF';
+
+  @override
+  String get receiptStart => 'ابدأ الدورة';
 }

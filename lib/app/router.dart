@@ -14,6 +14,8 @@ import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/auth/presentation/sign_in_screen.dart';
 import 'package:clinical_edge/features/certifications/presentation/certs_screen.dart';
 import 'package:clinical_edge/features/certifications/presentation/upload_sheet.dart';
+import 'package:clinical_edge/features/checkout/presentation/checkout_screen.dart';
+import 'package:clinical_edge/features/checkout/presentation/receipt_screen.dart';
 import 'package:clinical_edge/features/competencies/presentation/queue_screens.dart';
 import 'package:clinical_edge/features/competencies/presentation/signoff_providers.dart';
 import 'package:clinical_edge/features/competencies/presentation/signoffs_screen.dart';
@@ -355,11 +357,17 @@ GoRoute _learnRoute({required bool learnerOnly}) {
               'checkout',
               (l) => l.titleCheckout,
               Icons.shopping_bag_outlined,
+              screen: (state) =>
+                  CheckoutScreen(courseId: state.pathParameters['courseId']!),
             ),
             _detail(
               'receipt/:orderId',
               (l) => l.titleReceipt,
               Icons.receipt_long_outlined,
+              screen: (state) => ReceiptScreen(
+                courseId: state.pathParameters['courseId']!,
+                orderId: state.pathParameters['orderId']!,
+              ),
             ),
           ],
         ],

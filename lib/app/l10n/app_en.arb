@@ -1292,5 +1292,231 @@
   "decidedEmptyBody": "Approved and returned sign-offs appear here.",
   "@decidedEmptyBody": {
     "description": "Empty decided list."
+  },
+  "checkoutOrderSummary": "Order summary",
+  "@checkoutOrderSummary": {
+    "description": "Card title."
+  },
+  "checkoutLessonsCredits": "{lessons} lessons · {credits} CPD credits",
+  "@checkoutLessonsCredits": {
+    "description": "Order item line.",
+    "placeholders": {
+      "lessons": {
+        "type": "int"
+      },
+      "credits": {
+        "type": "int"
+      }
+    }
+  },
+  "checkoutSubtotal": "Subtotal",
+  "@checkoutSubtotal": {
+    "description": "Row."
+  },
+  "checkoutVat": "VAT ({pct})",
+  "@checkoutVat": {
+    "description": "Row; pct like 5%.",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutTotal": "Total",
+  "@checkoutTotal": {
+    "description": "Row."
+  },
+  "checkoutMethod": "Payment method",
+  "@checkoutMethod": {
+    "description": "Section."
+  },
+  "checkoutCard": "Card",
+  "@checkoutCard": {
+    "description": "Method."
+  },
+  "checkoutApplePay": "Apple Pay",
+  "@checkoutApplePay": {
+    "description": "Method."
+  },
+  "checkoutCardNumber": "Card number",
+  "@checkoutCardNumber": {
+    "description": "Field."
+  },
+  "checkoutCardHint": "4242 4242 4242 4242 (test)",
+  "@checkoutCardHint": {
+    "description": "Field placeholder."
+  },
+  "checkoutExpiry": "Expiry",
+  "@checkoutExpiry": {
+    "description": "Field."
+  },
+  "checkoutExpiryHint": "MM / YY",
+  "@checkoutExpiryHint": {
+    "description": "Field placeholder."
+  },
+  "checkoutCvc": "CVC",
+  "@checkoutCvc": {
+    "description": "Field."
+  },
+  "checkoutErrorNumber": "Check the card number",
+  "@checkoutErrorNumber": {
+    "description": "Validation."
+  },
+  "checkoutErrorExpiry": "Enter a valid date that is not in the past",
+  "@checkoutErrorExpiry": {
+    "description": "Validation."
+  },
+  "checkoutErrorCvc": "3 or 4 digits",
+  "@checkoutErrorCvc": {
+    "description": "Validation."
+  },
+  "checkoutApplePaySheet": "Apple Pay sheet (mock)",
+  "@checkoutApplePaySheet": {
+    "description": "Mock sheet title."
+  },
+  "checkoutApplePayHint": "Confirm with Face ID on device",
+  "@checkoutApplePayHint": {
+    "description": "Mock sheet hint."
+  },
+  "checkoutLockNote": "PaymentGateway → MockGateway today. A Network International adapter plugs in behind the same interface. Card details are never logged.",
+  "@checkoutLockNote": {
+    "description": "Lock note."
+  },
+  "checkoutPay": "Pay {amount}",
+  "@checkoutPay": {
+    "description": "Pay button.",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutPayApple": "Pay with Apple Pay · {amount}",
+  "@checkoutPayApple": {
+    "description": "Pay button.",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutProcessing": "Processing…",
+  "@checkoutProcessing": {
+    "description": "Pay button while processing."
+  },
+  "checkoutDeclinedTitle": "Payment declined",
+  "@checkoutDeclinedTitle": {
+    "description": "Error banner."
+  },
+  "checkoutDeclinedBody": "You were not charged. Check the details or try another method.",
+  "@checkoutDeclinedBody": {
+    "description": "Error banner."
+  },
+  "checkoutCancelledBody": "Payment cancelled at 3-D Secure. You were not charged.",
+  "@checkoutCancelledBody": {
+    "description": "Error banner."
+  },
+  "checkoutRetry": "Try again",
+  "@checkoutRetry": {
+    "description": "Retry."
+  },
+  "threeDsTitle": "3-D Secure (mock)",
+  "@threeDsTitle": {
+    "description": "3DS screen."
+  },
+  "threeDsBody": "Your bank asks you to confirm a payment of {amount} to ClinicalEdge.",
+  "@threeDsBody": {
+    "description": "3DS body.",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "threeDsApprove": "Approve",
+  "@threeDsApprove": {
+    "description": "3DS."
+  },
+  "threeDsCancel": "Cancel",
+  "@threeDsCancel": {
+    "description": "3DS."
+  },
+  "receiptSuccess": "Payment successful",
+  "@receiptSuccess": {
+    "description": "Receipt title."
+  },
+  "receiptInvoice": "Tax invoice {number} · {date}",
+  "@receiptInvoice": {
+    "description": "Receipt line.",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptSeller": "Seller",
+  "@receiptSeller": {
+    "description": "Row."
+  },
+  "receiptSellerValue": "{name} · TRN {trn}",
+  "@receiptSellerValue": {
+    "description": "Row value.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "trn": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptBilledTo": "Billed to",
+  "@receiptBilledTo": {
+    "description": "Row."
+  },
+  "receiptItem": "Item",
+  "@receiptItem": {
+    "description": "Row."
+  },
+  "receiptMethod": "Method",
+  "@receiptMethod": {
+    "description": "Row."
+  },
+  "receiptCardMethod": "Card •••• {last4} (mock)",
+  "@receiptCardMethod": {
+    "description": "Row value.",
+    "placeholders": {
+      "last4": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptApplePay": "Apple Pay (mock)",
+  "@receiptApplePay": {
+    "description": "Row value."
+  },
+  "receiptVat": "VAT {pct}",
+  "@receiptVat": {
+    "description": "Row.",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptTotalPaid": "Total paid",
+  "@receiptTotalPaid": {
+    "description": "Row."
+  },
+  "receiptShare": "Share PDF",
+  "@receiptShare": {
+    "description": "Button."
+  },
+  "receiptStart": "Start course",
+  "@receiptStart": {
+    "description": "Button."
   }
 }

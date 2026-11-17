@@ -10,9 +10,9 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 
 ## Current status
 
-- Phase: **Phase 7 done, next: Phase 8 Checkout**
-- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit) · 6 Certifications and CPD (certs tab, CPD ring + ledger, upload sheet, expiry reminders) · 7 Competency sign-off (learner checklists, supervisor queue, review, decided)
-- App code: sign-in, Profile & settings, home, catalogue, course detail, lesson player, Assess tab, quiz, Certs tab, upload sheet, sign-offs, queue, review and decided are real; checkout, receipt and admin screens are placeholders
+- Phase: **Phase 8 done, next: Phase 9 Admin**
+- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit) · 6 Certifications and CPD (certs tab, CPD ring + ledger, upload sheet, expiry reminders) · 7 Competency sign-off (learner checklists, supervisor queue, review, decided) · 8 Checkout (order summary, card + mock Apple Pay, PurchaseCourse, receipt + PDF)
+- App code: sign-in, Profile & settings, home, catalogue, course detail, lesson player, Assess tab, quiz, Certs tab, upload sheet, sign-offs, queue, review and decided, checkout and receipt are real; admin screens are placeholders
 - Last updated: 2026-11-17 · claude/gurus-macbook-air
 
 ## Module map
@@ -40,7 +40,7 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 | certifications | `/certs`, `/certs/upload` (root sheet) | certificationRepositoryProvider, cpdRepositoryProvider, certificateFilePickerProvider, myCertificationsProvider, cpdConfigProvider, cpdLedgerProvider, reminderServiceProvider, dueCertificateProvider, reminderSyncProvider, setRemindersEnabledProvider, simulateReminderProvider, uploadCertificateProvider | CertificationRepository, CpdRepository, CertificateFilePicker (+ UploadCertificate, ReminderService) | test/features/certifications_test.dart, integration_test/reminders_test.dart |
 | core: local notifications | — (`lib/core/notifications/`) | localNotificationsProvider | LocalNotifier (PluginLocalNotifier in main.dart, RecordingLocalNotifier in tests) | test/features/certifications_test.dart |
 | competencies | `/signoffs` (learner), `/queue`, `/queue/:requestId`, `/decided` (supervisor) | competencyRepositoryProvider, checklistsProvider, mySignOffsProvider, usersByIdProvider, signOffSupervisorProvider, checklistsByIdProvider, signOffQueueProvider, decidedSignOffsProvider, signOffRequestProvider, queueStatsProvider, requestSignOffProvider, decideSignOffProvider | CompetencyRepository (+ RequestSignOff, DecideSignOff) | test/features/competencies_test.dart, test/features/repositories_test.dart |
-| checkout (data) | `/learn/:id/checkout` (Phase 8 UI) | checkoutRepositoryProvider | CheckoutRepository | test/features/repositories_test.dart |
+| checkout | `/learn/:courseId/checkout`, `/learn/:courseId/receipt/:orderId` | checkoutRepositoryProvider, paymentGatewayProvider, mockGatewayModeProvider, sellerProvider, orderProvider, logCheckoutStartProvider, purchaseCourseProvider, complete3dsProvider | CheckoutRepository, PaymentGateway (+ PurchaseCourse, CardRules) | test/features/checkout_test.dart, test/features/repositories_test.dart |
 | admin (data) | `/cohort` (Phase 9 UI) | cohortRepositoryProvider | CohortRepository | test/features/repositories_test.dart |
 | mock wiring | — (`lib/app/mock_overrides.dart`) | every repository override, `resetDemoData` | all mocks | test/helpers/test_container.dart |
 
@@ -62,6 +62,7 @@ Implemented:
 - Quiz audit target: `"<quiz title EN> · <score>% (pass|fail)"`, e.g. `BLS Assessment · 88% (pass)`. Score = `QuizRules.scorePct` (half up), pass ≥ 80. Quiz ids `bls` (8 questions) and `ipc` (7, unlocks when c2 is complete).
 - `LocalNotifier` (requestPermission, showNow, replaceSchedule) and `CertificateFilePicker` (pick → name + size only); Android channel id `expiry_reminders`. Cert upload audit target `"<name> · pending verification"`; reminder usage target `"<code> · <days> days"`. Reminders fire at 09:00 Dubai on 90/60/30/7 days before expiry for verified certificates.
 - Sign-off audit targets: request = checklist name (EN); decision = `"<checklist> · <learner> · approved|rejected"` (never the comment). Default approval comment "Competent. Observed and signed off." stored in EN and AR.
+- Purchase audit target `"<course EN> · AED <0.00> · <invoiceNo>"`; `checkout.start` usage target = course title. Card number, expiry and CVC live only in the form controllers, are validated locally, cleared on success and never stored, logged or sent; the gateway gets a mock token (`card_mock_<uuid>` / `applepay_mock_<uuid>`) and the order keeps only `cardLast4`.
 - Repository interfaces in `lib/features/*/data/*_repository.dart`: AuthRepository, CourseRepository, ProgressRepository, AssessmentRepository, CertificationRepository, CpdRepository, CompetencyRepository, CheckoutRepository, CohortRepository.
 - `ActivityEvent` fields: id, ts (UTC), userId, role, action, target, platform (`ios`/`android`), kind (`audit`/`usage`), prevHash, hash (audit only). Action wire names: `AuditAction` (role.change, quiz.score, signoff.request, signoff.decision, purchase, cert.upload, course.complete, audit.export) and `UsageAction` (auth.signin, auth.signout, course.view, lesson.view, lesson.complete, checkout.start, notify.reminder).
 - Audit hash: `SHA-256(prevHash|ts|userId|role|action|target|platform)` lower hex; ts = ISO-8601 UTC (`toIso8601String`), role = enum name; first prevHash = 64 zeros. `AuditStore` exposes append + list only. Targets pass `TargetSanitizer` (≤ 120 chars; no card numbers, CVC, emails, passwords).
@@ -72,6 +73,13 @@ Implemented:
 - Demo clock: `FixedClock(demoNow)` = 2026-11-17 09:00 Asia/Dubai; calendar maths in Dubai time (UTC+4). Cert status: ≤ 0 days expired, ≤ 90 renew soon, else valid; pending verification → verifying.
 
 ## Decisions (newest first)
+
+- 2026-11-18 · Apple Pay is a mock sheet only in v1. Plan: integrate Apple Pay through the chosen UAE gateway's SDK (e.g. Network International) with a merchant ID and payment-processing certificate, behind `PaymentGateway` + `ApplePayMethod(token)`; no widget changes. Why: brief; no real payments in v1.
+- 2026-11-18 · `Order.cardLast4` added (BREAKING, additive) and `CheckoutRepository.completeOrder` takes optional `cardLast4`. Why: receipt shows "Card •••• 4242" from the last 4 only.
+- 2026-11-18 · Success navigates with `go` to the receipt (checkout leaves the stack; receipt back → `/learn`). Why: go_router `replace` from a declaratively reached page reported `/learn/c3` as the location.
+- 2026-11-18 · Receipt PDF is English-only (pdf package default font). Why: Arabic shaping needs an embedded Arabic font; revisit in Phase 10.
+- 2026-11-18 · Seller renamed to "ClinicalEdge (demo)" in `demo.json`; `DemoSeeder.seedVersion` → 5. Why: brief's receipt copy. Invoice sequence still starts at CE-YYYY-001041 (contract).
+- 2026-11-18 · Git commits are authored as `userproject02` with the GitHub no-reply email (user request); AGENTS.md → Git updated. Earlier commits keep the old author.
 
 - 2026-11-18 · Queue stats are computed: pending = queue size, this month = requests received this calendar month (Dubai), turnaround = mean request→decision time over decided requests (seed gives 1.7d, the brief's mock showed 1.4d). Why: no hard-coded numbers in UI.
 - 2026-11-18 · `MockCompetencyRepository.decide` keeps each `decidedAt` strictly after the latest decision. Why: under the fixed demo clock, "newest first" on Decided would tie.
@@ -131,8 +139,8 @@ Implemented:
 ## Known issues / TODO
 
 - [ ] `docs/design/` has no screenshots; Phase 1 was built from the prototype canvas itself (artifact "ClinicalEdge", `Main.dc.html`). Export the storyboard frames into `docs/design/` when convenient.
-- [ ] Device runs deferred: Android for Phases 1–7 and iOS for Phases 6–7 (`integration_test/reminders_test.dart` needs the notification permission granted, then confirm the banner and a real notification on each). An Android AVD `ce_pixel` (API 36, arm64) now exists on the MacBook.
-- [ ] Phase 5–7 goldens (`test/features/goldens/{assess,quiz_*,result_*,certs_*,upload_sheet_*,signoffs_*,queue*,review_*,decided_*}`) were generated on macOS; regenerate on Linux (`flutter test --update-goldens --tags golden`) so CI matches.
+- [ ] Device runs deferred: Android for Phases 1–8 and iOS for Phases 6–8 (incl. Share PDF sheet) (`integration_test/reminders_test.dart` needs the notification permission granted, then confirm the banner and a real notification on each). An Android AVD `ce_pixel` (API 36, arm64) now exists on the MacBook.
+- [ ] Phase 5–8 goldens (`test/features/goldens/{assess,quiz_*,result_*,certs_*,upload_sheet_*,signoffs_*,queue*,review_*,decided_*,checkout_*,receipt_*}`) were generated on macOS; regenerate on Linux (`flutter test --update-goldens --tags golden`) so CI matches.
 - [ ] Arabic numeric ranges in seed options render reversed in RTL ("80–60"); see `docs/TESTCASES.md` → Review notes.
 - [ ] Clinical and native-Arabic review of all seed content (see `docs/TESTCASES.md` → Review notes).
 - [ ] `HiveLocalDb` stores everything in plain JSON on device; fine for demo data, revisit (encryption) if real data ever lands.
@@ -141,9 +149,11 @@ Implemented:
 
 ## Next up
 
-Phase 8 — Checkout: `/learn/:courseId/checkout` with order summary, card (Luhn, expiry, CVC; never stored or logged) and mock Apple Pay, PurchaseCourse use case via PaymentGateway (success, failure, 3-D Secure), receipt with sequential invoice number, Share PDF and Start course (PAY-1, PAY-2). Test cases TC-PAY-*.
+Phase 9 — Admin: `/cohort` KPIs + fl_chart charts + learners (ADM-1), `/audit` with chain banner, filters, search, CSV export (ADM-2, ADM-3), `/insights` from usage data only (ADM-4). Test cases TC-ADM-*.
 
 ## Change log (newest first; last 30 entries, older in docs/changelog/)
+
+- 2026-11-18 · claude/gurus-macbook-air · Phase 8: checkout (order summary with cover tile, Subtotal/VAT/Total via Money, Card / Apple Pay method cards, card form with 4-digit grouping + Luhn + expiry + obscured CVC, mock black Apple Pay sheet with pulsing Face ID glyph, lock note, sticky Pay with processing state, double-tap and back guard, decline banner with retry, mock 3-D Secure Approve/Cancel), PurchaseCourse use case (order, gateway, invoice, ownership, purchase audit), receipt (burst + check animation, invoice line, seller/buyer/item/method rows, totals, Share PDF via pdf + share_plus, Start course), checkout.start usage; git author switched to userproject02 · lib/features/checkout, lib/core/payments, lib/core/money.dart, lib/app (router, l10n), lib/seed/demo.json, AGENTS.md, test/features/checkout_test.dart · PAY-1..2 · BREAKING: `Order.cardLast4` (new field) and `CheckoutRepository.completeOrder(cardLast4:)`; MockCheckoutRepository updated
 
 - 2026-11-18 · claude/gurus-macbook-air · Phase 7: learner Sign-offs tab (checklist cards, self-assessed items, request footer with supervisor note, pending spinner, decided line + comment quote), supervisor Queue (stats, oldest-first cards, animated empty state, tab badge), Review (learner + checklist cards, comment field, lock note, Reject/Approve with required reject comment and default approval comment), Decided list; RequestSignOff / DecideSignOff use cases with signoff.request / signoff.decision audit; queue is the supervisor home · lib/features/competencies, lib/app/router.dart, lib/app/l10n, test/features/competencies_test.dart, test/app/router_test.dart · COMP-1..2
 

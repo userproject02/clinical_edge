@@ -17,6 +17,7 @@ _Order _$OrderFromJson(Map<String, dynamic> json) => _Order(
   method: json['method'] as String?,
   invoiceNo: json['invoiceNo'] as String?,
   paymentReference: json['paymentReference'] as String?,
+  cardLast4: json['cardLast4'] as String?,
   paidAt: const NullableUtcDateTimeConverter().fromJson(
     json['paidAt'] as String?,
   ),
@@ -33,6 +34,7 @@ Map<String, dynamic> _$OrderToJson(_Order instance) => <String, dynamic>{
   'method': instance.method,
   'invoiceNo': instance.invoiceNo,
   'paymentReference': instance.paymentReference,
+  'cardLast4': instance.cardLast4,
   'paidAt': const NullableUtcDateTimeConverter().toJson(instance.paidAt),
 };
 

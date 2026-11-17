@@ -37,6 +37,7 @@ abstract interface class CheckoutRepository {
     Order order, {
     required PaymentMethod method,
     required String reference,
+    String? cardLast4,
   });
 
   /// Paid orders of [userId], newest first.
@@ -106,6 +107,7 @@ class MockCheckoutRepository implements CheckoutRepository {
     Order order, {
     required PaymentMethod method,
     required String reference,
+    String? cardLast4,
   }) async {
     await seeder.ready;
     final meta = await db.open(Collections.meta);
@@ -116,6 +118,7 @@ class MockCheckoutRepository implements CheckoutRepository {
     final paid = order.copyWith(
       method: method.name,
       paymentReference: reference,
+      cardLast4: cardLast4,
       paidAt: now,
       invoiceNo: invoiceNumber(
         demo['invoicePrefix']! as String,

@@ -1579,6 +1579,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Approved and returned sign-offs appear here.'**
   String get decidedEmptyBody;
+
+  /// Card title.
+  ///
+  /// In en, this message translates to:
+  /// **'Order summary'**
+  String get checkoutOrderSummary;
+
+  /// Order item line.
+  ///
+  /// In en, this message translates to:
+  /// **'{lessons} lessons · {credits} CPD credits'**
+  String checkoutLessonsCredits(int lessons, int credits);
+
+  /// Row.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get checkoutSubtotal;
+
+  /// Row; pct like 5%.
+  ///
+  /// In en, this message translates to:
+  /// **'VAT ({pct})'**
+  String checkoutVat(String pct);
+
+  /// Row.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get checkoutTotal;
+
+  /// Section.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment method'**
+  String get checkoutMethod;
+
+  /// Method.
+  ///
+  /// In en, this message translates to:
+  /// **'Card'**
+  String get checkoutCard;
+
+  /// Method.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple Pay'**
+  String get checkoutApplePay;
+
+  /// Field.
+  ///
+  /// In en, this message translates to:
+  /// **'Card number'**
+  String get checkoutCardNumber;
+
+  /// Field placeholder.
+  ///
+  /// In en, this message translates to:
+  /// **'4242 4242 4242 4242 (test)'**
+  String get checkoutCardHint;
+
+  /// Field.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry'**
+  String get checkoutExpiry;
+
+  /// Field placeholder.
+  ///
+  /// In en, this message translates to:
+  /// **'MM / YY'**
+  String get checkoutExpiryHint;
+
+  /// Field.
+  ///
+  /// In en, this message translates to:
+  /// **'CVC'**
+  String get checkoutCvc;
+
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the card number'**
+  String get checkoutErrorNumber;
+
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid date that is not in the past'**
+  String get checkoutErrorExpiry;
+
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'3 or 4 digits'**
+  String get checkoutErrorCvc;
+
+  /// Mock sheet title.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple Pay sheet (mock)'**
+  String get checkoutApplePaySheet;
+
+  /// Mock sheet hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm with Face ID on device'**
+  String get checkoutApplePayHint;
+
+  /// Lock note.
+  ///
+  /// In en, this message translates to:
+  /// **'PaymentGateway → MockGateway today. A Network International adapter plugs in behind the same interface. Card details are never logged.'**
+  String get checkoutLockNote;
+
+  /// Pay button.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay {amount}'**
+  String checkoutPay(String amount);
+
+  /// Pay button.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay with Apple Pay · {amount}'**
+  String checkoutPayApple(String amount);
+
+  /// Pay button while processing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing…'**
+  String get checkoutProcessing;
+
+  /// Error banner.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment declined'**
+  String get checkoutDeclinedTitle;
+
+  /// Error banner.
+  ///
+  /// In en, this message translates to:
+  /// **'You were not charged. Check the details or try another method.'**
+  String get checkoutDeclinedBody;
+
+  /// Error banner.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment cancelled at 3-D Secure. You were not charged.'**
+  String get checkoutCancelledBody;
+
+  /// Retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get checkoutRetry;
+
+  /// 3DS screen.
+  ///
+  /// In en, this message translates to:
+  /// **'3-D Secure (mock)'**
+  String get threeDsTitle;
+
+  /// 3DS body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your bank asks you to confirm a payment of {amount} to ClinicalEdge.'**
+  String threeDsBody(String amount);
+
+  /// 3DS.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get threeDsApprove;
+
+  /// 3DS.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get threeDsCancel;
+
+  /// Receipt title.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment successful'**
+  String get receiptSuccess;
+
+  /// Receipt line.
+  ///
+  /// In en, this message translates to:
+  /// **'Tax invoice {number} · {date}'**
+  String receiptInvoice(String number, String date);
+
+  /// Row.
+  ///
+  /// In en, this message translates to:
+  /// **'Seller'**
+  String get receiptSeller;
+
+  /// Row value.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} · TRN {trn}'**
+  String receiptSellerValue(String name, String trn);
+
+  /// Row.
+  ///
+  /// In en, this message translates to:
+  /// **'Billed to'**
+  String get receiptBilledTo;
+
+  /// Row.
+  ///
+  /// In en, this message translates to:
+  /// **'Item'**
+  String get receiptItem;
+
+  /// Row.
+  ///
+  /// In en, this message translates to:
+  /// **'Method'**
+  String get receiptMethod;
+
+  /// Row value.
+  ///
+  /// In en, this message translates to:
+  /// **'Card •••• {last4} (mock)'**
+  String receiptCardMethod(String last4);
+
+  /// Row value.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple Pay (mock)'**
+  String get receiptApplePay;
+
+  /// Row.
+  ///
+  /// In en, this message translates to:
+  /// **'VAT {pct}'**
+  String receiptVat(String pct);
+
+  /// Row.
+  ///
+  /// In en, this message translates to:
+  /// **'Total paid'**
+  String get receiptTotalPaid;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Share PDF'**
+  String get receiptShare;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Start course'**
+  String get receiptStart;
 }
 
 class _AppLocalizationsDelegate

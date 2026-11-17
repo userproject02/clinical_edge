@@ -855,4 +855,155 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get decidedEmptyBody => 'Approved and returned sign-offs appear here.';
+
+  @override
+  String get checkoutOrderSummary => 'Order summary';
+
+  @override
+  String checkoutLessonsCredits(int lessons, int credits) {
+    return '$lessons lessons · $credits CPD credits';
+  }
+
+  @override
+  String get checkoutSubtotal => 'Subtotal';
+
+  @override
+  String checkoutVat(String pct) {
+    return 'VAT ($pct)';
+  }
+
+  @override
+  String get checkoutTotal => 'Total';
+
+  @override
+  String get checkoutMethod => 'Payment method';
+
+  @override
+  String get checkoutCard => 'Card';
+
+  @override
+  String get checkoutApplePay => 'Apple Pay';
+
+  @override
+  String get checkoutCardNumber => 'Card number';
+
+  @override
+  String get checkoutCardHint => '4242 4242 4242 4242 (test)';
+
+  @override
+  String get checkoutExpiry => 'Expiry';
+
+  @override
+  String get checkoutExpiryHint => 'MM / YY';
+
+  @override
+  String get checkoutCvc => 'CVC';
+
+  @override
+  String get checkoutErrorNumber => 'Check the card number';
+
+  @override
+  String get checkoutErrorExpiry =>
+      'Enter a valid date that is not in the past';
+
+  @override
+  String get checkoutErrorCvc => '3 or 4 digits';
+
+  @override
+  String get checkoutApplePaySheet => 'Apple Pay sheet (mock)';
+
+  @override
+  String get checkoutApplePayHint => 'Confirm with Face ID on device';
+
+  @override
+  String get checkoutLockNote =>
+      'PaymentGateway → MockGateway today. A Network International adapter plugs in behind the same interface. Card details are never logged.';
+
+  @override
+  String checkoutPay(String amount) {
+    return 'Pay $amount';
+  }
+
+  @override
+  String checkoutPayApple(String amount) {
+    return 'Pay with Apple Pay · $amount';
+  }
+
+  @override
+  String get checkoutProcessing => 'Processing…';
+
+  @override
+  String get checkoutDeclinedTitle => 'Payment declined';
+
+  @override
+  String get checkoutDeclinedBody =>
+      'You were not charged. Check the details or try another method.';
+
+  @override
+  String get checkoutCancelledBody =>
+      'Payment cancelled at 3-D Secure. You were not charged.';
+
+  @override
+  String get checkoutRetry => 'Try again';
+
+  @override
+  String get threeDsTitle => '3-D Secure (mock)';
+
+  @override
+  String threeDsBody(String amount) {
+    return 'Your bank asks you to confirm a payment of $amount to ClinicalEdge.';
+  }
+
+  @override
+  String get threeDsApprove => 'Approve';
+
+  @override
+  String get threeDsCancel => 'Cancel';
+
+  @override
+  String get receiptSuccess => 'Payment successful';
+
+  @override
+  String receiptInvoice(String number, String date) {
+    return 'Tax invoice $number · $date';
+  }
+
+  @override
+  String get receiptSeller => 'Seller';
+
+  @override
+  String receiptSellerValue(String name, String trn) {
+    return '$name · TRN $trn';
+  }
+
+  @override
+  String get receiptBilledTo => 'Billed to';
+
+  @override
+  String get receiptItem => 'Item';
+
+  @override
+  String get receiptMethod => 'Method';
+
+  @override
+  String receiptCardMethod(String last4) {
+    return 'Card •••• $last4 (mock)';
+  }
+
+  @override
+  String get receiptApplePay => 'Apple Pay (mock)';
+
+  @override
+  String receiptVat(String pct) {
+    return 'VAT $pct';
+  }
+
+  @override
+  String get receiptTotalPaid => 'Total paid';
+
+  @override
+  String get receiptShare => 'Share PDF';
+
+  @override
+  String get receiptStart => 'Start course';
 }

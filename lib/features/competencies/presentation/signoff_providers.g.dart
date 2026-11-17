@@ -361,12 +361,12 @@ final class QueueStatsProvider
 
 String _$queueStatsHash() => r'e6042126fd8ff58d54f1a6287416758bbfd54086';
 
-/// Requests sign-off for [checklist] as the signed-in learner (COMP-1).
+/// Requests sign-off for a checklist as the signed-in learner (COMP-1).
 
 @ProviderFor(requestSignOff)
 final requestSignOffProvider = RequestSignOffProvider._();
 
-/// Requests sign-off for [checklist] as the signed-in learner (COMP-1).
+/// Requests sign-off for a checklist as the signed-in learner (COMP-1).
 
 final class RequestSignOffProvider
     extends
@@ -379,7 +379,7 @@ final class RequestSignOffProvider
         $Provider<
           Future<SignOffRequest> Function(CompetencyChecklist checklist)
         > {
-  /// Requests sign-off for [checklist] as the signed-in learner (COMP-1).
+  /// Requests sign-off for a checklist as the signed-in learner (COMP-1).
   RequestSignOffProvider._()
     : super(
         from: null,
@@ -424,13 +424,13 @@ final class RequestSignOffProvider
 
 String _$requestSignOffHash() => r'fbf0c180cf869e0f6c42bd572896ba67aa6110de';
 
-/// Approves or rejects [request] as the signed-in supervisor (COMP-2).
+/// Approves or rejects a request as the signed-in supervisor (COMP-2).
 /// Throws `CommentRequiredException` for a reject without a comment.
 
 @ProviderFor(decideSignOff)
 final decideSignOffProvider = DecideSignOffProvider._();
 
-/// Approves or rejects [request] as the signed-in supervisor (COMP-2).
+/// Approves or rejects a request as the signed-in supervisor (COMP-2).
 /// Throws `CommentRequiredException` for a reject without a comment.
 
 final class DecideSignOffProvider
@@ -460,7 +460,7 @@ final class DecideSignOffProvider
             required String comment,
           })
         > {
-  /// Approves or rejects [request] as the signed-in supervisor (COMP-2).
+  /// Approves or rejects a request as the signed-in supervisor (COMP-2).
   /// Throws `CommentRequiredException` for a reject without a comment.
   DecideSignOffProvider._()
     : super(

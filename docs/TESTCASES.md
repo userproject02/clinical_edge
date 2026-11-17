@@ -23,7 +23,7 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-COMP-1-01 | COMP-1 | Widget | Learner requests sign-off | None → Pending; appears in supervisor queue; signoff.request audit | `test/features/competencies_test.dart` | Passing |
 | TC-COMP-2-01 | COMP-2 | Widget | Supervisor rejects without comment, then approves | Reject blocked; decision + comment on learner card; signoff.decision audit | `test/features/competencies_test.dart` | Passing |
 | TC-PAY-1-01 | PAY-1 | Unit | VAT and totals (fils) | 35000→1750→36750, 25000→1250→26250, 30000→1500→31500 | `test/core/money_clock_test.dart` | Passing |
-| TC-PAY-2-01 | PAY-2 | Widget | Successful purchase | Receipt with invoice no. and VAT line; course unlocks; purchase audit | — | Planned |
+| TC-PAY-2-01 | PAY-2 | Widget | Successful purchase | Receipt with invoice no. and VAT line; course unlocks; purchase audit | `test/features/checkout_test.dart` | Passing |
 | TC-ADM-1-01 | ADM-1 | Widget | Cohort dashboard | KPIs and charts from repository data; live pending count | — | Planned |
 | TC-ADM-2-01 | ADM-2 | Widget | Audit log filters | User, action, kind and date filters combine; hash link shown | — | Planned |
 | TC-ADM-3-01 | ADM-3 | Unit | CSV export | RFC 4180 CSV of filtered rows; audit.export logged | — | Planned |
@@ -128,6 +128,13 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-PAY-1-05 | PAY-1 | Unit | MockGateway debug modes | Forced Failed and Needs3ds results | `test/core/payments_test.dart` | Passing |
 | TC-PAY-1-06 | PAY-1 | Unit | Order JSON | Order round-trips through JSON | `test/core/payments_test.dart` | Passing |
 | TC-PAY-2-02 | PAY-2 | Unit | Checkout repository | Order 30000/1500/31500 fils; invoice CE-2026-001041 then 001042; seller TRN placeholder | `test/features/repositories_test.dart` | Passing |
+| TC-PAY-1-07 | PAY-1 | Unit | VAT and totals for the three seed prices | 350 → 17.50 / 367.50; 250 → 12.50 / 262.50; 300 → 15.00 / 315.00 (fils, half up) | `test/features/checkout_test.dart` | Passing |
+| TC-PAY-1-08 | PAY-1 | Unit | Card rules | Luhn pass/fail, grouping in 4s, expiry MM / YY not before this month, CVC 3–4 digits, last 4 | `test/features/checkout_test.dart` | Passing |
+| TC-PAY-1-09 | PAY-1 | Widget | Checkout c3 with card | Summary "4 lessons · 2 CPD credits", AED 300.00 / 15.00 / 315.00; field errors; double tap → one order; receipt; course owned; audit purchase "Medication Safety & High-Alert Drugs · AED 315.00 · CE-2026-001041"; checkout.start logged; no card number, expiry or CVC in audit, usage or stored orders | `test/features/checkout_test.dart` | Passing |
+| TC-PAY-1-10 | PAY-1 | Widget | Gateway declines, then 3-D Secure | Decline banner with retry (stays on checkout); 3DS Cancel → cancelled banner, not owned; 3DS Approve → receipt | `test/features/checkout_test.dart` | Passing |
+| TC-PAY-2-03 | PAY-2 | Widget | Apple Pay (mock) | Black mock sheet, "Pay with Apple Pay · AED 315.00", receipt method "Apple Pay (mock)", catalogue no longer shows a price | `test/features/checkout_test.dart` | Passing |
+| TC-PAY-2-04 | PAY-2 | Widget | Receipt fields and Start course | "Tax invoice CE-2026-001041 · 2026-11-17 09:00", seller "ClinicalEdge (demo) · TRN [YOUR TRN]", billed to Dr. Layla Haddad, "Card •••• 4242 (mock)", totals; Start course → lesson 1 (covered in TC-PAY-1-09) | `test/features/checkout_test.dart` | Passing |
+| TC-PAY-G-01 | PAY-1..2 | Golden | Checkout card / Apple Pay / processing / error, receipt | 20 goldens, EN/AR × light/dark | `test/features/checkout_test.dart` | Passing (generated on macOS, regenerate on Linux) |
 | TC-ADM-1-02 | ADM-1 | Unit | Cohort repository | Stats load, labelled demo figures | `test/features/repositories_test.dart` | Passing |
 | TC-LOG-02 | Audit | Unit | Sanitiser rejects sensitive targets | Card numbers (13–19 digits, spaced or dashed), CVC, email, password rejected | `test/core/logging_test.dart` | Passing |
 | TC-LOG-03 | Audit | Unit | Sanitiser passes labels | Invoice/amount/score labels pass; capped at 120 chars; exception never echoes the value | `test/core/logging_test.dart` | Passing |

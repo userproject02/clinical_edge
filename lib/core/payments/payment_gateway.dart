@@ -20,6 +20,10 @@ abstract class Order with _$Order {
     String? method,
     String? invoiceNo,
     String? paymentReference,
+
+    /// Last 4 card digits for the receipt (card payments only; never the
+    /// full number).
+    String? cardLast4,
     @NullableUtcDateTimeConverter() DateTime? paidAt,
   }) = _Order;
 

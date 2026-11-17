@@ -51,6 +51,7 @@ Resolved versions (pubspec.yaml uses caret ranges; pubspec.lock is committed). U
 | fl_chart | 1.3.1 | admin charts (still on `flutter/material`; bridged, see CLAUDE.md) |
 | file_picker | 13.4.0 | mocked certificate pick |
 | share_plus | 13.3.1 | CSV export, receipt share |
+| pdf | 3.13.1 | receipt PDF for Share PDF (English text in v1) |
 | flutter_local_notifications | 23.0.2 | expiry reminders (Android needs core-library desugaring) |
 | crypto | 3.0.8 | SHA-256 audit hash chain |
 | timezone | 0.11.2 | `TZDateTime` for scheduled local notifications (UTC instants) |
@@ -129,6 +130,6 @@ Enforcement: the Claude Code `Stop` hook, the lefthook pre-commit hook and CI al
 
 ## Git
 
-- Commit author email: `guruprasathjay@gmail.com`.
+- Commit author: `userproject02` <`275130919+userproject02@users.noreply.github.com`> (GitHub no-reply; set in the repo's local git config).
 - Do **not** add `Co-Authored-By` or session trailers for AI tools to commit messages.
 - Small commits; message style `<area>: <what>` (e.g. `courses: mark lesson complete`).

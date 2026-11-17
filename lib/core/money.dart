@@ -38,6 +38,12 @@ class Money implements Comparable<Money> {
   /// Localized display: "AED 315.00" / "315.00 د.إ", LTR-isolated.
   String format(AppLocalizations l10n) => Formats.aed(fils, l10n);
 
+  /// Plain amount for logs and documents: "315.00" (no currency, no
+  /// localisation).
+  String get plain =>
+      '${fils < 0 ? '-' : ''}${fils.abs() ~/ 100}.'
+      '${(fils.abs() % 100).toString().padLeft(2, '0')}';
+
   @override
   int compareTo(Money other) => fils.compareTo(other.fils);
 
