@@ -1,13 +1,13 @@
 import 'package:clinical_edge/app/state/preferences.dart';
-import 'package:clinical_edge/app/state/session.dart';
 import 'package:clinical_edge/core/clock.dart';
 import 'package:clinical_edge/core/logging/activity_logger.dart';
 import 'package:clinical_edge/core/persistence/local_db.dart';
+import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/features/admin/data/cohort_repository.dart';
 import 'package:clinical_edge/features/assessments/data/assessment_repository.dart';
 import 'package:clinical_edge/features/auth/data/auth_repository.dart';
 import 'package:clinical_edge/features/auth/data/mock_auth_repository.dart';
-import 'package:clinical_edge/features/auth/domain/app_user.dart';
+import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/certifications/data/certification_repository.dart';
 import 'package:clinical_edge/features/checkout/data/checkout_repository.dart';
 import 'package:clinical_edge/features/competencies/data/competency_repository.dart';
@@ -30,11 +30,13 @@ List<Override> mockOverrides({
     sharedPreferencesProvider.overrideWithValue(prefs),
     localDbProvider.overrideWithValue(db),
     if (seed != null) seedLoaderProvider.overrideWithValue(seed),
-    // Phase 1 session stub → actor. Phase 3 reads the auth user instead.
+    // The logger stamps the signed-in user and active role.
     currentActorProvider.overrideWith(
       (ref) => () {
-        final role = ref.read(sessionProvider).role;
-        return (userId: SeedUsers.forRole(role), role: role);
+        final s = ref.read(sessionProvider).value;
+        return s == null
+            ? (userId: 'anonymous', role: Role.learner)
+            : (userId: s.user.id, role: s.role);
       },
     ),
     authRepositoryProvider.overrideWith(
@@ -100,8 +102,9 @@ List<Override> mockOverrides({
   ];
 }
 
-/// "Reset demo data": wipes local state, re-seeds and signs out.
+/// "Reset demo data": wipes local state (including the stored session),
+/// re-seeds and returns to sign-in.
 Future<void> resetDemoData(WidgetRef ref) async {
   await ref.read(demoSeederProvider).reset();
-  ref.read(sessionProvider.notifier).signOut();
+  ref.invalidate(sessionProvider);
 }

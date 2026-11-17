@@ -179,12 +179,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get debugMenu => 'Debug menu';
 
   @override
-  String get debugSession => 'Session';
-
-  @override
-  String get debugSignedOut => 'Signed out';
-
-  @override
   String get debugRoutes => 'Jump to route';
 
   @override
@@ -213,4 +207,85 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get debugResetDone => 'Demo data reset';
+
+  @override
+  String get heroHeadline =>
+      'Clinical training that keeps every licence current.';
+
+  @override
+  String get heroBody =>
+      'Courses, assessments, certifications and competency sign-off for UAE healthcare teams.';
+
+  @override
+  String get signInTitle => 'Sign in';
+
+  @override
+  String get signInEmail => 'Work email';
+
+  @override
+  String get signInPassword => 'Password';
+
+  @override
+  String get signInDemoRole => 'Demo role';
+
+  @override
+  String get signInButton => 'Sign in';
+
+  @override
+  String get signInDemoNote =>
+      'Demo build: any password works. No real authentication.';
+
+  @override
+  String get signInEmailRequired => 'Enter your work email';
+
+  @override
+  String get signInPasswordRequired => 'Enter your password';
+
+  @override
+  String get signInShowPassword => 'Show password';
+
+  @override
+  String get signInHidePassword => 'Hide password';
+
+  @override
+  String get greetingMorning => 'Good morning';
+
+  @override
+  String get greetingAfternoon => 'Good afternoon';
+
+  @override
+  String get greetingEvening => 'Good evening';
+
+  @override
+  String get roleSwitchedTitle => 'Role switched';
+
+  @override
+  String roleSwitchedBody(String name) {
+    return 'Now viewing as $name';
+  }
+
+  @override
+  String get settingsPush => 'Push notifications';
+
+  @override
+  String get settingsPushBody => 'Expiry reminders and sign-off decisions';
+
+  @override
+  String get settingsHoodTitle => 'Under the hood · Flutter';
+
+  @override
+  String get settingsHoodFeatureFirst => 'Feature-first';
+
+  @override
+  String get settingsHoodMockRepos => 'Mock repositories';
+
+  @override
+  String get settingsHoodBody =>
+      'Each feature reads through a repository interface; mock implementations swap for Firebase later without touching the UI.';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get appVersion => 'ClinicalEdge 0.1.0 (prototype) · mock data only';
 }

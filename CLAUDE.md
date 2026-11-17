@@ -10,9 +10,9 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 
 ## Current status
 
-- Phase: **Phase 2 done, next: Phase 3 Auth, roles, settings**
-- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed (Clock, Money, ActivityLogger + hash-chained AuditStore, PaymentGateway + MockGateway, Hive persistence + reset, 9 repositories with mocks, bilingual seed)
-- App code: every route is still a placeholder; repositories are wired but no screen reads them yet
+- Phase: **Phase 3 done, next: Phase 4 Home and courses**
+- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings (sign-in, persisted session, audited demo role switch, Profile & settings, real tab app bar)
+- App code: sign-in and Profile & settings are real; other routes are placeholders on the real tab app bar
 - Last updated: 2026-11-17 · claude/cloud-session
 
 ## Module map
@@ -20,13 +20,15 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 | Feature | Entry route | Providers | Repository | Tests |
 | --- | --- | --- | --- | --- |
 | app shell | — (`lib/app/app.dart`) | themeModeProvider, localeProvider, routerProvider | — | test/app_smoke_test.dart |
-| routing + role shells | all routes (`lib/app/routes.dart`, `router.dart`) | routerProvider, sessionProvider (stub) | — | test/app/router_test.dart |
+| routing + role shells | all routes (`lib/app/routes.dart`, `router.dart`, `screens/tab_scaffold.dart`) | routerProvider, sessionProvider, resumeLocationProvider, rootNavigatorContextProvider | — | test/app/router_test.dart |
+| auth (UI) | `/sign-in` | sessionProvider, demoAccountsProvider, tenantProvider, firstHomeLoadProvider | AuthRepository | test/features/auth_settings_test.dart |
+| settings | `/profile` | themeModeProvider, localeProvider, notificationsEnabledProvider, sessionProvider | SharedPreferences, AuthRepository | test/features/auth_settings_test.dart |
 | theme + tokens | — (`lib/app/theme/`) | — | — | test/app/theme_test.dart |
 | l10n (EN/AR) | — (`lib/app/l10n/*.arb`, generated/) | localeProvider | — | test/core/formatting_and_motion_test.dart |
 | settings state | — (`lib/app/state/`) | themeModeProvider, localeProvider, sharedPreferencesProvider | SharedPreferences | test/app/state_test.dart |
 | shared widgets | — (`lib/core/widgets/`) | — | — | test/core/widgets/ (+ goldens/) |
 | motion + formatting | — (`lib/core/motion.dart`, `formatting.dart`) | — | — | test/core/formatting_and_motion_test.dart |
-| debug menu (TEMP) | — (`lib/app/debug/`) | all of the above + clockModeProvider, mockGatewayModeProvider | — | manual |
+| debug menu (debug builds) | — (`lib/app/debug/`) | clockModeProvider, mockGatewayModeProvider, `resetDemoData` | — | manual |
 | core: clock + money | — (`lib/core/clock.dart`, `money.dart`) | clockProvider, clockModeProvider | — | test/core/money_clock_test.dart |
 | core: logging | — (`lib/core/logging/`) | activityLoggerProvider, auditStoreProvider, usageStoreProvider, crashReporterProvider, currentActorProvider | AuditStore, UsageStore | test/core/logging_test.dart |
 | core: payments | — (`lib/core/payments/`) | paymentGatewayProvider, mockGatewayModeProvider | PaymentGateway (MockGateway) | test/core/payments_test.dart |
@@ -49,8 +51,9 @@ Change only with a `BREAKING` log line.
 Implemented:
 
 - Route paths in `lib/app/routes.dart` (`AppRoutes`, `RouteAccess`) exactly as `docs/REQUIREMENTS.md` → Navigation and screens. Role homes: learner `/home`, supervisor `/queue`, admin `/cohort`. `/learn` and `/learn/:courseId` are learner + supervisor; lesson, checkout and receipt are learner-only; admin has no `/learn` (redirects to `/cohort`).
-- Provider names `themeModeProvider`, `localeProvider`, `sessionProvider`, `routerProvider`, `sharedPreferencesProvider` (`sharedPreferencesProvider` must be overridden in `main.dart` and tests).
-- Preference keys `PrefKeys.themeMode` / `PrefKeys.locale` (renaming loses users' saved settings).
+- Provider names `themeModeProvider`, `localeProvider`, `notificationsEnabledProvider`, `sessionProvider` (AsyncNotifier of `Session?` = AppUser + role; signIn / switchRole / signOut), `routerProvider`, `sharedPreferencesProvider` (overridden in `main.dart` and tests). `main.dart` awaits `sessionProvider.future` before the first frame.
+- Preference keys `PrefKeys.themeMode` / `PrefKeys.locale` / `PrefKeys.notifications` (renaming loses users' saved settings).
+- Role switch audit target: `"<From> → <To> (demo)"` with English role names; `kDemoRoleSwitcher` (`lib/app/feature_flags.dart`, `--dart-define=DEMO_ROLE_SWITCHER=false` turns it off).
 - `AppColors` token names and values (match the prototype canvas); shared widget public APIs in `lib/core/widgets/`.
 - `Motion` constant names in `lib/core/motion.dart`.
 
@@ -64,6 +67,12 @@ Implemented:
 - Demo clock: `FixedClock(demoNow)` = 2026-11-17 09:00 Asia/Dubai; calendar maths in Dubai time (UTC+4). Cert status: ≤ 0 days expired, ≤ 90 renew soon, else valid; pending verification → verifying.
 
 ## Decisions (newest first)
+
+- 2026-11-17 · `sessionProvider` is now an AsyncNotifier over `AuthRepository` (stub removed). Why: Phase 3 brief; the session persists via the repository. BREAKING for callers of the Phase 1 stub (fixed in the same commit).
+- 2026-11-17 · Switching role on Profile sets `resumeLocationProvider` so the rebuilt router lands back on `/profile`; Profile's back falls back to the role home when there is nothing to pop. Why: the router is rebuilt per role (Phase 1 decision) and the brief says stay on Profile.
+- 2026-11-17 · Theme picker on Profile is Light/Dark only (per prototype); the stored mode defaults to System until the user picks one. Why: matches the design; System stays the first-run default.
+- 2026-11-17 · `AssetSeedLoader` reads assets with `cache: false` and caches per loader. Why: rootBundle's global cache shared one pending load across ProviderContainers/test zones and hung the next test.
+- 2026-11-17 · Debug menu keeps only clock, mock payment outcome, reset and route jumps; theme, language and role moved to Profile & settings. Why: avoid two places for the same setting.
 
 - 2026-11-17 · Persistence on `hive_ce` with JSON strings in `Box<String>` behind a `LocalDb` interface (InMemoryLocalDb in tests). Why: no type adapters to maintain; the seed JSON schema stays the single contract.
 - 2026-11-17 · Static seed data (catalogue, question bank, checklists, cohort, CPD target) is read from `lib/seed` each time; only mutable state (session, ownership, progress, attempts, certifications, CPD ledger, sign-offs, orders, audit, usage) is copied into `LocalDb` by `DemoSeeder`. Why: a seed fix ships with the app; reset only needs to rewrite mutable state.
@@ -93,7 +102,8 @@ Implemented:
 
 - [ ] `docs/design/` has no screenshots; Phase 1 was built from the prototype canvas itself (artifact "ClinicalEdge", `Main.dc.html`). Export the storyboard frames into `docs/design/` when convenient.
 - [ ] Phase 1 not yet run on an iOS simulator / Android emulator (built in a cloud session with no devices). Run `flutter run` on both and `flutter test integration_test` (TC-PH1-51), then mark it Passing.
-- [ ] TEMPORARY: `lib/app/debug/` debug menu and the `sessionProvider` stub (with `stubInitials`). Phase 3 replaces both with auth (AuthRepository is ready), the role switcher and Profile & settings; then point `currentActorProvider` at the auth user.
+- [ ] Bell button is a no-op until Phase 6 wires the simulated expiry reminder.
+- [ ] Phases 1–3 not yet run on an iOS simulator / Android emulator (cloud session, no devices).
 - [ ] Clinical and native-Arabic review of all seed content (see `docs/TESTCASES.md` → Review notes).
 - [ ] `HiveLocalDb` stores everything in plain JSON on device; fine for demo data, revisit (encryption) if real data ever lands.
 - [ ] Remove `MaterialUiCompatibilityBridge` when fl_chart migrates to `material_ui`.
@@ -101,9 +111,11 @@ Implemented:
 
 ## Next up
 
-Phase 3 — Auth, roles, settings: sign-in screen with role picker on `AuthRepository` (AUTH-1), audit-logged role switch (AUTH-2), sign-out (AUTH-3), Profile & settings with language/theme/notifications (SET-1); replace the session stub and debug menu; logger actor from the auth user. Test cases TC-AUTH-*, TC-SET-1-01.
+Phase 4 — Home and courses: learner home dashboard (HOME-1) inside `FirstLoadSkeleton`/`TabScaffold`, catalogue with search and category chips (CRS-1), course detail (CRS-2), lesson player with mark complete (CRS-3), course completion awarding CPD (CRS-4). Test cases TC-HOME-1-01, TC-CRS-*.
 
 ## Change log (newest first; last 30 entries, older in docs/changelog/)
+
+- 2026-11-17 · claude/cloud-session · Phase 3: sign-in screen (hero, ECG, language toggle, validation, demo role picker), AsyncNotifier session persisted via AuthRepository, use cases SignIn/SwitchRole/SignOut with auth.signin, role.change (audit) and auth.signout, Profile & settings (role, language, theme, notifications, under-the-hood, sign out, version), real tab app bar (greeting by clock, first name, avatar), 900 ms first-home skeleton, kDemoRoleSwitcher flag, trimmed debug menu · lib/features/auth/presentation, lib/features/settings, lib/app (router, screens, state), test/features/auth_settings_test.dart · AUTH-1..3, SET-1 · BREAKING: `sessionProvider` is now `AsyncValue<Session?>` (user + role) with async signIn/switchRole/signOut; `redirectFor` takes `Session?` — all callers updated
 
 - 2026-11-17 · claude/cloud-session · Phase 2: Clock (FixedClock demo default), Money/VAT in fils, ActivityLogger + append-only hash-chained AuditStore + UsageStore + TargetSanitizer + CrashReporter, PaymentGateway + MockGateway (debug outcomes), LocalDb on Hive CE + DemoSeeder + reset, 9 repository interfaces with mocks and providers, bilingual seed (users, courses, 20-question bank, certs, CPD, checklists, sign-offs, cohort, audit seed), debug menu clock/gateway/reset · lib/core, lib/features/*/data+domain, lib/seed, lib/app/mock_overrides.dart, main.dart, test/ · core services and demo data for every feature phase
 

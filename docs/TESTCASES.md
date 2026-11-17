@@ -4,10 +4,10 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 
 | Test ID | Requirement | Type | Case | Expected | Test file | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| TC-AUTH-1-01 | AUTH-1 | Widget | Sign in with empty email or password | Inline errors, no navigation | — | Planned |
-| TC-AUTH-1-02 | AUTH-1 | Widget | Sign in with any non-empty password | Lands on the role's home; auth.signin usage event | — | Planned |
-| TC-AUTH-2-01 | AUTH-2 | Widget | Switch role from sign-in and from Profile | Tabs and home change at once; role.change audit event | — | Planned |
-| TC-AUTH-3-01 | AUTH-3 | Widget | Sign out from Profile | Back to sign-in, session cleared, auth.signout logged | — | Planned |
+| TC-AUTH-1-01 | AUTH-1 | Widget | Sign in with empty email or password | Inline errors under each empty field; stays on /sign-in; no session | `test/features/auth_settings_test.dart` | Passing |
+| TC-AUTH-1-02 | AUTH-1 | Widget | Sign in with any non-empty password | Learner → /home, supervisor → /queue, admin → /cohort; email pre-filled per role; ~900 ms skeleton; greeting + first name; auth.signin logged | `test/features/auth_settings_test.dart` | Passing |
+| TC-AUTH-2-01 | AUTH-2 | Widget | Switch role from sign-in and from Profile | Profile switch: session + tabs change, stays on Profile, snackbar "Role switched · Now viewing as …", audit role.change "Learner → Supervisor (demo)" | `test/features/auth_settings_test.dart` | Passing |
+| TC-AUTH-3-01 | AUTH-3 | Widget | Sign out from Profile | Back to /sign-in, session cleared (also after restart), auth.signout logged | `test/features/auth_settings_test.dart` | Passing |
 | TC-HOME-1-01 | HOME-1 | Widget | Learner home with seed data | 55% ring, 6/11 lessons, 26/40 credits, BLS 56 days; skeleton while loading | — | Planned |
 | TC-CRS-1-01 | CRS-1 | Widget | Catalogue search and category chips | Filters the 3 seed courses; owned show progress, unowned show AED + VAT note | — | Planned |
 | TC-CRS-2-01 | CRS-2 | Widget | Course detail CTA and lesson states | Continue / Start / Buy labels; locked lessons route to checkout | — | Planned |
@@ -28,7 +28,7 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-ADM-2-01 | ADM-2 | Widget | Audit log filters | User, action, kind and date filters combine; hash link shown | — | Planned |
 | TC-ADM-3-01 | ADM-3 | Unit | CSV export | RFC 4180 CSV of filtered rows; audit.export logged | — | Planned |
 | TC-ADM-4-01 | ADM-4 | Unit | Usage insights | Built from usage events only, never audit events | — | Planned |
-| TC-SET-1-01 | SET-1 | Widget | Language, theme, notifications | Apply instantly and persist across restarts | — | Planned |
+| TC-SET-1-01 | SET-1 | Widget | Language, theme, notifications | Theme, notifications and language apply instantly (RTL mirrors) and survive a restart | `test/features/auth_settings_test.dart` | Passing |
 | TC-LOG-01 | Audit | Unit | Append, verify, edit and remove stored audit events | Chain verifies; an edited event is reported as content break, a removed one as link break, at the right index | `test/core/logging_test.dart` | Passing |
 | TC-E2E-01 | All | Integration | Full demo journey across three roles | Every audit action appears in the log with a verified chain | — | Planned |
 | TC-PH0-01 | Phase 0 | Script | context_guard.sh: app change without CLAUDE.md | Blocked in worktree, staged and range modes; passes when CLAUDE.md changes | `tool/ci/context_guard.sh` (manual + CI) | Passing |
@@ -121,6 +121,11 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-PH2-05 | Phase 2 | Unit | Persistence and reset | State survives a restart on the same DB; reset restores the seed and the audit chain | `test/features/repositories_test.dart` | Passing |
 | TC-PH2-06 | Phase 2 | Unit | Clock switch | Debug clock mode switches to the device clock | `test/features/repositories_test.dart` | Passing |
 | TC-PH2-07 | Phase 2 | Unit | Hive persistence | Seeded Hive boxes survive reopen; clearAll empties them | `test/core/hive_local_db_test.dart` | Passing |
+
+| TC-AUTH-1-04 | AUTH-1 | Widget | Restart while signed in | Lands on the role home with the same user | `test/features/auth_settings_test.dart` | Passing |
+| TC-AUTH-1-05 | AUTH-1 | Widget | Language toggle on sign-in | Switches to Arabic RTL at once | `test/features/auth_settings_test.dart` | Passing |
+| TC-SET-1-02 | SET-1 | Unit | Greeting by clock | Morning before 12:00, afternoon before 17:00, evening after (Dubai time) | `test/features/auth_settings_test.dart` | Passing |
+| TC-PH3-01 | Phase 3 | Golden | Sign-in and Profile & settings screens | Pixel match, EN/AR × light/dark (8 images) | `test/features/goldens/` | Passing |
 
 ## Review notes
 

@@ -1,4 +1,3 @@
-import 'package:clinical_edge/app/state/session.dart';
 import 'package:clinical_edge/core/clock.dart';
 import 'package:clinical_edge/core/localized_text.dart';
 import 'package:clinical_edge/core/logging/activity_logger.dart';
@@ -11,6 +10,7 @@ import 'package:clinical_edge/features/admin/data/cohort_repository.dart';
 import 'package:clinical_edge/features/assessments/data/assessment_repository.dart';
 import 'package:clinical_edge/features/assessments/domain/assessment.dart';
 import 'package:clinical_edge/features/auth/data/auth_repository.dart';
+import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/certifications/data/certification_repository.dart';
 import 'package:clinical_edge/features/certifications/domain/certification.dart';
 import 'package:clinical_edge/features/checkout/data/checkout_repository.dart';
@@ -327,7 +327,13 @@ void main() {
 
   test('TC-PH2-04 logger uses the session actor and the demo clock', () async {
     final c = await mockContainer();
-    c.read(sessionProvider.notifier).signIn(Role.supervisor);
+    await c
+        .read(sessionProvider.notifier)
+        .signIn(
+          email: 'omar@demo-hospital.example',
+          password: 'x',
+          role: Role.supervisor,
+        );
     await c.read(demoSeederProvider).ready;
     await c
         .read(activityLoggerProvider)

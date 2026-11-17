@@ -428,18 +428,6 @@ abstract class AppLocalizations {
   /// **'Debug menu'**
   String get debugMenu;
 
-  /// Debug menu: section for the stub session.
-  ///
-  /// In en, this message translates to:
-  /// **'Session'**
-  String get debugSession;
-
-  /// Debug menu: signed-out session option.
-  ///
-  /// In en, this message translates to:
-  /// **'Signed out'**
-  String get debugSignedOut;
-
   /// Debug menu: section listing routes to open.
   ///
   /// In en, this message translates to:
@@ -499,6 +487,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Demo data reset'**
   String get debugResetDone;
+
+  /// Sign-in hero headline.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinical training that keeps every licence current.'**
+  String get heroHeadline;
+
+  /// Sign-in hero supporting copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Courses, assessments, certifications and competency sign-off for UAE healthcare teams.'**
+  String get heroBody;
+
+  /// Sign-in card heading.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signInTitle;
+
+  /// Email field label.
+  ///
+  /// In en, this message translates to:
+  /// **'Work email'**
+  String get signInEmail;
+
+  /// Password field label.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get signInPassword;
+
+  /// Label of the demo role picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo role'**
+  String get signInDemoRole;
+
+  /// Sign-in button.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signInButton;
+
+  /// Note under the sign-in button.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo build: any password works. No real authentication.'**
+  String get signInDemoNote;
+
+  /// Inline error: empty email.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your work email'**
+  String get signInEmailRequired;
+
+  /// Inline error: empty password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get signInPasswordRequired;
+
+  /// Accessibility label: reveal password.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get signInShowPassword;
+
+  /// Accessibility label: hide password.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get signInHidePassword;
+
+  /// Home subtitle before 12:00.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning'**
+  String get greetingMorning;
+
+  /// Home subtitle 12:00–16:59.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon'**
+  String get greetingAfternoon;
+
+  /// Home subtitle from 17:00.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening'**
+  String get greetingEvening;
+
+  /// Snackbar title after a demo role switch.
+  ///
+  /// In en, this message translates to:
+  /// **'Role switched'**
+  String get roleSwitchedTitle;
+
+  /// Snackbar body after a demo role switch.
+  ///
+  /// In en, this message translates to:
+  /// **'Now viewing as {name}'**
+  String roleSwitchedBody(String name);
+
+  /// Notifications switch label.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications'**
+  String get settingsPush;
+
+  /// Notifications switch description.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry reminders and sign-off decisions'**
+  String get settingsPushBody;
+
+  /// Tech stack card title.
+  ///
+  /// In en, this message translates to:
+  /// **'Under the hood · Flutter'**
+  String get settingsHoodTitle;
+
+  /// Tech chip: feature-first folders.
+  ///
+  /// In en, this message translates to:
+  /// **'Feature-first'**
+  String get settingsHoodFeatureFirst;
+
+  /// Tech chip: mock repositories.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock repositories'**
+  String get settingsHoodMockRepos;
+
+  /// Tech stack card description.
+  ///
+  /// In en, this message translates to:
+  /// **'Each feature reads through a repository interface; mock implementations swap for Firebase later without touching the UI.'**
+  String get settingsHoodBody;
+
+  /// Sign-out button.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOut;
+
+  /// Version line on Profile & settings.
+  ///
+  /// In en, this message translates to:
+  /// **'ClinicalEdge 0.1.0 (prototype) · mock data only'**
+  String get appVersion;
 }
 
 class _AppLocalizationsDelegate

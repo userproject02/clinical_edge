@@ -34,7 +34,10 @@ TimedOverlayHandle showTimedOverlay({
   required double offset,
   EdgeInsetsGeometry margin = const EdgeInsets.all(12),
 }) {
-  final overlay = Overlay.of(context, rootOverlay: true);
+  // Accept the Overlay's own context too (e.g. a navigator's overlay).
+  final overlay = (context is StatefulElement && context.state is OverlayState)
+      ? context.state as OverlayState
+      : Overlay.of(context, rootOverlay: true);
   final key = GlobalKey<_TimedOverlayState>();
   late final OverlayEntry entry;
   var removed = false;

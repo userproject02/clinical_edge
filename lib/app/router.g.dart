@@ -70,4 +70,60 @@ final class RouterProvider
   }
 }
 
-String _$routerHash() => r'e2ca92d2dcf06f2142fd5f9ec2c4a58ff6c91ece';
+String _$routerHash() => r'a2967f17890f92814b7074c9a6677b9e040acbe4';
+
+/// Context of the current root navigator (for overlays shown after the
+/// router was rebuilt, e.g. the role-switch snackbar).
+
+@ProviderFor(rootNavigatorContext)
+final rootNavigatorContextProvider = RootNavigatorContextProvider._();
+
+/// Context of the current root navigator (for overlays shown after the
+/// router was rebuilt, e.g. the role-switch snackbar).
+
+final class RootNavigatorContextProvider
+    extends
+        $FunctionalProvider<
+          BuildContext? Function(),
+          BuildContext? Function(),
+          BuildContext? Function()
+        >
+    with $Provider<BuildContext? Function()> {
+  /// Context of the current root navigator (for overlays shown after the
+  /// router was rebuilt, e.g. the role-switch snackbar).
+  RootNavigatorContextProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'rootNavigatorContextProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$rootNavigatorContextHash();
+
+  @$internal
+  @override
+  $ProviderElement<BuildContext? Function()> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  BuildContext? Function() create(Ref ref) {
+    return rootNavigatorContext(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(BuildContext? Function() value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<BuildContext? Function()>(value),
+    );
+  }
+}
+
+String _$rootNavigatorContextHash() =>
+    r'3921aeab998662b880b1a2ce5cbe9d046e62f914';

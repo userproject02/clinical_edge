@@ -1,8 +1,6 @@
 import 'package:clinical_edge/app/state/locale.dart';
 import 'package:clinical_edge/app/state/preferences.dart';
-import 'package:clinical_edge/app/state/session.dart';
 import 'package:clinical_edge/app/state/theme_mode.dart';
-import 'package:clinical_edge/core/role.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -44,19 +42,5 @@ void main() {
     expect(restarted.read(localeProvider), const Locale('ar'));
     final junk = await _container(<String, Object>{PrefKeys.locale: 'fr'});
     expect(junk.read(localeProvider), const Locale('en'));
-  });
-
-  test('TC-PH1-37 session stub signs in, switches role, signs out', () async {
-    final c = await _container();
-    expect(c.read(sessionProvider).signedIn, isFalse);
-    c.read(sessionProvider.notifier).signIn(Role.supervisor);
-    expect(
-      c.read(sessionProvider),
-      const Session(signedIn: true, role: Role.supervisor),
-    );
-    c.read(sessionProvider.notifier).switchRole(Role.admin);
-    expect(c.read(sessionProvider).role, Role.admin);
-    c.read(sessionProvider.notifier).signOut();
-    expect(c.read(sessionProvider).signedIn, isFalse);
   });
 }

@@ -1,9 +1,10 @@
 import 'package:clinical_edge/app/app.dart';
+import 'package:clinical_edge/app/mock_overrides.dart';
 import 'package:clinical_edge/app/state/locale.dart';
-import 'package:clinical_edge/app/state/preferences.dart';
-import 'package:clinical_edge/app/state/session.dart';
 import 'package:clinical_edge/app/state/theme_mode.dart';
+import 'package:clinical_edge/core/persistence/local_db.dart';
 import 'package:clinical_edge/core/role.dart';
+import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -21,7 +22,7 @@ void main() {
     SharedPreferences.setMockInitialValues(<String, Object>{});
     final prefs = await SharedPreferences.getInstance();
     final c = ProviderContainer(
-      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+      overrides: mockOverrides(db: InMemoryLocalDb(), prefs: prefs),
     );
     addTearDown(c.dispose);
     await tester.pumpWidget(
@@ -33,8 +34,15 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('Sign in'), findsWidgets);
 
+    await c.read(sessionProvider.future);
     for (final role in Role.values) {
-      c.read(sessionProvider.notifier).signIn(role);
+      await c
+          .read(sessionProvider.notifier)
+          .signIn(
+            email: 'demo@demo-hospital.example',
+            password: 'x',
+            role: role,
+          );
       await tester.pump(const Duration(seconds: 1));
       expect(find.byType(NavigationBar), findsOneWidget);
     }

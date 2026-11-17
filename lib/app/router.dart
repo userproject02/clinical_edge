@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:clinical_edge/app/l10n/generated/app_localizations.dart';
 import 'package:clinical_edge/app/routes.dart';
 import 'package:clinical_edge/app/screens/placeholder_screen.dart';
 import 'package:clinical_edge/app/screens/role_shell.dart';
-import 'package:clinical_edge/app/state/session.dart';
 import 'package:clinical_edge/core/motion.dart';
 import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/core/widgets/app_bottom_sheet.dart';
 import 'package:clinical_edge/core/widgets/bottom_nav_bar.dart';
+import 'package:clinical_edge/features/auth/presentation/session.dart';
+import 'package:clinical_edge/features/auth/presentation/sign_in_screen.dart';
+import 'package:clinical_edge/features/settings/presentation/profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -23,21 +27,34 @@ part 'router.g.dart';
 /// redirect: signed out → `/sign-in`; a route of another role → own home.
 @Riverpod(keepAlive: true)
 GoRouter router(Ref ref) {
-  final role = ref.watch(sessionProvider.select((s) => s.role));
-  final session = ref.read(sessionProvider);
+  final role = ref.watch(sessionProvider.select((s) => s.value?.role));
+  final session = ref.read(sessionProvider).value;
+  final resume = ref.read(resumeLocationProvider);
+  if (resume != null) {
+    unawaited(
+      Future<void>.microtask(
+        () => ref.read(resumeLocationProvider.notifier).set(null),
+      ),
+    );
+  }
   final refresh = ValueNotifier<int>(0);
   ref.listen(sessionProvider, (_, _) => refresh.value++);
 
   final rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
   final router = GoRouter(
     navigatorKey: rootKey,
-    initialLocation: session.signedIn
-        ? AppRoutes.homeFor(role)
-        : AppRoutes.signIn,
+    initialLocation: session == null
+        ? AppRoutes.signIn
+        : resume ?? AppRoutes.homeFor(session.role),
     refreshListenable: refresh,
-    redirect: (context, state) =>
-        redirectFor(ref.read(sessionProvider), state.uri),
-    routes: buildRoutes(activeRole: role, rootKey: rootKey),
+    redirect: (context, state) {
+      final s = ref.read(sessionProvider);
+      // Still restoring the stored session: stay put (main.dart preloads it,
+      // so this only happens for a frame in tests).
+      if (s.isLoading && !s.hasValue) return null;
+      return redirectFor(s.value, state.uri);
+    },
+    routes: buildRoutes(activeRole: role ?? Role.learner, rootKey: rootKey),
   );
   ref.onDispose(() {
     // MaterialApp swaps to the new router on the next frame; dispose after.
@@ -49,11 +66,11 @@ GoRouter router(Ref ref) {
   return router;
 }
 
-/// Redirect rules (pure, unit-tested).
-String? redirectFor(Session session, Uri uri) {
+/// Redirect rules (pure, unit-tested). [session] is null when signed out.
+String? redirectFor(Session? session, Uri uri) {
   final path = uri.path;
   final atSignIn = path == AppRoutes.signIn;
-  if (!session.signedIn) return atSignIn ? null : AppRoutes.signIn;
+  if (session == null) return atSignIn ? null : AppRoutes.signIn;
   if (atSignIn || path == '/' || path.isEmpty) {
     return AppRoutes.homeFor(session.role);
   }
@@ -77,7 +94,7 @@ List<RouteBase> buildRoutes({
     GoRoute(
       path: AppRoutes.signIn,
       pageBuilder: (context, state) =>
-          _fadePage(context, state, const SignInPlaceholder()),
+          _fadePage(context, state, const SignInScreen()),
     ),
     shells[activeRole]!,
     for (final r in Role.values)
@@ -85,15 +102,8 @@ List<RouteBase> buildRoutes({
     GoRoute(
       path: AppRoutes.profile,
       parentNavigatorKey: rootKey,
-      pageBuilder: (context, state) => pushPage(
-        context,
-        state,
-        DetailPlaceholder(
-          title: (l) => l.titleProfile,
-          path: state.uri.path,
-          icon: Icons.person_outline_rounded,
-        ),
-      ),
+      pageBuilder: (context, state) =>
+          pushPage(context, state, const ProfileScreen()),
     ),
   ];
 }
@@ -386,3 +396,15 @@ Page<void> _fadePage(BuildContext context, GoRouterState state, Widget child) {
     ),
   );
 }
+
+/// Context of the current root navigator (for overlays shown after the
+/// router was rebuilt, e.g. the role-switch snackbar).
+@Riverpod(keepAlive: true)
+BuildContext? Function() rootNavigatorContext(Ref ref) =>
+    () => ref
+        .read(routerProvider)
+        .routerDelegate
+        .navigatorKey
+        .currentState
+        ?.overlay
+        ?.context;

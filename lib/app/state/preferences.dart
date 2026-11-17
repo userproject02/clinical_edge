@@ -10,6 +10,9 @@ abstract final class PrefKeys {
 
   /// Language code: `en` or `ar`.
   static const String locale = 'settings.locale';
+
+  /// Push notifications on/off.
+  static const String notifications = 'settings.notifications';
 }
 
 /// The app's [SharedPreferences] instance.

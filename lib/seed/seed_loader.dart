@@ -60,7 +60,9 @@ class AssetSeedLoader implements SeedLoader {
 
   @override
   Future<Json> load(SeedFile file) => _cache[file] ??= _bundle
-      .loadString('lib/seed/${file.fileName}')
+      // cache: false — rootBundle's global cache would share one pending
+      // load across ProviderContainers (and test zones); we cache per loader.
+      .loadString('lib/seed/${file.fileName}', cache: false)
       .then((s) => (jsonDecode(s) as Map).cast<String, Object?>());
 }
 

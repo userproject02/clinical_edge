@@ -1,54 +1,59 @@
-import 'package:clinical_edge/app/app.dart';
 import 'package:clinical_edge/app/router.dart';
 import 'package:clinical_edge/app/routes.dart';
 import 'package:clinical_edge/app/state/locale.dart';
-import 'package:clinical_edge/app/state/preferences.dart';
-import 'package:clinical_edge/app/state/session.dart';
+import 'package:clinical_edge/core/localized_text.dart';
 import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
+import 'package:clinical_edge/features/auth/domain/app_user.dart';
+import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-const _out = Session();
-const _learner = Session(signedIn: true);
-const _supervisor = Session(signedIn: true, role: Role.supervisor);
-const _admin = Session(signedIn: true, role: Role.admin);
+import '../helpers/test_app_harness.dart';
 
-String? _r(Session s, String path) => redirectFor(s, Uri.parse(path));
+Session _as(Role role) {
+  const t = LocalizedText(en: 'x', ar: 'س');
+  return Session(
+    user: AppUser(
+      id: SeedUsers.forRole(role),
+      name: t,
+      shortName: t,
+      title: t,
+      department: 'er',
+      email: 'x@demo-hospital.example',
+      role: role,
+      initials: 'XX',
+    ),
+    role: role,
+  );
+}
+
+const Session? _out = null;
+final Session _learner = _as(Role.learner);
+final Session _supervisor = _as(Role.supervisor);
+final Session _admin = _as(Role.admin);
+
+String? _r(Session? s, String path) => redirectFor(s, Uri.parse(path));
 
 Future<ProviderContainer> _pumpApp(
   WidgetTester tester, {
   Role? signedInAs,
   String locale = 'en',
-}) async {
-  SharedPreferences.setMockInitialValues(<String, Object>{
-    PrefKeys.locale: locale,
-  });
-  final prefs = await SharedPreferences.getInstance();
-  final container = ProviderContainer(
-    overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+}) => pumpClinicalEdge(tester, signedInAs: signedInAs, locale: locale);
+
+Future<void> _signInAs(
+  WidgetTester tester,
+  ProviderContainer c,
+  Role role,
+) async {
+  await tester.runAsync(
+    () => c
+        .read(sessionProvider.notifier)
+        .signIn(email: 'x@demo-hospital.example', password: 'x', role: role),
   );
-  addTearDown(container.dispose);
-  if (signedInAs != null) {
-    container.read(sessionProvider.notifier).signIn(signedInAs);
-  }
-  // Looping decor (ECG line, bell pulse) never settles; tests run with the
-  // platform's reduce-motion setting, which the app honours everywhere.
-  tester.platformDispatcher.accessibilityFeaturesTestValue =
-      const FakeAccessibilityFeatures(disableAnimations: true);
-  addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
-  await tester.binding.setSurfaceSize(const Size(390, 844));
-  addTearDown(() => tester.binding.setSurfaceSize(null));
-  await tester.pumpWidget(
-    UncontrolledProviderScope(
-      container: container,
-      child: const ClinicalEdgeApp(showDebugMenu: false),
-    ),
-  );
-  await tester.pumpAndSettle();
-  return container;
+  c.read(firstHomeLoadProvider.notifier).done();
+  await settle(tester);
 }
 
 String _location(ProviderContainer c) =>
@@ -139,8 +144,7 @@ void main() {
         );
       }
 
-      c.read(sessionProvider.notifier).signIn(Role.supervisor);
-      await tester.pumpAndSettle();
+      await _signInAs(tester, c, Role.supervisor);
       expect(_location(c), '/queue');
       expect(find.text('Sign-off queue'), findsWidgets);
       expect(
@@ -148,8 +152,7 @@ void main() {
         hasLength(3),
       );
 
-      c.read(sessionProvider.notifier).signIn(Role.admin);
-      await tester.pumpAndSettle();
+      await _signInAs(tester, c, Role.admin);
       expect(_location(c), '/cohort');
       expect(find.text('Cohort dashboard'), findsWidgets);
     });
@@ -164,7 +167,7 @@ void main() {
           matching: find.text('Learn'),
         ),
       );
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(_location(c), '/learn');
       final bar = tester.widget<NavigationBar>(find.byType(NavigationBar));
       expect(bar.selectedIndex, 2);
@@ -180,10 +183,10 @@ void main() {
         0,
       );
       c.read(routerProvider).go(AppRoutes.course('c1'));
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(find.text('Course'), findsWidgets);
       await tester.tap(find.byTooltip('Back'));
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(_location(c), '/learn');
       expect(
         tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
@@ -197,14 +200,14 @@ void main() {
     ) async {
       final c = await _pumpApp(tester, signedInAs: Role.learner);
       c.read(routerProvider).go(AppRoutes.quiz('bls'));
-      await tester.pumpAndSettle();
+      await settle(tester);
       await tester.tap(
         find.descendant(
           of: find.byType(NavigationBar),
           matching: find.text('Home'),
         ),
       );
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(_location(c), '/home');
       await tester.tap(
         find.descendant(
@@ -212,7 +215,7 @@ void main() {
           matching: find.text('Assess'),
         ),
       );
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(_location(c), '/assess/bls/run');
     });
 
@@ -221,13 +224,13 @@ void main() {
     ) async {
       final c = await _pumpApp(tester, signedInAs: Role.learner);
       await tester.tap(find.bySemanticsLabel('Profile and settings'));
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(find.text('Profile & settings'), findsWidgets);
       await tester.tap(find.byTooltip('Back'));
-      await tester.pumpAndSettle();
+      await settle(tester);
 
       c.read(routerProvider).go(AppRoutes.certUpload);
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(find.byType(AppBottomSheet), findsOneWidget);
       expect(find.text('Upload certificate'), findsOneWidget);
     });
@@ -253,7 +256,7 @@ void main() {
       expect(home.dx, greaterThan(signoffs.dx));
 
       c.read(routerProvider).go(AppRoutes.course('c1'));
-      await tester.pumpAndSettle();
+      await settle(tester);
       final back = tester.getRect(find.byTooltip('رجوع'));
       expect(back.left, greaterThan(195), reason: 'back arrow on the right');
     });
@@ -275,34 +278,32 @@ void main() {
       };
       for (final MapEntry(key: path, value: title) in expected.entries) {
         router.go(path);
-        await tester.pumpAndSettle();
+        await settle(tester);
         expect(find.text(title), findsWidgets, reason: path);
         expect(find.text(path), findsOneWidget, reason: path);
       }
-      c.read(sessionProvider.notifier).signIn(Role.supervisor);
-      await tester.pumpAndSettle();
+      await _signInAs(tester, c, Role.supervisor);
       c.read(routerProvider).go('/queue/q1');
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(find.text('Review sign-off'), findsWidgets);
       c.read(routerProvider).go('/decided');
-      await tester.pumpAndSettle();
+      await settle(tester);
       expect(find.text('Recently decided'), findsWidgets);
-      c.read(sessionProvider.notifier).signIn(Role.admin);
-      await tester.pumpAndSettle();
+      await _signInAs(tester, c, Role.admin);
       for (final MapEntry(key: path, value: title) in <String, String>{
         '/audit': 'Audit log',
         '/insights': 'Usage insights',
       }.entries) {
         c.read(routerProvider).go(path);
-        await tester.pumpAndSettle();
+        await settle(tester);
         expect(find.text(title), findsWidgets, reason: path);
       }
     });
 
     testWidgets('TC-PH1-50 signing out returns to sign-in', (tester) async {
       final c = await _pumpApp(tester, signedInAs: Role.admin);
-      c.read(sessionProvider.notifier).signOut();
-      await tester.pumpAndSettle();
+      await tester.runAsync(() => c.read(sessionProvider.notifier).signOut());
+      await settle(tester);
       expect(_location(c), AppRoutes.signIn);
     });
   });

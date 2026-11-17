@@ -230,14 +230,6 @@
   "@debugMenu": {
     "description": "Title and button label of the temporary developer menu (debug builds only)."
   },
-  "debugSession": "Session",
-  "@debugSession": {
-    "description": "Debug menu: section for the stub session."
-  },
-  "debugSignedOut": "Signed out",
-  "@debugSignedOut": {
-    "description": "Debug menu: signed-out session option."
-  },
   "debugRoutes": "Jump to route",
   "@debugRoutes": {
     "description": "Debug menu: section listing routes to open."
@@ -277,5 +269,110 @@
   "debugResetDone": "Demo data reset",
   "@debugResetDone": {
     "description": "Snackbar after the demo data was reset."
+  },
+  "heroHeadline": "Clinical training that keeps every licence current.",
+  "@heroHeadline": {
+    "description": "Sign-in hero headline."
+  },
+  "heroBody": "Courses, assessments, certifications and competency sign-off for UAE healthcare teams.",
+  "@heroBody": {
+    "description": "Sign-in hero supporting copy."
+  },
+  "signInTitle": "Sign in",
+  "@signInTitle": {
+    "description": "Sign-in card heading."
+  },
+  "signInEmail": "Work email",
+  "@signInEmail": {
+    "description": "Email field label."
+  },
+  "signInPassword": "Password",
+  "@signInPassword": {
+    "description": "Password field label."
+  },
+  "signInDemoRole": "Demo role",
+  "@signInDemoRole": {
+    "description": "Label of the demo role picker."
+  },
+  "signInButton": "Sign in",
+  "@signInButton": {
+    "description": "Sign-in button."
+  },
+  "signInDemoNote": "Demo build: any password works. No real authentication.",
+  "@signInDemoNote": {
+    "description": "Note under the sign-in button."
+  },
+  "signInEmailRequired": "Enter your work email",
+  "@signInEmailRequired": {
+    "description": "Inline error: empty email."
+  },
+  "signInPasswordRequired": "Enter your password",
+  "@signInPasswordRequired": {
+    "description": "Inline error: empty password."
+  },
+  "signInShowPassword": "Show password",
+  "@signInShowPassword": {
+    "description": "Accessibility label: reveal password."
+  },
+  "signInHidePassword": "Hide password",
+  "@signInHidePassword": {
+    "description": "Accessibility label: hide password."
+  },
+  "greetingMorning": "Good morning",
+  "@greetingMorning": {
+    "description": "Home subtitle before 12:00."
+  },
+  "greetingAfternoon": "Good afternoon",
+  "@greetingAfternoon": {
+    "description": "Home subtitle 12:00–16:59."
+  },
+  "greetingEvening": "Good evening",
+  "@greetingEvening": {
+    "description": "Home subtitle from 17:00."
+  },
+  "roleSwitchedTitle": "Role switched",
+  "@roleSwitchedTitle": {
+    "description": "Snackbar title after a demo role switch."
+  },
+  "roleSwitchedBody": "Now viewing as {name}",
+  "@roleSwitchedBody": {
+    "description": "Snackbar body after a demo role switch.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsPush": "Push notifications",
+  "@settingsPush": {
+    "description": "Notifications switch label."
+  },
+  "settingsPushBody": "Expiry reminders and sign-off decisions",
+  "@settingsPushBody": {
+    "description": "Notifications switch description."
+  },
+  "settingsHoodTitle": "Under the hood · Flutter",
+  "@settingsHoodTitle": {
+    "description": "Tech stack card title."
+  },
+  "settingsHoodFeatureFirst": "Feature-first",
+  "@settingsHoodFeatureFirst": {
+    "description": "Tech chip: feature-first folders."
+  },
+  "settingsHoodMockRepos": "Mock repositories",
+  "@settingsHoodMockRepos": {
+    "description": "Tech chip: mock repositories."
+  },
+  "settingsHoodBody": "Each feature reads through a repository interface; mock implementations swap for Firebase later without touching the UI.",
+  "@settingsHoodBody": {
+    "description": "Tech stack card description."
+  },
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "Sign-out button."
+  },
+  "appVersion": "ClinicalEdge 0.1.0 (prototype) · mock data only",
+  "@appVersion": {
+    "description": "Version line on Profile & settings."
   }
 }

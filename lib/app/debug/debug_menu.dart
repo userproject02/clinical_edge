@@ -3,9 +3,6 @@ import 'dart:async';
 import 'package:clinical_edge/app/l10n/generated/app_localizations.dart';
 import 'package:clinical_edge/app/mock_overrides.dart';
 import 'package:clinical_edge/app/routes.dart';
-import 'package:clinical_edge/app/state/locale.dart';
-import 'package:clinical_edge/app/state/session.dart';
-import 'package:clinical_edge/app/state/theme_mode.dart';
 import 'package:clinical_edge/app/theme/app_colors.dart';
 import 'package:clinical_edge/app/theme/app_typography.dart';
 import 'package:clinical_edge/core/clock.dart';
@@ -13,6 +10,7 @@ import 'package:clinical_edge/core/formatting.dart';
 import 'package:clinical_edge/core/payments/payment_gateway.dart';
 import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
+import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -20,8 +18,8 @@ import 'package:material_ui/material_ui.dart';
 /// TEMPORARY developer menu (debug builds only; removed in Phase 3 when
 /// Profile & settings and the real sign-in land).
 ///
-/// A small floating button opens a sheet to switch theme, language and the
-/// stub session, and to jump to any route of the active role.
+/// A small floating button opens a sheet to switch the clock and the mock
+/// payment outcome, reset the demo data and jump to any route.
 class DebugMenuOverlay extends StatelessWidget {
   /// Wraps the app [child].
   const new({
@@ -96,10 +94,7 @@ class DebugMenuSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
-    final mode = ref.watch(themeModeProvider);
-    final locale = ref.watch(localeProvider);
-    final session = ref.watch(sessionProvider);
-    final sessionValue = session.signedIn ? session.role : null;
+    final session = ref.watch(sessionProvider).value;
 
     Widget label(String text) => Padding(
       padding: const EdgeInsets.only(top: 12, bottom: 6),
@@ -113,52 +108,6 @@ class DebugMenuSheet extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            label(l.settingsTheme),
-            SegmentedPicker<ThemeMode>(
-              semanticLabel: l.settingsTheme,
-              selected: mode,
-              onChanged: (m) =>
-                  unawaited(ref.read(themeModeProvider.notifier).set(m)),
-              segments: <Segment<ThemeMode>>[
-                Segment(value: ThemeMode.system, label: l.themeSystem),
-                Segment(value: ThemeMode.light, label: l.themeLight),
-                Segment(value: ThemeMode.dark, label: l.themeDark),
-              ],
-            ),
-            label(l.settingsLanguage),
-            SegmentedPicker<String>(
-              semanticLabel: l.settingsLanguage,
-              selected: locale.languageCode,
-              onChanged: (code) => unawaited(
-                ref.read(localeProvider.notifier).set(Locale(code)),
-              ),
-              segments: <Segment<String>>[
-                Segment(value: 'en', label: l.languageEnglish),
-                Segment(value: 'ar', label: l.languageArabic),
-              ],
-            ),
-            label(l.debugSession),
-            SegmentedPicker<Role?>(
-              semanticLabel: l.debugSession,
-              selected: sessionValue,
-              onChanged: (role) {
-                // The router is rebuilt for a new role, which closes this
-                // sheet's navigator; close it first.
-                Navigator.of(context).pop();
-                final notifier = ref.read(sessionProvider.notifier);
-                if (role == null) {
-                  notifier.signOut();
-                } else {
-                  notifier.signIn(role);
-                }
-              },
-              segments: <Segment<Role?>>[
-                Segment(value: null, label: l.debugSignedOut),
-                Segment(value: Role.learner, label: l.roleLearner),
-                Segment(value: Role.supervisor, label: l.roleSupervisor),
-                Segment(value: Role.admin, label: l.roleAdmin),
-              ],
-            ),
             label(l.debugClock),
             SegmentedPicker<ClockMode>(
               semanticLabel: l.debugClock,
@@ -193,19 +142,24 @@ class DebugMenuSheet extends ConsumerWidget {
               label: l.debugReset,
               icon: Icons.restart_alt_rounded,
               onPressed: () async {
-                final messenger =
-                    router.routerDelegate.navigatorKey.currentContext;
                 Navigator.of(context).pop();
                 await resetDemoData(ref);
-                if (messenger != null && messenger.mounted) {
+                await WidgetsBinding.instance.endOfFrame;
+                final ctx = router
+                    .routerDelegate
+                    .navigatorKey
+                    .currentState
+                    ?.overlay
+                    ?.context;
+                if (ctx != null && ctx.mounted) {
                   AppSnackBar.show(
-                    messenger,
-                    title: AppLocalizations.of(messenger).debugResetDone,
+                    ctx,
+                    title: AppLocalizations.of(ctx).debugResetDone,
                   );
                 }
               },
             ),
-            if (session.signedIn) ...<Widget>[
+            if (session != null) ...<Widget>[
               label(l.debugRoutes),
               for (final (title, path) in _routesFor(session.role, l))
                 ListTile(

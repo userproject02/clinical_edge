@@ -179,12 +179,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get debugMenu => 'قائمة المطوّر';
 
   @override
-  String get debugSession => 'الجلسة';
-
-  @override
-  String get debugSignedOut => 'غير مسجّل';
-
-  @override
   String get debugRoutes => 'الانتقال إلى مسار';
 
   @override
@@ -213,4 +207,85 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get debugResetDone => 'تمت إعادة ضبط البيانات التجريبية';
+
+  @override
+  String get heroHeadline => 'تدريب سريري يُبقي كل ترخيص سارياً.';
+
+  @override
+  String get heroBody =>
+      'دورات وتقييمات وشهادات واعتماد الكفاءات لفرق الرعاية الصحية في الإمارات.';
+
+  @override
+  String get signInTitle => 'تسجيل الدخول';
+
+  @override
+  String get signInEmail => 'بريد العمل';
+
+  @override
+  String get signInPassword => 'كلمة المرور';
+
+  @override
+  String get signInDemoRole => 'دور تجريبي';
+
+  @override
+  String get signInButton => 'تسجيل الدخول';
+
+  @override
+  String get signInDemoNote =>
+      'نسخة تجريبية: أي كلمة مرور تعمل، دون مصادقة حقيقية.';
+
+  @override
+  String get signInEmailRequired => 'أدخل بريد العمل';
+
+  @override
+  String get signInPasswordRequired => 'أدخل كلمة المرور';
+
+  @override
+  String get signInShowPassword => 'إظهار كلمة المرور';
+
+  @override
+  String get signInHidePassword => 'إخفاء كلمة المرور';
+
+  @override
+  String get greetingMorning => 'صباح الخير';
+
+  @override
+  String get greetingAfternoon => 'مساء الخير';
+
+  @override
+  String get greetingEvening => 'مساء الخير';
+
+  @override
+  String get roleSwitchedTitle => 'تم تغيير الدور';
+
+  @override
+  String roleSwitchedBody(String name) {
+    return 'تتصفّح الآن باسم $name';
+  }
+
+  @override
+  String get settingsPush => 'الإشعارات';
+
+  @override
+  String get settingsPushBody => 'تذكيرات الانتهاء وقرارات الاعتماد';
+
+  @override
+  String get settingsHoodTitle => 'البنية التقنية · Flutter';
+
+  @override
+  String get settingsHoodFeatureFirst => 'تنظيم حسب الميزة';
+
+  @override
+  String get settingsHoodMockRepos => 'مستودعات تجريبية';
+
+  @override
+  String get settingsHoodBody =>
+      'تقرأ كل ميزة بياناتها عبر واجهة مستودع، وتُستبدل التطبيقات التجريبية بـ Firebase لاحقاً دون تغيير الواجهة.';
+
+  @override
+  String get signOut => 'تسجيل الخروج';
+
+  @override
+  String get appVersion =>
+      'ClinicalEdge 0.1.0 (نموذج أولي) · بيانات تجريبية فقط';
 }
