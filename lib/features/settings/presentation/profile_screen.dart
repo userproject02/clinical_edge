@@ -14,6 +14,7 @@ import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:clinical_edge/features/auth/presentation/role_labels.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
+import 'package:clinical_edge/features/certifications/presentation/cert_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -244,11 +245,10 @@ class _SettingsCard extends ConsumerWidget {
                   trackOutlineColor: WidgetStateProperty.resolveWith(
                     (s) => s.contains(WidgetState.selected) ? c.brand : c.muted,
                   ),
-                  onChanged: (v) => unawaited(
-                    ref
-                        .read(notificationsEnabledProvider.notifier)
-                        .set(enabled: v),
-                  ),
+                  // Shared with the Certs reminders card; asks for OS
+                  // permission when turned on.
+                  onChanged: (v) =>
+                      unawaited(ref.read(setRemindersEnabledProvider)(v)),
                 ),
               ],
             ),

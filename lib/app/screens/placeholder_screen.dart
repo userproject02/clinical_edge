@@ -80,27 +80,6 @@ class DetailPlaceholder extends StatelessWidget {
   }
 }
 
-/// Upload certificate sheet placeholder (route `/certs/upload`).
-class UploadSheetPlaceholder extends StatelessWidget {
-  /// Creates the placeholder.
-  const new({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return AppBottomSheet(
-      title: l10n.titleUploadCert,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 8),
-        child: Text(
-          l10n.placeholderBody,
-          style: context.body.copyWith(color: context.colors.muted),
-        ),
-      ),
-    );
-  }
-}
-
 class _PlaceholderBody extends StatelessWidget {
   const new({required this.title, required this.path, required this.icon});
 

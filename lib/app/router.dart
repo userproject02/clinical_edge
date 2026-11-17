@@ -12,6 +12,8 @@ import 'package:clinical_edge/features/assessments/presentation/assess_screen.da
 import 'package:clinical_edge/features/assessments/presentation/quiz_screen.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/auth/presentation/sign_in_screen.dart';
+import 'package:clinical_edge/features/certifications/presentation/certs_screen.dart';
+import 'package:clinical_edge/features/certifications/presentation/upload_sheet.dart';
 import 'package:clinical_edge/features/courses/presentation/catalogue_screen.dart';
 import 'package:clinical_edge/features/courses/presentation/course_detail_screen.dart';
 import 'package:clinical_edge/features/courses/presentation/lesson_screen.dart';
@@ -186,6 +188,7 @@ RouteBase _learnerShell(GlobalKey<NavigatorState> rootKey) {
           AppRoutes.certs,
           (l) => l.titleCerts,
           Icons.workspace_premium_outlined,
+          screen: (_) => const CertsScreen(),
           routes: <RouteBase>[
             GoRoute(
               path: 'upload',
@@ -193,7 +196,7 @@ RouteBase _learnerShell(GlobalKey<NavigatorState> rootKey) {
               pageBuilder: (context, state) => BottomSheetPage<void>(
                 key: state.pageKey,
                 name: state.uri.path,
-                child: const UploadSheetPlaceholder(),
+                child: const UploadSheet(),
               ),
             ),
           ],

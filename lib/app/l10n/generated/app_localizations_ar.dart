@@ -624,4 +624,138 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get resultRetake => 'إعادة المحاولة';
+
+  @override
+  String reminderTitle(String code, int days) {
+    return 'تنتهي صلاحية شهادة $code خلال $days يومًا';
+  }
+
+  @override
+  String reminderBody(String date) {
+    return 'جدّدها قبل $date لتبقى ملتزمًا بالمتطلبات.';
+  }
+
+  @override
+  String get reminderChannel => 'تذكيرات انتهاء الصلاحية';
+
+  @override
+  String get certIssuerUploaded => 'رفعتها بنفسك';
+
+  @override
+  String certsCpdOf(String target) {
+    return 'من $target';
+  }
+
+  @override
+  String certsCpdToTarget(int left) {
+    return '$left نقطة متبقية للوصول إلى هدفك';
+  }
+
+  @override
+  String get certsCpdReached => 'وصلت إلى هدفك';
+
+  @override
+  String certsCpdSemantics(int total, int target) {
+    return '$total من $target نقطة تطوير مهني';
+  }
+
+  @override
+  String get certsRemindersTitle => 'تذكيرات انتهاء الصلاحية';
+
+  @override
+  String certsRemindersDays(String days) {
+    return 'قبل $days يومًا';
+  }
+
+  @override
+  String get certsSimulate => 'محاكاة تذكير انتهاء الصلاحية';
+
+  @override
+  String get certsListTitle => 'الشهادات';
+
+  @override
+  String get certsLedgerTitle => 'سجل التطوير المهني المستمر';
+
+  @override
+  String get certsUpload => 'رفع';
+
+  @override
+  String get certStatusValid => 'سارية';
+
+  @override
+  String get certStatusRenewSoon => 'جدّد قريبًا';
+
+  @override
+  String get certStatusVerifying => 'قيد التحقق';
+
+  @override
+  String get certStatusExpired => 'منتهية';
+
+  @override
+  String certExpires(String date) {
+    return 'تنتهي في $date';
+  }
+
+  @override
+  String certDaysLeft(String days) {
+    return '$days يومًا';
+  }
+
+  @override
+  String certDaysLeftSemantics(int days) {
+    return 'متبقٍ $days يومًا';
+  }
+
+  @override
+  String get cpdSourceExternal => 'خارجي';
+
+  @override
+  String get cpdSourceClinicaledge => 'ClinicalEdge';
+
+  @override
+  String get uploadDropZone => 'امسح بالكاميرا أو اختر ملفًا';
+
+  @override
+  String get uploadDropHint => 'PDF أو JPG أو PNG';
+
+  @override
+  String uploadFileSize(String kb) {
+    return '$kb ك.ب';
+  }
+
+  @override
+  String get uploadNameLabel => 'الشهادة';
+
+  @override
+  String get uploadNameHint => 'برنامج إنعاش حديثي الولادة (NRP)';
+
+  @override
+  String get uploadIssued => 'تاريخ الإصدار';
+
+  @override
+  String get uploadExpires => 'تاريخ الانتهاء';
+
+  @override
+  String get uploadPickDate => 'اختر التاريخ';
+
+  @override
+  String get uploadSubmit => 'رفع للتحقق';
+
+  @override
+  String get uploadErrorName => 'أدخل اسم الشهادة';
+
+  @override
+  String get uploadErrorExpiry => 'اختر تاريخ الانتهاء';
+
+  @override
+  String get uploadErrorExpiryOrder =>
+      'يجب أن يكون تاريخ الانتهاء بعد تاريخ الإصدار';
+
+  @override
+  String get uploadDoneTitle => 'تم رفع الشهادة';
+
+  @override
+  String uploadDoneMessage(String code) {
+    return '$code قيد التحقق';
+  }
 }

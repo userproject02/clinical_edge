@@ -1195,6 +1195,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Retake'**
   String get resultRetake;
+
+  /// Expiry reminder title.
+  ///
+  /// In en, this message translates to:
+  /// **'{code} certificate expires in {days} days'**
+  String reminderTitle(String code, int days);
+
+  /// Expiry reminder body.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew before {date} to stay compliant.'**
+  String reminderBody(String date);
+
+  /// Android notification channel name.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry reminders'**
+  String get reminderChannel;
+
+  /// Issuer line of a self-uploaded certificate.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded by you'**
+  String get certIssuerUploaded;
+
+  /// Under the credits in the CPD ring.
+  ///
+  /// In en, this message translates to:
+  /// **'of {target}'**
+  String certsCpdOf(String target);
+
+  /// CPD card line.
+  ///
+  /// In en, this message translates to:
+  /// **'{left} credits to reach your target'**
+  String certsCpdToTarget(int left);
+
+  /// CPD card line when done.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve reached your target'**
+  String get certsCpdReached;
+
+  /// CPD ring semantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{total} of {target} CPD credits'**
+  String certsCpdSemantics(int total, int target);
+
+  /// Card title.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry reminders'**
+  String get certsRemindersTitle;
+
+  /// Reminder offsets line; days is like 90 · 60 · 30 · 7.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days before'**
+  String certsRemindersDays(String days);
+
+  /// Dashed button.
+  ///
+  /// In en, this message translates to:
+  /// **'Simulate expiry reminder'**
+  String get certsSimulate;
+
+  /// Section title.
+  ///
+  /// In en, this message translates to:
+  /// **'Certifications'**
+  String get certsListTitle;
+
+  /// Section title.
+  ///
+  /// In en, this message translates to:
+  /// **'CPD/CME ledger'**
+  String get certsLedgerTitle;
+
+  /// Extended FAB.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload'**
+  String get certsUpload;
+
+  /// Status tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid'**
+  String get certStatusValid;
+
+  /// Status tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew soon'**
+  String get certStatusRenewSoon;
+
+  /// Status tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying'**
+  String get certStatusVerifying;
+
+  /// Status tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get certStatusExpired;
+
+  /// Certificate expiry line.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires {date}'**
+  String certExpires(String date);
+
+  /// Days left.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days'**
+  String certDaysLeft(String days);
+
+  /// Meter semantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days left'**
+  String certDaysLeftSemantics(int days);
+
+  /// Ledger source.
+  ///
+  /// In en, this message translates to:
+  /// **'External'**
+  String get cpdSourceExternal;
+
+  /// Ledger source.
+  ///
+  /// In en, this message translates to:
+  /// **'ClinicalEdge'**
+  String get cpdSourceClinicaledge;
+
+  /// Drop zone.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan with camera or choose a file'**
+  String get uploadDropZone;
+
+  /// Drop zone hint.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF, JPG or PNG'**
+  String get uploadDropHint;
+
+  /// File size.
+  ///
+  /// In en, this message translates to:
+  /// **'{kb} KB'**
+  String uploadFileSize(String kb);
+
+  /// Field label.
+  ///
+  /// In en, this message translates to:
+  /// **'Certificate'**
+  String get uploadNameLabel;
+
+  /// Field placeholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Neonatal Resuscitation Program (NRP)'**
+  String get uploadNameHint;
+
+  /// Date field.
+  ///
+  /// In en, this message translates to:
+  /// **'Issued'**
+  String get uploadIssued;
+
+  /// Date field.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires'**
+  String get uploadExpires;
+
+  /// Empty date field.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose date'**
+  String get uploadPickDate;
+
+  /// Submit button.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload for verification'**
+  String get uploadSubmit;
+
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the certificate name'**
+  String get uploadErrorName;
+
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an expiry date'**
+  String get uploadErrorExpiry;
+
+  /// Validation.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry must be after the issue date'**
+  String get uploadErrorExpiryOrder;
+
+  /// Snackbar title.
+  ///
+  /// In en, this message translates to:
+  /// **'Certificate uploaded'**
+  String get uploadDoneTitle;
+
+  /// Snackbar message.
+  ///
+  /// In en, this message translates to:
+  /// **'{code} is pending verification'**
+  String uploadDoneMessage(String code);
 }
 
 class _AppLocalizationsDelegate

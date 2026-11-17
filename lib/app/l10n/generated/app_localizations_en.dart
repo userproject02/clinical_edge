@@ -626,4 +626,137 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resultRetake => 'Retake';
+
+  @override
+  String reminderTitle(String code, int days) {
+    return '$code certificate expires in $days days';
+  }
+
+  @override
+  String reminderBody(String date) {
+    return 'Renew before $date to stay compliant.';
+  }
+
+  @override
+  String get reminderChannel => 'Expiry reminders';
+
+  @override
+  String get certIssuerUploaded => 'Uploaded by you';
+
+  @override
+  String certsCpdOf(String target) {
+    return 'of $target';
+  }
+
+  @override
+  String certsCpdToTarget(int left) {
+    return '$left credits to reach your target';
+  }
+
+  @override
+  String get certsCpdReached => 'You\'ve reached your target';
+
+  @override
+  String certsCpdSemantics(int total, int target) {
+    return '$total of $target CPD credits';
+  }
+
+  @override
+  String get certsRemindersTitle => 'Expiry reminders';
+
+  @override
+  String certsRemindersDays(String days) {
+    return '$days days before';
+  }
+
+  @override
+  String get certsSimulate => 'Simulate expiry reminder';
+
+  @override
+  String get certsListTitle => 'Certifications';
+
+  @override
+  String get certsLedgerTitle => 'CPD/CME ledger';
+
+  @override
+  String get certsUpload => 'Upload';
+
+  @override
+  String get certStatusValid => 'Valid';
+
+  @override
+  String get certStatusRenewSoon => 'Renew soon';
+
+  @override
+  String get certStatusVerifying => 'Verifying';
+
+  @override
+  String get certStatusExpired => 'Expired';
+
+  @override
+  String certExpires(String date) {
+    return 'Expires $date';
+  }
+
+  @override
+  String certDaysLeft(String days) {
+    return '$days days';
+  }
+
+  @override
+  String certDaysLeftSemantics(int days) {
+    return '$days days left';
+  }
+
+  @override
+  String get cpdSourceExternal => 'External';
+
+  @override
+  String get cpdSourceClinicaledge => 'ClinicalEdge';
+
+  @override
+  String get uploadDropZone => 'Scan with camera or choose a file';
+
+  @override
+  String get uploadDropHint => 'PDF, JPG or PNG';
+
+  @override
+  String uploadFileSize(String kb) {
+    return '$kb KB';
+  }
+
+  @override
+  String get uploadNameLabel => 'Certificate';
+
+  @override
+  String get uploadNameHint => 'Neonatal Resuscitation Program (NRP)';
+
+  @override
+  String get uploadIssued => 'Issued';
+
+  @override
+  String get uploadExpires => 'Expires';
+
+  @override
+  String get uploadPickDate => 'Choose date';
+
+  @override
+  String get uploadSubmit => 'Upload for verification';
+
+  @override
+  String get uploadErrorName => 'Enter the certificate name';
+
+  @override
+  String get uploadErrorExpiry => 'Choose an expiry date';
+
+  @override
+  String get uploadErrorExpiryOrder => 'Expiry must be after the issue date';
+
+  @override
+  String get uploadDoneTitle => 'Certificate uploaded';
+
+  @override
+  String uploadDoneMessage(String code) {
+    return '$code is pending verification';
+  }
 }

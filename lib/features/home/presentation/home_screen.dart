@@ -9,6 +9,7 @@ import 'package:clinical_edge/core/motion.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:clinical_edge/features/assessments/domain/assessment.dart';
 import 'package:clinical_edge/features/certifications/domain/certification.dart';
+import 'package:clinical_edge/features/certifications/presentation/cert_providers.dart';
 import 'package:clinical_edge/features/competencies/domain/competency.dart';
 import 'package:clinical_edge/features/courses/domain/course_progress.dart';
 import 'package:clinical_edge/features/courses/presentation/course_widgets.dart';
@@ -27,6 +28,8 @@ class HomeScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final overview = ref.watch(learnerOverviewProvider).value;
     final certs = ref.watch(myCertificationsProvider).value;
+    // Same rule as the reminders and the bell (ReminderService.due).
+    final due = ref.watch(dueCertificateProvider).value;
     final config = ref.watch(cpdConfigProvider).value;
     final ledger = ref.watch(cpdLedgerProvider).value;
     final history = ref.watch(quizHistoryProvider).value;
@@ -54,8 +57,7 @@ class HomeScreen extends ConsumerWidget {
                 children: <Widget>[
                   for (final (i, w) in <Widget>[
                     _Hero(overview: overview!),
-                    if (_soonest(certs!, ref) case final cert?)
-                      _ExpiryAlert(cert: cert),
+                    if (due case final cert?) _ExpiryAlert(cert: cert),
                     _CpdCard(
                       config: config!,
                       total: ledger!.fold(0, (s, e) => s + e.credits),
@@ -71,14 +73,6 @@ class HomeScreen extends ConsumerWidget {
               ),
       ),
     );
-  }
-
-  Certification? _soonest(List<Certification> certs, WidgetRef ref) {
-    final clock = ref.watch(clockProvider);
-    for (final c in certs) {
-      if (c.status(clock) == CertStatus.renewSoon) return c;
-    }
-    return null;
   }
 }
 

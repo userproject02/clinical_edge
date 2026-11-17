@@ -928,5 +928,214 @@
   "resultRetake": "Retake",
   "@resultRetake": {
     "description": "Button."
+  },
+  "reminderTitle": "{code} certificate expires in {days} days",
+  "@reminderTitle": {
+    "description": "Expiry reminder title.",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "reminderBody": "Renew before {date} to stay compliant.",
+  "@reminderBody": {
+    "description": "Expiry reminder body.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderChannel": "Expiry reminders",
+  "@reminderChannel": {
+    "description": "Android notification channel name."
+  },
+  "certIssuerUploaded": "Uploaded by you",
+  "@certIssuerUploaded": {
+    "description": "Issuer line of a self-uploaded certificate."
+  },
+  "certsCpdOf": "of {target}",
+  "@certsCpdOf": {
+    "description": "Under the credits in the CPD ring.",
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "certsCpdToTarget": "{left} credits to reach your target",
+  "@certsCpdToTarget": {
+    "description": "CPD card line.",
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "certsCpdReached": "You've reached your target",
+  "@certsCpdReached": {
+    "description": "CPD card line when done."
+  },
+  "certsCpdSemantics": "{total} of {target} CPD credits",
+  "@certsCpdSemantics": {
+    "description": "CPD ring semantics.",
+    "placeholders": {
+      "total": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "certsRemindersTitle": "Expiry reminders",
+  "@certsRemindersTitle": {
+    "description": "Card title."
+  },
+  "certsRemindersDays": "{days} days before",
+  "@certsRemindersDays": {
+    "description": "Reminder offsets line; days is like 90 · 60 · 30 · 7.",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "certsSimulate": "Simulate expiry reminder",
+  "@certsSimulate": {
+    "description": "Dashed button."
+  },
+  "certsListTitle": "Certifications",
+  "@certsListTitle": {
+    "description": "Section title."
+  },
+  "certsLedgerTitle": "CPD/CME ledger",
+  "@certsLedgerTitle": {
+    "description": "Section title."
+  },
+  "certsUpload": "Upload",
+  "@certsUpload": {
+    "description": "Extended FAB."
+  },
+  "certStatusValid": "Valid",
+  "@certStatusValid": {
+    "description": "Status tag."
+  },
+  "certStatusRenewSoon": "Renew soon",
+  "@certStatusRenewSoon": {
+    "description": "Status tag."
+  },
+  "certStatusVerifying": "Verifying",
+  "@certStatusVerifying": {
+    "description": "Status tag."
+  },
+  "certStatusExpired": "Expired",
+  "@certStatusExpired": {
+    "description": "Status tag."
+  },
+  "certExpires": "Expires {date}",
+  "@certExpires": {
+    "description": "Certificate expiry line.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "certDaysLeft": "{days} days",
+  "@certDaysLeft": {
+    "description": "Days left.",
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "certDaysLeftSemantics": "{days} days left",
+  "@certDaysLeftSemantics": {
+    "description": "Meter semantics.",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cpdSourceExternal": "External",
+  "@cpdSourceExternal": {
+    "description": "Ledger source."
+  },
+  "cpdSourceClinicaledge": "ClinicalEdge",
+  "@cpdSourceClinicaledge": {
+    "description": "Ledger source."
+  },
+  "uploadDropZone": "Scan with camera or choose a file",
+  "@uploadDropZone": {
+    "description": "Drop zone."
+  },
+  "uploadDropHint": "PDF, JPG or PNG",
+  "@uploadDropHint": {
+    "description": "Drop zone hint."
+  },
+  "uploadFileSize": "{kb} KB",
+  "@uploadFileSize": {
+    "description": "File size.",
+    "placeholders": {
+      "kb": {
+        "type": "String"
+      }
+    }
+  },
+  "uploadNameLabel": "Certificate",
+  "@uploadNameLabel": {
+    "description": "Field label."
+  },
+  "uploadNameHint": "Neonatal Resuscitation Program (NRP)",
+  "@uploadNameHint": {
+    "description": "Field placeholder."
+  },
+  "uploadIssued": "Issued",
+  "@uploadIssued": {
+    "description": "Date field."
+  },
+  "uploadExpires": "Expires",
+  "@uploadExpires": {
+    "description": "Date field."
+  },
+  "uploadPickDate": "Choose date",
+  "@uploadPickDate": {
+    "description": "Empty date field."
+  },
+  "uploadSubmit": "Upload for verification",
+  "@uploadSubmit": {
+    "description": "Submit button."
+  },
+  "uploadErrorName": "Enter the certificate name",
+  "@uploadErrorName": {
+    "description": "Validation."
+  },
+  "uploadErrorExpiry": "Choose an expiry date",
+  "@uploadErrorExpiry": {
+    "description": "Validation."
+  },
+  "uploadErrorExpiryOrder": "Expiry must be after the issue date",
+  "@uploadErrorExpiryOrder": {
+    "description": "Validation."
+  },
+  "uploadDoneTitle": "Certificate uploaded",
+  "@uploadDoneTitle": {
+    "description": "Snackbar title."
+  },
+  "uploadDoneMessage": "{code} is pending verification",
+  "@uploadDoneMessage": {
+    "description": "Snackbar message.",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
   }
 }

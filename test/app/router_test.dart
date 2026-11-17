@@ -269,7 +269,6 @@ void main() {
       final expected = <String, String>{
         '/learn/c3/checkout': 'Checkout',
         '/learn/c3/receipt/o1': 'Receipt',
-        '/certs': 'Certifications & CPD',
         '/signoffs': 'Competencies',
       };
       for (final MapEntry(key: path, value: title) in expected.entries) {

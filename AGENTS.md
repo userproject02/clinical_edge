@@ -53,6 +53,7 @@ Resolved versions (pubspec.yaml uses caret ranges; pubspec.lock is committed). U
 | share_plus | 13.3.1 | CSV export, receipt share |
 | flutter_local_notifications | 23.0.2 | expiry reminders (Android needs core-library desugaring) |
 | crypto | 3.0.8 | SHA-256 audit hash chain |
+| timezone | 0.11.2 | `TZDateTime` for scheduled local notifications (UTC instants) |
 | uuid | 4.6.0 | IDs |
 | mocktail | 1.0.5 | test doubles (dev) |
 | fake_async | 1.3.3 | time control in tests (dev) |

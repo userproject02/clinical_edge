@@ -10,9 +10,9 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 
 ## Current status
 
-- Phase: **Phase 5 done, next: Phase 6 Certifications and CPD**
-- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit)
-- App code: sign-in, Profile & settings, home, catalogue, course detail, lesson player, Assess tab and quiz are real; certs, sign-offs, checkout, staff screens are placeholders
+- Phase: **Phase 6 done, next: Phase 7 Competencies**
+- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit) · 6 Certifications and CPD (certs tab, CPD ring + ledger, upload sheet, expiry reminders)
+- App code: sign-in, Profile & settings, home, catalogue, course detail, lesson player, Assess tab, quiz, Certs tab and upload sheet are real; sign-offs, checkout, staff screens are placeholders
 - Last updated: 2026-11-17 · claude/gurus-macbook-air
 
 ## Module map
@@ -37,7 +37,8 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 | home | `/home` | learnerOverviewProvider, myCertificationsProvider, cpdConfigProvider, cpdLedgerProvider, quizHistoryProvider, checklistsProvider, mySignOffsProvider | Course/Progress/Certification/Cpd/Assessment/Competency | test/features/courses_test.dart |
 | courses | `/learn`, `/learn/:courseId`, `/learn/:courseId/lesson/:n` | catalogueProvider, categoriesProvider, courseProgressListProvider, courseProgressProvider, completeLessonProvider, logCourseViewProvider, logLessonViewProvider | CourseRepository, ProgressRepository, CpdRepository | test/features/courses_test.dart |
 | assessments | `/assess`, `/assess/:quizId/run` (root navigator, no bottom nav) | assessmentRepositoryProvider, quizCardsProvider, quizRunProvider(quizId), attemptIdFactoryProvider, quizHistoryProvider | AssessmentRepository (+ SubmitAttempt use case) | test/features/assessments_test.dart, test/features/repositories_test.dart, integration_test/assessments_test.dart |
-| certifications (data) | `/certs` (Phase 6 UI) | certificationRepositoryProvider, cpdRepositoryProvider | CertificationRepository, CpdRepository | test/features/repositories_test.dart |
+| certifications | `/certs`, `/certs/upload` (root sheet) | certificationRepositoryProvider, cpdRepositoryProvider, certificateFilePickerProvider, myCertificationsProvider, cpdConfigProvider, cpdLedgerProvider, reminderServiceProvider, dueCertificateProvider, reminderSyncProvider, setRemindersEnabledProvider, simulateReminderProvider, uploadCertificateProvider | CertificationRepository, CpdRepository, CertificateFilePicker (+ UploadCertificate, ReminderService) | test/features/certifications_test.dart, integration_test/reminders_test.dart |
+| core: local notifications | — (`lib/core/notifications/`) | localNotificationsProvider | LocalNotifier (PluginLocalNotifier in main.dart, RecordingLocalNotifier in tests) | test/features/certifications_test.dart |
 | competencies (data) | `/signoffs`, `/queue` (Phase 7 UI) | competencyRepositoryProvider | CompetencyRepository | test/features/repositories_test.dart |
 | checkout (data) | `/learn/:id/checkout` (Phase 8 UI) | checkoutRepositoryProvider | CheckoutRepository | test/features/repositories_test.dart |
 | admin (data) | `/cohort` (Phase 9 UI) | cohortRepositoryProvider | CohortRepository | test/features/repositories_test.dart |
@@ -59,6 +60,7 @@ Implemented:
 - `Motion` constant names in `lib/core/motion.dart`.
 
 - Quiz audit target: `"<quiz title EN> · <score>% (pass|fail)"`, e.g. `BLS Assessment · 88% (pass)`. Score = `QuizRules.scorePct` (half up), pass ≥ 80. Quiz ids `bls` (8 questions) and `ipc` (7, unlocks when c2 is complete).
+- `LocalNotifier` (requestPermission, showNow, replaceSchedule) and `CertificateFilePicker` (pick → name + size only); Android channel id `expiry_reminders`. Cert upload audit target `"<name> · pending verification"`; reminder usage target `"<code> · <days> days"`. Reminders fire at 09:00 Dubai on 90/60/30/7 days before expiry for verified certificates.
 - Repository interfaces in `lib/features/*/data/*_repository.dart`: AuthRepository, CourseRepository, ProgressRepository, AssessmentRepository, CertificationRepository, CpdRepository, CompetencyRepository, CheckoutRepository, CohortRepository.
 - `ActivityEvent` fields: id, ts (UTC), userId, role, action, target, platform (`ios`/`android`), kind (`audit`/`usage`), prevHash, hash (audit only). Action wire names: `AuditAction` (role.change, quiz.score, signoff.request, signoff.decision, purchase, cert.upload, course.complete, audit.export) and `UsageAction` (auth.signin, auth.signout, course.view, lesson.view, lesson.complete, checkout.start, notify.reminder).
 - Audit hash: `SHA-256(prevHash|ts|userId|role|action|target|platform)` lower hex; ts = ISO-8601 UTC (`toIso8601String`), role = enum name; first prevHash = 64 zeros. `AuditStore` exposes append + list only. Targets pass `TargetSanitizer` (≤ 120 chars; no card numbers, CVC, emails, passwords).
@@ -69,6 +71,13 @@ Implemented:
 - Demo clock: `FixedClock(demoNow)` = 2026-11-17 09:00 Asia/Dubai; calendar maths in Dubai time (UTC+4). Cert status: ≤ 0 days expired, ≤ 90 renew soon, else valid; pending verification → verifying.
 
 ## Decisions (newest first)
+
+- 2026-11-17 · One switch (`notificationsEnabledProvider`, pref key unchanged) drives Profile and the Certs reminders card through `setRemindersEnabledProvider`, which asks OS permission on enable; `reminderSyncProvider` (watched by every tab scaffold) replaces the device schedule whenever the switch, certificates or language change. Why: CERT-4 "shares state"; one source of truth.
+- 2026-11-17 · Home expiry alert, bell and simulate use `ReminderService` (`due` / `simulated`). Why: brief says Home reads from the same service.
+- 2026-11-17 · Device services (`LocalNotifier`, `CertificateFilePicker`) are passed to `mockOverrides` (real plugins from `main.dart`, recording/mock fakes by default). Why: plugins don't run in widget tests; keeps widgets off platform APIs.
+- 2026-11-17 · File picker on an iOS simulator (env `SIMULATOR_UDID`) or on picker failure returns the mock "NRP_certificate.pdf · 412 KB"; only name and size are read and the stored fileRef is `demo-upload-<uuid>`. Why: brief + privacy rules.
+- 2026-11-17 · Upload FAB uses a soft brand shadow instead of Material elevation. Why: the elevation shadow rendered as a hard black ring in goldens.
+- 2026-11-17 · CPD note text moved to config (`cpd.json` targetNote) with the brief's wording; `DemoSeeder.seedVersion` → 4. Why: target and note are config, not UI.
 
 - 2026-11-17 · `SubmitAttempt` stamps a new attempt at least 1 s after the user's latest one. Why: under the fixed demo clock every attempt would share one instant and "newest first" / "Attempt N" would be ambiguous.
 - 2026-11-17 · Quiz route sits on the root navigator (path unchanged `/assess/:quizId/run`). Why: the brief says no bottom nav during a quiz; TC-PH1-46 now checks tab state with `/learn/c1`.
@@ -115,9 +124,8 @@ Implemented:
 ## Known issues / TODO
 
 - [ ] `docs/design/` has no screenshots; Phase 1 was built from the prototype canvas itself (artifact "ClinicalEdge", `Main.dc.html`). Export the storyboard frames into `docs/design/` when convenient.
-- [ ] Bell button is a no-op until Phase 6 wires the simulated expiry reminder.
-- [ ] Android emulator run pending for Phases 1–5 (iOS simulator: integration tests pass as of Phase 5).
-- [ ] Phase 5 goldens (`test/features/goldens/{assess,quiz_*,result_*}`) were generated on macOS; regenerate on Linux (`flutter test --update-goldens --tags golden`) so CI matches.
+- [ ] Device runs deferred: Android for Phases 1–6 and iOS for Phase 6 (`integration_test/reminders_test.dart` needs the notification permission granted, then confirm the banner and a real notification on each). An Android AVD `ce_pixel` (API 36, arm64) now exists on the MacBook.
+- [ ] Phase 5–6 goldens (`test/features/goldens/{assess,quiz_*,result_*,certs_*,upload_sheet_*}`) were generated on macOS; regenerate on Linux (`flutter test --update-goldens --tags golden`) so CI matches.
 - [ ] Arabic numeric ranges in seed options render reversed in RTL ("80–60"); see `docs/TESTCASES.md` → Review notes.
 - [ ] Clinical and native-Arabic review of all seed content (see `docs/TESTCASES.md` → Review notes).
 - [ ] `HiveLocalDb` stores everything in plain JSON on device; fine for demo data, revisit (encryption) if real data ever lands.
@@ -126,9 +134,11 @@ Implemented:
 
 ## Next up
 
-Phase 6 — Certifications and CPD: `/certs` list with status and expiry bar (CERT-1), CPD meter + ledger (CERT-2), upload sheet → Verifying + `cert.upload` audit (CERT-3), reminders at 90/60/30/7 days with simulate button and settings toggle + `notify.reminder` (CERT-4). Test cases TC-CERT-*.
+Phase 7 — Competencies: learner checklists and sign-off request (COMP-1, `signoff.request` audit), supervisor queue and decision with required reject comment (COMP-2, `signoff.decision` audit). Test cases TC-COMP-*.
 
 ## Change log (newest first; last 30 entries, older in docs/changelog/)
+
+- 2026-11-17 · claude/gurus-macbook-air · Phase 6: Certs tab (CPD ring with credits over target from config, reminders card with shared switch, dashed simulate button, certifications with status / expiry / days / 730-day meter, CPD ledger newest first, extended Upload FAB), upload sheet (dashed drop zone with floating icon, mock-file fallback, name + issued/expires date pickers, validation, Verifying + cert.upload audit, snackbar), ReminderService (90/60/30/7-day schedule at 09:00 Dubai, due certificate for Home/bell/simulate), LocalNotifier on flutter_local_notifications (Android channel "Expiry reminders", iOS foreground delegate), bell wired, timezone package, DashedBorder widget, 8 goldens · lib/features/certifications, lib/core/notifications, lib/core/widgets/dashed_border.dart, lib/app (router, tab scaffold, mock overrides, l10n), lib/main.dart, lib/features/home, lib/features/settings, android manifest, ios AppDelegate, lib/seed/cpd.json, test/features/certifications_test.dart, integration_test/reminders_test.dart · CERT-1..4 · BREAKING: `mockOverrides` gains optional `notifier` and `filePicker`; `localNotificationsProvider` and `certificateFilePickerProvider` must be overridden (mockOverrides does it); Profile's switch now goes through `setRemindersEnabledProvider`
 
 - 2026-11-17 · claude/gurus-macbook-air · Phase 5: Assess tab (BLS card with pass mark / best / attempts, score history newest first with meter + tag, IPC card locked until c2 complete), quiz on the root navigator (question N of 8, pass tag, 8-segment bar, A–D / أ–د badges, first tap locks, check draw / shake, explanation card, sticky Next → See results, leave confirmation), result (animated ring, n / 8 correct, Passed / Below pass mark, audit row, Done / Retake), SubmitAttempt use case (score, attempt, quiz.score audit), quizCardsProvider + quizRunProvider, 24 goldens, device journey; Phase 1 device test fixed for real-time pumping · lib/features/assessments, lib/app/router.dart, lib/app/l10n, lib/seed/question_bank.json, test/features/assessments_test.dart, integration_test/ · QZ-1..3 · BREAKING: `Quiz.subject` is a new required field (seed updated) and `AssessmentRepository` gains `quizzes()` and `bankSize()` (MockAssessmentRepository updated; other implementations must add them)
 

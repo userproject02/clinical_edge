@@ -2,7 +2,7 @@
   "cycle": "2026",
   "target": 40,
   "targetIsDemo": true,
-  "targetNote": {"en": "Demo target. Real targets depend on the licensing authority (DHA, DoH, MOHAP) and profession.", "ar": "هدف تجريبي؛ تعتمد الأهداف الفعلية على جهة الترخيص (هيئة الصحة بدبي أو دائرة الصحة أو وزارة الصحة ووقاية المجتمع) وعلى المهنة."},
+  "targetNote": {"en": "Demo target; your licensing authority sets the real requirement.", "ar": "هدف تجريبي؛ تحدد جهة الترخيص المتطلبات الفعلية."},
   "sources": [
     {"id": "external", "label": {"en": "External", "ar": "خارجي"}},
     {"id": "clinicaledge", "label": {"en": "ClinicalEdge", "ar": "ClinicalEdge"}}

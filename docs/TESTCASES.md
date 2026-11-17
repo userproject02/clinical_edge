@@ -18,8 +18,8 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-QZ-3-01 | QZ-3 | Widget | Score history | Newest first; best score and attempt count (covered by TC-QZ-3-04, TC-QZ-2-05) | `test/features/assessments_test.dart` | Passing |
 | TC-CERT-1-01 | CERT-1 | Unit | Expiry status at 91/90/1/0 days | Valid / Renew soon / Renew soon / Expired; BLS 56 days renew soon, ACLS 317 valid on the demo clock; uploaded → Verifying | `test/features/repositories_test.dart` | Passing |
 | TC-CERT-2-01 | CERT-2 | Unit | CPD meter vs ledger | Total (26) equals ledger sum; target 40 from cpd.json config | `test/features/repositories_test.dart` | Passing |
-| TC-CERT-3-01 | CERT-3 | Widget | Upload certificate | Appears as Verifying; cert.upload audit event | — | Planned |
-| TC-CERT-4-01 | CERT-4 | Unit | Reminder schedule and simulate | 90/60/30/7-day dates; banner shown; notify.reminder logged | — | Planned |
+| TC-CERT-3-01 | CERT-3 | Widget | Upload certificate | Appears as Verifying; cert.upload audit event (covered by TC-CERT-3-04) | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-4-01 | CERT-4 | Unit | Reminder schedule and simulate | 90/60/30/7-day dates; banner shown; notify.reminder logged (covered by TC-CERT-4-03, TC-CERT-4-05) | `test/features/certifications_test.dart` | Passing |
 | TC-COMP-1-01 | COMP-1 | Widget | Learner requests sign-off | None → Pending; appears in supervisor queue; signoff.request audit | — | Planned |
 | TC-COMP-2-01 | COMP-2 | Widget | Supervisor rejects without comment, then approves | Reject blocked; decision + comment on learner card; signoff.decision audit | — | Planned |
 | TC-PAY-1-01 | PAY-1 | Unit | VAT and totals (fils) | 35000→1750→36750, 25000→1250→26250, 30000→1500→31500 | `test/core/money_clock_test.dart` | Passing |
@@ -102,6 +102,17 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-QZ-G-01 | QZ-1..3 | Golden | Assess tab; question unanswered / correct / wrong; result pass / fail | 24 goldens, EN/AR × light/dark | `test/features/assessments_test.dart` | Passing (generated on macOS, regenerate on Linux) |
 | TC-QZ-E2E-01 | QZ-1..3 | Integration | BLS quiz on device | 7/8 → "Assessment passed"; Done shows Attempt 3 (iOS simulator) | `integration_test/assessments_test.dart` | Passing |
 | TC-CERT-3-02 | CERT-3 | Unit | Upload repository | Uploaded certificate stored as Verifying | `test/features/repositories_test.dart` | Passing |
+| TC-CERT-1-03 | CERT-1 | Unit | Status at 91/90/1/0/-1 days on FixedClock, pending upload | Valid / Renew soon / Renew soon / Expired / Expired; pending → Verifying | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-1-04 | CERT-1 | Widget | Certs list with seed data | BLS: Renew soon, "Expires 12 Jan 2027", "56 days", meter 56/730; ACLS: Valid, 317 days | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-2-03 | CERT-2 | Widget | CPD card and ledger | Ring "26" = ledger sum, "of 40", "CPD/CME credits · 2026", "14 credits to reach your target", demo note; ledger newest first, "+2", "4 Nov 2026 · External" | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-2-04 | CERT-2 | Widget | Add a ledger line | Ring moves to 31, "9 credits to reach your target", new line listed | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-3-03 | CERT-3 | Unit | Upload validation | Name required, expiry required, expiry after issue; short name "NRP" | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-3-04 | CERT-3 | Widget | Upload sheet end to end | Errors on empty submit; mock file "NRP_certificate.pdf · 412 KB"; submit → /certs, snackbar "Certificate uploaded · NRP is pending verification", row Verifying; audit "… (NRP) · pending verification"; fileRef is a fake id without the file name | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-4-03 | CERT-4 | Unit | ReminderService | Future reminders only, 09:00 Dubai (05:00 UTC), pending certs skipped; BLS due; simulate falls back to next expiry | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-4-04 | CERT-4 | Widget | Reminders switch | Certs and Profile share one persisted switch; off clears the schedule; on asks permission and schedules 6 reminders with localized text | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-4-05 | CERT-4 | Widget | Simulate and bell | Banner "BLS certificate expires in 56 days" + "Renew before 12 Jan 2027 to stay compliant."; local notification only when the switch is on; notify.reminder "BLS · 56 days" | `test/features/certifications_test.dart` | Passing |
+| TC-CERT-G-01 | CERT-1..3 | Golden | Certs tab and upload sheet | 8 goldens, EN/AR × light/dark | `test/features/certifications_test.dart` | Passing (generated on macOS, regenerate on Linux) |
+| TC-CERT-E2E-01 | CERT-4 | Integration | Simulate reminder on a device with the real plugin | Banner shows and a local notification is posted | `integration_test/reminders_test.dart` | Planned (device run deferred) |
 | TC-COMP-1-02 | COMP-1 | Unit | Request repository | none → pending, joins the queue; pending/approved cannot be re-requested | `test/features/repositories_test.dart` | Passing |
 | TC-COMP-2-02 | COMP-2 | Unit | Decide repository | Reject without (or with blank) comment fails; approve records supervisor and time; decided list updated | `test/features/repositories_test.dart` | Passing |
 | TC-PAY-1-02 | PAY-1 | Unit | Odd-fils VAT rounding | Half up (0.50 → 1, 1.45 → 1, 1.50 → 2), integer maths | `test/core/money_clock_test.dart` | Passing |

@@ -5,6 +5,8 @@ import 'package:clinical_edge/app/routes.dart';
 import 'package:clinical_edge/core/clock.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
+import 'package:clinical_edge/features/certifications/presentation/cert_providers.dart';
+import 'package:clinical_edge/features/certifications/presentation/certs_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -51,6 +53,8 @@ class TabScaffold extends ConsumerWidget {
     final session = ref.watch(sessionProvider).value;
     final tenant = ref.watch(tenantProvider).value?.of(context) ?? l.tenant;
     final now = ref.watch(clockProvider).now();
+    // Keeps scheduled expiry reminders in step (CERT-4).
+    ref.watch(reminderSyncProvider);
     return AppScaffold.tab(
       subtitle: isHome ? greetingFor(now, l) : tenant,
       title: isHome && session != null
@@ -58,8 +62,7 @@ class TabScaffold extends ConsumerWidget {
           : title,
       actions: actions,
       hasUnread: true,
-      // Phase 6 wires the simulated expiry reminder here.
-      onBellPressed: () {},
+      onBellPressed: () => unawaited(showExpiryReminder(context, ref)),
       avatarInitials: session?.user.initials ?? '',
       onAvatarPressed: () => unawaited(context.push(AppRoutes.profile)),
       body: body,

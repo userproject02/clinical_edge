@@ -1,6 +1,7 @@
 import 'package:clinical_edge/app/state/preferences.dart';
 import 'package:clinical_edge/core/clock.dart';
 import 'package:clinical_edge/core/logging/activity_logger.dart';
+import 'package:clinical_edge/core/notifications/local_notifier.dart';
 import 'package:clinical_edge/core/persistence/local_db.dart';
 import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/features/admin/data/cohort_repository.dart';
@@ -8,6 +9,7 @@ import 'package:clinical_edge/features/assessments/data/assessment_repository.da
 import 'package:clinical_edge/features/auth/data/auth_repository.dart';
 import 'package:clinical_edge/features/auth/data/mock_auth_repository.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
+import 'package:clinical_edge/features/certifications/data/certificate_file_picker.dart';
 import 'package:clinical_edge/features/certifications/data/certification_repository.dart';
 import 'package:clinical_edge/features/checkout/data/checkout_repository.dart';
 import 'package:clinical_edge/features/competencies/data/competency_repository.dart';
@@ -25,8 +27,17 @@ List<Override> mockOverrides({
   required LocalDb db,
   required SharedPreferences prefs,
   SeedLoader? seed,
+  LocalNotifier? notifier,
+  CertificateFilePicker? filePicker,
 }) {
   return <Override>[
+    // Device services: real plugins from main.dart, fakes otherwise.
+    localNotificationsProvider.overrideWithValue(
+      notifier ?? RecordingLocalNotifier(),
+    ),
+    certificateFilePickerProvider.overrideWithValue(
+      filePicker ?? const MockCertificateFilePicker(),
+    ),
     sharedPreferencesProvider.overrideWithValue(prefs),
     localDbProvider.overrideWithValue(db),
     if (seed != null) seedLoaderProvider.overrideWithValue(seed),
