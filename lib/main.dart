@@ -3,6 +3,7 @@ import 'package:clinical_edge/app/l10n/generated/app_localizations.dart';
 import 'package:clinical_edge/app/mock_overrides.dart';
 import 'package:clinical_edge/core/notifications/local_notifier.dart';
 import 'package:clinical_edge/core/persistence/hive_local_db.dart';
+import 'package:clinical_edge/core/sharing/file_sharer.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/certifications/data/certificate_file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
         channelName: lookupAppLocalizations(const Locale('en')).reminderChannel,
       ),
       filePicker: const PlatformCertificateFilePicker(),
+      sharer: const PluginFileSharer(),
     ),
   );
   // Restore the stored session before the first frame, so a restart lands

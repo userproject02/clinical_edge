@@ -66,6 +66,7 @@ _CohortKpis _$CohortKpisFromJson(Map<String, dynamic> json) => _CohortKpis(
     json['deltaComparedTo'] as Map<String, dynamic>,
   ),
   certsExpiringWithin90Days: (json['certsExpiringWithin90Days'] as num).toInt(),
+  supervisors: (json['supervisors'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$CohortKpisToJson(_CohortKpis instance) =>
@@ -77,6 +78,7 @@ Map<String, dynamic> _$CohortKpisToJson(_CohortKpis instance) =>
       'avgCompletionDeltaPts': instance.avgCompletionDeltaPts,
       'deltaComparedTo': instance.deltaComparedTo.toJson(),
       'certsExpiringWithin90Days': instance.certsExpiringWithin90Days,
+      'supervisors': instance.supervisors,
     };
 
 _CoursePct _$CoursePctFromJson(Map<String, dynamic> json) => _CoursePct(
@@ -117,6 +119,8 @@ _CohortLearner _$CohortLearnerFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       completionPct: (json['completionPct'] as num).toInt(),
       certsExpiringSoon: (json['certsExpiringSoon'] as num).toInt(),
+      nextExpiryCode: json['nextExpiryCode'] as String?,
+      nextExpiryDays: (json['nextExpiryDays'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$CohortLearnerToJson(_CohortLearner instance) =>
@@ -124,6 +128,8 @@ Map<String, dynamic> _$CohortLearnerToJson(_CohortLearner instance) =>
       'userId': instance.userId,
       'completionPct': instance.completionPct,
       'certsExpiringSoon': instance.certsExpiringSoon,
+      'nextExpiryCode': instance.nextExpiryCode,
+      'nextExpiryDays': instance.nextExpiryDays,
     };
 
 _UsageInsights _$UsageInsightsFromJson(Map<String, dynamic> json) =>

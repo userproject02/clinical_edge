@@ -1518,5 +1518,328 @@
   "receiptStart": "Start course",
   "@receiptStart": {
     "description": "Button."
+  },
+  "cohortActive": "Active learners",
+  "@cohortActive": {
+    "description": "KPI."
+  },
+  "cohortActiveSplit": "{nursing} nursing · {physicians} physicians",
+  "@cohortActiveSplit": {
+    "description": "KPI caption.",
+    "placeholders": {
+      "nursing": {
+        "type": "String"
+      },
+      "physicians": {
+        "type": "String"
+      }
+    }
+  },
+  "cohortAvgCompletion": "Avg. completion",
+  "@cohortAvgCompletion": {
+    "description": "KPI."
+  },
+  "cohortDelta": "{delta} pts {compared}",
+  "@cohortDelta": {
+    "description": "KPI caption; delta like +6.",
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      },
+      "compared": {
+        "type": "String"
+      }
+    }
+  },
+  "cohortExpiring": "Expiring ≤ 90 days",
+  "@cohortExpiring": {
+    "description": "KPI."
+  },
+  "cohortRemindersScheduled": "Reminders scheduled",
+  "@cohortRemindersScheduled": {
+    "description": "KPI caption."
+  },
+  "cohortPendingSignoffs": "Pending sign-offs",
+  "@cohortPendingSignoffs": {
+    "description": "KPI."
+  },
+  "cohortSupervisors": "{count} supervisors",
+  "@cohortSupervisors": {
+    "description": "KPI caption.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cohortCompletionByCourse": "Completion by course",
+  "@cohortCompletionByCourse": {
+    "description": "Chart title."
+  },
+  "cohortProgressByDept": "Average progress by department",
+  "@cohortProgressByDept": {
+    "description": "Chart title."
+  },
+  "cohortExpiries": "Expiries next 6 months",
+  "@cohortExpiries": {
+    "description": "Chart title."
+  },
+  "cohortExpiriesTotal": "{count} total",
+  "@cohortExpiriesTotal": {
+    "description": "Tag.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cohortLearners": "Learners",
+  "@cohortLearners": {
+    "description": "Section."
+  },
+  "cohortLearnerLine": "{pct} · {department}",
+  "@cohortLearnerLine": {
+    "description": "Learner row.",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      },
+      "department": {
+        "type": "String"
+      }
+    }
+  },
+  "cohortExpiryTag": "{code} {days}d",
+  "@cohortExpiryTag": {
+    "description": "Learner expiry tag.",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "cohortNoExpiry": "No expiries",
+  "@cohortNoExpiry": {
+    "description": "Learner tag."
+  },
+  "cohortDemoNote": "{label} · as of {date}",
+  "@cohortDemoNote": {
+    "description": "Demo figures note.",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chartSemantics": "{title}: {values}",
+  "@chartSemantics": {
+    "description": "Chart semantics.",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "values": {
+        "type": "String"
+      }
+    }
+  },
+  "auditChainOk": "Hash chain verified · {count} append-only events · head {head}",
+  "@auditChainOk": {
+    "description": "Banner.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      },
+      "head": {
+        "type": "String"
+      }
+    }
+  },
+  "auditChainBroken": "Hash chain broken at event {index} ({action} · {date})",
+  "@auditChainBroken": {
+    "description": "Banner.",
+    "placeholders": {
+      "index": {
+        "type": "String"
+      },
+      "action": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "auditKindAll": "All events",
+  "@auditKindAll": {
+    "description": "Chip."
+  },
+  "auditKindAudit": "Audit",
+  "@auditKindAudit": {
+    "description": "Chip."
+  },
+  "auditKindUsage": "Usage",
+  "@auditKindUsage": {
+    "description": "Chip."
+  },
+  "auditToday": "Today",
+  "@auditToday": {
+    "description": "Chip."
+  },
+  "auditWeek": "7 days",
+  "@auditWeek": {
+    "description": "Chip."
+  },
+  "auditUser": "User",
+  "@auditUser": {
+    "description": "Dropdown."
+  },
+  "auditAction": "Action",
+  "@auditAction": {
+    "description": "Dropdown."
+  },
+  "auditAnyUser": "All users",
+  "@auditAnyUser": {
+    "description": "Dropdown option."
+  },
+  "auditAnyAction": "All actions",
+  "@auditAnyAction": {
+    "description": "Dropdown option."
+  },
+  "auditSearch": "Search targets",
+  "@auditSearch": {
+    "description": "Search hint."
+  },
+  "auditCount": "{count} events · newest first · no patient data, passwords or card details",
+  "@auditCount": {
+    "description": "Count line.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "auditMeta": "{user} · {role} · {platform} · {date}",
+  "@auditMeta": {
+    "description": "Event meta line.",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      },
+      "platform": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "auditUsageNote": "usage analytics · not chained",
+  "@auditUsageNote": {
+    "description": "Usage event line."
+  },
+  "auditShowMore": "Show {count} more",
+  "@auditShowMore": {
+    "description": "Pagination.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "auditExport": "Export CSV",
+  "@auditExport": {
+    "description": "App-bar action."
+  },
+  "auditExportReady": "Export ready",
+  "@auditExportReady": {
+    "description": "Snackbar."
+  },
+  "auditExportRows": "{count} rows shared as CSV",
+  "@auditExportRows": {
+    "description": "Snackbar message.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "auditEmpty": "No events match these filters",
+  "@auditEmpty": {
+    "description": "Empty state."
+  },
+  "insightsMostUsed": "Most-used courses",
+  "@insightsMostUsed": {
+    "description": "Chart title."
+  },
+  "insightsViews": "{count} views",
+  "@insightsViews": {
+    "description": "Bar label.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsDropOff": "Drop-off · {course}",
+  "@insightsDropOff": {
+    "description": "Chart title.",
+    "placeholders": {
+      "course": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsDropCaption": "Share of enrolled learners reaching each lesson.",
+  "@insightsDropCaption": {
+    "description": "Caption."
+  },
+  "insightsLessonTag": "Lesson {n}",
+  "@insightsLessonTag": {
+    "description": "Biggest drop tag.",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsLessonShort": "L{n}",
+  "@insightsLessonShort": {
+    "description": "Axis label.",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsPassRates": "Assessment pass rates",
+  "@insightsPassRates": {
+    "description": "Section."
+  },
+  "insightsAttempts": "{count} attempts",
+  "@insightsAttempts": {
+    "description": "Ring caption.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsPlatforms": "Sessions by platform",
+  "@insightsPlatforms": {
+    "description": "Section."
+  },
+  "insightsNote": "Usage analytics live apart from the audit trail and swap to Firebase Analytics behind ActivityLogger.",
+  "@insightsNote": {
+    "description": "Note."
   }
 }

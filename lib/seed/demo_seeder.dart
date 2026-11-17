@@ -17,7 +17,7 @@ class DemoSeeder {
   new({required this.db, required this.seed, required this.auditStore});
 
   /// Bump when the seed schema or contents change to re-seed on update.
-  static const int seedVersion = 5;
+  static const int seedVersion = 6;
 
   /// Persistence.
   final LocalDb db;

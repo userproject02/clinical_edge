@@ -24,10 +24,10 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-COMP-2-01 | COMP-2 | Widget | Supervisor rejects without comment, then approves | Reject blocked; decision + comment on learner card; signoff.decision audit | `test/features/competencies_test.dart` | Passing |
 | TC-PAY-1-01 | PAY-1 | Unit | VAT and totals (fils) | 35000→1750→36750, 25000→1250→26250, 30000→1500→31500 | `test/core/money_clock_test.dart` | Passing |
 | TC-PAY-2-01 | PAY-2 | Widget | Successful purchase | Receipt with invoice no. and VAT line; course unlocks; purchase audit | `test/features/checkout_test.dart` | Passing |
-| TC-ADM-1-01 | ADM-1 | Widget | Cohort dashboard | KPIs and charts from repository data; live pending count | — | Planned |
-| TC-ADM-2-01 | ADM-2 | Widget | Audit log filters | User, action, kind and date filters combine; hash link shown | — | Planned |
-| TC-ADM-3-01 | ADM-3 | Unit | CSV export | RFC 4180 CSV of filtered rows; audit.export logged | — | Planned |
-| TC-ADM-4-01 | ADM-4 | Unit | Usage insights | Built from usage events only, never audit events | — | Planned |
+| TC-ADM-1-01 | ADM-1 | Widget | Cohort dashboard | KPIs and charts from repository data; live pending count | `test/features/admin_test.dart` | Passing |
+| TC-ADM-2-01 | ADM-2 | Widget | Audit log filters | User, action, kind and date filters combine; hash link shown | `test/features/admin_test.dart` | Passing |
+| TC-ADM-3-01 | ADM-3 | Unit | CSV export | RFC 4180 CSV of filtered rows; audit.export logged | `test/features/admin_test.dart` | Passing |
+| TC-ADM-4-01 | ADM-4 | Unit | Usage insights | Built from usage events only, never audit events | `test/features/admin_test.dart` | Passing |
 | TC-SET-1-01 | SET-1 | Widget | Language, theme, notifications | Theme, notifications and language apply instantly (RTL mirrors) and survive a restart | `test/features/auth_settings_test.dart` | Passing |
 | TC-LOG-01 | Audit | Unit | Append, verify, edit and remove stored audit events | Chain verifies; an edited event is reported as content break, a removed one as link break, at the right index | `test/core/logging_test.dart` | Passing |
 | TC-E2E-01 | All | Integration | Full demo journey across three roles | Every audit action appears in the log with a verified chain | — | Planned |
@@ -136,6 +136,16 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-PAY-2-04 | PAY-2 | Widget | Receipt fields and Start course | "Tax invoice CE-2026-001041 · 2026-11-17 09:00", seller "ClinicalEdge (demo) · TRN [YOUR TRN]", billed to Dr. Layla Haddad, "Card •••• 4242 (mock)", totals; Start course → lesson 1 (covered in TC-PAY-1-09) | `test/features/checkout_test.dart` | Passing |
 | TC-PAY-G-01 | PAY-1..2 | Golden | Checkout card / Apple Pay / processing / error, receipt | 20 goldens, EN/AR × light/dark | `test/features/checkout_test.dart` | Passing (generated on macOS, regenerate on Linux) |
 | TC-ADM-1-02 | ADM-1 | Unit | Cohort repository | Stats load, labelled demo figures | `test/features/repositories_test.dart` | Passing |
+| TC-ADM-1-03 | ADM-1 | Widget | Cohort dashboard | KPIs 142 (96 nursing · 46 physicians), 68% (+6 pts vs Oct), 17, pending 2 live (3 supervisors), 34 total expiries; Layla live 55% · Internal Medicine, BLS 56d; Yousef BLS 12d; deciding a request → 1; Layla completing a lesson → 64% | `test/features/admin_test.dart` | Passing |
+| TC-ADM-1-04 | ADM-1 | Widget | Admin guard | Learner going to /cohort, /audit, /insights lands on /home | `test/features/admin_test.dart` | Passing |
+| TC-ADM-2-03 | ADM-2 | Unit | Filters | Kind, Today/7 days, user, action and target search each work and combine; newest first | `test/features/admin_test.dart` | Passing |
+| TC-ADM-2-04 | ADM-2 | Widget | Audit log live | Banner "Hash chain verified · N append-only events · head <8>"; count line; live course.view and auth.signin listed; usage cards say "usage analytics · not chained"; audit cards show prev → hash; Usage chip and search narrow the list | `test/features/admin_test.dart` | Passing |
+| TC-ADM-2-05 | ADM-2 | Widget | Tampered audit row | Bad banner "Hash chain broken at event 3" | `test/features/admin_test.dart` | Passing |
+| TC-ADM-3-03 | ADM-3 | Unit | CSV | Header ts,user,role,action,target,platform,kind,prevHash,hash; RFC 4180 quoting of commas, quotes and newlines; CRLF; one row per event | `test/features/admin_test.dart` | Passing |
+| TC-ADM-3-04 | ADM-3 | Widget | Export | Shares clinicaledge-audit-2026-11-17.csv (text/csv) with the filtered rows; audit audit.export "CSV · N rows"; snackbar "Export ready" | `test/features/admin_test.dart` | Passing |
+| TC-ADM-4-03 | ADM-4 | Unit | Insights from usage only | Builder rejects audit events; seed 412 views, biggest drop lesson 4, iOS 58%; live course.view/lesson.view add views; live Android sign-ins move the platform split | `test/features/admin_test.dart` | Passing |
+| TC-ADM-4-04 | ADM-4 | Widget | Audit events ignored | Writing quiz.score (audit) leaves insights unchanged; "Lesson 4" tag and caption shown | `test/features/admin_test.dart` | Passing |
+| TC-ADM-G-01 | ADM-1..4 | Golden | Cohort, audit, insights | 12 goldens, EN/AR × light/dark | `test/features/admin_test.dart` | Passing (generated on macOS, regenerate on Linux) |
 | TC-LOG-02 | Audit | Unit | Sanitiser rejects sensitive targets | Card numbers (13–19 digits, spaced or dashed), CVC, email, password rejected | `test/core/logging_test.dart` | Passing |
 | TC-LOG-03 | Audit | Unit | Sanitiser passes labels | Invoice/amount/score labels pass; capped at 120 chars; exception never echoes the value | `test/core/logging_test.dart` | Passing |
 | TC-LOG-04 | Audit | Unit | Hash formula | SHA-256 hex of prevHash|ts|userId|role|action|target|platform; ts normalised to UTC | `test/core/logging_test.dart` | Passing |

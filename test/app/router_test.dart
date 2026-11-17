@@ -154,7 +154,7 @@ void main() {
 
       await _signInAs(tester, c, Role.admin);
       expect(_location(c), '/cohort');
-      expect(find.text('Cohort dashboard'), findsWidgets);
+      expect(find.byKey(const Key('cohort.list')), findsOneWidget);
     });
 
     testWidgets('TC-PH1-44 supervisor /learn opens the supervisor Learn tab', (
@@ -261,7 +261,7 @@ void main() {
       expect(back.left, greaterThan(195), reason: 'back arrow on the right');
     });
 
-    testWidgets('TC-PH1-49 every remaining placeholder shows its title', (
+    testWidgets('TC-PH1-49 every detail and admin route shows its title', (
       tester,
     ) async {
       final c = await _pumpApp(tester, signedInAs: Role.learner);
@@ -274,7 +274,6 @@ void main() {
         router.go(path);
         await settle(tester);
         expect(find.text(title), findsWidgets, reason: path);
-        expect(find.text(path), findsOneWidget, reason: path);
       }
       await _signInAs(tester, c, Role.supervisor);
       c.read(routerProvider).go('/queue/q1');

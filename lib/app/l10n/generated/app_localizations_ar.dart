@@ -1004,4 +1004,188 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get receiptStart => 'ابدأ الدورة';
+
+  @override
+  String get cohortActive => 'المتعلّمون النشطون';
+
+  @override
+  String cohortActiveSplit(String nursing, String physicians) {
+    return '$nursing تمريض · $physicians أطباء';
+  }
+
+  @override
+  String get cohortAvgCompletion => 'متوسط الإكمال';
+
+  @override
+  String cohortDelta(String delta, String compared) {
+    return '$delta نقاط $compared';
+  }
+
+  @override
+  String get cohortExpiring => 'تنتهي خلال 90 يومًا';
+
+  @override
+  String get cohortRemindersScheduled => 'التذكيرات مجدولة';
+
+  @override
+  String get cohortPendingSignoffs => 'اعتمادات معلّقة';
+
+  @override
+  String cohortSupervisors(String count) {
+    return '$count مشرفين';
+  }
+
+  @override
+  String get cohortCompletionByCourse => 'الإكمال حسب الدورة';
+
+  @override
+  String get cohortProgressByDept => 'متوسط التقدّم حسب القسم';
+
+  @override
+  String get cohortExpiries => 'حالات الانتهاء خلال 6 أشهر';
+
+  @override
+  String cohortExpiriesTotal(String count) {
+    return '$count إجمالًا';
+  }
+
+  @override
+  String get cohortLearners => 'المتعلّمون';
+
+  @override
+  String cohortLearnerLine(String pct, String department) {
+    return '$pct · $department';
+  }
+
+  @override
+  String cohortExpiryTag(String code, String days) {
+    return '$code $days يوم';
+  }
+
+  @override
+  String get cohortNoExpiry => 'لا انتهاءات';
+
+  @override
+  String cohortDemoNote(String label, String date) {
+    return '$label · حتى $date';
+  }
+
+  @override
+  String chartSemantics(String title, String values) {
+    return '$title: $values';
+  }
+
+  @override
+  String auditChainOk(String count, String head) {
+    return 'تم التحقق من سلسلة التجزئة · $count حدثًا غير قابل للتعديل · الرأس $head';
+  }
+
+  @override
+  String auditChainBroken(String index, String action, String date) {
+    return 'سلسلة التجزئة مكسورة عند الحدث $index ($action · $date)';
+  }
+
+  @override
+  String get auditKindAll => 'كل الأحداث';
+
+  @override
+  String get auditKindAudit => 'التدقيق';
+
+  @override
+  String get auditKindUsage => 'الاستخدام';
+
+  @override
+  String get auditToday => 'اليوم';
+
+  @override
+  String get auditWeek => '7 أيام';
+
+  @override
+  String get auditUser => 'المستخدم';
+
+  @override
+  String get auditAction => 'الإجراء';
+
+  @override
+  String get auditAnyUser => 'كل المستخدمين';
+
+  @override
+  String get auditAnyAction => 'كل الإجراءات';
+
+  @override
+  String get auditSearch => 'ابحث في الأهداف';
+
+  @override
+  String auditCount(String count) {
+    return '$count حدثًا · الأحدث أولًا · لا بيانات مرضى أو كلمات مرور أو بطاقات';
+  }
+
+  @override
+  String auditMeta(String user, String role, String platform, String date) {
+    return '$user · $role · $platform · $date';
+  }
+
+  @override
+  String get auditUsageNote => 'تحليلات الاستخدام · غير مرتبطة بالسلسلة';
+
+  @override
+  String auditShowMore(String count) {
+    return 'عرض $count إضافية';
+  }
+
+  @override
+  String get auditExport => 'تصدير CSV';
+
+  @override
+  String get auditExportReady => 'التصدير جاهز';
+
+  @override
+  String auditExportRows(String count) {
+    return 'تمت مشاركة $count صفًا بصيغة CSV';
+  }
+
+  @override
+  String get auditEmpty => 'لا أحداث تطابق عوامل التصفية';
+
+  @override
+  String get insightsMostUsed => 'الدورات الأكثر استخدامًا';
+
+  @override
+  String insightsViews(String count) {
+    return '$count مشاهدة';
+  }
+
+  @override
+  String insightsDropOff(String course) {
+    return 'الانقطاع · $course';
+  }
+
+  @override
+  String get insightsDropCaption =>
+      'نسبة المتعلّمين المسجّلين الذين يصلون إلى كل درس.';
+
+  @override
+  String insightsLessonTag(String n) {
+    return 'الدرس $n';
+  }
+
+  @override
+  String insightsLessonShort(String n) {
+    return 'د$n';
+  }
+
+  @override
+  String get insightsPassRates => 'معدلات اجتياز التقييمات';
+
+  @override
+  String insightsAttempts(String count) {
+    return '$count محاولة';
+  }
+
+  @override
+  String get insightsPlatforms => 'الجلسات حسب المنصة';
+
+  @override
+  String get insightsNote =>
+      'تُحفظ تحليلات الاستخدام بمعزل عن سجل التدقيق ويمكن نقلها إلى Firebase Analytics خلف ActivityLogger.';
 }

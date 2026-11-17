@@ -1837,6 +1837,294 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start course'**
   String get receiptStart;
+
+  /// KPI.
+  ///
+  /// In en, this message translates to:
+  /// **'Active learners'**
+  String get cohortActive;
+
+  /// KPI caption.
+  ///
+  /// In en, this message translates to:
+  /// **'{nursing} nursing · {physicians} physicians'**
+  String cohortActiveSplit(String nursing, String physicians);
+
+  /// KPI.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg. completion'**
+  String get cohortAvgCompletion;
+
+  /// KPI caption; delta like +6.
+  ///
+  /// In en, this message translates to:
+  /// **'{delta} pts {compared}'**
+  String cohortDelta(String delta, String compared);
+
+  /// KPI.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiring ≤ 90 days'**
+  String get cohortExpiring;
+
+  /// KPI caption.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders scheduled'**
+  String get cohortRemindersScheduled;
+
+  /// KPI.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending sign-offs'**
+  String get cohortPendingSignoffs;
+
+  /// KPI caption.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} supervisors'**
+  String cohortSupervisors(String count);
+
+  /// Chart title.
+  ///
+  /// In en, this message translates to:
+  /// **'Completion by course'**
+  String get cohortCompletionByCourse;
+
+  /// Chart title.
+  ///
+  /// In en, this message translates to:
+  /// **'Average progress by department'**
+  String get cohortProgressByDept;
+
+  /// Chart title.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiries next 6 months'**
+  String get cohortExpiries;
+
+  /// Tag.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} total'**
+  String cohortExpiriesTotal(String count);
+
+  /// Section.
+  ///
+  /// In en, this message translates to:
+  /// **'Learners'**
+  String get cohortLearners;
+
+  /// Learner row.
+  ///
+  /// In en, this message translates to:
+  /// **'{pct} · {department}'**
+  String cohortLearnerLine(String pct, String department);
+
+  /// Learner expiry tag.
+  ///
+  /// In en, this message translates to:
+  /// **'{code} {days}d'**
+  String cohortExpiryTag(String code, String days);
+
+  /// Learner tag.
+  ///
+  /// In en, this message translates to:
+  /// **'No expiries'**
+  String get cohortNoExpiry;
+
+  /// Demo figures note.
+  ///
+  /// In en, this message translates to:
+  /// **'{label} · as of {date}'**
+  String cohortDemoNote(String label, String date);
+
+  /// Chart semantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{title}: {values}'**
+  String chartSemantics(String title, String values);
+
+  /// Banner.
+  ///
+  /// In en, this message translates to:
+  /// **'Hash chain verified · {count} append-only events · head {head}'**
+  String auditChainOk(String count, String head);
+
+  /// Banner.
+  ///
+  /// In en, this message translates to:
+  /// **'Hash chain broken at event {index} ({action} · {date})'**
+  String auditChainBroken(String index, String action, String date);
+
+  /// Chip.
+  ///
+  /// In en, this message translates to:
+  /// **'All events'**
+  String get auditKindAll;
+
+  /// Chip.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit'**
+  String get auditKindAudit;
+
+  /// Chip.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage'**
+  String get auditKindUsage;
+
+  /// Chip.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get auditToday;
+
+  /// Chip.
+  ///
+  /// In en, this message translates to:
+  /// **'7 days'**
+  String get auditWeek;
+
+  /// Dropdown.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get auditUser;
+
+  /// Dropdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Action'**
+  String get auditAction;
+
+  /// Dropdown option.
+  ///
+  /// In en, this message translates to:
+  /// **'All users'**
+  String get auditAnyUser;
+
+  /// Dropdown option.
+  ///
+  /// In en, this message translates to:
+  /// **'All actions'**
+  String get auditAnyAction;
+
+  /// Search hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search targets'**
+  String get auditSearch;
+
+  /// Count line.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} events · newest first · no patient data, passwords or card details'**
+  String auditCount(String count);
+
+  /// Event meta line.
+  ///
+  /// In en, this message translates to:
+  /// **'{user} · {role} · {platform} · {date}'**
+  String auditMeta(String user, String role, String platform, String date);
+
+  /// Usage event line.
+  ///
+  /// In en, this message translates to:
+  /// **'usage analytics · not chained'**
+  String get auditUsageNote;
+
+  /// Pagination.
+  ///
+  /// In en, this message translates to:
+  /// **'Show {count} more'**
+  String auditShowMore(String count);
+
+  /// App-bar action.
+  ///
+  /// In en, this message translates to:
+  /// **'Export CSV'**
+  String get auditExport;
+
+  /// Snackbar.
+  ///
+  /// In en, this message translates to:
+  /// **'Export ready'**
+  String get auditExportReady;
+
+  /// Snackbar message.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} rows shared as CSV'**
+  String auditExportRows(String count);
+
+  /// Empty state.
+  ///
+  /// In en, this message translates to:
+  /// **'No events match these filters'**
+  String get auditEmpty;
+
+  /// Chart title.
+  ///
+  /// In en, this message translates to:
+  /// **'Most-used courses'**
+  String get insightsMostUsed;
+
+  /// Bar label.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} views'**
+  String insightsViews(String count);
+
+  /// Chart title.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop-off · {course}'**
+  String insightsDropOff(String course);
+
+  /// Caption.
+  ///
+  /// In en, this message translates to:
+  /// **'Share of enrolled learners reaching each lesson.'**
+  String get insightsDropCaption;
+
+  /// Biggest drop tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson {n}'**
+  String insightsLessonTag(String n);
+
+  /// Axis label.
+  ///
+  /// In en, this message translates to:
+  /// **'L{n}'**
+  String insightsLessonShort(String n);
+
+  /// Section.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment pass rates'**
+  String get insightsPassRates;
+
+  /// Ring caption.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} attempts'**
+  String insightsAttempts(String count);
+
+  /// Section.
+  ///
+  /// In en, this message translates to:
+  /// **'Sessions by platform'**
+  String get insightsPlatforms;
+
+  /// Note.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage analytics live apart from the audit trail and swap to Firebase Analytics behind ActivityLogger.'**
+  String get insightsNote;
 }
 
 class _AppLocalizationsDelegate

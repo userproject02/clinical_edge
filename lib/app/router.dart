@@ -8,6 +8,9 @@ import 'package:clinical_edge/core/motion.dart';
 import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/core/widgets/app_bottom_sheet.dart';
 import 'package:clinical_edge/core/widgets/bottom_nav_bar.dart';
+import 'package:clinical_edge/features/admin/presentation/audit_screen.dart';
+import 'package:clinical_edge/features/admin/presentation/cohort_screen.dart';
+import 'package:clinical_edge/features/admin/presentation/insights_screen.dart';
 import 'package:clinical_edge/features/assessments/presentation/assess_screen.dart';
 import 'package:clinical_edge/features/assessments/presentation/quiz_screen.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
@@ -306,6 +309,7 @@ RouteBase _adminShell() {
           AppRoutes.cohort,
           (l) => l.titleCohort,
           Icons.insert_chart_outlined_rounded,
+          screen: (_) => const CohortScreen(),
         ),
       ),
       _branch(
@@ -313,6 +317,7 @@ RouteBase _adminShell() {
           AppRoutes.audit,
           (l) => l.titleAudit,
           Icons.verified_user_outlined,
+          screen: (_) => const AuditScreen(),
         ),
       ),
       _branch(
@@ -320,6 +325,7 @@ RouteBase _adminShell() {
           AppRoutes.insights,
           (l) => l.titleInsights,
           Icons.trending_up_rounded,
+          screen: (_) => const InsightsScreen(),
         ),
       ),
     ],

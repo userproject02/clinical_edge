@@ -10,9 +10,9 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 
 ## Current status
 
-- Phase: **Phase 8 done, next: Phase 9 Admin**
-- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit) · 6 Certifications and CPD (certs tab, CPD ring + ledger, upload sheet, expiry reminders) · 7 Competency sign-off (learner checklists, supervisor queue, review, decided) · 8 Checkout (order summary, card + mock Apple Pay, PurchaseCourse, receipt + PDF)
-- App code: sign-in, Profile & settings, home, catalogue, course detail, lesson player, Assess tab, quiz, Certs tab, upload sheet, sign-offs, queue, review and decided, checkout and receipt are real; admin screens are placeholders
+- Phase: **Phase 9 done, next: Phase 10 Polish and release**
+- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit) · 6 Certifications and CPD (certs tab, CPD ring + ledger, upload sheet, expiry reminders) · 7 Competency sign-off (learner checklists, supervisor queue, review, decided) · 8 Checkout (order summary, card + mock Apple Pay, PurchaseCourse, receipt + PDF) · 9 Admin (cohort dashboard, audit log + CSV export, usage insights)
+- App code: sign-in, Profile & settings, home, catalogue, course detail, lesson player, Assess tab, quiz, Certs tab, upload sheet, sign-offs, queue, review and decided, checkout, receipt, cohort, audit log and insights are real; no placeholder screens remain
 - Last updated: 2026-11-17 · claude/gurus-macbook-air
 
 ## Module map
@@ -41,7 +41,8 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 | core: local notifications | — (`lib/core/notifications/`) | localNotificationsProvider | LocalNotifier (PluginLocalNotifier in main.dart, RecordingLocalNotifier in tests) | test/features/certifications_test.dart |
 | competencies | `/signoffs` (learner), `/queue`, `/queue/:requestId`, `/decided` (supervisor) | competencyRepositoryProvider, checklistsProvider, mySignOffsProvider, usersByIdProvider, signOffSupervisorProvider, checklistsByIdProvider, signOffQueueProvider, decidedSignOffsProvider, signOffRequestProvider, queueStatsProvider, requestSignOffProvider, decideSignOffProvider | CompetencyRepository (+ RequestSignOff, DecideSignOff) | test/features/competencies_test.dart, test/features/repositories_test.dart |
 | checkout | `/learn/:courseId/checkout`, `/learn/:courseId/receipt/:orderId` | checkoutRepositoryProvider, paymentGatewayProvider, mockGatewayModeProvider, sellerProvider, orderProvider, logCheckoutStartProvider, purchaseCourseProvider, complete3dsProvider | CheckoutRepository, PaymentGateway (+ PurchaseCourse, CardRules) | test/features/checkout_test.dart, test/features/repositories_test.dart |
-| admin (data) | `/cohort` (Phase 9 UI) | cohortRepositoryProvider | CohortRepository | test/features/repositories_test.dart |
+| admin | `/cohort` (admin home), `/audit`, `/insights` | cohortRepositoryProvider, cohortStatsProvider, cohortLearnersProvider, auditEventsProvider, usageEventsProvider, chainResultProvider, auditFilterStateProvider, filteredEventsProvider, auditFilterOptionsProvider, exportAuditCsvProvider, insightsProvider | CohortRepository, AuditStore, UsageStore (+ AuditFilter, auditCsv, InsightsView) | test/features/admin_test.dart |
+| core: file sharing | — (`lib/core/sharing/`) | fileSharerProvider | FileSharer (PluginFileSharer in main.dart, RecordingFileSharer in tests) | test/features/admin_test.dart |
 | mock wiring | — (`lib/app/mock_overrides.dart`) | every repository override, `resetDemoData` | all mocks | test/helpers/test_container.dart |
 
 Later phases add one row per feature (auth, home, courses, assessments, certifications, competencies, checkout, admin, settings).
@@ -63,6 +64,7 @@ Implemented:
 - `LocalNotifier` (requestPermission, showNow, replaceSchedule) and `CertificateFilePicker` (pick → name + size only); Android channel id `expiry_reminders`. Cert upload audit target `"<name> · pending verification"`; reminder usage target `"<code> · <days> days"`. Reminders fire at 09:00 Dubai on 90/60/30/7 days before expiry for verified certificates.
 - Sign-off audit targets: request = checklist name (EN); decision = `"<checklist> · <learner> · approved|rejected"` (never the comment). Default approval comment "Competent. Observed and signed off." stored in EN and AR.
 - Purchase audit target `"<course EN> · AED <0.00> · <invoiceNo>"`; `checkout.start` usage target = course title. Card number, expiry and CVC live only in the form controllers, are validated locally, cleared on success and never stored, logged or sent; the gateway gets a mock token (`card_mock_<uuid>` / `applepay_mock_<uuid>`) and the order keeps only `cardLast4`.
+- Audit export: CSV columns `ts,user,role,action,target,platform,kind,prevHash,hash`, RFC 4180, CRLF, file `clinicaledge-audit-YYYY-MM-DD.csv`; audit target `"CSV · N rows"`. Insights are built from `UsageStore` + seed only (`InsightsView.build` rejects audit events).
 - Repository interfaces in `lib/features/*/data/*_repository.dart`: AuthRepository, CourseRepository, ProgressRepository, AssessmentRepository, CertificationRepository, CpdRepository, CompetencyRepository, CheckoutRepository, CohortRepository.
 - `ActivityEvent` fields: id, ts (UTC), userId, role, action, target, platform (`ios`/`android`), kind (`audit`/`usage`), prevHash, hash (audit only). Action wire names: `AuditAction` (role.change, quiz.score, signoff.request, signoff.decision, purchase, cert.upload, course.complete, audit.export) and `UsageAction` (auth.signin, auth.signout, course.view, lesson.view, lesson.complete, checkout.start, notify.reminder).
 - Audit hash: `SHA-256(prevHash|ts|userId|role|action|target|platform)` lower hex; ts = ISO-8601 UTC (`toIso8601String`), role = enum name; first prevHash = 64 zeros. `AuditStore` exposes append + list only. Targets pass `TargetSanitizer` (≤ 120 chars; no card numbers, CVC, emails, passwords).
@@ -73,6 +75,12 @@ Implemented:
 - Demo clock: `FixedClock(demoNow)` = 2026-11-17 09:00 Asia/Dubai; calendar maths in Dubai time (UTC+4). Cert status: ≤ 0 days expired, ≤ 90 renew soon, else valid; pending verification → verifying.
 
 ## Decisions (newest first)
+
+- 2026-11-18 · Vertical charts (department progress, expiries, BLS drop-off) use fl_chart bars with titles off and our own labels below; bar order is reversed in RTL so the first item sits on the right; bars grow from 0 after `Motion.barDelay` (instant with reduced motion). Horizontal bars and the platform split are `LinearMeter`/custom widgets. Why: fl_chart titles are `flutter/material` widgets and it does not mirror; meters already mirror.
+- 2026-11-18 · `FileSharer` interface for CSV export and receipt PDF (share_plus in `main.dart`, recording fake by default). Why: platform channels don't run in widget tests; widgets stay off plugins.
+- 2026-11-18 · Cohort seed gains `kpis.supervisors` and per-learner `nextExpiryCode`/`nextExpiryDays` (demo figures); Layla's row uses live progress and her live soonest certificate; `DemoSeeder.seedVersion` → 6. BREAKING (additive model fields).
+- 2026-11-18 · Cohort is the admin home (greeting title + first-load skeleton). Audit and Insights re-read the stores each time the tab is built and on pull-to-refresh. Why: live events from other roles.
+- 2026-11-18 · Insights merge rule: seed views + live `course.view`/`lesson.view` matched by course title; seed platform shares count as 100 sessions plus live `auth.signin` by platform; pass rates stay seed-only (quiz scores are audit events). Why: ADM-4 never reads the audit store.
 
 - 2026-11-18 · Apple Pay is a mock sheet only in v1. Plan: integrate Apple Pay through the chosen UAE gateway's SDK (e.g. Network International) with a merchant ID and payment-processing certificate, behind `PaymentGateway` + `ApplePayMethod(token)`; no widget changes. Why: brief; no real payments in v1.
 - 2026-11-18 · `Order.cardLast4` added (BREAKING, additive) and `CheckoutRepository.completeOrder` takes optional `cardLast4`. Why: receipt shows "Card •••• 4242" from the last 4 only.
@@ -139,8 +147,8 @@ Implemented:
 ## Known issues / TODO
 
 - [ ] `docs/design/` has no screenshots; Phase 1 was built from the prototype canvas itself (artifact "ClinicalEdge", `Main.dc.html`). Export the storyboard frames into `docs/design/` when convenient.
-- [ ] Device runs deferred: Android for Phases 1–8 and iOS for Phases 6–8 (incl. Share PDF sheet) (`integration_test/reminders_test.dart` needs the notification permission granted, then confirm the banner and a real notification on each). An Android AVD `ce_pixel` (API 36, arm64) now exists on the MacBook.
-- [ ] Phase 5–8 goldens (`test/features/goldens/{assess,quiz_*,result_*,certs_*,upload_sheet_*,signoffs_*,queue*,review_*,decided_*,checkout_*,receipt_*}`) were generated on macOS; regenerate on Linux (`flutter test --update-goldens --tags golden`) so CI matches.
+- [ ] Device runs deferred: Android for Phases 1–9 and iOS for Phases 6–9 (incl. a real local notification, Share PDF sheet, CSV export opened) (`integration_test/reminders_test.dart` needs the notification permission granted, then confirm the banner and a real notification on each). An Android AVD `ce_pixel` (API 36, arm64) now exists on the MacBook.
+- [ ] Phase 5–9 goldens (`test/features/goldens/{assess,quiz_*,result_*,certs_*,upload_sheet_*,signoffs_*,queue*,review_*,decided_*,checkout_*,receipt_*,cohort_*,audit_*,insights_*}`) were generated on macOS; regenerate on Linux (`flutter test --update-goldens --tags golden`) so CI matches.
 - [ ] Arabic numeric ranges in seed options render reversed in RTL ("80–60"); see `docs/TESTCASES.md` → Review notes.
 - [ ] Clinical and native-Arabic review of all seed content (see `docs/TESTCASES.md` → Review notes).
 - [ ] `HiveLocalDb` stores everything in plain JSON on device; fine for demo data, revisit (encryption) if real data ever lands.
@@ -149,9 +157,11 @@ Implemented:
 
 ## Next up
 
-Phase 9 — Admin: `/cohort` KPIs + fl_chart charts + learners (ADM-1), `/audit` with chain banner, filters, search, CSV export (ADM-2, ADM-3), `/insights` from usage data only (ADM-4). Test cases TC-ADM-*.
+Phase 10 — Polish and release. Before that, the deferred checks: full device runs on the iOS simulator and the Android emulator (`ce_pixel`) for Phases 1–9 (integration tests, a real local notification, Share PDF, CSV export), and regenerating the Phase 5–9 goldens on Linux.
 
 ## Change log (newest first; last 30 entries, older in docs/changelog/)
+
+- 2026-11-18 · claude/gurus-macbook-air · Phase 9: Cohort dashboard (2×2 KPIs with live pending sign-offs, completion by course, progress by department and expiries charts with entry animation, RTL mirroring and semantics, learners with live row for Layla), Audit log (chain banner ok/broken from AuditChain.verify, kind/period chips, user/action dropdowns from data, target search, count line, audit and usage cards with hash link, paging by 50, Export CSV via share sheet + audit.export + snackbar), Usage insights (views, BLS drop-off with biggest drop highlighted, pass-rate rings, platform split, note) from usage events only; FileSharer service; route-title test replaces the placeholder test · lib/features/admin, lib/core/sharing, lib/app (router, mock overrides, l10n), lib/main.dart, lib/seed/cohort.json, test/features/admin_test.dart, test/app/router_test.dart · ADM-1..4 · BREAKING: `CohortKpis.supervisors` and `CohortLearner.nextExpiryCode/nextExpiryDays` (new optional fields); `mockOverrides` gains `sharer`; receipt Share PDF now goes through `fileSharerProvider`
 
 - 2026-11-18 · claude/gurus-macbook-air · Phase 8: checkout (order summary with cover tile, Subtotal/VAT/Total via Money, Card / Apple Pay method cards, card form with 4-digit grouping + Luhn + expiry + obscured CVC, mock black Apple Pay sheet with pulsing Face ID glyph, lock note, sticky Pay with processing state, double-tap and back guard, decline banner with retry, mock 3-D Secure Approve/Cancel), PurchaseCourse use case (order, gateway, invoice, ownership, purchase audit), receipt (burst + check animation, invoice line, seller/buyer/item/method rows, totals, Share PDF via pdf + share_plus, Start course), checkout.start usage; git author switched to userproject02 · lib/features/checkout, lib/core/payments, lib/core/money.dart, lib/app (router, l10n), lib/seed/demo.json, AGENTS.md, test/features/checkout_test.dart · PAY-1..2 · BREAKING: `Order.cardLast4` (new field) and `CheckoutRepository.completeOrder(cardLast4:)`; MockCheckoutRepository updated
 

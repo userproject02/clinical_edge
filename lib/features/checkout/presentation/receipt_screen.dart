@@ -10,6 +10,7 @@ import 'package:clinical_edge/core/formatting.dart';
 import 'package:clinical_edge/core/money.dart';
 import 'package:clinical_edge/core/motion.dart';
 import 'package:clinical_edge/core/payments/payment_gateway.dart';
+import 'package:clinical_edge/core/sharing/file_sharer.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/checkout/data/checkout_repository.dart';
@@ -20,7 +21,6 @@ import 'package:clinical_edge/features/courses/presentation/learning_providers.d
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:share_plus/share_plus.dart';
 
 /// Receipt timestamp in Dubai local time: "2026-11-17 09:00".
 String receiptTimestamp(DateTime instant) {
@@ -97,6 +97,7 @@ class ReceiptScreen extends ConsumerWidget {
                       onPressed: () => unawaited(
                         _share(
                           context,
+                          ref,
                           order,
                           seller,
                           course.title.en,
@@ -196,6 +197,7 @@ class ReceiptScreen extends ConsumerWidget {
 
   Future<void> _share(
     BuildContext context,
+    WidgetRef ref,
     Order order,
     Seller seller,
     String item,
@@ -215,20 +217,16 @@ class ReceiptScreen extends ConsumerWidget {
       ).replaceAll(RegExp('[\u2066-\u2069]'), ''),
       timestamp: receiptTimestamp(order.paidAt ?? order.createdAt),
     );
-    await SharePlus.instance.share(
-      ShareParams(
-        files: <XFile>[
-          XFile.fromData(
-            bytes,
-            name: '${order.invoiceNo ?? 'receipt'}.pdf',
-            mimeType: 'application/pdf',
-          ),
-        ],
-        sharePositionOrigin: box == null
-            ? null
-            : box.localToGlobal(Offset.zero) & box.size,
-      ),
-    );
+    await ref
+        .read(fileSharerProvider)
+        .shareFile(
+          bytes: bytes,
+          name: '${order.invoiceNo ?? 'receipt'}.pdf',
+          mimeType: 'application/pdf',
+          origin: box == null
+              ? null
+              : box.localToGlobal(Offset.zero) & box.size,
+        );
   }
 }
 

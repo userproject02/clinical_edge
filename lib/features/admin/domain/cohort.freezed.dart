@@ -688,7 +688,8 @@ $LocalizedTextCopyWith<$Res> get label {
 /// @nodoc
 mixin _$CohortKpis {
 
- int get activeLearners; int get nursing; int get physicians; int get avgCompletionPct; int get avgCompletionDeltaPts; LocalizedText get deltaComparedTo; int get certsExpiringWithin90Days;
+ int get activeLearners; int get nursing; int get physicians; int get avgCompletionPct; int get avgCompletionDeltaPts; LocalizedText get deltaComparedTo; int get certsExpiringWithin90Days;/// Supervisors signing off (demo figure).
+ int get supervisors;
 /// Create a copy of CohortKpis
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -702,20 +703,20 @@ $CohortKpisCopyWith<CohortKpis> get copyWith => _$CohortKpisCopyWithImpl<CohortK
 @override
 bool operator ==(Object other) {
   final _this = this as CohortKpis;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CohortKpis&&(identical(other.activeLearners, _this.activeLearners) || other.activeLearners == _this.activeLearners)&&(identical(other.nursing, _this.nursing) || other.nursing == _this.nursing)&&(identical(other.physicians, _this.physicians) || other.physicians == _this.physicians)&&(identical(other.avgCompletionPct, _this.avgCompletionPct) || other.avgCompletionPct == _this.avgCompletionPct)&&(identical(other.avgCompletionDeltaPts, _this.avgCompletionDeltaPts) || other.avgCompletionDeltaPts == _this.avgCompletionDeltaPts)&&(identical(other.deltaComparedTo, _this.deltaComparedTo) || other.deltaComparedTo == _this.deltaComparedTo)&&(identical(other.certsExpiringWithin90Days, _this.certsExpiringWithin90Days) || other.certsExpiringWithin90Days == _this.certsExpiringWithin90Days));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CohortKpis&&(identical(other.activeLearners, _this.activeLearners) || other.activeLearners == _this.activeLearners)&&(identical(other.nursing, _this.nursing) || other.nursing == _this.nursing)&&(identical(other.physicians, _this.physicians) || other.physicians == _this.physicians)&&(identical(other.avgCompletionPct, _this.avgCompletionPct) || other.avgCompletionPct == _this.avgCompletionPct)&&(identical(other.avgCompletionDeltaPts, _this.avgCompletionDeltaPts) || other.avgCompletionDeltaPts == _this.avgCompletionDeltaPts)&&(identical(other.deltaComparedTo, _this.deltaComparedTo) || other.deltaComparedTo == _this.deltaComparedTo)&&(identical(other.certsExpiringWithin90Days, _this.certsExpiringWithin90Days) || other.certsExpiringWithin90Days == _this.certsExpiringWithin90Days)&&(identical(other.supervisors, _this.supervisors) || other.supervisors == _this.supervisors));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as CohortKpis;
-  return Object.hash(runtimeType,_this.activeLearners,_this.nursing,_this.physicians,_this.avgCompletionPct,_this.avgCompletionDeltaPts,_this.deltaComparedTo,_this.certsExpiringWithin90Days);
+  return Object.hash(runtimeType,_this.activeLearners,_this.nursing,_this.physicians,_this.avgCompletionPct,_this.avgCompletionDeltaPts,_this.deltaComparedTo,_this.certsExpiringWithin90Days,_this.supervisors);
 }
 
 @override
 String toString() {
   final _this = this as CohortKpis;
-  return 'CohortKpis(activeLearners: ${_this.activeLearners}, nursing: ${_this.nursing}, physicians: ${_this.physicians}, avgCompletionPct: ${_this.avgCompletionPct}, avgCompletionDeltaPts: ${_this.avgCompletionDeltaPts}, deltaComparedTo: ${_this.deltaComparedTo}, certsExpiringWithin90Days: ${_this.certsExpiringWithin90Days})';
+  return 'CohortKpis(activeLearners: ${_this.activeLearners}, nursing: ${_this.nursing}, physicians: ${_this.physicians}, avgCompletionPct: ${_this.avgCompletionPct}, avgCompletionDeltaPts: ${_this.avgCompletionDeltaPts}, deltaComparedTo: ${_this.deltaComparedTo}, certsExpiringWithin90Days: ${_this.certsExpiringWithin90Days}, supervisors: ${_this.supervisors})';
 }
 
 
@@ -726,7 +727,7 @@ abstract mixin class $CohortKpisCopyWith<$Res>  {
   factory $CohortKpisCopyWith(CohortKpis value, $Res Function(CohortKpis) _then) = _$CohortKpisCopyWithImpl;
 @useResult
 $Res call({
- int activeLearners, int nursing, int physicians, int avgCompletionPct, int avgCompletionDeltaPts, LocalizedText deltaComparedTo, int certsExpiringWithin90Days
+ int activeLearners, int nursing, int physicians, int avgCompletionPct, int avgCompletionDeltaPts, LocalizedText deltaComparedTo, int certsExpiringWithin90Days, int supervisors
 });
 
 
@@ -743,7 +744,7 @@ class _$CohortKpisCopyWithImpl<$Res>
 
 /// Create a copy of CohortKpis
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? activeLearners = null,Object? nursing = null,Object? physicians = null,Object? avgCompletionPct = null,Object? avgCompletionDeltaPts = null,Object? deltaComparedTo = null,Object? certsExpiringWithin90Days = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? activeLearners = null,Object? nursing = null,Object? physicians = null,Object? avgCompletionPct = null,Object? avgCompletionDeltaPts = null,Object? deltaComparedTo = null,Object? certsExpiringWithin90Days = null,Object? supervisors = null,}) {
   return _then(CohortKpis(
 activeLearners: null == activeLearners ? _self.activeLearners : activeLearners // ignore: cast_nullable_to_non_nullable
 as int,nursing: null == nursing ? _self.nursing : nursing // ignore: cast_nullable_to_non_nullable
@@ -752,6 +753,7 @@ as int,avgCompletionPct: null == avgCompletionPct ? _self.avgCompletionPct : avg
 as int,avgCompletionDeltaPts: null == avgCompletionDeltaPts ? _self.avgCompletionDeltaPts : avgCompletionDeltaPts // ignore: cast_nullable_to_non_nullable
 as int,deltaComparedTo: null == deltaComparedTo ? _self.deltaComparedTo : deltaComparedTo // ignore: cast_nullable_to_non_nullable
 as LocalizedText,certsExpiringWithin90Days: null == certsExpiringWithin90Days ? _self.certsExpiringWithin90Days : certsExpiringWithin90Days // ignore: cast_nullable_to_non_nullable
+as int,supervisors: null == supervisors ? _self.supervisors : supervisors // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -846,10 +848,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int activeLearners,  int nursing,  int physicians,  int avgCompletionPct,  int avgCompletionDeltaPts,  LocalizedText deltaComparedTo,  int certsExpiringWithin90Days)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int activeLearners,  int nursing,  int physicians,  int avgCompletionPct,  int avgCompletionDeltaPts,  LocalizedText deltaComparedTo,  int certsExpiringWithin90Days,  int supervisors)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CohortKpis() when $default != null:
-return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCompletionPct,_that.avgCompletionDeltaPts,_that.deltaComparedTo,_that.certsExpiringWithin90Days);case _:
+return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCompletionPct,_that.avgCompletionDeltaPts,_that.deltaComparedTo,_that.certsExpiringWithin90Days,_that.supervisors);case _:
   return orElse();
 
 }
@@ -867,10 +869,10 @@ return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCom
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int activeLearners,  int nursing,  int physicians,  int avgCompletionPct,  int avgCompletionDeltaPts,  LocalizedText deltaComparedTo,  int certsExpiringWithin90Days)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int activeLearners,  int nursing,  int physicians,  int avgCompletionPct,  int avgCompletionDeltaPts,  LocalizedText deltaComparedTo,  int certsExpiringWithin90Days,  int supervisors)  $default,) {final _that = this;
 switch (_that) {
 case _CohortKpis():
-return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCompletionPct,_that.avgCompletionDeltaPts,_that.deltaComparedTo,_that.certsExpiringWithin90Days);case _:
+return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCompletionPct,_that.avgCompletionDeltaPts,_that.deltaComparedTo,_that.certsExpiringWithin90Days,_that.supervisors);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -887,10 +889,10 @@ return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCom
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int activeLearners,  int nursing,  int physicians,  int avgCompletionPct,  int avgCompletionDeltaPts,  LocalizedText deltaComparedTo,  int certsExpiringWithin90Days)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int activeLearners,  int nursing,  int physicians,  int avgCompletionPct,  int avgCompletionDeltaPts,  LocalizedText deltaComparedTo,  int certsExpiringWithin90Days,  int supervisors)?  $default,) {final _that = this;
 switch (_that) {
 case _CohortKpis() when $default != null:
-return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCompletionPct,_that.avgCompletionDeltaPts,_that.deltaComparedTo,_that.certsExpiringWithin90Days);case _:
+return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCompletionPct,_that.avgCompletionDeltaPts,_that.deltaComparedTo,_that.certsExpiringWithin90Days,_that.supervisors);case _:
   return null;
 
 }
@@ -902,7 +904,7 @@ return $default(_that.activeLearners,_that.nursing,_that.physicians,_that.avgCom
 @JsonSerializable()
 
 class _CohortKpis implements CohortKpis {
-  const _CohortKpis({required this.activeLearners, required this.nursing, required this.physicians, required this.avgCompletionPct, required this.avgCompletionDeltaPts, required this.deltaComparedTo, required this.certsExpiringWithin90Days});
+  const _CohortKpis({required this.activeLearners, required this.nursing, required this.physicians, required this.avgCompletionPct, required this.avgCompletionDeltaPts, required this.deltaComparedTo, required this.certsExpiringWithin90Days, this.supervisors = 0});
   factory _CohortKpis.fromJson(Map<String, dynamic> json) => _$CohortKpisFromJson(json);
 
 @override final  int activeLearners;
@@ -912,6 +914,8 @@ class _CohortKpis implements CohortKpis {
 @override final  int avgCompletionDeltaPts;
 @override final  LocalizedText deltaComparedTo;
 @override final  int certsExpiringWithin90Days;
+/// Supervisors signing off (demo figure).
+@override@JsonKey() final  int supervisors;
 
 /// Create a copy of CohortKpis
 /// with the given fields replaced by the non-null parameter values.
@@ -926,18 +930,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CohortKpis&&(identical(other.activeLearners, activeLearners) || other.activeLearners == activeLearners)&&(identical(other.nursing, nursing) || other.nursing == nursing)&&(identical(other.physicians, physicians) || other.physicians == physicians)&&(identical(other.avgCompletionPct, avgCompletionPct) || other.avgCompletionPct == avgCompletionPct)&&(identical(other.avgCompletionDeltaPts, avgCompletionDeltaPts) || other.avgCompletionDeltaPts == avgCompletionDeltaPts)&&(identical(other.deltaComparedTo, deltaComparedTo) || other.deltaComparedTo == deltaComparedTo)&&(identical(other.certsExpiringWithin90Days, certsExpiringWithin90Days) || other.certsExpiringWithin90Days == certsExpiringWithin90Days));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CohortKpis&&(identical(other.activeLearners, activeLearners) || other.activeLearners == activeLearners)&&(identical(other.nursing, nursing) || other.nursing == nursing)&&(identical(other.physicians, physicians) || other.physicians == physicians)&&(identical(other.avgCompletionPct, avgCompletionPct) || other.avgCompletionPct == avgCompletionPct)&&(identical(other.avgCompletionDeltaPts, avgCompletionDeltaPts) || other.avgCompletionDeltaPts == avgCompletionDeltaPts)&&(identical(other.deltaComparedTo, deltaComparedTo) || other.deltaComparedTo == deltaComparedTo)&&(identical(other.certsExpiringWithin90Days, certsExpiringWithin90Days) || other.certsExpiringWithin90Days == certsExpiringWithin90Days)&&(identical(other.supervisors, supervisors) || other.supervisors == supervisors));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,activeLearners,nursing,physicians,avgCompletionPct,avgCompletionDeltaPts,deltaComparedTo,certsExpiringWithin90Days);
+    return Object.hash(runtimeType,activeLearners,nursing,physicians,avgCompletionPct,avgCompletionDeltaPts,deltaComparedTo,certsExpiringWithin90Days,supervisors);
 }
 
 @override
 String toString() {
-    return 'CohortKpis(activeLearners: $activeLearners, nursing: $nursing, physicians: $physicians, avgCompletionPct: $avgCompletionPct, avgCompletionDeltaPts: $avgCompletionDeltaPts, deltaComparedTo: $deltaComparedTo, certsExpiringWithin90Days: $certsExpiringWithin90Days)';
+    return 'CohortKpis(activeLearners: $activeLearners, nursing: $nursing, physicians: $physicians, avgCompletionPct: $avgCompletionPct, avgCompletionDeltaPts: $avgCompletionDeltaPts, deltaComparedTo: $deltaComparedTo, certsExpiringWithin90Days: $certsExpiringWithin90Days, supervisors: $supervisors)';
 }
 
 
@@ -948,7 +952,7 @@ abstract mixin class _$CohortKpisCopyWith<$Res> implements $CohortKpisCopyWith<$
   factory _$CohortKpisCopyWith(_CohortKpis value, $Res Function(_CohortKpis) _then) = __$CohortKpisCopyWithImpl;
 @override @useResult
 $Res call({
- int activeLearners, int nursing, int physicians, int avgCompletionPct, int avgCompletionDeltaPts, LocalizedText deltaComparedTo, int certsExpiringWithin90Days
+ int activeLearners, int nursing, int physicians, int avgCompletionPct, int avgCompletionDeltaPts, LocalizedText deltaComparedTo, int certsExpiringWithin90Days, int supervisors
 });
 
 
@@ -965,7 +969,7 @@ class __$CohortKpisCopyWithImpl<$Res>
 
 /// Create a copy of CohortKpis
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? activeLearners = null,Object? nursing = null,Object? physicians = null,Object? avgCompletionPct = null,Object? avgCompletionDeltaPts = null,Object? deltaComparedTo = null,Object? certsExpiringWithin90Days = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? activeLearners = null,Object? nursing = null,Object? physicians = null,Object? avgCompletionPct = null,Object? avgCompletionDeltaPts = null,Object? deltaComparedTo = null,Object? certsExpiringWithin90Days = null,Object? supervisors = null,}) {
   return _then(_CohortKpis(
 activeLearners: null == activeLearners ? _self.activeLearners : activeLearners // ignore: cast_nullable_to_non_nullable
 as int,nursing: null == nursing ? _self.nursing : nursing // ignore: cast_nullable_to_non_nullable
@@ -974,6 +978,7 @@ as int,avgCompletionPct: null == avgCompletionPct ? _self.avgCompletionPct : avg
 as int,avgCompletionDeltaPts: null == avgCompletionDeltaPts ? _self.avgCompletionDeltaPts : avgCompletionDeltaPts // ignore: cast_nullable_to_non_nullable
 as int,deltaComparedTo: null == deltaComparedTo ? _self.deltaComparedTo : deltaComparedTo // ignore: cast_nullable_to_non_nullable
 as LocalizedText,certsExpiringWithin90Days: null == certsExpiringWithin90Days ? _self.certsExpiringWithin90Days : certsExpiringWithin90Days // ignore: cast_nullable_to_non_nullable
+as int,supervisors: null == supervisors ? _self.supervisors : supervisors // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -1816,7 +1821,9 @@ as int,
 /// @nodoc
 mixin _$CohortLearner {
 
- String get userId; int get completionPct; int get certsExpiringSoon;
+ String get userId; int get completionPct; int get certsExpiringSoon;/// Code of the next certificate to expire ("BLS"), demo figure.
+ String? get nextExpiryCode;/// Days until that expiry, demo figure.
+ int? get nextExpiryDays;
 /// Create a copy of CohortLearner
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1830,20 +1837,20 @@ $CohortLearnerCopyWith<CohortLearner> get copyWith => _$CohortLearnerCopyWithImp
 @override
 bool operator ==(Object other) {
   final _this = this as CohortLearner;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CohortLearner&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.completionPct, _this.completionPct) || other.completionPct == _this.completionPct)&&(identical(other.certsExpiringSoon, _this.certsExpiringSoon) || other.certsExpiringSoon == _this.certsExpiringSoon));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CohortLearner&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.completionPct, _this.completionPct) || other.completionPct == _this.completionPct)&&(identical(other.certsExpiringSoon, _this.certsExpiringSoon) || other.certsExpiringSoon == _this.certsExpiringSoon)&&(identical(other.nextExpiryCode, _this.nextExpiryCode) || other.nextExpiryCode == _this.nextExpiryCode)&&(identical(other.nextExpiryDays, _this.nextExpiryDays) || other.nextExpiryDays == _this.nextExpiryDays));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as CohortLearner;
-  return Object.hash(runtimeType,_this.userId,_this.completionPct,_this.certsExpiringSoon);
+  return Object.hash(runtimeType,_this.userId,_this.completionPct,_this.certsExpiringSoon,_this.nextExpiryCode,_this.nextExpiryDays);
 }
 
 @override
 String toString() {
   final _this = this as CohortLearner;
-  return 'CohortLearner(userId: ${_this.userId}, completionPct: ${_this.completionPct}, certsExpiringSoon: ${_this.certsExpiringSoon})';
+  return 'CohortLearner(userId: ${_this.userId}, completionPct: ${_this.completionPct}, certsExpiringSoon: ${_this.certsExpiringSoon}, nextExpiryCode: ${_this.nextExpiryCode}, nextExpiryDays: ${_this.nextExpiryDays})';
 }
 
 
@@ -1854,7 +1861,7 @@ abstract mixin class $CohortLearnerCopyWith<$Res>  {
   factory $CohortLearnerCopyWith(CohortLearner value, $Res Function(CohortLearner) _then) = _$CohortLearnerCopyWithImpl;
 @useResult
 $Res call({
- String userId, int completionPct, int certsExpiringSoon
+ String userId, int completionPct, int certsExpiringSoon, String? nextExpiryCode, int? nextExpiryDays
 });
 
 
@@ -1871,12 +1878,14 @@ class _$CohortLearnerCopyWithImpl<$Res>
 
 /// Create a copy of CohortLearner
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? completionPct = null,Object? certsExpiringSoon = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? completionPct = null,Object? certsExpiringSoon = null,Object? nextExpiryCode = freezed,Object? nextExpiryDays = freezed,}) {
   return _then(CohortLearner(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,completionPct: null == completionPct ? _self.completionPct : completionPct // ignore: cast_nullable_to_non_nullable
 as int,certsExpiringSoon: null == certsExpiringSoon ? _self.certsExpiringSoon : certsExpiringSoon // ignore: cast_nullable_to_non_nullable
-as int,
+as int,nextExpiryCode: freezed == nextExpiryCode ? _self.nextExpiryCode : nextExpiryCode // ignore: cast_nullable_to_non_nullable
+as String?,nextExpiryDays: freezed == nextExpiryDays ? _self.nextExpiryDays : nextExpiryDays // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 
@@ -1961,10 +1970,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  int completionPct,  int certsExpiringSoon)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  int completionPct,  int certsExpiringSoon,  String? nextExpiryCode,  int? nextExpiryDays)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CohortLearner() when $default != null:
-return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon);case _:
+return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon,_that.nextExpiryCode,_that.nextExpiryDays);case _:
   return orElse();
 
 }
@@ -1982,10 +1991,10 @@ return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  int completionPct,  int certsExpiringSoon)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  int completionPct,  int certsExpiringSoon,  String? nextExpiryCode,  int? nextExpiryDays)  $default,) {final _that = this;
 switch (_that) {
 case _CohortLearner():
-return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon);case _:
+return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon,_that.nextExpiryCode,_that.nextExpiryDays);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2002,10 +2011,10 @@ return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  int completionPct,  int certsExpiringSoon)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  int completionPct,  int certsExpiringSoon,  String? nextExpiryCode,  int? nextExpiryDays)?  $default,) {final _that = this;
 switch (_that) {
 case _CohortLearner() when $default != null:
-return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon);case _:
+return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon,_that.nextExpiryCode,_that.nextExpiryDays);case _:
   return null;
 
 }
@@ -2017,12 +2026,16 @@ return $default(_that.userId,_that.completionPct,_that.certsExpiringSoon);case _
 @JsonSerializable()
 
 class _CohortLearner implements CohortLearner {
-  const _CohortLearner({required this.userId, required this.completionPct, required this.certsExpiringSoon});
+  const _CohortLearner({required this.userId, required this.completionPct, required this.certsExpiringSoon, this.nextExpiryCode, this.nextExpiryDays});
   factory _CohortLearner.fromJson(Map<String, dynamic> json) => _$CohortLearnerFromJson(json);
 
 @override final  String userId;
 @override final  int completionPct;
 @override final  int certsExpiringSoon;
+/// Code of the next certificate to expire ("BLS"), demo figure.
+@override final  String? nextExpiryCode;
+/// Days until that expiry, demo figure.
+@override final  int? nextExpiryDays;
 
 /// Create a copy of CohortLearner
 /// with the given fields replaced by the non-null parameter values.
@@ -2037,18 +2050,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CohortLearner&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.completionPct, completionPct) || other.completionPct == completionPct)&&(identical(other.certsExpiringSoon, certsExpiringSoon) || other.certsExpiringSoon == certsExpiringSoon));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CohortLearner&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.completionPct, completionPct) || other.completionPct == completionPct)&&(identical(other.certsExpiringSoon, certsExpiringSoon) || other.certsExpiringSoon == certsExpiringSoon)&&(identical(other.nextExpiryCode, nextExpiryCode) || other.nextExpiryCode == nextExpiryCode)&&(identical(other.nextExpiryDays, nextExpiryDays) || other.nextExpiryDays == nextExpiryDays));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,userId,completionPct,certsExpiringSoon);
+    return Object.hash(runtimeType,userId,completionPct,certsExpiringSoon,nextExpiryCode,nextExpiryDays);
 }
 
 @override
 String toString() {
-    return 'CohortLearner(userId: $userId, completionPct: $completionPct, certsExpiringSoon: $certsExpiringSoon)';
+    return 'CohortLearner(userId: $userId, completionPct: $completionPct, certsExpiringSoon: $certsExpiringSoon, nextExpiryCode: $nextExpiryCode, nextExpiryDays: $nextExpiryDays)';
 }
 
 
@@ -2059,7 +2072,7 @@ abstract mixin class _$CohortLearnerCopyWith<$Res> implements $CohortLearnerCopy
   factory _$CohortLearnerCopyWith(_CohortLearner value, $Res Function(_CohortLearner) _then) = __$CohortLearnerCopyWithImpl;
 @override @useResult
 $Res call({
- String userId, int completionPct, int certsExpiringSoon
+ String userId, int completionPct, int certsExpiringSoon, String? nextExpiryCode, int? nextExpiryDays
 });
 
 
@@ -2076,12 +2089,14 @@ class __$CohortLearnerCopyWithImpl<$Res>
 
 /// Create a copy of CohortLearner
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? completionPct = null,Object? certsExpiringSoon = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? completionPct = null,Object? certsExpiringSoon = null,Object? nextExpiryCode = freezed,Object? nextExpiryDays = freezed,}) {
   return _then(_CohortLearner(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,completionPct: null == completionPct ? _self.completionPct : completionPct // ignore: cast_nullable_to_non_nullable
 as int,certsExpiringSoon: null == certsExpiringSoon ? _self.certsExpiringSoon : certsExpiringSoon // ignore: cast_nullable_to_non_nullable
-as int,
+as int,nextExpiryCode: freezed == nextExpiryCode ? _self.nextExpiryCode : nextExpiryCode // ignore: cast_nullable_to_non_nullable
+as String?,nextExpiryDays: freezed == nextExpiryDays ? _self.nextExpiryDays : nextExpiryDays // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 

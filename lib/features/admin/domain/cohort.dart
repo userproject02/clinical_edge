@@ -49,6 +49,9 @@ abstract class CohortKpis with _$CohortKpis {
     required int avgCompletionDeltaPts,
     required LocalizedText deltaComparedTo,
     required int certsExpiringWithin90Days,
+
+    /// Supervisors signing off (demo figure).
+    @Default(0) int supervisors,
   }) = _CohortKpis;
 
   /// Decodes JSON.
@@ -95,6 +98,12 @@ abstract class CohortLearner with _$CohortLearner {
     required String userId,
     required int completionPct,
     required int certsExpiringSoon,
+
+    /// Code of the next certificate to expire ("BLS"), demo figure.
+    String? nextExpiryCode,
+
+    /// Days until that expiry, demo figure.
+    int? nextExpiryDays,
   }) = _CohortLearner;
 
   /// Decodes JSON.

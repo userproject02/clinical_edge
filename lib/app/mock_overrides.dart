@@ -4,6 +4,7 @@ import 'package:clinical_edge/core/logging/activity_logger.dart';
 import 'package:clinical_edge/core/notifications/local_notifier.dart';
 import 'package:clinical_edge/core/persistence/local_db.dart';
 import 'package:clinical_edge/core/role.dart';
+import 'package:clinical_edge/core/sharing/file_sharer.dart';
 import 'package:clinical_edge/features/admin/data/cohort_repository.dart';
 import 'package:clinical_edge/features/assessments/data/assessment_repository.dart';
 import 'package:clinical_edge/features/auth/data/auth_repository.dart';
@@ -29,6 +30,7 @@ List<Override> mockOverrides({
   SeedLoader? seed,
   LocalNotifier? notifier,
   CertificateFilePicker? filePicker,
+  FileSharer? sharer,
 }) {
   return <Override>[
     // Device services: real plugins from main.dart, fakes otherwise.
@@ -38,6 +40,7 @@ List<Override> mockOverrides({
     certificateFilePickerProvider.overrideWithValue(
       filePicker ?? const MockCertificateFilePicker(),
     ),
+    fileSharerProvider.overrideWithValue(sharer ?? RecordingFileSharer()),
     sharedPreferencesProvider.overrideWithValue(prefs),
     localDbProvider.overrideWithValue(db),
     if (seed != null) seedLoaderProvider.overrideWithValue(seed),

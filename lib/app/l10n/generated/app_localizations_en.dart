@@ -1006,4 +1006,188 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get receiptStart => 'Start course';
+
+  @override
+  String get cohortActive => 'Active learners';
+
+  @override
+  String cohortActiveSplit(String nursing, String physicians) {
+    return '$nursing nursing · $physicians physicians';
+  }
+
+  @override
+  String get cohortAvgCompletion => 'Avg. completion';
+
+  @override
+  String cohortDelta(String delta, String compared) {
+    return '$delta pts $compared';
+  }
+
+  @override
+  String get cohortExpiring => 'Expiring ≤ 90 days';
+
+  @override
+  String get cohortRemindersScheduled => 'Reminders scheduled';
+
+  @override
+  String get cohortPendingSignoffs => 'Pending sign-offs';
+
+  @override
+  String cohortSupervisors(String count) {
+    return '$count supervisors';
+  }
+
+  @override
+  String get cohortCompletionByCourse => 'Completion by course';
+
+  @override
+  String get cohortProgressByDept => 'Average progress by department';
+
+  @override
+  String get cohortExpiries => 'Expiries next 6 months';
+
+  @override
+  String cohortExpiriesTotal(String count) {
+    return '$count total';
+  }
+
+  @override
+  String get cohortLearners => 'Learners';
+
+  @override
+  String cohortLearnerLine(String pct, String department) {
+    return '$pct · $department';
+  }
+
+  @override
+  String cohortExpiryTag(String code, String days) {
+    return '$code ${days}d';
+  }
+
+  @override
+  String get cohortNoExpiry => 'No expiries';
+
+  @override
+  String cohortDemoNote(String label, String date) {
+    return '$label · as of $date';
+  }
+
+  @override
+  String chartSemantics(String title, String values) {
+    return '$title: $values';
+  }
+
+  @override
+  String auditChainOk(String count, String head) {
+    return 'Hash chain verified · $count append-only events · head $head';
+  }
+
+  @override
+  String auditChainBroken(String index, String action, String date) {
+    return 'Hash chain broken at event $index ($action · $date)';
+  }
+
+  @override
+  String get auditKindAll => 'All events';
+
+  @override
+  String get auditKindAudit => 'Audit';
+
+  @override
+  String get auditKindUsage => 'Usage';
+
+  @override
+  String get auditToday => 'Today';
+
+  @override
+  String get auditWeek => '7 days';
+
+  @override
+  String get auditUser => 'User';
+
+  @override
+  String get auditAction => 'Action';
+
+  @override
+  String get auditAnyUser => 'All users';
+
+  @override
+  String get auditAnyAction => 'All actions';
+
+  @override
+  String get auditSearch => 'Search targets';
+
+  @override
+  String auditCount(String count) {
+    return '$count events · newest first · no patient data, passwords or card details';
+  }
+
+  @override
+  String auditMeta(String user, String role, String platform, String date) {
+    return '$user · $role · $platform · $date';
+  }
+
+  @override
+  String get auditUsageNote => 'usage analytics · not chained';
+
+  @override
+  String auditShowMore(String count) {
+    return 'Show $count more';
+  }
+
+  @override
+  String get auditExport => 'Export CSV';
+
+  @override
+  String get auditExportReady => 'Export ready';
+
+  @override
+  String auditExportRows(String count) {
+    return '$count rows shared as CSV';
+  }
+
+  @override
+  String get auditEmpty => 'No events match these filters';
+
+  @override
+  String get insightsMostUsed => 'Most-used courses';
+
+  @override
+  String insightsViews(String count) {
+    return '$count views';
+  }
+
+  @override
+  String insightsDropOff(String course) {
+    return 'Drop-off · $course';
+  }
+
+  @override
+  String get insightsDropCaption =>
+      'Share of enrolled learners reaching each lesson.';
+
+  @override
+  String insightsLessonTag(String n) {
+    return 'Lesson $n';
+  }
+
+  @override
+  String insightsLessonShort(String n) {
+    return 'L$n';
+  }
+
+  @override
+  String get insightsPassRates => 'Assessment pass rates';
+
+  @override
+  String insightsAttempts(String count) {
+    return '$count attempts';
+  }
+
+  @override
+  String get insightsPlatforms => 'Sessions by platform';
+
+  @override
+  String get insightsNote =>
+      'Usage analytics live apart from the audit trail and swap to Firebase Analytics behind ActivityLogger.';
 }
