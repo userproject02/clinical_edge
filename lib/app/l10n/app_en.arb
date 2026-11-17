@@ -718,5 +718,215 @@
         "type": "int"
       }
     }
+  },
+  "assessQuestionsFromBank": "{count} questions · from a {bank}-question bank",
+  "@assessQuestionsFromBank": {
+    "description": "Quiz card subtitle.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "bank": {
+        "type": "int"
+      }
+    }
+  },
+  "assessPassMark": "Pass mark",
+  "@assessPassMark": {
+    "description": "Stat tile label."
+  },
+  "assessBestScore": "Best score",
+  "@assessBestScore": {
+    "description": "Stat tile label."
+  },
+  "assessAttempts": "Attempts",
+  "@assessAttempts": {
+    "description": "Stat tile label."
+  },
+  "assessStart": "Start assessment",
+  "@assessStart": {
+    "description": "Button: start a quiz."
+  },
+  "assessHistory": "Score history",
+  "@assessHistory": {
+    "description": "Section title."
+  },
+  "assessNoHistory": "No attempts yet. Your scores will appear here.",
+  "@assessNoHistory": {
+    "description": "Empty history."
+  },
+  "assessAttemptN": "Attempt {n}",
+  "@assessAttemptN": {
+    "description": "History row title.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "assessUnlocksAfter": "Unlocks after all {count} lessons",
+  "@assessUnlocksAfter": {
+    "description": "Locked quiz line.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "assessLocked": "Locked",
+  "@assessLocked": {
+    "description": "Locked tag."
+  },
+  "quizQuestionOf": "Question {n} of {total}",
+  "@quizQuestionOf": {
+    "description": "Quiz header.",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "quizPassTag": "Pass {pct}",
+  "@quizPassTag": {
+    "description": "Quiz header tag, pct is like 80%.",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "quizOptionLetters": "A|B|C|D",
+  "@quizOptionLetters": {
+    "description": "Option badge letters separated by |."
+  },
+  "quizOptionSemantics": "Option {letter}: {text}",
+  "@quizOptionSemantics": {
+    "description": "Option semantics.",
+    "placeholders": {
+      "letter": {
+        "type": "String"
+      },
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "quizCorrect": "Correct",
+  "@quizCorrect": {
+    "description": "Feedback title."
+  },
+  "quizNotQuite": "Not quite",
+  "@quizNotQuite": {
+    "description": "Feedback title."
+  },
+  "quizExplanation": "Explanation: {text}",
+  "@quizExplanation": {
+    "description": "Feedback body.",
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "quizNext": "Next question",
+  "@quizNext": {
+    "description": "Sticky button."
+  },
+  "quizSeeResults": "See results",
+  "@quizSeeResults": {
+    "description": "Sticky button on last question."
+  },
+  "quizLeaveTitle": "Leave assessment?",
+  "@quizLeaveTitle": {
+    "description": "Dialog title."
+  },
+  "quizLeaveBody": "Your answers will be lost.",
+  "@quizLeaveBody": {
+    "description": "Dialog body."
+  },
+  "quizLeaveStay": "Stay",
+  "@quizLeaveStay": {
+    "description": "Dialog: keep going."
+  },
+  "quizLeaveConfirm": "Leave",
+  "@quizLeaveConfirm": {
+    "description": "Dialog: leave."
+  },
+  "quizProgressSemantics": "{answered} of {total} questions answered",
+  "@quizProgressSemantics": {
+    "description": "Progress bar semantics.",
+    "placeholders": {
+      "answered": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "resultCorrectCount": "{correct} / {total} correct",
+  "@resultCorrectCount": {
+    "description": "Result line; numbers are LTR-isolated.",
+    "placeholders": {
+      "correct": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "resultPassedTag": "Passed",
+  "@resultPassedTag": {
+    "description": "Result tag."
+  },
+  "resultBelowTag": "Below pass mark",
+  "@resultBelowTag": {
+    "description": "Result tag."
+  },
+  "resultPassedTitle": "Assessment passed",
+  "@resultPassedTitle": {
+    "description": "Result title."
+  },
+  "resultFailedTitle": "Not passed this time",
+  "@resultFailedTitle": {
+    "description": "Result title."
+  },
+  "resultPassedBody": "Well done. This attempt is saved to your score history.",
+  "@resultPassedBody": {
+    "description": "Result supporting line."
+  },
+  "resultFailedBody": "You need {pct} to pass. Review the course and try again.",
+  "@resultFailedBody": {
+    "description": "Result supporting line.",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "resultAudit": "Recorded to audit trail",
+  "@resultAudit": {
+    "description": "Audit row label."
+  },
+  "resultScoreSemantics": "Score {pct}",
+  "@resultScoreSemantics": {
+    "description": "Ring semantics.",
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "resultDone": "Done",
+  "@resultDone": {
+    "description": "Button."
+  },
+  "resultRetake": "Retake",
+  "@resultRetake": {
+    "description": "Button."
   }
 }

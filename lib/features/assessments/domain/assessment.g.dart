@@ -36,6 +36,7 @@ _Quiz _$QuizFromJson(Map<String, dynamic> json) => _Quiz(
   id: json['id'] as String,
   courseId: json['courseId'] as String,
   title: LocalizedText.fromJson(json['title'] as Map<String, dynamic>),
+  subject: LocalizedText.fromJson(json['subject'] as Map<String, dynamic>),
   topicOrder: (json['topicOrder'] as List<dynamic>)
       .map((e) => e as String)
       .toList(),
@@ -47,6 +48,7 @@ Map<String, dynamic> _$QuizToJson(_Quiz instance) => <String, dynamic>{
   'id': instance.id,
   'courseId': instance.courseId,
   'title': instance.title.toJson(),
+  'subject': instance.subject.toJson(),
   'topicOrder': instance.topicOrder,
   'size': instance.size,
   'passMarkPct': instance.passMarkPct,

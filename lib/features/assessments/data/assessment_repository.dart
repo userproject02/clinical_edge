@@ -11,6 +11,12 @@ abstract interface class AssessmentRepository {
   /// Quiz definition.
   Future<Quiz> quiz(String quizId);
 
+  /// Every quiz definition (seed order).
+  Future<List<Quiz>> quizzes();
+
+  /// Number of questions in the bank.
+  Future<int> bankSize();
+
   /// The questions of one attempt. v1 draws them in a fixed order (the
   /// quiz's topics in `topicOrder`, bank order within a topic) so the demo
   /// is stable; the BLS quiz is the 8 resuscitation questions.
@@ -43,6 +49,17 @@ class MockAssessmentRepository implements AssessmentRepository {
           .objects('quizzes')
           .map(Quiz.fromJson)
           .firstWhere((q) => q.id == quizId);
+
+  @override
+  Future<List<Quiz>> quizzes() async =>
+      (await seed.load(SeedFile.questionBank))
+          .objects('quizzes')
+          .map(Quiz.fromJson)
+          .toList();
+
+  @override
+  Future<int> bankSize() async =>
+      (await seed.load(SeedFile.questionBank)).objects('questions').length;
 
   @override
   Future<List<Question>> drawQuiz(String quizId) async {

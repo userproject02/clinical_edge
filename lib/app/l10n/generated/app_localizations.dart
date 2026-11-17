@@ -985,6 +985,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'+{n} CPD/CME credits added'**
   String courseCompleteBody(int n);
+
+  /// Quiz card subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} questions · from a {bank}-question bank'**
+  String assessQuestionsFromBank(int count, int bank);
+
+  /// Stat tile label.
+  ///
+  /// In en, this message translates to:
+  /// **'Pass mark'**
+  String get assessPassMark;
+
+  /// Stat tile label.
+  ///
+  /// In en, this message translates to:
+  /// **'Best score'**
+  String get assessBestScore;
+
+  /// Stat tile label.
+  ///
+  /// In en, this message translates to:
+  /// **'Attempts'**
+  String get assessAttempts;
+
+  /// Button: start a quiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Start assessment'**
+  String get assessStart;
+
+  /// Section title.
+  ///
+  /// In en, this message translates to:
+  /// **'Score history'**
+  String get assessHistory;
+
+  /// Empty history.
+  ///
+  /// In en, this message translates to:
+  /// **'No attempts yet. Your scores will appear here.'**
+  String get assessNoHistory;
+
+  /// History row title.
+  ///
+  /// In en, this message translates to:
+  /// **'Attempt {n}'**
+  String assessAttemptN(int n);
+
+  /// Locked quiz line.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocks after all {count} lessons'**
+  String assessUnlocksAfter(int count);
+
+  /// Locked tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get assessLocked;
+
+  /// Quiz header.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {n} of {total}'**
+  String quizQuestionOf(String n, String total);
+
+  /// Quiz header tag, pct is like 80%.
+  ///
+  /// In en, this message translates to:
+  /// **'Pass {pct}'**
+  String quizPassTag(String pct);
+
+  /// Option badge letters separated by |.
+  ///
+  /// In en, this message translates to:
+  /// **'A|B|C|D'**
+  String get quizOptionLetters;
+
+  /// Option semantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Option {letter}: {text}'**
+  String quizOptionSemantics(String letter, String text);
+
+  /// Feedback title.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get quizCorrect;
+
+  /// Feedback title.
+  ///
+  /// In en, this message translates to:
+  /// **'Not quite'**
+  String get quizNotQuite;
+
+  /// Feedback body.
+  ///
+  /// In en, this message translates to:
+  /// **'Explanation: {text}'**
+  String quizExplanation(String text);
+
+  /// Sticky button.
+  ///
+  /// In en, this message translates to:
+  /// **'Next question'**
+  String get quizNext;
+
+  /// Sticky button on last question.
+  ///
+  /// In en, this message translates to:
+  /// **'See results'**
+  String get quizSeeResults;
+
+  /// Dialog title.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave assessment?'**
+  String get quizLeaveTitle;
+
+  /// Dialog body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answers will be lost.'**
+  String get quizLeaveBody;
+
+  /// Dialog: keep going.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay'**
+  String get quizLeaveStay;
+
+  /// Dialog: leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get quizLeaveConfirm;
+
+  /// Progress bar semantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{answered} of {total} questions answered'**
+  String quizProgressSemantics(int answered, int total);
+
+  /// Result line; numbers are LTR-isolated.
+  ///
+  /// In en, this message translates to:
+  /// **'{correct} / {total} correct'**
+  String resultCorrectCount(String correct, String total);
+
+  /// Result tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Passed'**
+  String get resultPassedTag;
+
+  /// Result tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Below pass mark'**
+  String get resultBelowTag;
+
+  /// Result title.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment passed'**
+  String get resultPassedTitle;
+
+  /// Result title.
+  ///
+  /// In en, this message translates to:
+  /// **'Not passed this time'**
+  String get resultFailedTitle;
+
+  /// Result supporting line.
+  ///
+  /// In en, this message translates to:
+  /// **'Well done. This attempt is saved to your score history.'**
+  String get resultPassedBody;
+
+  /// Result supporting line.
+  ///
+  /// In en, this message translates to:
+  /// **'You need {pct} to pass. Review the course and try again.'**
+  String resultFailedBody(String pct);
+
+  /// Audit row label.
+  ///
+  /// In en, this message translates to:
+  /// **'Recorded to audit trail'**
+  String get resultAudit;
+
+  /// Ring semantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Score {pct}'**
+  String resultScoreSemantics(String pct);
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get resultDone;
+
+  /// Button.
+  ///
+  /// In en, this message translates to:
+  /// **'Retake'**
+  String get resultRetake;
 }
 
 class _AppLocalizationsDelegate

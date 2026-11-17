@@ -349,7 +349,8 @@ $LocalizedTextCopyWith<$Res> get explanation {
 /// @nodoc
 mixin _$Quiz {
 
- String get id; String get courseId; LocalizedText get title; List<String> get topicOrder; int get size; int get passMarkPct;
+ String get id; String get courseId; LocalizedText get title;/// What the quiz covers, shown on the Assess tab ("Basic Life Support").
+ LocalizedText get subject; List<String> get topicOrder; int get size; int get passMarkPct;
 /// Create a copy of Quiz
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -363,20 +364,20 @@ $QuizCopyWith<Quiz> get copyWith => _$QuizCopyWithImpl<Quiz>(this as Quiz, _$ide
 @override
 bool operator ==(Object other) {
   final _this = this as Quiz;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Quiz&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.courseId, _this.courseId) || other.courseId == _this.courseId)&&(identical(other.title, _this.title) || other.title == _this.title)&&const DeepCollectionEquality().equals(other.topicOrder, _this.topicOrder)&&(identical(other.size, _this.size) || other.size == _this.size)&&(identical(other.passMarkPct, _this.passMarkPct) || other.passMarkPct == _this.passMarkPct));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Quiz&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.courseId, _this.courseId) || other.courseId == _this.courseId)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.subject, _this.subject) || other.subject == _this.subject)&&const DeepCollectionEquality().equals(other.topicOrder, _this.topicOrder)&&(identical(other.size, _this.size) || other.size == _this.size)&&(identical(other.passMarkPct, _this.passMarkPct) || other.passMarkPct == _this.passMarkPct));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Quiz;
-  return Object.hash(runtimeType,_this.id,_this.courseId,_this.title,const DeepCollectionEquality().hash(_this.topicOrder),_this.size,_this.passMarkPct);
+  return Object.hash(runtimeType,_this.id,_this.courseId,_this.title,_this.subject,const DeepCollectionEquality().hash(_this.topicOrder),_this.size,_this.passMarkPct);
 }
 
 @override
 String toString() {
   final _this = this as Quiz;
-  return 'Quiz(id: ${_this.id}, courseId: ${_this.courseId}, title: ${_this.title}, topicOrder: ${_this.topicOrder}, size: ${_this.size}, passMarkPct: ${_this.passMarkPct})';
+  return 'Quiz(id: ${_this.id}, courseId: ${_this.courseId}, title: ${_this.title}, subject: ${_this.subject}, topicOrder: ${_this.topicOrder}, size: ${_this.size}, passMarkPct: ${_this.passMarkPct})';
 }
 
 
@@ -387,11 +388,11 @@ abstract mixin class $QuizCopyWith<$Res>  {
   factory $QuizCopyWith(Quiz value, $Res Function(Quiz) _then) = _$QuizCopyWithImpl;
 @useResult
 $Res call({
- String id, String courseId, LocalizedText title, List<String> topicOrder, int size, int passMarkPct
+ String id, String courseId, LocalizedText title, LocalizedText subject, List<String> topicOrder, int size, int passMarkPct
 });
 
 
-$LocalizedTextCopyWith<$Res> get title;
+$LocalizedTextCopyWith<$Res> get title;$LocalizedTextCopyWith<$Res> get subject;
 
 }
 /// @nodoc
@@ -404,11 +405,12 @@ class _$QuizCopyWithImpl<$Res>
 
 /// Create a copy of Quiz
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? courseId = null,Object? title = null,Object? topicOrder = null,Object? size = null,Object? passMarkPct = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? courseId = null,Object? title = null,Object? subject = null,Object? topicOrder = null,Object? size = null,Object? passMarkPct = null,}) {
   return _then(Quiz(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,courseId: null == courseId ? _self.courseId : courseId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as LocalizedText,subject: null == subject ? _self.subject : subject // ignore: cast_nullable_to_non_nullable
 as LocalizedText,topicOrder: null == topicOrder ? _self.topicOrder : topicOrder // ignore: cast_nullable_to_non_nullable
 as List<String>,size: null == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
 as int,passMarkPct: null == passMarkPct ? _self.passMarkPct : passMarkPct // ignore: cast_nullable_to_non_nullable
@@ -423,6 +425,15 @@ $LocalizedTextCopyWith<$Res> get title {
   
   return $LocalizedTextCopyWith<$Res>(_self.title, (value) {
     return _then(_self.copyWith(title: value));
+  });
+}/// Create a copy of Quiz
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocalizedTextCopyWith<$Res> get subject {
+  
+  return $LocalizedTextCopyWith<$Res>(_self.subject, (value) {
+    return _then(_self.copyWith(subject: value));
   });
 }
 }
@@ -506,10 +517,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String courseId,  LocalizedText title,  List<String> topicOrder,  int size,  int passMarkPct)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String courseId,  LocalizedText title,  LocalizedText subject,  List<String> topicOrder,  int size,  int passMarkPct)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Quiz() when $default != null:
-return $default(_that.id,_that.courseId,_that.title,_that.topicOrder,_that.size,_that.passMarkPct);case _:
+return $default(_that.id,_that.courseId,_that.title,_that.subject,_that.topicOrder,_that.size,_that.passMarkPct);case _:
   return orElse();
 
 }
@@ -527,10 +538,10 @@ return $default(_that.id,_that.courseId,_that.title,_that.topicOrder,_that.size,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String courseId,  LocalizedText title,  List<String> topicOrder,  int size,  int passMarkPct)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String courseId,  LocalizedText title,  LocalizedText subject,  List<String> topicOrder,  int size,  int passMarkPct)  $default,) {final _that = this;
 switch (_that) {
 case _Quiz():
-return $default(_that.id,_that.courseId,_that.title,_that.topicOrder,_that.size,_that.passMarkPct);case _:
+return $default(_that.id,_that.courseId,_that.title,_that.subject,_that.topicOrder,_that.size,_that.passMarkPct);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -547,10 +558,10 @@ return $default(_that.id,_that.courseId,_that.title,_that.topicOrder,_that.size,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String courseId,  LocalizedText title,  List<String> topicOrder,  int size,  int passMarkPct)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String courseId,  LocalizedText title,  LocalizedText subject,  List<String> topicOrder,  int size,  int passMarkPct)?  $default,) {final _that = this;
 switch (_that) {
 case _Quiz() when $default != null:
-return $default(_that.id,_that.courseId,_that.title,_that.topicOrder,_that.size,_that.passMarkPct);case _:
+return $default(_that.id,_that.courseId,_that.title,_that.subject,_that.topicOrder,_that.size,_that.passMarkPct);case _:
   return null;
 
 }
@@ -562,12 +573,14 @@ return $default(_that.id,_that.courseId,_that.title,_that.topicOrder,_that.size,
 @JsonSerializable()
 
 class _Quiz implements Quiz {
-  const _Quiz({required this.id, required this.courseId, required this.title, required  List<String> topicOrder, required this.size, required this.passMarkPct}): _topicOrder = topicOrder;
+  const _Quiz({required this.id, required this.courseId, required this.title, required this.subject, required  List<String> topicOrder, required this.size, required this.passMarkPct}): _topicOrder = topicOrder;
   factory _Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
 
 @override final  String id;
 @override final  String courseId;
 @override final  LocalizedText title;
+/// What the quiz covers, shown on the Assess tab ("Basic Life Support").
+@override final  LocalizedText subject;
  final  List<String> _topicOrder;
 @override List<String> get topicOrder {
   if (_topicOrder is EqualUnmodifiableListView) return _topicOrder;
@@ -591,18 +604,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Quiz&&(identical(other.id, id) || other.id == id)&&(identical(other.courseId, courseId) || other.courseId == courseId)&&(identical(other.title, title) || other.title == title)&&const DeepCollectionEquality().equals(other.topicOrder, _topicOrder)&&(identical(other.size, size) || other.size == size)&&(identical(other.passMarkPct, passMarkPct) || other.passMarkPct == passMarkPct));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Quiz&&(identical(other.id, id) || other.id == id)&&(identical(other.courseId, courseId) || other.courseId == courseId)&&(identical(other.title, title) || other.title == title)&&(identical(other.subject, subject) || other.subject == subject)&&const DeepCollectionEquality().equals(other.topicOrder, _topicOrder)&&(identical(other.size, size) || other.size == size)&&(identical(other.passMarkPct, passMarkPct) || other.passMarkPct == passMarkPct));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,courseId,title,const DeepCollectionEquality().hash(_topicOrder),size,passMarkPct);
+    return Object.hash(runtimeType,id,courseId,title,subject,const DeepCollectionEquality().hash(_topicOrder),size,passMarkPct);
 }
 
 @override
 String toString() {
-    return 'Quiz(id: $id, courseId: $courseId, title: $title, topicOrder: $topicOrder, size: $size, passMarkPct: $passMarkPct)';
+    return 'Quiz(id: $id, courseId: $courseId, title: $title, subject: $subject, topicOrder: $topicOrder, size: $size, passMarkPct: $passMarkPct)';
 }
 
 
@@ -613,11 +626,11 @@ abstract mixin class _$QuizCopyWith<$Res> implements $QuizCopyWith<$Res> {
   factory _$QuizCopyWith(_Quiz value, $Res Function(_Quiz) _then) = __$QuizCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String courseId, LocalizedText title, List<String> topicOrder, int size, int passMarkPct
+ String id, String courseId, LocalizedText title, LocalizedText subject, List<String> topicOrder, int size, int passMarkPct
 });
 
 
-@override $LocalizedTextCopyWith<$Res> get title;
+@override $LocalizedTextCopyWith<$Res> get title;@override $LocalizedTextCopyWith<$Res> get subject;
 
 }
 /// @nodoc
@@ -630,11 +643,12 @@ class __$QuizCopyWithImpl<$Res>
 
 /// Create a copy of Quiz
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? courseId = null,Object? title = null,Object? topicOrder = null,Object? size = null,Object? passMarkPct = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? courseId = null,Object? title = null,Object? subject = null,Object? topicOrder = null,Object? size = null,Object? passMarkPct = null,}) {
   return _then(_Quiz(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,courseId: null == courseId ? _self.courseId : courseId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as LocalizedText,subject: null == subject ? _self.subject : subject // ignore: cast_nullable_to_non_nullable
 as LocalizedText,topicOrder: null == topicOrder ? _self._topicOrder : topicOrder // ignore: cast_nullable_to_non_nullable
 as List<String>,size: null == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
 as int,passMarkPct: null == passMarkPct ? _self.passMarkPct : passMarkPct // ignore: cast_nullable_to_non_nullable
@@ -650,6 +664,15 @@ $LocalizedTextCopyWith<$Res> get title {
   
   return $LocalizedTextCopyWith<$Res>(_self.title, (value) {
     return _then(_self.copyWith(title: value));
+  });
+}/// Create a copy of Quiz
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LocalizedTextCopyWith<$Res> get subject {
+  
+  return $LocalizedTextCopyWith<$Res>(_self.subject, (value) {
+    return _then(_self.copyWith(subject: value));
   });
 }
 }

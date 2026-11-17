@@ -199,7 +199,7 @@ void main() {
       tester,
     ) async {
       final c = await _pumpApp(tester, signedInAs: Role.learner);
-      c.read(routerProvider).go(AppRoutes.quiz('bls'));
+      c.read(routerProvider).go(AppRoutes.course('c1'));
       await settle(tester);
       await tester.tap(
         find.descendant(
@@ -212,11 +212,11 @@ void main() {
       await tester.tap(
         find.descendant(
           of: find.byType(NavigationBar),
-          matching: find.text('Assess'),
+          matching: find.text('Learn'),
         ),
       );
       await settle(tester);
-      expect(_location(c), '/assess/bls/run');
+      expect(_location(c), '/learn/c1');
     });
 
     testWidgets('TC-PH1-47 avatar pushes /profile; upload opens a sheet', (
@@ -261,14 +261,14 @@ void main() {
       expect(back.left, greaterThan(195), reason: 'back arrow on the right');
     });
 
-    testWidgets('TC-PH1-49 every remaining placeholder shows its title', (tester) async {
+    testWidgets('TC-PH1-49 every remaining placeholder shows its title', (
+      tester,
+    ) async {
       final c = await _pumpApp(tester, signedInAs: Role.learner);
       final router = c.read(routerProvider);
       final expected = <String, String>{
         '/learn/c3/checkout': 'Checkout',
         '/learn/c3/receipt/o1': 'Receipt',
-        '/assess': 'Assessments',
-        '/assess/bls/run': 'Quiz',
         '/certs': 'Certifications & CPD',
         '/signoffs': 'Competencies',
       };

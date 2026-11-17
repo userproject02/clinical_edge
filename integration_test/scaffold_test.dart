@@ -31,7 +31,7 @@ void main() {
         child: const ClinicalEdgeApp(showDebugMenu: false),
       ),
     );
-    await tester.pump(const Duration(seconds: 1));
+    await _settleLive(tester);
     expect(find.text('Sign in'), findsWidgets);
 
     await c.read(sessionProvider.future);
@@ -43,15 +43,25 @@ void main() {
             password: 'x',
             role: role,
           );
-      await tester.pump(const Duration(seconds: 1));
+      await Future<void>.delayed(const Duration(seconds: 1));
+      await tester.pump();
       expect(find.byType(NavigationBar), findsOneWidget);
     }
 
     await c.read(themeModeProvider.notifier).set(ThemeMode.dark);
     await c.read(localeProvider.notifier).set(const Locale('ar'));
-    await tester.pump(const Duration(seconds: 1));
+    await _settleLive(tester);
     final nav = tester.element(find.byType(NavigationBar));
     expect(Directionality.of(nav), TextDirection.rtl);
     expect(Theme.of(nav).brightness, Brightness.dark);
   });
+}
+
+/// Pumps frames in real time for about a second (on a device, animations
+/// such as the theme cross-fade start on the first frame and need more).
+Future<void> _settleLive(WidgetTester tester) async {
+  for (var i = 0; i < 12; i++) {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    await tester.pump();
+  }
 }

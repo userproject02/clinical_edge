@@ -53,3 +53,4 @@ coverage/
 
 # Gradle output
 /android/build/
+**/failures/

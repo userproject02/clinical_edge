@@ -8,6 +8,8 @@ import 'package:clinical_edge/core/motion.dart';
 import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/core/widgets/app_bottom_sheet.dart';
 import 'package:clinical_edge/core/widgets/bottom_nav_bar.dart';
+import 'package:clinical_edge/features/assessments/presentation/assess_screen.dart';
+import 'package:clinical_edge/features/assessments/presentation/quiz_screen.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/auth/presentation/sign_in_screen.dart';
 import 'package:clinical_edge/features/courses/presentation/catalogue_screen.dart';
@@ -164,8 +166,18 @@ RouteBase _learnerShell(GlobalKey<NavigatorState> rootKey) {
           AppRoutes.assess,
           (l) => l.titleAssessments,
           Icons.assignment_turned_in_outlined,
+          screen: (_) => const AssessScreen(),
           routes: <RouteBase>[
-            _detail(':quizId/run', (l) => l.titleQuiz, Icons.quiz_outlined),
+            // Root navigator: the quiz has no bottom navigation.
+            GoRoute(
+              path: ':quizId/run',
+              parentNavigatorKey: rootKey,
+              pageBuilder: (context, state) => pushPage(
+                context,
+                state,
+                QuizScreen(quizId: state.pathParameters['quizId']!),
+              ),
+            ),
           ],
         ),
       ),

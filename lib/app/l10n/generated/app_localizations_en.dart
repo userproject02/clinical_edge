@@ -497,4 +497,133 @@ class AppLocalizationsEn extends AppLocalizations {
   String courseCompleteBody(int n) {
     return '+$n CPD/CME credits added';
   }
+
+  @override
+  String assessQuestionsFromBank(int count, int bank) {
+    return '$count questions · from a $bank-question bank';
+  }
+
+  @override
+  String get assessPassMark => 'Pass mark';
+
+  @override
+  String get assessBestScore => 'Best score';
+
+  @override
+  String get assessAttempts => 'Attempts';
+
+  @override
+  String get assessStart => 'Start assessment';
+
+  @override
+  String get assessHistory => 'Score history';
+
+  @override
+  String get assessNoHistory =>
+      'No attempts yet. Your scores will appear here.';
+
+  @override
+  String assessAttemptN(int n) {
+    return 'Attempt $n';
+  }
+
+  @override
+  String assessUnlocksAfter(int count) {
+    return 'Unlocks after all $count lessons';
+  }
+
+  @override
+  String get assessLocked => 'Locked';
+
+  @override
+  String quizQuestionOf(String n, String total) {
+    return 'Question $n of $total';
+  }
+
+  @override
+  String quizPassTag(String pct) {
+    return 'Pass $pct';
+  }
+
+  @override
+  String get quizOptionLetters => 'A|B|C|D';
+
+  @override
+  String quizOptionSemantics(String letter, String text) {
+    return 'Option $letter: $text';
+  }
+
+  @override
+  String get quizCorrect => 'Correct';
+
+  @override
+  String get quizNotQuite => 'Not quite';
+
+  @override
+  String quizExplanation(String text) {
+    return 'Explanation: $text';
+  }
+
+  @override
+  String get quizNext => 'Next question';
+
+  @override
+  String get quizSeeResults => 'See results';
+
+  @override
+  String get quizLeaveTitle => 'Leave assessment?';
+
+  @override
+  String get quizLeaveBody => 'Your answers will be lost.';
+
+  @override
+  String get quizLeaveStay => 'Stay';
+
+  @override
+  String get quizLeaveConfirm => 'Leave';
+
+  @override
+  String quizProgressSemantics(int answered, int total) {
+    return '$answered of $total questions answered';
+  }
+
+  @override
+  String resultCorrectCount(String correct, String total) {
+    return '$correct / $total correct';
+  }
+
+  @override
+  String get resultPassedTag => 'Passed';
+
+  @override
+  String get resultBelowTag => 'Below pass mark';
+
+  @override
+  String get resultPassedTitle => 'Assessment passed';
+
+  @override
+  String get resultFailedTitle => 'Not passed this time';
+
+  @override
+  String get resultPassedBody =>
+      'Well done. This attempt is saved to your score history.';
+
+  @override
+  String resultFailedBody(String pct) {
+    return 'You need $pct to pass. Review the course and try again.';
+  }
+
+  @override
+  String get resultAudit => 'Recorded to audit trail';
+
+  @override
+  String resultScoreSemantics(String pct) {
+    return 'Score $pct';
+  }
+
+  @override
+  String get resultDone => 'Done';
+
+  @override
+  String get resultRetake => 'Retake';
 }

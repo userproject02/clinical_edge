@@ -10,10 +10,10 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 
 ## Current status
 
-- Phase: **Phase 4 done, next: Phase 5 Assessments**
-- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award)
-- App code: sign-in, Profile & settings, home, catalogue, course detail and lesson player are real; assess, certs, sign-offs, checkout, staff screens are placeholders
-- Last updated: 2026-11-17 · claude/cloud-session
+- Phase: **Phase 5 done, next: Phase 6 Certifications and CPD**
+- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit)
+- App code: sign-in, Profile & settings, home, catalogue, course detail, lesson player, Assess tab and quiz are real; certs, sign-offs, checkout, staff screens are placeholders
+- Last updated: 2026-11-17 · claude/gurus-macbook-air
 
 ## Module map
 
@@ -36,7 +36,7 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 | auth (data) | `/sign-in` (Phase 3 UI) | authRepositoryProvider | AuthRepository | test/features/repositories_test.dart |
 | home | `/home` | learnerOverviewProvider, myCertificationsProvider, cpdConfigProvider, cpdLedgerProvider, quizHistoryProvider, checklistsProvider, mySignOffsProvider | Course/Progress/Certification/Cpd/Assessment/Competency | test/features/courses_test.dart |
 | courses | `/learn`, `/learn/:courseId`, `/learn/:courseId/lesson/:n` | catalogueProvider, categoriesProvider, courseProgressListProvider, courseProgressProvider, completeLessonProvider, logCourseViewProvider, logLessonViewProvider | CourseRepository, ProgressRepository, CpdRepository | test/features/courses_test.dart |
-| assessments (data) | `/assess` (Phase 5 UI) | assessmentRepositoryProvider | AssessmentRepository | test/features/repositories_test.dart |
+| assessments | `/assess`, `/assess/:quizId/run` (root navigator, no bottom nav) | assessmentRepositoryProvider, quizCardsProvider, quizRunProvider(quizId), attemptIdFactoryProvider, quizHistoryProvider | AssessmentRepository (+ SubmitAttempt use case) | test/features/assessments_test.dart, test/features/repositories_test.dart, integration_test/assessments_test.dart |
 | certifications (data) | `/certs` (Phase 6 UI) | certificationRepositoryProvider, cpdRepositoryProvider | CertificationRepository, CpdRepository | test/features/repositories_test.dart |
 | competencies (data) | `/signoffs`, `/queue` (Phase 7 UI) | competencyRepositoryProvider | CompetencyRepository | test/features/repositories_test.dart |
 | checkout (data) | `/learn/:id/checkout` (Phase 8 UI) | checkoutRepositoryProvider | CheckoutRepository | test/features/repositories_test.dart |
@@ -58,6 +58,7 @@ Implemented:
 - `AppColors` token names and values (match the prototype canvas); shared widget public APIs in `lib/core/widgets/`.
 - `Motion` constant names in `lib/core/motion.dart`.
 
+- Quiz audit target: `"<quiz title EN> · <score>% (pass|fail)"`, e.g. `BLS Assessment · 88% (pass)`. Score = `QuizRules.scorePct` (half up), pass ≥ 80. Quiz ids `bls` (8 questions) and `ipc` (7, unlocks when c2 is complete).
 - Repository interfaces in `lib/features/*/data/*_repository.dart`: AuthRepository, CourseRepository, ProgressRepository, AssessmentRepository, CertificationRepository, CpdRepository, CompetencyRepository, CheckoutRepository, CohortRepository.
 - `ActivityEvent` fields: id, ts (UTC), userId, role, action, target, platform (`ios`/`android`), kind (`audit`/`usage`), prevHash, hash (audit only). Action wire names: `AuditAction` (role.change, quiz.score, signoff.request, signoff.decision, purchase, cert.upload, course.complete, audit.export) and `UsageAction` (auth.signin, auth.signout, course.view, lesson.view, lesson.complete, checkout.start, notify.reminder).
 - Audit hash: `SHA-256(prevHash|ts|userId|role|action|target|platform)` lower hex; ts = ISO-8601 UTC (`toIso8601String`), role = enum name; first prevHash = 64 zeros. `AuditStore` exposes append + list only. Targets pass `TargetSanitizer` (≤ 120 chars; no card numbers, CVC, emails, passwords).
@@ -68,6 +69,12 @@ Implemented:
 - Demo clock: `FixedClock(demoNow)` = 2026-11-17 09:00 Asia/Dubai; calendar maths in Dubai time (UTC+4). Cert status: ≤ 0 days expired, ≤ 90 renew soon, else valid; pending verification → verifying.
 
 ## Decisions (newest first)
+
+- 2026-11-17 · `SubmitAttempt` stamps a new attempt at least 1 s after the user's latest one. Why: under the fixed demo clock every attempt would share one instant and "newest first" / "Attempt N" would be ambiguous.
+- 2026-11-17 · Quiz route sits on the root navigator (path unchanged `/assess/:quizId/run`). Why: the brief says no bottom nav during a quiz; TC-PH1-46 now checks tab state with `/learn/c1`.
+- 2026-11-17 · Kept `drawQuiz(quizId)` (the brief says `drawQuiz(topic, 8)`); the quiz's `topicOrder` and `size` drive the draw. Why: no breaking change; IPC quiz is topic `infection_control`, 7 questions (the bank has 7).
+- 2026-11-17 · Quiz `subject` field ({en, ar}) and IPC quiz added to `question_bank.json`; `DemoSeeder.seedVersion` → 3. Why: card title "Basic Life Support" differs from the quiz title used in the audit target.
+- 2026-11-17 · Leave confirmation only when at least one answer is locked and no result yet. Why: nothing to lose before the first answer or after saving.
 
 - 2026-11-17 · Progress is derived, never stored twice: `courseProgressListProvider` combines catalogue + ownership + lesson progress; `completeLessonProvider` invalidates `lessonProgressProvider` and `cpdLedgerProvider`, so home, carousel, catalogue, detail and CPD update together. Why: CRS-3 "updates everywhere".
 - 2026-11-17 · `MarkLessonComplete` awards credits only on the transition to all-done (ledger id `cpd-course-<course>-<user>`), so re-completing cannot double count. Why: CRS-4.
@@ -108,9 +115,10 @@ Implemented:
 ## Known issues / TODO
 
 - [ ] `docs/design/` has no screenshots; Phase 1 was built from the prototype canvas itself (artifact "ClinicalEdge", `Main.dc.html`). Export the storyboard frames into `docs/design/` when convenient.
-- [ ] Phase 1 not yet run on an iOS simulator / Android emulator (built in a cloud session with no devices). Run `flutter run` on both and `flutter test integration_test` (TC-PH1-51), then mark it Passing.
 - [ ] Bell button is a no-op until Phase 6 wires the simulated expiry reminder.
-- [ ] Phases 1–3 not yet run on an iOS simulator / Android emulator (cloud session, no devices).
+- [ ] Android emulator run pending for Phases 1–5 (iOS simulator: integration tests pass as of Phase 5).
+- [ ] Phase 5 goldens (`test/features/goldens/{assess,quiz_*,result_*}`) were generated on macOS; regenerate on Linux (`flutter test --update-goldens --tags golden`) so CI matches.
+- [ ] Arabic numeric ranges in seed options render reversed in RTL ("80–60"); see `docs/TESTCASES.md` → Review notes.
 - [ ] Clinical and native-Arabic review of all seed content (see `docs/TESTCASES.md` → Review notes).
 - [ ] `HiveLocalDb` stores everything in plain JSON on device; fine for demo data, revisit (encryption) if real data ever lands.
 - [ ] Remove `MaterialUiCompatibilityBridge` when fl_chart migrates to `material_ui`.
@@ -118,9 +126,11 @@ Implemented:
 
 ## Next up
 
-Phase 5 — Assessments: `/assess` with pass mark, best score, history (QZ-3), `/assess/:quizId/run` quiz with instant feedback and explanation (QZ-1), scoring + result ring + `quiz.score` audit (QZ-2), using `AssessmentRepository.drawQuiz` and `QuizRules`. Test cases TC-QZ-*.
+Phase 6 — Certifications and CPD: `/certs` list with status and expiry bar (CERT-1), CPD meter + ledger (CERT-2), upload sheet → Verifying + `cert.upload` audit (CERT-3), reminders at 90/60/30/7 days with simulate button and settings toggle + `notify.reminder` (CERT-4). Test cases TC-CERT-*.
 
 ## Change log (newest first; last 30 entries, older in docs/changelog/)
+
+- 2026-11-17 · claude/gurus-macbook-air · Phase 5: Assess tab (BLS card with pass mark / best / attempts, score history newest first with meter + tag, IPC card locked until c2 complete), quiz on the root navigator (question N of 8, pass tag, 8-segment bar, A–D / أ–د badges, first tap locks, check draw / shake, explanation card, sticky Next → See results, leave confirmation), result (animated ring, n / 8 correct, Passed / Below pass mark, audit row, Done / Retake), SubmitAttempt use case (score, attempt, quiz.score audit), quizCardsProvider + quizRunProvider, 24 goldens, device journey; Phase 1 device test fixed for real-time pumping · lib/features/assessments, lib/app/router.dart, lib/app/l10n, lib/seed/question_bank.json, test/features/assessments_test.dart, integration_test/ · QZ-1..3 · BREAKING: `Quiz.subject` is a new required field (seed updated) and `AssessmentRepository` gains `quizzes()` and `bankSize()` (MockAssessmentRepository updated; other implementations must add them)
 
 - 2026-11-17 · claude/cloud-session · Phase 4: learner home (hero ring + resume, expiry alert, CPD meter, continue-learning carousel, recent-scores chart with pass line, sign-off status), catalogue (search, category chips, owned/unowned cards), course detail (coloured header, progress, lesson states, sticky CTA incl. Buy with VAT → checkout), lesson player (video/PDF/reading placeholders, up-next outline, previous/mark complete), MarkLessonComplete use case (lesson.complete, course.complete audit, CPD award), course.view/lesson.view usage · lib/features/home, lib/features/courses, lib/app/router.dart, lib/seed (blurb, code), test/features/courses_test.dart · HOME-1, CRS-1..4
 

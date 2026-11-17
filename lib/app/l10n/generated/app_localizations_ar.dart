@@ -497,4 +497,131 @@ class AppLocalizationsAr extends AppLocalizations {
   String courseCompleteBody(int n) {
     return 'أُضيفت $n ساعات تطوير مهني';
   }
+
+  @override
+  String assessQuestionsFromBank(int count, int bank) {
+    return '$count أسئلة · من بنك يضم $bank سؤالًا';
+  }
+
+  @override
+  String get assessPassMark => 'درجة النجاح';
+
+  @override
+  String get assessBestScore => 'أفضل نتيجة';
+
+  @override
+  String get assessAttempts => 'المحاولات';
+
+  @override
+  String get assessStart => 'ابدأ التقييم';
+
+  @override
+  String get assessHistory => 'سجل النتائج';
+
+  @override
+  String get assessNoHistory => 'لا توجد محاولات بعد. ستظهر نتائجك هنا.';
+
+  @override
+  String assessAttemptN(int n) {
+    return 'المحاولة $n';
+  }
+
+  @override
+  String assessUnlocksAfter(int count) {
+    return 'يُفتح بعد إكمال الدروس الـ$count كلها';
+  }
+
+  @override
+  String get assessLocked => 'مقفل';
+
+  @override
+  String quizQuestionOf(String n, String total) {
+    return 'السؤال $n من $total';
+  }
+
+  @override
+  String quizPassTag(String pct) {
+    return 'النجاح $pct';
+  }
+
+  @override
+  String get quizOptionLetters => 'أ|ب|ج|د';
+
+  @override
+  String quizOptionSemantics(String letter, String text) {
+    return 'الخيار $letter: $text';
+  }
+
+  @override
+  String get quizCorrect => 'إجابة صحيحة';
+
+  @override
+  String get quizNotQuite => 'ليست الإجابة الصحيحة';
+
+  @override
+  String quizExplanation(String text) {
+    return 'التوضيح: $text';
+  }
+
+  @override
+  String get quizNext => 'السؤال التالي';
+
+  @override
+  String get quizSeeResults => 'عرض النتيجة';
+
+  @override
+  String get quizLeaveTitle => 'مغادرة التقييم؟';
+
+  @override
+  String get quizLeaveBody => 'ستفقد إجاباتك.';
+
+  @override
+  String get quizLeaveStay => 'البقاء';
+
+  @override
+  String get quizLeaveConfirm => 'مغادرة';
+
+  @override
+  String quizProgressSemantics(int answered, int total) {
+    return 'تمت الإجابة عن $answered من $total أسئلة';
+  }
+
+  @override
+  String resultCorrectCount(String correct, String total) {
+    return '$correct / $total إجابات صحيحة';
+  }
+
+  @override
+  String get resultPassedTag => 'ناجح';
+
+  @override
+  String get resultBelowTag => 'دون درجة النجاح';
+
+  @override
+  String get resultPassedTitle => 'تم اجتياز التقييم';
+
+  @override
+  String get resultFailedTitle => 'لم تجتز التقييم هذه المرة';
+
+  @override
+  String get resultPassedBody => 'أحسنت. حُفظت هذه المحاولة في سجل نتائجك.';
+
+  @override
+  String resultFailedBody(String pct) {
+    return 'تحتاج إلى $pct للنجاح. راجع الدورة وحاول مرة أخرى.';
+  }
+
+  @override
+  String get resultAudit => 'سُجّلت في سجل التدقيق';
+
+  @override
+  String resultScoreSemantics(String pct) {
+    return 'النتيجة $pct';
+  }
+
+  @override
+  String get resultDone => 'تم';
+
+  @override
+  String get resultRetake => 'إعادة المحاولة';
 }

@@ -31,12 +31,33 @@
         "en": "BLS Assessment",
         "ar": "تقييم دعم الحياة الأساسي"
       },
+      "subject": {
+        "en": "Basic Life Support",
+        "ar": "دعم الحياة الأساسي"
+      },
       "topicOrder": [
         "resuscitation",
         "infection_control",
         "medication_safety"
       ],
       "size": 8,
+      "passMarkPct": 80
+    },
+    {
+      "id": "ipc",
+      "courseId": "c2",
+      "title": {
+        "en": "IPC Assessment",
+        "ar": "تقييم الوقاية من العدوى ومكافحتها"
+      },
+      "subject": {
+        "en": "Infection Prevention & Control",
+        "ar": "الوقاية من العدوى ومكافحتها"
+      },
+      "topicOrder": [
+        "infection_control"
+      ],
+      "size": 7,
       "passMarkPct": 80
     }
   ],

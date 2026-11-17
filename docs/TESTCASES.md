@@ -13,9 +13,9 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-CRS-2-01 | CRS-2 | Widget | Course detail CTA and lesson states | Continue · lesson 5 / 3, Buy · AED 315.00 (incl. VAT), Locked lessons route to checkout | `test/features/courses_test.dart` | Passing |
 | TC-CRS-3-01 | CRS-3 | Widget | Mark lesson complete | Mark complete advances to the next lesson; lesson.view + lesson.complete logged; home ring 64 %, 7 of 11, carousel update | `test/features/courses_test.dart` | Passing |
 | TC-CRS-4-01 | CRS-4 | Unit | Finish all lessons of c1 | Finishing c1: snackbar "+4 CPD/CME credits added", course.complete audit, CPD 26 → 30, CTA Review course | `test/features/courses_test.dart` | Passing |
-| TC-QZ-1-01 | QZ-1 | Widget | Answer a question | Answer locks; correct/incorrect shown with explanation | — | Planned |
-| TC-QZ-2-01 | QZ-2 | Unit | Score 7/8 and 6/8 | 88% pass, 75% fail; quiz.score audit event | — | Planned |
-| TC-QZ-3-01 | QZ-3 | Widget | Score history | Newest first; best score and attempt count | — | Planned |
+| TC-QZ-1-01 | QZ-1 | Widget | Answer a question | Answer locks; correct/incorrect shown with explanation (covered by TC-QZ-1-03) | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-2-01 | QZ-2 | Unit | Score 7/8 and 6/8 | 88% pass, 75% fail; quiz.score audit event (covered by TC-QZ-2-03) | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-3-01 | QZ-3 | Widget | Score history | Newest first; best score and attempt count (covered by TC-QZ-3-04, TC-QZ-2-05) | `test/features/assessments_test.dart` | Passing |
 | TC-CERT-1-01 | CERT-1 | Unit | Expiry status at 91/90/1/0 days | Valid / Renew soon / Renew soon / Expired; BLS 56 days renew soon, ACLS 317 valid on the demo clock; uploaded → Verifying | `test/features/repositories_test.dart` | Passing |
 | TC-CERT-2-01 | CERT-2 | Unit | CPD meter vs ledger | Total (26) equals ledger sum; target 40 from cpd.json config | `test/features/repositories_test.dart` | Passing |
 | TC-CERT-3-01 | CERT-3 | Widget | Upload certificate | Appears as Verifying; cert.upload audit event | — | Planned |
@@ -83,13 +83,24 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-PH1-48 | NFR Localisation | Widget | Arabic app | Whole app RTL; tabs and back arrow mirrored | `test/app/router_test.dart` | Passing |
 | TC-PH1-49 | Phase 1 routing | Widget | Placeholders | Every route shows its title | `test/app/router_test.dart` | Passing |
 | TC-PH1-50 | Phase 1 routing | Widget | Sign out | Returns to sign-in | `test/app/router_test.dart` | Passing |
-| TC-PH1-51 | Phase 1 | Integration | On device | Roles, dark mode and Arabic RTL on a simulator/emulator | `integration_test/scaffold_test.dart` | Planned (device) |
+| TC-PH1-51 | Phase 1 | Integration | On device | Roles, dark mode and Arabic RTL on a simulator/emulator | `integration_test/scaffold_test.dart` | Passing (iOS simulator; Android pending) |
 | TC-PH1-52 | NFR Design system | Golden | 18 shared-widget compositions × light/dark × LTR/RTL (72 images) | Pixel match within 0.5 % | `test/core/widgets/*_test.dart` → `test/core/widgets/goldens/` | Passing |
 | TC-AUTH-1-03 | AUTH-1 | Unit | Mock auth repository | Empty fields → InvalidCredentials; any password signs in as the role's seed user; session persists; sign-out clears | `test/features/repositories_test.dart` | Passing |
 | TC-HOME-1-02 | HOME-1 | Unit | Seed progress for the learner | Owns c1, c2; 6 of 11 lessons done; markComplete is idempotent and stamps the clock | `test/features/repositories_test.dart` | Passing |
 | TC-QZ-1-02 | QZ-1 | Unit | BLS quiz draw | 8 resuscitation questions q01–q08, same order every time | `test/features/repositories_test.dart` | Passing |
 | TC-QZ-2-02 | QZ-2 | Unit | Scoring rule | 7/8 = 88 % pass, 6/8 = 75 % fail, 5/8 = 63 %; pass mark 80 % | `test/features/repositories_test.dart` | Passing |
 | TC-QZ-3-02 | QZ-3 | Unit | Attempt history | Seed 75 %, 63 % newest first; a new attempt goes on top | `test/features/repositories_test.dart` | Passing |
+| TC-QZ-1-03 | QZ-1 | Widget | Start BLS, tap a wrong option, tap again | "Question 1 of 8", "Pass 80%", no bottom nav; Next disabled until answered; first tap locks (second tap ignored); "Not quite" + "Explanation: …"; correct pick shows "Correct" + check | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-1-04 | QZ-1 | Widget | Back after answering one question | "Leave assessment?" dialog; Stay keeps the quiz; Leave → /assess with nothing saved | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-1-05 | QZ-1 | Widget | Quiz in Arabic | Question and explanation from the Arabic seed; badges أ ب ج د | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-2-03 | QZ-2 | Unit | SubmitAttempt with 7/8 then 6/8 | 88 % pass, 75 % fail; attempts saved with answers and time; audit quiz.score "BLS Assessment · 88% (pass)" / "· 75% (fail)" | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-2-04 | QZ-2 | Unit | Edge scores | 0/8 = 0 %, 8/8 = 100 %, 6/7 = 86 % | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-2-05 | QZ-2 | Widget | Finish BLS with 7/8, Done, then 6/8 and Retake | Result 88 %, "7 / 8 correct", Passed, "Assessment passed", audit row; /assess shows best 88 %, 3 attempts, "Attempt 3" on top; Home recent scores 88 %; fail shows "Below pass mark"; Retake restarts at question 1 | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-3-03 | QZ-3 | Unit | Best score and attempt numbering | Best = max score; "Attempt N" counts oldest = 1 | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-3-04 | QZ-3 | Widget | Assess tab with seed data | "Basic Life Support", "8 questions · from a 20-question bank", pass 80 %, best 75 %, 2 attempts; history Attempt 2 (75 %, 20 Oct 2026) above Attempt 1 (63 %); IPC locked "Unlocks after all 5 lessons" | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-3-05 | QZ-3 | Widget | Complete all c2 lessons | IPC card unlocks; quiz runs 7 infection-control questions starting at q09 | `test/features/assessments_test.dart` | Passing |
+| TC-QZ-G-01 | QZ-1..3 | Golden | Assess tab; question unanswered / correct / wrong; result pass / fail | 24 goldens, EN/AR × light/dark | `test/features/assessments_test.dart` | Passing (generated on macOS, regenerate on Linux) |
+| TC-QZ-E2E-01 | QZ-1..3 | Integration | BLS quiz on device | 7/8 → "Assessment passed"; Done shows Attempt 3 (iOS simulator) | `integration_test/assessments_test.dart` | Passing |
 | TC-CERT-3-02 | CERT-3 | Unit | Upload repository | Uploaded certificate stored as Verifying | `test/features/repositories_test.dart` | Passing |
 | TC-COMP-1-02 | COMP-1 | Unit | Request repository | none → pending, joins the queue; pending/approved cannot be re-requested | `test/features/repositories_test.dart` | Passing |
 | TC-COMP-2-02 | COMP-2 | Unit | Decide repository | Reject without (or with blank) comment fails; approve records supervisor and time; decided list updated | `test/features/repositories_test.dart` | Passing |
@@ -134,4 +145,5 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 
 - **Clinical review needed:** every question in `lib/seed/question_bank.json` (q01–q20, `reviewStatus` field), the explanations and the competency checklist items in `lib/seed/checklists.json` were written from the cited guidelines (AHA 2020 / ERC 2021, WHO hand hygiene 2009, CDC PPE and sharps guidance, ISMP, Joint Commission NPSG.01.01.01, WHO Medication Without Harm). A clinician must review them before any real use.
 - **Arabic review needed:** all Arabic in `lib/seed/*.json` and `lib/app/l10n/app_ar.arb` is Modern Standard Arabic written for this prototype; a native-speaking medical translator should review it, especially clinical terms (الإنعاش القلبي الرئوي، مزيل الرجفان الخارجي الآلي، معدات الوقاية الشخصية، الأدوية عالية الخطورة).
+- **Arabic number ranges:** seed options such as "60–80 ضغطة في الدقيقة" render as "80–60" in RTL (bidi reorders the digits around the dash). Wrap numeric ranges in LTR isolates in the seed text or at render time.
 - **Demo figures:** `lib/seed/cohort.json` (KPIs, charts, learner completion) and the CPD target of 40 are invented demo values and are labelled as such in the data (`demoFigures`, `targetIsDemo`).

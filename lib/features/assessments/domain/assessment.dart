@@ -45,6 +45,9 @@ abstract class Quiz with _$Quiz {
     required String id,
     required String courseId,
     required LocalizedText title,
+
+    /// What the quiz covers, shown on the Assess tab ("Basic Life Support").
+    required LocalizedText subject,
     required List<String> topicOrder,
     required int size,
     required int passMarkPct,
