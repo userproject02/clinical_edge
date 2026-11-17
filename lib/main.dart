@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:clinical_edge/app/app.dart';
 import 'package:clinical_edge/app/l10n/generated/app_localizations.dart';
 import 'package:clinical_edge/app/mock_overrides.dart';
 import 'package:clinical_edge/core/notifications/local_notifier.dart';
 import 'package:clinical_edge/core/persistence/hive_local_db.dart';
+import 'package:clinical_edge/core/persistence/latency_local_db.dart';
 import 'package:clinical_edge/core/sharing/file_sharer.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/certifications/data/certificate_file_picker.dart';
@@ -17,7 +20,8 @@ Future<void> main() async {
   // v1: every data source is a mock (AGENTS.md → Architecture rules).
   final container = ProviderContainer(
     overrides: mockOverrides(
-      db: db,
+      // 300–900 ms on list queries so loading states show (NFR).
+      db: LatencyLocalDb(db, random: Random()),
       prefs: prefs,
       notifier: PluginLocalNotifier(
         channelName: lookupAppLocalizations(const Locale('en')).reminderChannel,

@@ -51,24 +51,18 @@ class HomeScreen extends ConsumerWidget {
       body: FirstLoadSkeleton(
         child: !ready
             ? const _HomeSkeleton()
-            : ListView(
+            : SectionList(
                 key: const Key('home.list'),
-                padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 24),
-                children: <Widget>[
-                  for (final (i, w) in <Widget>[
-                    _Hero(overview: overview!),
-                    if (due case final cert?) _ExpiryAlert(cert: cert),
-                    _CpdCard(
-                      config: config!,
-                      total: ledger!.fold(0, (s, e) => s + e.credits),
-                    ),
-                    _Carousel(overview: overview),
-                    _RecentScores(history: history!),
-                    _SignOffs(checklists: checklists!, requests: signoffs!),
-                  ].indexed) ...<Widget>[
-                    if (i > 0) const SizedBox(height: 14),
-                    FadeUpIn(index: i, child: w),
-                  ],
+                sections: <Widget>[
+                  _Hero(overview: overview!),
+                  if (due case final cert?) _ExpiryAlert(cert: cert),
+                  _CpdCard(
+                    config: config!,
+                    total: ledger!.fold(0, (s, e) => s + e.credits),
+                  ),
+                  _Carousel(overview: overview),
+                  _RecentScores(history: history!),
+                  _SignOffs(checklists: checklists!, requests: signoffs!),
                 ],
               ),
       ),
@@ -166,7 +160,7 @@ class _Hero extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 SizedBox(
-                  height: 46,
+                  height: 48,
                   child: FilledButton.icon(
                     key: const Key('home.resume'),
                     style: FilledButton.styleFrom(

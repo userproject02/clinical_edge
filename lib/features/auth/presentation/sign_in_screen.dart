@@ -214,7 +214,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         borderRadius: BorderRadius.circular(AppRadii.hero),
         boxShadow: const <BoxShadow>[
           BoxShadow(
-            color: Color(0x59000000),
+            color: FixedColors.shadowHero,
             blurRadius: 30,
             offset: Offset(0, 10),
             spreadRadius: -18,

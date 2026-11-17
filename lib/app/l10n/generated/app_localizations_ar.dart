@@ -1188,4 +1188,9 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get insightsNote =>
       'تُحفظ تحليلات الاستخدام بمعزل عن سجل التدقيق ويمكن نقلها إلى Firebase Analytics خلف ActivityLogger.';
+
+  @override
+  String platformShare(String platform, String pct) {
+    return '$platform $pct';
+  }
 }

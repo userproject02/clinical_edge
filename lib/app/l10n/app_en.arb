@@ -1841,5 +1841,17 @@
   "insightsNote": "Usage analytics live apart from the audit trail and swap to Firebase Analytics behind ActivityLogger.",
   "@insightsNote": {
     "description": "Note."
+  },
+  "platformShare": "{platform} {pct}",
+  "@platformShare": {
+    "description": "Platform share; platform is iOS or Android (product names).",
+    "placeholders": {
+      "platform": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
   }
 }

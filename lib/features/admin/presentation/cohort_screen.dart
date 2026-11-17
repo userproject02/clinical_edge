@@ -3,7 +3,6 @@ import 'package:clinical_edge/app/screens/tab_scaffold.dart';
 import 'package:clinical_edge/app/theme/app_colors.dart';
 import 'package:clinical_edge/app/theme/app_typography.dart';
 import 'package:clinical_edge/core/formatting.dart';
-import 'package:clinical_edge/core/motion.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:clinical_edge/features/admin/presentation/admin_charts.dart';
 import 'package:clinical_edge/features/admin/presentation/admin_providers.dart';
@@ -183,12 +182,9 @@ class CohortScreen extends ConsumerWidget {
       AdminCard(
         key: const Key('cohort.learners'),
         title: l.cohortLearners,
-        trailing: Text(
-          l.cohortDemoNote(
-            stats.demoLabel.of(context),
-            Formats.date(stats.asOf, locale),
-          ),
-          style: context.micro.copyWith(color: c.muted),
+        subtitle: l.cohortDemoNote(
+          stats.demoLabel.of(context),
+          Formats.date(stats.asOf, locale),
         ),
         child: Column(
           children: <Widget>[
@@ -196,6 +192,7 @@ class CohortScreen extends ConsumerWidget {
               if (i > 0) Divider(height: 20, color: c.outline),
               Row(
                 key: Key('cohort.learner.${r.user.id}'),
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   InitialsAvatar(initials: r.user.initials, size: 36),
                   const SizedBox(width: 10),
@@ -203,13 +200,34 @@ class CohortScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          r.user.name.of(context),
-                          style: context.body.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 4,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              r.user.name.of(context),
+                              style: context.body.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            if (r.expiryCode != null && r.expiryDays != null)
+                              StatusTag(
+                                key: Key('cohort.learner.${r.user.id}.expiry'),
+                                label: l.cohortExpiryTag(
+                                  r.expiryCode!,
+                                  Formats.integer(r.expiryDays!),
+                                ),
+                                tone: expiryTone(r.expiryDays!),
+                              )
+                            else
+                              StatusTag(
+                                label: l.cohortNoExpiry,
+                                tone: StatusTone.ok,
+                              ),
+                          ],
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 6),
                         Row(
                           children: <Widget>[
                             SizedBox(
@@ -235,18 +253,6 @@ class CohortScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  if (r.expiryCode != null && r.expiryDays != null)
-                    StatusTag(
-                      key: Key('cohort.learner.${r.user.id}.expiry'),
-                      label: l.cohortExpiryTag(
-                        r.expiryCode!,
-                        Formats.integer(r.expiryDays!),
-                      ),
-                      tone: expiryTone(r.expiryDays!),
-                    )
-                  else
-                    StatusTag(label: l.cohortNoExpiry, tone: StatusTone.ok),
                 ],
               ),
             ],
@@ -258,16 +264,7 @@ class CohortScreen extends ConsumerWidget {
       title: l.titleCohort,
       isHome: true,
       body: FirstLoadSkeleton(
-        child: ListView(
-          key: const Key('cohort.list'),
-          padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 24),
-          children: <Widget>[
-            for (final (i, w) in sections.indexed) ...<Widget>[
-              if (i > 0) const SizedBox(height: 14),
-              FadeUpIn(index: i, child: w),
-            ],
-          ],
-        ),
+        child: SectionList(key: const Key('cohort.list'), sections: sections),
       ),
     );
   }

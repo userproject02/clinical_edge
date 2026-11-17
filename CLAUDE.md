@@ -10,10 +10,10 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 
 ## Current status
 
-- Phase: **Phase 9 done, next: Phase 10 Polish and release**
-- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit) · 6 Certifications and CPD (certs tab, CPD ring + ledger, upload sheet, expiry reminders) · 7 Competency sign-off (learner checklists, supervisor queue, review, decided) · 8 Checkout (order summary, card + mock Apple Pay, PurchaseCourse, receipt + PDF) · 9 Admin (cohort dashboard, audit log + CSV export, usage insights)
+- Phase: **v1 prototype complete** (v0.1.0+1, Phase 10 done). Next: production work (see Next up)
+- Done: 0 Repo and context · 1 Scaffold and design system · 2 Core and seed · 3 Auth, roles, settings · 4 Home and courses (dashboard, catalogue, course detail, lesson player, completion + CPD award) · 5 Assessments (Assess tab, quiz with instant feedback, result + quiz.score audit) · 6 Certifications and CPD (certs tab, CPD ring + ledger, upload sheet, expiry reminders) · 7 Competency sign-off (learner checklists, supervisor queue, review, decided) · 8 Checkout (order summary, card + mock Apple Pay, PurchaseCourse, receipt + PDF) · 9 Admin (cohort dashboard, audit log + CSV export, usage insights) · 10 Polish and release (a11y + privacy tests, tablet reflow, mock latency, E2E journey, README, icon + splash, builds)
 - App code: sign-in, Profile & settings, home, catalogue, course detail, lesson player, Assess tab, quiz, Certs tab, upload sheet, sign-offs, queue, review and decided, checkout, receipt, cohort, audit log and insights are real; no placeholder screens remain
-- Last updated: 2026-11-17 · claude/gurus-macbook-air
+- Last updated: 2026-11-18 · claude/gurus-macbook-air
 
 ## Module map
 
@@ -43,7 +43,9 @@ Flutter mobile app (iOS + Android only) for UAE healthcare professionals to take
 | checkout | `/learn/:courseId/checkout`, `/learn/:courseId/receipt/:orderId` | checkoutRepositoryProvider, paymentGatewayProvider, mockGatewayModeProvider, sellerProvider, orderProvider, logCheckoutStartProvider, purchaseCourseProvider, complete3dsProvider | CheckoutRepository, PaymentGateway (+ PurchaseCourse, CardRules) | test/features/checkout_test.dart, test/features/repositories_test.dart |
 | admin | `/cohort` (admin home), `/audit`, `/insights` | cohortRepositoryProvider, cohortStatsProvider, cohortLearnersProvider, auditEventsProvider, usageEventsProvider, chainResultProvider, auditFilterStateProvider, filteredEventsProvider, auditFilterOptionsProvider, exportAuditCsvProvider, insightsProvider | CohortRepository, AuditStore, UsageStore (+ AuditFilter, auditCsv, InsightsView) | test/features/admin_test.dart |
 | core: file sharing | — (`lib/core/sharing/`) | fileSharerProvider | FileSharer (PluginFileSharer in main.dart, RecordingFileSharer in tests) | test/features/admin_test.dart |
-| mock wiring | — (`lib/app/mock_overrides.dart`) | every repository override, `resetDemoData` | all mocks | test/helpers/test_container.dart |
+| mock wiring | — (`lib/app/mock_overrides.dart`) | every repository override, `resetDemoData`; device services (notifier, file picker, file sharer) | all mocks; `LatencyLocalDb` (300–900 ms on list queries, `main.dart` only) | test/helpers/test_container.dart |
+| a11y + privacy | — | — | — | test/a11y_test.dart, test/privacy_test.dart |
+| end-to-end | — | — | — | integration_test/demo_journey_test.dart (TC-E2E-01), assessments, reminders, scaffold |
 
 Later phases add one row per feature (auth, home, courses, assessments, certifications, competencies, checkout, admin, settings).
 
@@ -76,110 +78,56 @@ Implemented:
 
 ## Decisions (newest first)
 
+- 2026-11-18 · Tablets: dashboard lists (`SectionList`) reflow into two columns when the available width is ≥ 700 dp (LayoutBuilder, not screen width). Why: NFR Platforms; LayoutBuilder also keeps tests on the phone layout.
+- 2026-11-18 · `StatusTag` never wraps; if squeezed it fades its label instead of overflowing. Rows that pair a long name with a tag use `Wrap` or put the tag under the text. Why: 1.3× text and Arabic overflowed (a11y tests).
+- 2026-11-18 · Theme-independent colours live in `FixedColors` (transparent, shadows, Apple Pay sheet); no `Color(0x…)` literals in widgets. `CrashReporter` prints only outside release.
+- 2026-11-18 · Android `compileSdk = 37` (flutter_local_notifications 23 requires it; the Android build had been failing since Phase 6). Why: build fix.
+- 2026-11-18 · App icon and splash generated from the logo mark (`tool/icon/render_icon_test.dart` → `assets/icon/`, flutter_launcher_icons + flutter_native_splash). Version 0.1.0+1.
+- 2026-11-18 · Goldens are re-rendered on Linux by the manual workflow `.github/workflows/update-goldens.yml` (commits images + a CLAUDE.md log line). Why: macOS renders differ; CI compares on Linux.
+- 2026-11-18 · Numbers inside seed text (quiz prompts, options, explanations) are LTR-isolated at render time (`ltrNumbers`). Why: "60–80" read reversed in Arabic.
+
 - 2026-11-18 · Vertical charts (department progress, expiries, BLS drop-off) use fl_chart bars with titles off and our own labels below; bar order is reversed in RTL so the first item sits on the right; bars grow from 0 after `Motion.barDelay` (instant with reduced motion). Horizontal bars and the platform split are `LinearMeter`/custom widgets. Why: fl_chart titles are `flutter/material` widgets and it does not mirror; meters already mirror.
 - 2026-11-18 · `FileSharer` interface for CSV export and receipt PDF (share_plus in `main.dart`, recording fake by default). Why: platform channels don't run in widget tests; widgets stay off plugins.
 - 2026-11-18 · Cohort seed gains `kpis.supervisors` and per-learner `nextExpiryCode`/`nextExpiryDays` (demo figures); Layla's row uses live progress and her live soonest certificate; `DemoSeeder.seedVersion` → 6. BREAKING (additive model fields).
 - 2026-11-18 · Cohort is the admin home (greeting title + first-load skeleton). Audit and Insights re-read the stores each time the tab is built and on pull-to-refresh. Why: live events from other roles.
 - 2026-11-18 · Insights merge rule: seed views + live `course.view`/`lesson.view` matched by course title; seed platform shares count as 100 sessions plus live `auth.signin` by platform; pass rates stay seed-only (quiz scores are audit events). Why: ADM-4 never reads the audit store.
-
 - 2026-11-18 · Apple Pay is a mock sheet only in v1. Plan: integrate Apple Pay through the chosen UAE gateway's SDK (e.g. Network International) with a merchant ID and payment-processing certificate, behind `PaymentGateway` + `ApplePayMethod(token)`; no widget changes. Why: brief; no real payments in v1.
 - 2026-11-18 · `Order.cardLast4` added (BREAKING, additive) and `CheckoutRepository.completeOrder` takes optional `cardLast4`. Why: receipt shows "Card •••• 4242" from the last 4 only.
 - 2026-11-18 · Success navigates with `go` to the receipt (checkout leaves the stack; receipt back → `/learn`). Why: go_router `replace` from a declaratively reached page reported `/learn/c3` as the location.
 - 2026-11-18 · Receipt PDF is English-only (pdf package default font). Why: Arabic shaping needs an embedded Arabic font; revisit in Phase 10.
 - 2026-11-18 · Seller renamed to "ClinicalEdge (demo)" in `demo.json`; `DemoSeeder.seedVersion` → 5. Why: brief's receipt copy. Invoice sequence still starts at CE-YYYY-001041 (contract).
 - 2026-11-18 · Git commits are authored as `userproject02` with the GitHub no-reply email (user request); AGENTS.md → Git updated. Earlier commits keep the old author.
-
 - 2026-11-18 · Queue stats are computed: pending = queue size, this month = requests received this calendar month (Dubai), turnaround = mean request→decision time over decided requests (seed gives 1.7d, the brief's mock showed 1.4d). Why: no hard-coded numbers in UI.
 - 2026-11-18 · `MockCompetencyRepository.decide` keeps each `decidedAt` strictly after the latest decision. Why: under the fixed demo clock, "newest first" on Decided would tie.
 - 2026-11-18 · `DecideSignOff` enforces "only a supervisor decides, never their own request" in the domain, not just the router. Why: permission rules in REQUIREMENTS.
 - 2026-11-18 · `/queue` is the supervisor's home (greeting title + first-load skeleton like Home). Why: matches role-home behaviour from Phase 3; TC-PH1-43 now checks the queue list instead of the placeholder text.
 - 2026-11-18 · Learner checklist items show as self-assessed (static ok checks); comments render in a start-bar quote card without quotation marks. Why: brief ("no curly quotes in Arabic").
 
-- 2026-11-17 · One switch (`notificationsEnabledProvider`, pref key unchanged) drives Profile and the Certs reminders card through `setRemindersEnabledProvider`, which asks OS permission on enable; `reminderSyncProvider` (watched by every tab scaffold) replaces the device schedule whenever the switch, certificates or language change. Why: CERT-4 "shares state"; one source of truth.
-- 2026-11-17 · Home expiry alert, bell and simulate use `ReminderService` (`due` / `simulated`). Why: brief says Home reads from the same service.
-- 2026-11-17 · Device services (`LocalNotifier`, `CertificateFilePicker`) are passed to `mockOverrides` (real plugins from `main.dart`, recording/mock fakes by default). Why: plugins don't run in widget tests; keeps widgets off platform APIs.
-- 2026-11-17 · File picker on an iOS simulator (env `SIMULATOR_UDID`) or on picker failure returns the mock "NRP_certificate.pdf · 412 KB"; only name and size are read and the stored fileRef is `demo-upload-<uuid>`. Why: brief + privacy rules.
-- 2026-11-17 · Upload FAB uses a soft brand shadow instead of Material elevation. Why: the elevation shadow rendered as a hard black ring in goldens.
-- 2026-11-17 · CPD note text moved to config (`cpd.json` targetNote) with the brief's wording; `DemoSeeder.seedVersion` → 4. Why: target and note are config, not UI.
-
-- 2026-11-17 · `SubmitAttempt` stamps a new attempt at least 1 s after the user's latest one. Why: under the fixed demo clock every attempt would share one instant and "newest first" / "Attempt N" would be ambiguous.
-- 2026-11-17 · Quiz route sits on the root navigator (path unchanged `/assess/:quizId/run`). Why: the brief says no bottom nav during a quiz; TC-PH1-46 now checks tab state with `/learn/c1`.
-- 2026-11-17 · Kept `drawQuiz(quizId)` (the brief says `drawQuiz(topic, 8)`); the quiz's `topicOrder` and `size` drive the draw. Why: no breaking change; IPC quiz is topic `infection_control`, 7 questions (the bank has 7).
-- 2026-11-17 · Quiz `subject` field ({en, ar}) and IPC quiz added to `question_bank.json`; `DemoSeeder.seedVersion` → 3. Why: card title "Basic Life Support" differs from the quiz title used in the audit target.
-- 2026-11-17 · Leave confirmation only when at least one answer is locked and no result yet. Why: nothing to lose before the first answer or after saving.
-
-- 2026-11-17 · Progress is derived, never stored twice: `courseProgressListProvider` combines catalogue + ownership + lesson progress; `completeLessonProvider` invalidates `lessonProgressProvider` and `cpdLedgerProvider`, so home, carousel, catalogue, detail and CPD update together. Why: CRS-3 "updates everywhere".
-- 2026-11-17 · `MarkLessonComplete` awards credits only on the transition to all-done (ledger id `cpd-course-<course>-<user>`), so re-completing cannot double count. Why: CRS-4.
-- 2026-11-17 · Opening a course always uses `go` (Learn tab) even from Home. Why: the course routes live in the Learn branch; back returns to `/learn`.
-- 2026-11-17 · Seed additions: course `blurb` ({en, ar}) and certificate `code` ("BLS"); `DemoSeeder.seedVersion` → 2. Why: course header copy and the "BLS expires in 56 days" alert.
-- 2026-11-17 · Test helper `settle()` alternates real-time ticks with frames. Why: some repository futures complete only on a real event-loop turn, which pumpAndSettle never gives while a spinner animates.
-
-- 2026-11-17 · `sessionProvider` is now an AsyncNotifier over `AuthRepository` (stub removed). Why: Phase 3 brief; the session persists via the repository. BREAKING for callers of the Phase 1 stub (fixed in the same commit).
-- 2026-11-17 · Switching role on Profile sets `resumeLocationProvider` so the rebuilt router lands back on `/profile`; Profile's back falls back to the role home when there is nothing to pop. Why: the router is rebuilt per role (Phase 1 decision) and the brief says stay on Profile.
-- 2026-11-17 · Theme picker on Profile is Light/Dark only (per prototype); the stored mode defaults to System until the user picks one. Why: matches the design; System stays the first-run default.
-- 2026-11-17 · `AssetSeedLoader` reads assets with `cache: false` and caches per loader. Why: rootBundle's global cache shared one pending load across ProviderContainers/test zones and hung the next test.
-- 2026-11-17 · Debug menu keeps only clock, mock payment outcome, reset and route jumps; theme, language and role moved to Profile & settings. Why: avoid two places for the same setting.
-
-- 2026-11-17 · Persistence on `hive_ce` with JSON strings in `Box<String>` behind a `LocalDb` interface (InMemoryLocalDb in tests). Why: no type adapters to maintain; the seed JSON schema stays the single contract.
-- 2026-11-17 · Static seed data (catalogue, question bank, checklists, cohort, CPD target) is read from `lib/seed` each time; only mutable state (session, ownership, progress, attempts, certifications, CPD ledger, sign-offs, orders, audit, usage) is copied into `LocalDb` by `DemoSeeder`. Why: a seed fix ships with the app; reset only needs to rewrite mutable state.
-- 2026-11-17 · Default clock is `FixedClock` at 2026-11-17 09:00 Dubai, switchable to `SystemClock` from the debug menu (persisted). Why: the demo's expiries and "days left" always read the same.
-- 2026-11-17 · Repository providers throw unless overridden; `mockOverrides()` is the single wiring list for `main.dart` and tests. Why: a missing override fails loudly instead of silently using a mock in production.
-- 2026-11-17 · The audit store, not the logger, computes `prevHash`/`hash` and serialises appends. Why: one place guarantees the chain, including for historical seed events.
-- 2026-11-17 · Lesson type `reading` (not `text` as in the REQUIREMENTS domain table). Why: the Phase 2 brief and the UI copy say "Reading".
-- 2026-11-17 · Quiz draw is deterministic (quiz `topicOrder`, bank order) and the BLS quiz is the 8 resuscitation questions. Why: stable demo, per the brief.
-- 2026-11-17 · `Order` lives in `lib/core/payments` (not the checkout feature). Why: `PaymentGateway.createIntent(Order)` is core and core must not import features.
-- 2026-11-17 · Seed learners get demo completion figures in `cohort.json` (Layla 55 %, Aisha 82 %, Mariam 64 %, Yousef 47 %, Priya 71 %) for the ADM-1 learner list. Why: the brief gave aggregates only; the values are labelled demo figures.
-- 2026-11-17 · Logger actor comes from the Phase 1 session stub (`currentActorProvider` override maps role → seed user). Why: Phase 3 replaces it with the auth user without touching the logger.
-
-- 2026-11-17 · Material from `package:material_ui` (not `flutter/material.dart`, deprecated on Flutter 3.47+). `MaterialUiCompatibilityBridge` in `MaterialApp.builder` passes theme and localizations to packages still on `flutter/material` (fl_chart). Why: the template and SDK channel require it; types from the two libraries are not interchangeable.
-- 2026-11-17 · Fonts (Inter, IBM Plex Sans Arabic, JetBrains Mono; OFL) bundled as pubspec font families in `assets/fonts/`; `google_fonts` not added. Why: offline and deterministic rendering (goldens), and google_fonts' `TextTheme` helpers use `flutter/material` types.
-- 2026-11-17 · Goldens with plain `matchesGoldenFile` + a 4-variant helper (`test/helpers/golden.dart`), 0.5 % tolerance comparator; `alchemist`/`golden_toolkit` not added. Why: their APIs take `flutter/material` `ThemeData`. Goldens are generated on Linux (CI); run `--exclude-tags golden` on macOS if anti-aliasing differs.
-- 2026-11-17 · The router is rebuilt when the role changes, with the active role's shell listed first. Why: `/learn` lives in both learner and supervisor shells and go_router matches the first route.
-- 2026-11-17 · Negative title letter-spacing (-0.02em) for Latin only. Why: tracking breaks Arabic letter joins.
-- 2026-11-17 · Numbers, money and dates use Western digits in both languages and are wrapped in LTR isolates (`ltr()`, `LtrText`). Why: matches the prototype and keeps numeric runs readable in RTL.
-- 2026-11-17 · App/widget tests run with the platform reduce-motion flag on. Why: the ECG line and pulse loop forever, so `pumpAndSettle` would never finish; the app honours reduce motion everywhere, so behaviour is unchanged otherwise.
-- 2026-11-17 · Kept the existing `clinical_edge` project and package name (created with the current Flutter template that uses `package:material_ui`). Why: avoid churn; the name is used in imports.
-- 2026-11-17 · Removed web, linux, macos and windows targets. Why: v1 is iOS + Android only.
-- 2026-11-17 · Bundle IDs `ae.clinicaledge.clinicalEdge` (iOS) and `ae.clinicaledge.clinical_edge` (Android); Android minSdk 26, iOS 15. Why: requirements NFR "Platforms".
-- 2026-11-17 · Lints: `very_good_analysis` replaces `flutter_lints`. Why: stricter, matches requirements.
-- 2026-11-17 · SDK pinned to Flutter 3.50.0 stable (Dart 3.14) locally and in CI. Why: reproducible builds; the template needs Dart ^3.14.
+Older decisions (Phases 0–7, still in force): `docs/decisions/v1-phases-0-7.md`.
 
 ## Known issues / TODO
 
-- [ ] `docs/design/` has no screenshots; Phase 1 was built from the prototype canvas itself (artifact "ClinicalEdge", `Main.dc.html`). Export the storyboard frames into `docs/design/` when convenient.
-- [ ] Device runs deferred: Android for Phases 1–9 and iOS for Phases 6–9 (incl. a real local notification, Share PDF sheet, CSV export opened) (`integration_test/reminders_test.dart` needs the notification permission granted, then confirm the banner and a real notification on each). An Android AVD `ce_pixel` (API 36, arm64) now exists on the MacBook.
-- [ ] Phase 5–9 goldens (`test/features/goldens/{assess,quiz_*,result_*,certs_*,upload_sheet_*,signoffs_*,queue*,review_*,decided_*,checkout_*,receipt_*,cohort_*,audit_*,insights_*}`) were generated on macOS; regenerate on Linux (`flutter test --update-goldens --tags golden`) so CI matches.
-- [ ] Arabic numeric ranges in seed options render reversed in RTL ("80–60"); see `docs/TESTCASES.md` → Review notes.
-- [ ] Clinical and native-Arabic review of all seed content (see `docs/TESTCASES.md` → Review notes).
-- [ ] `HiveLocalDb` stores everything in plain JSON on device; fine for demo data, revisit (encryption) if real data ever lands.
+- [ ] Goldens in the repo are macOS renders; run the *Update goldens (Linux)* workflow once so CI's golden comparison passes.
+- [ ] iOS real local notification not confirmed automatically (the simulator permission prompt needs a tap): run the app, tap Allow when enabling reminders, then the bell. Android confirmed.
+- [ ] Android notification small icon uses the launcher mipmap and shows as a plain circle; add a monochrome `ic_notification` drawable.
+- [ ] A snackbar can briefly cover a sticky bottom button on the next screen; consider dismissing snackbars on navigation.
+- [ ] 60 fps profile check in DevTools not recorded in this session; animations are reduced-motion aware and no text scales.
+- [ ] Clinical and native-Arabic review of all seed content (see `docs/TESTCASES.md` → Review notes). Receipt PDF is English-only (needs an embedded Arabic font).
+- [ ] `HiveLocalDb` stores demo data in plain JSON on device; add encryption if real data ever lands.
+- [ ] `docs/design/` has no screenshots (built from the prototype canvas); export frames when convenient.
 - [ ] Remove `MaterialUiCompatibilityBridge` when fl_chart migrates to `material_ui`.
-- [ ] Repo is on GitHub (`userproject02/clinical_edge`); enable branch protection with the CI checks required.
+- [ ] Enable branch protection on GitHub with the CI checks required.
 
 ## Next up
 
-Phase 10 — Polish and release. Before that, the deferred checks: full device runs on the iOS simulator and the Android emulator (`ce_pixel`) for Phases 1–9 (integration tests, a real local notification, Share PDF, CSV export), and regenerating the Phase 5–9 goldens on Linux.
+Production (see README → What to build next): real auth/SSO with role claims (remove the demo switcher, `kDemoRoleSwitcher=false`), Firestore repositories + security rules, server-side audit chain, Firebase Analytics/Crashlytics behind `ActivityLogger`/`CrashReporter`, a UAE payment gateway adapter (real Apple Pay, 3-D Secure, invoices with TRN), FCM push, offline cache, PDPL/health-data and accessibility audits. Answer the open questions in REQUIREMENTS.md first.
 
 ## Change log (newest first; last 30 entries, older in docs/changelog/)
 
+- 2026-11-18 · claude/gurus-macbook-air · Phase 10: requirements sweep; a11y tests (tap targets, labels, contrast, 1.3× text EN/AR) and fixes (Resume 48 dp, locked/learner rows, StatusTag fade, admin card subtitle, legend wrap); privacy test; FixedColors (no colour literals); CrashReporter silent in release; SectionList two-column reflow on tablets; LatencyLocalDb 300–900 ms in main; ltrNumbers for Arabic ranges; TC-E2E-01 journey (EN light + AR dark) on iOS and Android; Android compileSdk 37 build fix; icon + splash; version 0.1.0+1; README; golden workflow; CLAUDE.md compacted (old log → docs/changelog/phase-10.md, old decisions → docs/decisions/v1-phases-0-7.md) · lib/core, lib/features, lib/app, lib/main.dart, android, ios, assets/icon, tool/icon, test/, integration_test/, README.md, .github/workflows · NFR, all requirement IDs
+
 - 2026-11-18 · claude/gurus-macbook-air · Phase 9: Cohort dashboard (2×2 KPIs with live pending sign-offs, completion by course, progress by department and expiries charts with entry animation, RTL mirroring and semantics, learners with live row for Layla), Audit log (chain banner ok/broken from AuditChain.verify, kind/period chips, user/action dropdowns from data, target search, count line, audit and usage cards with hash link, paging by 50, Export CSV via share sheet + audit.export + snackbar), Usage insights (views, BLS drop-off with biggest drop highlighted, pass-rate rings, platform split, note) from usage events only; FileSharer service; route-title test replaces the placeholder test · lib/features/admin, lib/core/sharing, lib/app (router, mock overrides, l10n), lib/main.dart, lib/seed/cohort.json, test/features/admin_test.dart, test/app/router_test.dart · ADM-1..4 · BREAKING: `CohortKpis.supervisors` and `CohortLearner.nextExpiryCode/nextExpiryDays` (new optional fields); `mockOverrides` gains `sharer`; receipt Share PDF now goes through `fileSharerProvider`
-
 - 2026-11-18 · claude/gurus-macbook-air · Phase 8: checkout (order summary with cover tile, Subtotal/VAT/Total via Money, Card / Apple Pay method cards, card form with 4-digit grouping + Luhn + expiry + obscured CVC, mock black Apple Pay sheet with pulsing Face ID glyph, lock note, sticky Pay with processing state, double-tap and back guard, decline banner with retry, mock 3-D Secure Approve/Cancel), PurchaseCourse use case (order, gateway, invoice, ownership, purchase audit), receipt (burst + check animation, invoice line, seller/buyer/item/method rows, totals, Share PDF via pdf + share_plus, Start course), checkout.start usage; git author switched to userproject02 · lib/features/checkout, lib/core/payments, lib/core/money.dart, lib/app (router, l10n), lib/seed/demo.json, AGENTS.md, test/features/checkout_test.dart · PAY-1..2 · BREAKING: `Order.cardLast4` (new field) and `CheckoutRepository.completeOrder(cardLast4:)`; MockCheckoutRepository updated
-
-- 2026-11-18 · claude/gurus-macbook-air · Phase 7: learner Sign-offs tab (checklist cards, self-assessed items, request footer with supervisor note, pending spinner, decided line + comment quote), supervisor Queue (stats, oldest-first cards, animated empty state, tab badge), Review (learner + checklist cards, comment field, lock note, Reject/Approve with required reject comment and default approval comment), Decided list; RequestSignOff / DecideSignOff use cases with signoff.request / signoff.decision audit; queue is the supervisor home · lib/features/competencies, lib/app/router.dart, lib/app/l10n, test/features/competencies_test.dart, test/app/router_test.dart · COMP-1..2
-
-- 2026-11-17 · claude/gurus-macbook-air · Phase 6: Certs tab (CPD ring with credits over target from config, reminders card with shared switch, dashed simulate button, certifications with status / expiry / days / 730-day meter, CPD ledger newest first, extended Upload FAB), upload sheet (dashed drop zone with floating icon, mock-file fallback, name + issued/expires date pickers, validation, Verifying + cert.upload audit, snackbar), ReminderService (90/60/30/7-day schedule at 09:00 Dubai, due certificate for Home/bell/simulate), LocalNotifier on flutter_local_notifications (Android channel "Expiry reminders", iOS foreground delegate), bell wired, timezone package, DashedBorder widget, 8 goldens · lib/features/certifications, lib/core/notifications, lib/core/widgets/dashed_border.dart, lib/app (router, tab scaffold, mock overrides, l10n), lib/main.dart, lib/features/home, lib/features/settings, android manifest, ios AppDelegate, lib/seed/cpd.json, test/features/certifications_test.dart, integration_test/reminders_test.dart · CERT-1..4 · BREAKING: `mockOverrides` gains optional `notifier` and `filePicker`; `localNotificationsProvider` and `certificateFilePickerProvider` must be overridden (mockOverrides does it); Profile's switch now goes through `setRemindersEnabledProvider`
-
-- 2026-11-17 · claude/gurus-macbook-air · Phase 5: Assess tab (BLS card with pass mark / best / attempts, score history newest first with meter + tag, IPC card locked until c2 complete), quiz on the root navigator (question N of 8, pass tag, 8-segment bar, A–D / أ–د badges, first tap locks, check draw / shake, explanation card, sticky Next → See results, leave confirmation), result (animated ring, n / 8 correct, Passed / Below pass mark, audit row, Done / Retake), SubmitAttempt use case (score, attempt, quiz.score audit), quizCardsProvider + quizRunProvider, 24 goldens, device journey; Phase 1 device test fixed for real-time pumping · lib/features/assessments, lib/app/router.dart, lib/app/l10n, lib/seed/question_bank.json, test/features/assessments_test.dart, integration_test/ · QZ-1..3 · BREAKING: `Quiz.subject` is a new required field (seed updated) and `AssessmentRepository` gains `quizzes()` and `bankSize()` (MockAssessmentRepository updated; other implementations must add them)
-
-- 2026-11-17 · claude/cloud-session · Phase 4: learner home (hero ring + resume, expiry alert, CPD meter, continue-learning carousel, recent-scores chart with pass line, sign-off status), catalogue (search, category chips, owned/unowned cards), course detail (coloured header, progress, lesson states, sticky CTA incl. Buy with VAT → checkout), lesson player (video/PDF/reading placeholders, up-next outline, previous/mark complete), MarkLessonComplete use case (lesson.complete, course.complete audit, CPD award), course.view/lesson.view usage · lib/features/home, lib/features/courses, lib/app/router.dart, lib/seed (blurb, code), test/features/courses_test.dart · HOME-1, CRS-1..4
-
-- 2026-11-17 · claude/cloud-session · Phase 3: sign-in screen (hero, ECG, language toggle, validation, demo role picker), AsyncNotifier session persisted via AuthRepository, use cases SignIn/SwitchRole/SignOut with auth.signin, role.change (audit) and auth.signout, Profile & settings (role, language, theme, notifications, under-the-hood, sign out, version), real tab app bar (greeting by clock, first name, avatar), 900 ms first-home skeleton, kDemoRoleSwitcher flag, trimmed debug menu · lib/features/auth/presentation, lib/features/settings, lib/app (router, screens, state), test/features/auth_settings_test.dart · AUTH-1..3, SET-1 · BREAKING: `sessionProvider` is now `AsyncValue<Session?>` (user + role) with async signIn/switchRole/signOut; `redirectFor` takes `Session?` — all callers updated
-
-- 2026-11-17 · claude/cloud-session · Phase 2: Clock (FixedClock demo default), Money/VAT in fils, ActivityLogger + append-only hash-chained AuditStore + UsageStore + TargetSanitizer + CrashReporter, PaymentGateway + MockGateway (debug outcomes), LocalDb on Hive CE + DemoSeeder + reset, 9 repository interfaces with mocks and providers, bilingual seed (users, courses, 20-question bank, certs, CPD, checklists, sign-offs, cohort, audit seed), debug menu clock/gateway/reset · lib/core, lib/features/*/data+domain, lib/seed, lib/app/mock_overrides.dart, main.dart, test/ · core services and demo data for every feature phase
-
-- 2026-11-17 · claude/cloud-session · Phase 1: Material 3 theme from prototype tokens + `AppColors` extension, bundled fonts, `motion.dart`, EN/AR ARB + RTL, LTR-isolated formatting, go_router with 3 role shells and placeholder screens, persisted theme/locale providers, session stub, temporary debug menu, 16 shared widgets with 72 goldens, Android desugaring + iOS `ar` localization · lib/app, lib/core, test/, integration_test/, assets/fonts, pubspec, android/app, ios/Runner/Info.plist · scaffold and design system for every later phase
-- 2026-11-17 · claude/gurus-macbook-air · CI pinned to Flutter 3.50.0 stable; removed one-off bootstrap script · .github/workflows/ci.yml, CLAUDE.md · match local SDK
-- 2026-11-17 · claude/gurus-macbook-air · Phase 0: AGENTS.md, CLAUDE.md, subagents, TESTCASES.md, hooks, lefthook, CI, placeholder app, iOS/Android only · repo root, .claude/, tool/, .github/, docs/ · bootstrap context so any session can work safely
 
 ## Commands
 

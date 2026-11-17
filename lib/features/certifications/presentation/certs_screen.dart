@@ -8,7 +8,6 @@ import 'package:clinical_edge/app/theme/app_colors.dart';
 import 'package:clinical_edge/app/theme/app_typography.dart';
 import 'package:clinical_edge/core/clock.dart';
 import 'package:clinical_edge/core/formatting.dart';
-import 'package:clinical_edge/core/motion.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:clinical_edge/features/certifications/domain/certification.dart';
 import 'package:clinical_edge/features/certifications/presentation/cert_providers.dart';
@@ -67,33 +66,26 @@ class CertsScreen extends ConsumerWidget {
               child: SkeletonBox(height: 220),
             )
           else
-            ListView(
+            SectionList(
               key: const Key('certs.list'),
               padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 96),
-              children: <Widget>[
-                for (final (i, w) in <Widget>[
-                  _CpdCard(
-                    config: config,
-                    total: ledger.fold(0, (s, e) => s + e.credits),
-                  ),
-                  const _RemindersCard(),
-                  const _SimulateButton(),
-                  _Section(
-                    title: l.certsListTitle,
-                    children: <Widget>[
-                      for (final c in certs) _CertRow(cert: c),
-                    ],
-                  ),
-                  _Section(
-                    title: l.certsLedgerTitle,
-                    children: <Widget>[
-                      for (final e in ledger) _LedgerRow(entry: e),
-                    ],
-                  ),
-                ].indexed) ...<Widget>[
-                  if (i > 0) const SizedBox(height: 14),
-                  FadeUpIn(index: i, child: w),
-                ],
+              sections: <Widget>[
+                _CpdCard(
+                  config: config,
+                  total: ledger.fold(0, (s, e) => s + e.credits),
+                ),
+                const _RemindersCard(),
+                const _SimulateButton(),
+                _Section(
+                  title: l.certsListTitle,
+                  children: <Widget>[for (final c in certs) _CertRow(cert: c)],
+                ),
+                _Section(
+                  title: l.certsLedgerTitle,
+                  children: <Widget>[
+                    for (final e in ledger) _LedgerRow(entry: e),
+                  ],
+                ),
               ],
             ),
           PositionedDirectional(

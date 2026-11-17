@@ -337,5 +337,6 @@
   "insightsPassRates": "معدلات اجتياز التقييمات",
   "insightsAttempts": "{count} محاولة",
   "insightsPlatforms": "الجلسات حسب المنصة",
-  "insightsNote": "تُحفظ تحليلات الاستخدام بمعزل عن سجل التدقيق ويمكن نقلها إلى Firebase Analytics خلف ActivityLogger."
+  "insightsNote": "تُحفظ تحليلات الاستخدام بمعزل عن سجل التدقيق ويمكن نقلها إلى Firebase Analytics خلف ActivityLogger.",
+  "platformShare": "{platform} {pct}"
 }

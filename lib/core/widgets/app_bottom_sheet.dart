@@ -77,7 +77,7 @@ Future<T?> showAppBottomSheet<T>({
     context: context,
     useRootNavigator: useRootNavigator,
     isScrollControlled: true,
-    backgroundColor: const Color(0x00000000),
+    backgroundColor: FixedColors.transparent,
     barrierColor: c.scrim,
     elevation: 0,
     sheetAnimationStyle: AnimationStyle(
@@ -107,7 +107,7 @@ class BottomSheetPage<T> extends Page<T> {
       settings: this,
       builder: (_) => child,
       isScrollControlled: true,
-      backgroundColor: const Color(0x00000000),
+      backgroundColor: FixedColors.transparent,
       modalBarrierColor: c.scrim,
       elevation: 0,
       sheetAnimationStyle: AnimationStyle(

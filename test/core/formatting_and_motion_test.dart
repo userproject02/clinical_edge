@@ -130,4 +130,18 @@ void main() {
       await tester.pumpAndSettle();
     });
   });
+
+  test('TC-NFR-L10N-01 numeric ranges are LTR-isolated in Arabic text', () {
+    const lri = '\u2066';
+    const pdi = '\u2069';
+    expect(
+      ltrNumbers('60–80 ضغطة في الدقيقة'),
+      '${lri}60–80$pdi ضغطة في الدقيقة',
+    );
+    expect(
+      ltrNumbers('Compress at 100–120 per minute'),
+      'Compress at ${lri}100–120$pdi per minute',
+    );
+    expect(ltrNumbers('no digits'), 'no digits');
+  });
 }

@@ -196,7 +196,7 @@ class _OutlineRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Material(
-      color: current ? c.brandSoft : const Color(0x00000000),
+      color: current ? c.brandSoft : FixedColors.transparent,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
@@ -382,7 +382,7 @@ class _PdfPanel extends StatelessWidget {
               color: c.surface,
               borderRadius: BorderRadius.circular(6),
               boxShadow: const <BoxShadow>[
-                BoxShadow(color: Color(0x22000000), blurRadius: 12),
+                BoxShadow(color: FixedColors.shadowSoft, blurRadius: 12),
               ],
             ),
             child: Column(

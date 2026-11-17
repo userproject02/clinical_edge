@@ -351,3 +351,29 @@ extension AppColorsContext on BuildContext {
   AppColors get colors =>
       Theme.of(this).extension<AppColors>() ?? AppColors.light;
 }
+
+/// Fixed colours that do not change with the theme (shadows, transparent
+/// fills, the system-styled Apple Pay sheet). Widgets use these names
+/// instead of `Color(0x…)` literals.
+abstract final class FixedColors {
+  /// Fully transparent.
+  static const Color transparent = Color(0x00000000);
+
+  /// Soft card shadow (lesson player panels).
+  static const Color shadowSoft = Color(0x22000000);
+
+  /// Sign-in hero shadow.
+  static const Color shadowHero = Color(0x59000000);
+
+  /// Notification banner shadow.
+  static const Color shadowBanner = Color(0x73000000);
+
+  /// Snackbar shadow.
+  static const Color shadowSnackbar = Color(0x80000000);
+
+  /// Apple Pay sheet background (system style, same in both themes).
+  static const Color applePaySheet = Color(0xFF000000);
+
+  /// Text and glyphs on the Apple Pay sheet.
+  static const Color onApplePaySheet = Color(0xFFFFFFFF);
+}

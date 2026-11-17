@@ -9,13 +9,15 @@ abstract interface class CrashReporter {
   void record(Object error, StackTrace stack, {String? reason});
 }
 
-/// Prints errors to the debug console.
+/// Prints errors to the debug console in debug and profile builds; silent
+/// in release (errors could carry user data).
 class ConsoleCrashReporter implements CrashReporter {
   /// Creates the reporter.
   const new();
 
   @override
   void record(Object error, StackTrace stack, {String? reason}) {
+    if (kReleaseMode) return;
     debugPrint('CrashReporter${reason == null ? '' : ' [$reason]'}: $error');
     debugPrintStack(stackTrace: stack, maxFrames: 8);
   }

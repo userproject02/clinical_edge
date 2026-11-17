@@ -14,6 +14,7 @@ export 'linear_meter.dart';
 export 'notification_banner.dart';
 export 'progress_ring.dart';
 export 'pulsing_dot.dart';
+export 'section_list.dart';
 export 'segmented_picker.dart';
 export 'skeleton_box.dart';
 export 'stat_tile.dart';

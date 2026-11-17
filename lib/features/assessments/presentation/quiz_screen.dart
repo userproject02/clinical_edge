@@ -140,7 +140,7 @@ class _QuestionView extends StatelessWidget {
         _SegmentBar(session: s),
         const SizedBox(height: 18),
         Text(
-          q.prompt.of(context),
+          ltrNumbers(q.prompt.of(context)),
           key: Key('quiz.prompt.${q.id}'),
           style: context.sectionTitle,
         ),
@@ -151,7 +151,7 @@ class _QuestionView extends StatelessWidget {
             child: _OptionButton(
               key: Key('quiz.option.$i'),
               letter: i < letters.length ? letters[i] : '${i + 1}',
-              text: option.of(context),
+              text: ltrNumbers(option.of(context)),
               state: chosen == null
                   ? _OptionState.idle
                   : i == q.correctIndex
@@ -167,7 +167,7 @@ class _QuestionView extends StatelessWidget {
             key: Key('quiz.explanation.${q.id}'),
             child: _ExplanationCard(
               correct: chosen == q.correctIndex,
-              text: q.explanation.of(context),
+              text: ltrNumbers(q.explanation.of(context)),
             ),
           ),
       ],

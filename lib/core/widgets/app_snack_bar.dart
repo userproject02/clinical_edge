@@ -63,7 +63,7 @@ class AppSnackBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadii.field),
           boxShadow: const <BoxShadow>[
             BoxShadow(
-              color: Color(0x80000000),
+              color: FixedColors.shadowSnackbar,
               blurRadius: 28,
               offset: Offset(0, 12),
               spreadRadius: -12,

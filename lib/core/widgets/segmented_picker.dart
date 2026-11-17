@@ -75,7 +75,7 @@ class SegmentedPicker<T> extends StatelessWidget {
       button: true,
       inMutuallyExclusiveGroup: true,
       child: Material(
-        color: on ? c.brandSoft : const Color(0x00000000),
+        color: on ? c.brandSoft : FixedColors.transparent,
         child: InkWell(
           onTap: on ? null : () => onChanged(s.value),
           child: AnimatedDefaultTextStyle(

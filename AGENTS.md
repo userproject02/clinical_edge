@@ -60,6 +60,8 @@ Resolved versions (pubspec.yaml uses caret ranges; pubspec.lock is committed). U
 | fake_async | 1.3.3 | time control in tests (dev) |
 | integration_test (SDK) | — | device journeys (dev) |
 | very_good_analysis | 11.0.0 | lint rules (dev) |
+| flutter_launcher_icons | 0.14.4 | app icon from `assets/icon/` (dev) |
+| flutter_native_splash | 2.4.8 | splash screen from `assets/icon/` (dev) |
 
 Not used, on purpose: `google_fonts` (fonts are bundled as pubspec families instead) and `golden_toolkit`/`alchemist` (their APIs take `flutter/material` types); see CLAUDE.md → Decisions.
 
@@ -101,6 +103,8 @@ Not used, on purpose: `google_fonts` (fonts are bundled as pubspec families inst
 | Integration test | `flutter test integration_test` |
 | Install git hooks | `lefthook install` (once per clone; needs `brew install lefthook`) |
 | Context check (same as CI) | `tool/ci/context_guard.sh worktree` |
+| App icon + splash | `flutter test tool/icon/render_icon_test.dart`, then `dart run flutter_launcher_icons` and `dart run flutter_native_splash:create` |
+| Goldens on Linux | GitHub Actions → *Update goldens (Linux)* (manual) |
 
 ## Change protocol (every session, every change)
 

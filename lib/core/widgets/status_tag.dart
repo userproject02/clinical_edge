@@ -93,13 +93,18 @@ class StatusTag extends StatelessWidget {
             ),
             const SizedBox(width: 6),
           ],
-          Text(
-            label,
-            maxLines: 1,
-            softWrap: false,
-            style: context.caption.copyWith(
-              color: fg,
-              fontWeight: FontWeight.w600,
+          // Never wraps; if squeezed (large text in a narrow slot) it fades
+          // instead of overflowing.
+          Flexible(
+            child: Text(
+              label,
+              maxLines: 1,
+              softWrap: false,
+              overflow: TextOverflow.fade,
+              style: context.caption.copyWith(
+                color: fg,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],

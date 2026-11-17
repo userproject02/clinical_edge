@@ -2125,6 +2125,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Usage analytics live apart from the audit trail and swap to Firebase Analytics behind ActivityLogger.'**
   String get insightsNote;
+
+  /// Platform share; platform is iOS or Android (product names).
+  ///
+  /// In en, this message translates to:
+  /// **'{platform} {pct}'**
+  String platformShare(String platform, String pct);
 }
 
 class _AppLocalizationsDelegate

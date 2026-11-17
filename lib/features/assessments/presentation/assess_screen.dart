@@ -4,7 +4,6 @@ import 'package:clinical_edge/app/screens/tab_scaffold.dart';
 import 'package:clinical_edge/app/theme/app_colors.dart';
 import 'package:clinical_edge/app/theme/app_typography.dart';
 import 'package:clinical_edge/core/formatting.dart';
-import 'package:clinical_edge/core/motion.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:clinical_edge/features/assessments/domain/assessment.dart';
 import 'package:clinical_edge/features/assessments/presentation/assessment_providers.dart';
@@ -44,16 +43,7 @@ class AssessScreen extends ConsumerWidget {
     ];
     return TabScaffold(
       title: l.titleAssessments,
-      body: ListView(
-        key: const Key('assess.list'),
-        padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 24),
-        children: <Widget>[
-          for (final (i, w) in children.indexed) ...<Widget>[
-            if (i > 0) const SizedBox(height: 14),
-            FadeUpIn(index: i, child: w),
-          ],
-        ],
-      ),
+      body: SectionList(key: const Key('assess.list'), sections: children),
     );
   }
 }
@@ -290,11 +280,16 @@ class _LockedCard extends StatelessWidget {
                   l.assessUnlocksAfter(data.lessonsToUnlock),
                   style: context.caption.copyWith(color: c.muted),
                 ),
+                const SizedBox(height: 8),
+                // Under the text so it never squeezes the row at large
+                // text sizes.
+                StatusTag(
+                  label: l.assessLocked,
+                  icon: Icons.lock_outline_rounded,
+                ),
               ],
             ),
           ),
-          const SizedBox(width: 8),
-          StatusTag(label: l.assessLocked, icon: Icons.lock_outline_rounded),
         ],
       ),
     );

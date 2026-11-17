@@ -1,0 +1,47 @@
+# Decisions, Phases 0–7 (moved from CLAUDE.md at Phase 10)
+
+Still in force unless a newer decision in `CLAUDE.md` says otherwise.
+
+- 2026-11-17 · One switch (`notificationsEnabledProvider`, pref key unchanged) drives Profile and the Certs reminders card through `setRemindersEnabledProvider`, which asks OS permission on enable; `reminderSyncProvider` (watched by every tab scaffold) replaces the device schedule whenever the switch, certificates or language change. Why: CERT-4 "shares state"; one source of truth.
+- 2026-11-17 · Home expiry alert, bell and simulate use `ReminderService` (`due` / `simulated`). Why: brief says Home reads from the same service.
+- 2026-11-17 · Device services (`LocalNotifier`, `CertificateFilePicker`) are passed to `mockOverrides` (real plugins from `main.dart`, recording/mock fakes by default). Why: plugins don't run in widget tests; keeps widgets off platform APIs.
+- 2026-11-17 · File picker on an iOS simulator (env `SIMULATOR_UDID`) or on picker failure returns the mock "NRP_certificate.pdf · 412 KB"; only name and size are read and the stored fileRef is `demo-upload-<uuid>`. Why: brief + privacy rules.
+- 2026-11-17 · Upload FAB uses a soft brand shadow instead of Material elevation. Why: the elevation shadow rendered as a hard black ring in goldens.
+- 2026-11-17 · CPD note text moved to config (`cpd.json` targetNote) with the brief's wording; `DemoSeeder.seedVersion` → 4. Why: target and note are config, not UI.
+- 2026-11-17 · `SubmitAttempt` stamps a new attempt at least 1 s after the user's latest one. Why: under the fixed demo clock every attempt would share one instant and "newest first" / "Attempt N" would be ambiguous.
+- 2026-11-17 · Quiz route sits on the root navigator (path unchanged `/assess/:quizId/run`). Why: the brief says no bottom nav during a quiz; TC-PH1-46 now checks tab state with `/learn/c1`.
+- 2026-11-17 · Kept `drawQuiz(quizId)` (the brief says `drawQuiz(topic, 8)`); the quiz's `topicOrder` and `size` drive the draw. Why: no breaking change; IPC quiz is topic `infection_control`, 7 questions (the bank has 7).
+- 2026-11-17 · Quiz `subject` field ({en, ar}) and IPC quiz added to `question_bank.json`; `DemoSeeder.seedVersion` → 3. Why: card title "Basic Life Support" differs from the quiz title used in the audit target.
+- 2026-11-17 · Leave confirmation only when at least one answer is locked and no result yet. Why: nothing to lose before the first answer or after saving.
+- 2026-11-17 · Progress is derived, never stored twice: `courseProgressListProvider` combines catalogue + ownership + lesson progress; `completeLessonProvider` invalidates `lessonProgressProvider` and `cpdLedgerProvider`, so home, carousel, catalogue, detail and CPD update together. Why: CRS-3 "updates everywhere".
+- 2026-11-17 · `MarkLessonComplete` awards credits only on the transition to all-done (ledger id `cpd-course-<course>-<user>`), so re-completing cannot double count. Why: CRS-4.
+- 2026-11-17 · Opening a course always uses `go` (Learn tab) even from Home. Why: the course routes live in the Learn branch; back returns to `/learn`.
+- 2026-11-17 · Seed additions: course `blurb` ({en, ar}) and certificate `code` ("BLS"); `DemoSeeder.seedVersion` → 2. Why: course header copy and the "BLS expires in 56 days" alert.
+- 2026-11-17 · Test helper `settle()` alternates real-time ticks with frames. Why: some repository futures complete only on a real event-loop turn, which pumpAndSettle never gives while a spinner animates.
+- 2026-11-17 · `sessionProvider` is now an AsyncNotifier over `AuthRepository` (stub removed). Why: Phase 3 brief; the session persists via the repository. BREAKING for callers of the Phase 1 stub (fixed in the same commit).
+- 2026-11-17 · Switching role on Profile sets `resumeLocationProvider` so the rebuilt router lands back on `/profile`; Profile's back falls back to the role home when there is nothing to pop. Why: the router is rebuilt per role (Phase 1 decision) and the brief says stay on Profile.
+- 2026-11-17 · Theme picker on Profile is Light/Dark only (per prototype); the stored mode defaults to System until the user picks one. Why: matches the design; System stays the first-run default.
+- 2026-11-17 · `AssetSeedLoader` reads assets with `cache: false` and caches per loader. Why: rootBundle's global cache shared one pending load across ProviderContainers/test zones and hung the next test.
+- 2026-11-17 · Debug menu keeps only clock, mock payment outcome, reset and route jumps; theme, language and role moved to Profile & settings. Why: avoid two places for the same setting.
+- 2026-11-17 · Persistence on `hive_ce` with JSON strings in `Box<String>` behind a `LocalDb` interface (InMemoryLocalDb in tests). Why: no type adapters to maintain; the seed JSON schema stays the single contract.
+- 2026-11-17 · Static seed data (catalogue, question bank, checklists, cohort, CPD target) is read from `lib/seed` each time; only mutable state (session, ownership, progress, attempts, certifications, CPD ledger, sign-offs, orders, audit, usage) is copied into `LocalDb` by `DemoSeeder`. Why: a seed fix ships with the app; reset only needs to rewrite mutable state.
+- 2026-11-17 · Default clock is `FixedClock` at 2026-11-17 09:00 Dubai, switchable to `SystemClock` from the debug menu (persisted). Why: the demo's expiries and "days left" always read the same.
+- 2026-11-17 · Repository providers throw unless overridden; `mockOverrides()` is the single wiring list for `main.dart` and tests. Why: a missing override fails loudly instead of silently using a mock in production.
+- 2026-11-17 · The audit store, not the logger, computes `prevHash`/`hash` and serialises appends. Why: one place guarantees the chain, including for historical seed events.
+- 2026-11-17 · Lesson type `reading` (not `text` as in the REQUIREMENTS domain table). Why: the Phase 2 brief and the UI copy say "Reading".
+- 2026-11-17 · Quiz draw is deterministic (quiz `topicOrder`, bank order) and the BLS quiz is the 8 resuscitation questions. Why: stable demo, per the brief.
+- 2026-11-17 · `Order` lives in `lib/core/payments` (not the checkout feature). Why: `PaymentGateway.createIntent(Order)` is core and core must not import features.
+- 2026-11-17 · Seed learners get demo completion figures in `cohort.json` (Layla 55 %, Aisha 82 %, Mariam 64 %, Yousef 47 %, Priya 71 %) for the ADM-1 learner list. Why: the brief gave aggregates only; the values are labelled demo figures.
+- 2026-11-17 · Logger actor comes from the Phase 1 session stub (`currentActorProvider` override maps role → seed user). Why: Phase 3 replaces it with the auth user without touching the logger.
+- 2026-11-17 · Material from `package:material_ui` (not `flutter/material.dart`, deprecated on Flutter 3.47+). `MaterialUiCompatibilityBridge` in `MaterialApp.builder` passes theme and localizations to packages still on `flutter/material` (fl_chart). Why: the template and SDK channel require it; types from the two libraries are not interchangeable.
+- 2026-11-17 · Fonts (Inter, IBM Plex Sans Arabic, JetBrains Mono; OFL) bundled as pubspec font families in `assets/fonts/`; `google_fonts` not added. Why: offline and deterministic rendering (goldens), and google_fonts' `TextTheme` helpers use `flutter/material` types.
+- 2026-11-17 · Goldens with plain `matchesGoldenFile` + a 4-variant helper (`test/helpers/golden.dart`), 0.5 % tolerance comparator; `alchemist`/`golden_toolkit` not added. Why: their APIs take `flutter/material` `ThemeData`. Goldens are generated on Linux (CI); run `--exclude-tags golden` on macOS if anti-aliasing differs.
+- 2026-11-17 · The router is rebuilt when the role changes, with the active role's shell listed first. Why: `/learn` lives in both learner and supervisor shells and go_router matches the first route.
+- 2026-11-17 · Negative title letter-spacing (-0.02em) for Latin only. Why: tracking breaks Arabic letter joins.
+- 2026-11-17 · Numbers, money and dates use Western digits in both languages and are wrapped in LTR isolates (`ltr()`, `LtrText`). Why: matches the prototype and keeps numeric runs readable in RTL.
+- 2026-11-17 · App/widget tests run with the platform reduce-motion flag on. Why: the ECG line and pulse loop forever, so `pumpAndSettle` would never finish; the app honours reduce motion everywhere, so behaviour is unchanged otherwise.
+- 2026-11-17 · Kept the existing `clinical_edge` project and package name (created with the current Flutter template that uses `package:material_ui`). Why: avoid churn; the name is used in imports.
+- 2026-11-17 · Removed web, linux, macos and windows targets. Why: v1 is iOS + Android only.
+- 2026-11-17 · Bundle IDs `ae.clinicaledge.clinicalEdge` (iOS) and `ae.clinicaledge.clinical_edge` (Android); Android minSdk 26, iOS 15. Why: requirements NFR "Platforms".
+- 2026-11-17 · Lints: `very_good_analysis` replaces `flutter_lints`. Why: stricter, matches requirements.
+- 2026-11-17 · SDK pinned to Flutter 3.50.0 stable (Dart 3.14) locally and in CI. Why: reproducible builds; the template needs Dart ^3.14.

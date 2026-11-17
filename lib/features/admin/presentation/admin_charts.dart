@@ -12,8 +12,12 @@ class AdminCard extends StatelessWidget {
     required this.title,
     required this.child,
     this.trailing,
+    this.subtitle,
     super.key,
   });
+
+  /// Optional line under the title (wraps).
+  final String? subtitle;
 
   /// Title.
   final String title;
@@ -35,11 +39,23 @@ class AdminCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(child: Text(title, style: context.cardTitle)),
-            ?trailing,
+            if (trailing != null) ...<Widget>[
+              const SizedBox(width: 8),
+              trailing!,
+            ],
           ],
         ),
+        if (subtitle != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Text(
+              subtitle!,
+              style: context.micro.copyWith(color: context.colors.muted),
+            ),
+          ),
         const SizedBox(height: 14),
         child,
       ],

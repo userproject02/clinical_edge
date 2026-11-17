@@ -1190,4 +1190,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get insightsNote =>
       'Usage analytics live apart from the audit trail and swap to Firebase Analytics behind ActivityLogger.';
+
+  @override
+  String platformShare(String platform, String pct) {
+    return '$platform $pct';
+  }
 }

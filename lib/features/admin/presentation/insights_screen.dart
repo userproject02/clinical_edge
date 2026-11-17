@@ -170,16 +170,7 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen> {
     ];
     return TabScaffold(
       title: l.titleInsights,
-      body: ListView(
-        key: const Key('insights.list'),
-        padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 24),
-        children: <Widget>[
-          for (final (i, w) in sections.indexed) ...<Widget>[
-            if (i > 0) const SizedBox(height: 14),
-            FadeUpIn(index: i, child: w),
-          ],
-        ],
-      ),
+      body: SectionList(key: const Key('insights.list'), sections: sections),
     );
   }
 }
@@ -193,8 +184,10 @@ class _PlatformBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final label =
-        'iOS ${Formats.percent(ios)} · Android ${Formats.percent(android)}';
+    final l = AppLocalizations.of(context);
+    final iosText = l.platformShare('iOS', Formats.percent(ios));
+    final androidText = l.platformShare('Android', Formats.percent(android));
+    final label = '$iosText · $androidText';
     return Semantics(
       label: label.replaceAll(RegExp('[\u2066-\u2069]'), ''),
       child: ExcludeSemantics(
@@ -232,14 +225,12 @@ class _PlatformBar extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Row(
+            Wrap(
+              spacing: 16,
+              runSpacing: 6,
               children: <Widget>[
-                _Legend(color: c.brand, text: 'iOS ${Formats.percent(ios)}'),
-                const SizedBox(width: 16),
-                _Legend(
-                  color: c.blue,
-                  text: 'Android ${Formats.percent(android)}',
-                ),
+                _Legend(color: c.brand, text: iosText),
+                _Legend(color: c.blue, text: androidText),
               ],
             ),
           ],

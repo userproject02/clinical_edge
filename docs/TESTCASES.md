@@ -30,7 +30,7 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-ADM-4-01 | ADM-4 | Unit | Usage insights | Built from usage events only, never audit events | `test/features/admin_test.dart` | Passing |
 | TC-SET-1-01 | SET-1 | Widget | Language, theme, notifications | Theme, notifications and language apply instantly (RTL mirrors) and survive a restart | `test/features/auth_settings_test.dart` | Passing |
 | TC-LOG-01 | Audit | Unit | Append, verify, edit and remove stored audit events | Chain verifies; an edited event is reported as content break, a removed one as link break, at the right index | `test/core/logging_test.dart` | Passing |
-| TC-E2E-01 | All | Integration | Full demo journey across three roles | Every audit action appears in the log with a verified chain | — | Planned |
+| TC-E2E-01 | All | Integration | Full demo journey across three roles (EN + light, AR + dark) | Credits 26 → 30, quiz pass, NRP verifying, sign-off requested, AED 315.00 purchase, language round trip, reject blocked then approve, admin audit has every journey audit action in a verified chain, CSV exported | `integration_test/demo_journey_test.dart` | Passing (iPhone 17 Pro simulator, Android API 36 emulator) |
 | TC-PH0-01 | Phase 0 | Script | context_guard.sh: app change without CLAUDE.md | Blocked in worktree, staged and range modes; passes when CLAUDE.md changes | `tool/ci/context_guard.sh` (manual + CI) | Passing |
 | TC-PH0-02 | Phase 0 | Widget | App smoke test | App boots with the mock overrides to the sign-in placeholder (updated in Phases 1 and 2) | `test/app_smoke_test.dart` | Passing |
 | TC-PH1-01 | NFR Localisation | Unit | AED formatting | AED 315.00 (en), 315.00 د.إ (ar), LTR-isolated | `test/core/formatting_and_motion_test.dart` | Passing |
@@ -83,7 +83,7 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-PH1-48 | NFR Localisation | Widget | Arabic app | Whole app RTL; tabs and back arrow mirrored | `test/app/router_test.dart` | Passing |
 | TC-PH1-49 | Phase 1 routing | Widget | Placeholders | Every route shows its title | `test/app/router_test.dart` | Passing |
 | TC-PH1-50 | Phase 1 routing | Widget | Sign out | Returns to sign-in | `test/app/router_test.dart` | Passing |
-| TC-PH1-51 | Phase 1 | Integration | On device | Roles, dark mode and Arabic RTL on a simulator/emulator | `integration_test/scaffold_test.dart` | Passing (iOS simulator; Android pending) |
+| TC-PH1-51 | Phase 1 | Integration | On device | Roles, dark mode and Arabic RTL on a simulator/emulator | `integration_test/scaffold_test.dart` | Passing (iOS simulator, Android emulator) |
 | TC-PH1-52 | NFR Design system | Golden | 18 shared-widget compositions × light/dark × LTR/RTL (72 images) | Pixel match within 0.5 % | `test/core/widgets/*_test.dart` → `test/core/widgets/goldens/` | Passing |
 | TC-AUTH-1-03 | AUTH-1 | Unit | Mock auth repository | Empty fields → InvalidCredentials; any password signs in as the role's seed user; session persists; sign-out clears | `test/features/repositories_test.dart` | Passing |
 | TC-HOME-1-02 | HOME-1 | Unit | Seed progress for the learner | Owns c1, c2; 6 of 11 lessons done; markComplete is idempotent and stamps the clock | `test/features/repositories_test.dart` | Passing |
@@ -112,7 +112,7 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-CERT-4-04 | CERT-4 | Widget | Reminders switch | Certs and Profile share one persisted switch; off clears the schedule; on asks permission and schedules 6 reminders with localized text | `test/features/certifications_test.dart` | Passing |
 | TC-CERT-4-05 | CERT-4 | Widget | Simulate and bell | Banner "BLS certificate expires in 56 days" + "Renew before 12 Jan 2027 to stay compliant."; local notification only when the switch is on; notify.reminder "BLS · 56 days" | `test/features/certifications_test.dart` | Passing |
 | TC-CERT-G-01 | CERT-1..3 | Golden | Certs tab and upload sheet | 8 goldens, EN/AR × light/dark | `test/features/certifications_test.dart` | Passing (generated on macOS, regenerate on Linux) |
-| TC-CERT-E2E-01 | CERT-4 | Integration | Simulate reminder on a device with the real plugin | Banner shows and a local notification is posted | `integration_test/reminders_test.dart` | Planned (device run deferred) |
+| TC-CERT-E2E-01 | CERT-4 | Integration | Simulate reminder with the real plugin | Banner shows and a local notification is posted | `integration_test/reminders_test.dart` + manual | Passing on Android (notification "BLS certificate expires in 56 days" seen in the shade); iOS needs the permission prompt tapped once |
 | TC-COMP-1-02 | COMP-1 | Unit | Request repository | none → pending, joins the queue; pending/approved cannot be re-requested | `test/features/repositories_test.dart` | Passing |
 | TC-COMP-2-02 | COMP-2 | Unit | Decide repository | Reject without (or with blank) comment fails; approve records supervisor and time; decided list updated | `test/features/repositories_test.dart` | Passing |
 | TC-COMP-1-03 | COMP-1 | Widget | Learner sign-offs tab, request cl1 | cl1 Not requested + "Goes to Dr. Omar Al Mansoori · Emergency Medicine"; cl2 Approved by Omar · 28 Oct 2026 with comment; request → Pending "Waiting for supervisor · requested 17 Nov 2026", snackbar "Sign-off requested · Sent to Dr. Omar Al Mansoori", audit signoff.request "Peripheral IV cannulation" | `test/features/competencies_test.dart` | Passing |
@@ -154,6 +154,10 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-LOG-07 | Audit | Unit | Sensitive targets via logger | audit() throws; usage() drops and reports to CrashReporter | `test/core/logging_test.dart` | Passing |
 | TC-LOG-08 | Audit | Unit | Action names | Wire names match the contract lists | `test/core/logging_test.dart` | Passing |
 | TC-LOG-09 | Audit | Unit | Usage store is lossy | Keeps the newest N events | `test/core/logging_test.dart` | Passing |
+| TC-NFR-A11Y-01 | NFR Accessibility | Widget | Guidelines on sign-in, home, quiz, checkout, certs, queue, cohort (light + dark) | androidTapTargetGuideline, iOSTapTargetGuideline, labeledTapTargetGuideline, textContrastGuideline all met | `test/a11y_test.dart` | Passing |
+| TC-NFR-A11Y-02 | NFR Accessibility | Widget | 14 screens at 1.3× text, EN and AR | No layout overflow | `test/a11y_test.dart` | Passing |
+| TC-NFR-PRIV-01 | NFR Privacy | Widget | Sign in with a password, buy by card, upload a file, reject with a comment | Audit and usage stores contain none of the password, card number, CVC, comment, file name or email | `test/privacy_test.dart` | Passing |
+| TC-NFR-L10N-01 | NFR Localisation | Unit | Numbers inside Arabic quiz text | Ranges such as 60–80 are LTR-isolated so they do not read reversed | `test/core/formatting_and_motion_test.dart` | Passing |
 | TC-SEED-01 | Seed | Unit | Seed files parse | Every file loads into its models; counts and totals match the brief | `test/seed/seed_test.dart` | Passing |
 | TC-SEED-02 | Seed | Unit | Bilingual strings | Every {en, ar} pair non-empty; Arabic text present (pure numbers excepted) | `test/seed/seed_test.dart` | Passing |
 | TC-SEED-03 | Seed | Unit | Required questions | The 8 specified questions are present with the right answers | `test/seed/seed_test.dart` | Passing |
@@ -180,5 +184,4 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 
 - **Clinical review needed:** every question in `lib/seed/question_bank.json` (q01–q20, `reviewStatus` field), the explanations and the competency checklist items in `lib/seed/checklists.json` were written from the cited guidelines (AHA 2020 / ERC 2021, WHO hand hygiene 2009, CDC PPE and sharps guidance, ISMP, Joint Commission NPSG.01.01.01, WHO Medication Without Harm). A clinician must review them before any real use.
 - **Arabic review needed:** all Arabic in `lib/seed/*.json` and `lib/app/l10n/app_ar.arb` is Modern Standard Arabic written for this prototype; a native-speaking medical translator should review it, especially clinical terms (الإنعاش القلبي الرئوي، مزيل الرجفان الخارجي الآلي، معدات الوقاية الشخصية، الأدوية عالية الخطورة).
-- **Arabic number ranges:** seed options such as "60–80 ضغطة في الدقيقة" render as "80–60" in RTL (bidi reorders the digits around the dash). Wrap numeric ranges in LTR isolates in the seed text or at render time.
 - **Demo figures:** `lib/seed/cohort.json` (KPIs, charts, learner completion) and the CPD target of 40 are invented demo values and are labelled as such in the data (`demoFigures`, `targetIsDemo`).

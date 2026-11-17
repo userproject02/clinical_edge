@@ -112,3 +112,10 @@ class LtrText extends StatelessWidget {
     );
   }
 }
+
+/// Wraps numeric runs and ranges in [text] ("60–80", "100–120", "2.5") in
+/// LTR isolates so they read left to right inside Arabic sentences.
+String ltrNumbers(String text) => text.replaceAllMapped(
+  RegExp(r'\d+(?:[.,]\d+)*(?:\s*[–-]\s*\d+(?:[.,]\d+)*)*'),
+  (m) => ltr(m[0]!),
+);

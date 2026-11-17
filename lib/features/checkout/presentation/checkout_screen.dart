@@ -610,8 +610,8 @@ class _ApplePaySheetState extends State<_ApplePaySheet>
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     // The mock sheet is always black, like the system sheet.
-    const sheet = Color(0xFF000000);
-    const onSheet = Color(0xFFFFFFFF);
+    const sheet = FixedColors.applePaySheet;
+    const onSheet = FixedColors.onApplePaySheet;
     return Container(
       key: const Key('checkout.applePaySheet'),
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),

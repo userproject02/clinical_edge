@@ -54,7 +54,7 @@ class NotificationBanner extends StatelessWidget {
             border: Border.all(color: c.outline),
             boxShadow: const <BoxShadow>[
               BoxShadow(
-                color: Color(0x73000000),
+                color: FixedColors.shadowBanner,
                 blurRadius: 36,
                 offset: Offset(0, 16),
                 spreadRadius: -14,

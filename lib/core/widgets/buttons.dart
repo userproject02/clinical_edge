@@ -203,7 +203,7 @@ class _ButtonContent extends StatelessWidget {
             child: CircularProgressIndicator(
               strokeWidth: 2.4,
               color: spinnerColor,
-              backgroundColor: const Color(0x00000000),
+              backgroundColor: FixedColors.transparent,
               strokeCap: StrokeCap.round,
             ),
           ),

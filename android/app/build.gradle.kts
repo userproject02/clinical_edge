@@ -6,7 +6,8 @@ plugins {
 
 android {
     namespace = "ae.clinicaledge.clinical_edge"
-    compileSdk = flutter.compileSdkVersion
+    // flutter_local_notifications 23 needs API 37 to compile against.
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
