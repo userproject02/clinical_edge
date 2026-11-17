@@ -1,0 +1,9 @@
+{
+  "requests": [
+    {"id": "so-001", "learnerId": "u-layla", "checklistId": "cl1", "status": "none", "requestedAt": null, "decidedBy": null, "decidedAt": null, "comment": null},
+    {"id": "so-002", "learnerId": "u-layla", "checklistId": "cl2", "status": "approved", "requestedAt": "2026-10-27T10:30:00+04:00", "decidedBy": "u-omar", "decidedAt": "2026-10-28T14:10:00+04:00", "comment": {"en": "Confident PPV technique and clear team communication.", "ar": "أداء واثق في التهوية بالضغط الإيجابي وتواصل واضح مع الفريق."}},
+    {"id": "so-003", "learnerId": "u-aisha", "checklistId": "cl1", "status": "pending", "requestedAt": "2026-11-16T11:05:00+04:00", "decidedBy": null, "decidedAt": null, "comment": null},
+    {"id": "so-004", "learnerId": "u-mariam", "checklistId": "cl2", "status": "pending", "requestedAt": "2026-11-15T16:40:00+04:00", "decidedBy": null, "decidedAt": null, "comment": null},
+    {"id": "so-005", "learnerId": "u-yousef", "checklistId": "cl1", "status": "rejected", "requestedAt": "2026-10-18T09:20:00+04:00", "decidedBy": "u-omar", "decidedAt": "2026-10-20T15:45:00+04:00", "comment": {"en": "Repeat aseptic non-touch technique under supervision, then resubmit.", "ar": "كرّر تقنية عدم اللمس المعقّمة تحت الإشراف، ثم أعد تقديم الطلب."}}
+  ]
+}

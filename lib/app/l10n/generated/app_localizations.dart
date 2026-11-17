@@ -445,6 +445,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Jump to route'**
   String get debugRoutes;
+
+  /// Debug menu: clock source section.
+  ///
+  /// In en, this message translates to:
+  /// **'Clock'**
+  String get debugClock;
+
+  /// Debug menu: fixed demo clock (17 Nov 2026, 09:00 Dubai).
+  ///
+  /// In en, this message translates to:
+  /// **'Demo date'**
+  String get debugClockDemo;
+
+  /// Debug menu: real device clock.
+  ///
+  /// In en, this message translates to:
+  /// **'Device'**
+  String get debugClockSystem;
+
+  /// Debug menu: forced outcome of the mock payment gateway.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock payment'**
+  String get debugGateway;
+
+  /// Mock payment outcome: success.
+  ///
+  /// In en, this message translates to:
+  /// **'Succeed'**
+  String get debugGatewaySucceed;
+
+  /// Mock payment outcome: declined.
+  ///
+  /// In en, this message translates to:
+  /// **'Fail'**
+  String get debugGatewayFail;
+
+  /// Mock payment outcome: 3-D Secure challenge.
+  ///
+  /// In en, this message translates to:
+  /// **'3-D Secure'**
+  String get debugGateway3ds;
+
+  /// Debug menu: wipe local data and reload the seed.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset demo data'**
+  String get debugReset;
+
+  /// Snackbar after the demo data was reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo data reset'**
+  String get debugResetDone;
 }
 
 class _AppLocalizationsDelegate

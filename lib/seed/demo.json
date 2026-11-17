@@ -1,0 +1,9 @@
+{
+  "demoNow": "2026-11-17T09:00:00+04:00",
+  "currency": "AED",
+  "vatPercent": 5,
+  "seller": {"en": "Demo Health Network LLC", "ar": "شبكة الصحة التجريبية ذ.م.م"},
+  "sellerTrn": "[YOUR TRN]",
+  "invoicePrefix": "CE",
+  "nextInvoiceSeq": 1041
+}

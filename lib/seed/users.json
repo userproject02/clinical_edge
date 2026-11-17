@@ -1,0 +1,82 @@
+{
+  "tenant": {"en": "Demo Health Network · Dubai", "ar": "شبكة الصحة التجريبية · دبي"},
+  "users": [
+    {
+      "id": "u-layla",
+      "name": {"en": "Dr. Layla Haddad", "ar": "د. ليلى حداد"},
+      "shortName": {"en": "Layla", "ar": "ليلى"},
+      "title": {"en": "Resident · Internal Medicine", "ar": "طبيبة مقيمة · الطب الباطني"},
+      "department": "im",
+      "email": "layla.haddad@demo-hospital.example",
+      "role": "learner",
+      "initials": "LH",
+      "cohort": true
+    },
+    {
+      "id": "u-omar",
+      "name": {"en": "Dr. Omar Al Mansoori", "ar": "د. عمر المنصوري"},
+      "shortName": {"en": "Omar", "ar": "عمر"},
+      "title": {"en": "Consultant · Emergency Medicine", "ar": "استشاري · طب الطوارئ"},
+      "department": "er",
+      "email": "omar.almansoori@demo-hospital.example",
+      "role": "supervisor",
+      "initials": "OM",
+      "cohort": false
+    },
+    {
+      "id": "u-sara",
+      "name": {"en": "Sara Khan", "ar": "سارة خان"},
+      "shortName": {"en": "Sara", "ar": "سارة"},
+      "title": {"en": "Education & Compliance Admin", "ar": "مسؤولة التعليم والامتثال"},
+      "department": "education",
+      "email": "sara.khan@demo-hospital.example",
+      "role": "admin",
+      "initials": "SK",
+      "cohort": false
+    },
+    {
+      "id": "u-aisha",
+      "name": {"en": "Aisha Rahman", "ar": "عائشة رحمن"},
+      "shortName": {"en": "Aisha", "ar": "عائشة"},
+      "title": {"en": "Registered Nurse · ICU", "ar": "ممرضة مسجّلة · العناية المركزة"},
+      "department": "icu",
+      "email": "aisha.rahman@demo-hospital.example",
+      "role": "learner",
+      "initials": "AR",
+      "cohort": true
+    },
+    {
+      "id": "u-mariam",
+      "name": {"en": "Mariam Saeed", "ar": "مريم سعيد"},
+      "shortName": {"en": "Mariam", "ar": "مريم"},
+      "title": {"en": "Midwife · Maternity", "ar": "قابلة · قسم الولادة"},
+      "department": "maternity",
+      "email": "mariam.saeed@demo-hospital.example",
+      "role": "learner",
+      "initials": "MS",
+      "cohort": true
+    },
+    {
+      "id": "u-yousef",
+      "name": {"en": "Dr. Yousef Nasser", "ar": "د. يوسف ناصر"},
+      "shortName": {"en": "Yousef", "ar": "يوسف"},
+      "title": {"en": "Resident · Emergency", "ar": "طبيب مقيم · الطوارئ"},
+      "department": "er",
+      "email": "yousef.nasser@demo-hospital.example",
+      "role": "learner",
+      "initials": "YN",
+      "cohort": true
+    },
+    {
+      "id": "u-priya",
+      "name": {"en": "Priya Menon", "ar": "بريا مينون"},
+      "shortName": {"en": "Priya", "ar": "بريا"},
+      "title": {"en": "Registered Nurse · Surgery", "ar": "ممرضة مسجّلة · الجراحة"},
+      "department": "surgery",
+      "email": "priya.menon@demo-hospital.example",
+      "role": "learner",
+      "initials": "PM",
+      "cohort": true
+    }
+  ]
+}

@@ -1,13 +1,16 @@
 import 'dart:async';
 
 import 'package:clinical_edge/app/l10n/generated/app_localizations.dart';
+import 'package:clinical_edge/app/mock_overrides.dart';
 import 'package:clinical_edge/app/routes.dart';
 import 'package:clinical_edge/app/state/locale.dart';
 import 'package:clinical_edge/app/state/session.dart';
 import 'package:clinical_edge/app/state/theme_mode.dart';
 import 'package:clinical_edge/app/theme/app_colors.dart';
 import 'package:clinical_edge/app/theme/app_typography.dart';
+import 'package:clinical_edge/core/clock.dart';
 import 'package:clinical_edge/core/formatting.dart';
+import 'package:clinical_edge/core/payments/payment_gateway.dart';
 import 'package:clinical_edge/core/role.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -155,6 +158,52 @@ class DebugMenuSheet extends ConsumerWidget {
                 Segment(value: Role.supervisor, label: l.roleSupervisor),
                 Segment(value: Role.admin, label: l.roleAdmin),
               ],
+            ),
+            label(l.debugClock),
+            SegmentedPicker<ClockMode>(
+              semanticLabel: l.debugClock,
+              selected: ref.watch(clockModeProvider),
+              onChanged: (m) =>
+                  unawaited(ref.read(clockModeProvider.notifier).set(m)),
+              segments: <Segment<ClockMode>>[
+                Segment(value: ClockMode.fixedDemo, label: l.debugClockDemo),
+                Segment(value: ClockMode.system, label: l.debugClockSystem),
+              ],
+            ),
+            label(l.debugGateway),
+            SegmentedPicker<MockGatewayMode>(
+              semanticLabel: l.debugGateway,
+              selected: ref.watch(mockGatewayModeProvider),
+              onChanged: (m) =>
+                  ref.read(mockGatewayModeProvider.notifier).set(m),
+              segments: <Segment<MockGatewayMode>>[
+                Segment(
+                  value: MockGatewayMode.succeed,
+                  label: l.debugGatewaySucceed,
+                ),
+                Segment(value: MockGatewayMode.fail, label: l.debugGatewayFail),
+                Segment(
+                  value: MockGatewayMode.needs3ds,
+                  label: l.debugGateway3ds,
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            SecondaryButton(
+              label: l.debugReset,
+              icon: Icons.restart_alt_rounded,
+              onPressed: () async {
+                final messenger =
+                    router.routerDelegate.navigatorKey.currentContext;
+                Navigator.of(context).pop();
+                await resetDemoData(ref);
+                if (messenger != null && messenger.mounted) {
+                  AppSnackBar.show(
+                    messenger,
+                    title: AppLocalizations.of(messenger).debugResetDone,
+                  );
+                }
+              },
             ),
             if (session.signedIn) ...<Widget>[
               label(l.debugRoutes),

@@ -1,10 +1,8 @@
 {
   "@@locale": "ar",
-
   "appTitle": "ClinicalEdge",
   "brandTag": "التدريب · الشهادات · التطوير المهني",
   "tenant": "شبكة الصحة التجريبية · دبي",
-
   "navHome": "الرئيسية",
   "navLearn": "التعلّم",
   "navAssess": "التقييم",
@@ -15,7 +13,6 @@
   "navCohort": "الدفعة",
   "navAudit": "التدقيق",
   "navInsights": "الرؤى",
-
   "titleSignIn": "تسجيل الدخول",
   "titleHome": "الرئيسية",
   "titleCourses": "الدورات",
@@ -35,19 +32,15 @@
   "titleAudit": "سجل التدقيق",
   "titleInsights": "رؤى الاستخدام",
   "titleProfile": "الملف والإعدادات",
-
   "placeholderBody": "تتوفر هذه الشاشة في مرحلة لاحقة.",
-
   "actionBack": "رجوع",
   "actionClose": "إغلاق",
   "actionNotifications": "الإشعارات",
   "actionProfile": "الملف والإعدادات",
   "loading": "جارٍ التحميل",
-
   "roleLearner": "متعلّم",
   "roleSupervisor": "مشرف",
   "roleAdmin": "مسؤول",
-
   "settingsTheme": "المظهر",
   "themeSystem": "النظام",
   "themeLight": "فاتح",
@@ -55,17 +48,23 @@
   "settingsLanguage": "اللغة",
   "languageEnglish": "English",
   "languageArabic": "العربية",
-
   "notificationAppName": "CLINICALEDGE",
   "notificationNow": "الآن",
   "notificationsEmptyTitle": "لا جديد الآن",
   "notificationsEmptyBody": "ستظهر تذكيرات انتهاء الصلاحية هنا.",
   "navBadge": "{count} جديد",
-
   "aedAmount": "{amount} د.إ",
-
   "debugMenu": "قائمة المطوّر",
   "debugSession": "الجلسة",
   "debugSignedOut": "غير مسجّل",
-  "debugRoutes": "الانتقال إلى مسار"
+  "debugRoutes": "الانتقال إلى مسار",
+  "debugClock": "الساعة",
+  "debugClockDemo": "تاريخ العرض",
+  "debugClockSystem": "الجهاز",
+  "debugGateway": "الدفع التجريبي",
+  "debugGatewaySucceed": "نجاح",
+  "debugGatewayFail": "فشل",
+  "debugGateway3ds": "التحقق ثلاثي الأبعاد",
+  "debugReset": "إعادة ضبط البيانات التجريبية",
+  "debugResetDone": "تمت إعادة ضبط البيانات التجريبية"
 }

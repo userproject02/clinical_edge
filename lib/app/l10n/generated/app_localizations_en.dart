@@ -186,4 +186,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get debugRoutes => 'Jump to route';
+
+  @override
+  String get debugClock => 'Clock';
+
+  @override
+  String get debugClockDemo => 'Demo date';
+
+  @override
+  String get debugClockSystem => 'Device';
+
+  @override
+  String get debugGateway => 'Mock payment';
+
+  @override
+  String get debugGatewaySucceed => 'Succeed';
+
+  @override
+  String get debugGatewayFail => 'Fail';
+
+  @override
+  String get debugGateway3ds => '3-D Secure';
+
+  @override
+  String get debugReset => 'Reset demo data';
+
+  @override
+  String get debugResetDone => 'Demo data reset';
 }

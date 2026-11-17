@@ -1,0 +1,763 @@
+{
+  "bankId": "core-2026",
+  "topics": [
+    {
+      "id": "resuscitation",
+      "label": {
+        "en": "Resuscitation",
+        "ar": "الإنعاش"
+      }
+    },
+    {
+      "id": "infection_control",
+      "label": {
+        "en": "Infection control",
+        "ar": "مكافحة العدوى"
+      }
+    },
+    {
+      "id": "medication_safety",
+      "label": {
+        "en": "Medication safety",
+        "ar": "سلامة الأدوية"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "bls",
+      "courseId": "c1",
+      "title": {
+        "en": "BLS Assessment",
+        "ar": "تقييم دعم الحياة الأساسي"
+      },
+      "topicOrder": [
+        "resuscitation",
+        "infection_control",
+        "medication_safety"
+      ],
+      "size": 8,
+      "passMarkPct": 80
+    }
+  ],
+  "questions": [
+    {
+      "id": "q01",
+      "bankId": "core-2026",
+      "topic": "resuscitation",
+      "prompt": {
+        "en": "What chest compression rate is recommended for an adult in cardiac arrest?",
+        "ar": "ما معدل الضغطات الصدرية الموصى به للبالغ المصاب بسكتة قلبية؟"
+      },
+      "options": [
+        {
+          "en": "60–80 per minute",
+          "ar": "60–80 ضغطة في الدقيقة"
+        },
+        {
+          "en": "80–100 per minute",
+          "ar": "80–100 ضغطة في الدقيقة"
+        },
+        {
+          "en": "100–120 per minute",
+          "ar": "100–120 ضغطة في الدقيقة"
+        },
+        {
+          "en": "120–140 per minute",
+          "ar": "120–140 ضغطة في الدقيقة"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Compress at 100–120 per minute. Faster rates reduce depth and refilling time; slower rates reduce blood flow.",
+        "ar": "اضغط بمعدل 100–120 ضغطة في الدقيقة؛ فالمعدل الأسرع يقلّل عمق الضغط ووقت امتلاء القلب، والمعدل الأبطأ يقلّل تدفق الدم."
+      },
+      "sourceGuideline": "AHA 2020 Guidelines for CPR and ECC; ERC Guidelines 2021",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q02",
+      "bankId": "core-2026",
+      "topic": "resuscitation",
+      "prompt": {
+        "en": "How deep should chest compressions be for an adult?",
+        "ar": "ما العمق المناسب للضغطات الصدرية لدى البالغ؟"
+      },
+      "options": [
+        {
+          "en": "2–3 cm",
+          "ar": "2–3 سم"
+        },
+        {
+          "en": "3–4 cm",
+          "ar": "3–4 سم"
+        },
+        {
+          "en": "5–6 cm",
+          "ar": "5–6 سم"
+        },
+        {
+          "en": "7–8 cm",
+          "ar": "7–8 سم"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Press at least 5 cm but no more than 6 cm on an adult; deeper compressions increase the risk of injury.",
+        "ar": "اضغط بعمق 5 سم على الأقل دون تجاوز 6 سم لدى البالغ؛ فالضغط الأعمق يزيد خطر الإصابة."
+      },
+      "sourceGuideline": "AHA 2020 Guidelines for CPR and ECC; ERC Guidelines 2021",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q03",
+      "bankId": "core-2026",
+      "topic": "resuscitation",
+      "prompt": {
+        "en": "What is the compression-to-ventilation ratio for a single rescuer giving adult CPR?",
+        "ar": "ما نسبة الضغطات إلى أنفاس الإنقاذ عندما يُجري مسعف واحد الإنعاش القلبي الرئوي لبالغ؟"
+      },
+      "options": [
+        {
+          "en": "15:2",
+          "ar": "15:2"
+        },
+        {
+          "en": "30:2",
+          "ar": "30:2"
+        },
+        {
+          "en": "30:1",
+          "ar": "30:1"
+        },
+        {
+          "en": "5:1",
+          "ar": "5:1"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "One rescuer gives 30 compressions, then 2 rescue breaths, and repeats the cycle without delay.",
+        "ar": "يعطي المسعف الواحد 30 ضغطة ثم نفَسَي إنقاذ، ويكرر الدورة دون تأخير."
+      },
+      "sourceGuideline": "AHA 2020 Guidelines for CPR and ECC; ERC Guidelines 2021",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q04",
+      "bankId": "core-2026",
+      "topic": "resuscitation",
+      "prompt": {
+        "en": "When checking for a pulse in an unresponsive adult, what is the most time you should take?",
+        "ar": "ما أقصى مدة ينبغي قضاؤها في تحسّس النبض لدى بالغ لا يستجيب؟"
+      },
+      "options": [
+        {
+          "en": "No more than 10 seconds",
+          "ar": "10 ثوانٍ كحد أقصى"
+        },
+        {
+          "en": "Up to 20 seconds",
+          "ar": "حتى 20 ثانية"
+        },
+        {
+          "en": "Up to 30 seconds",
+          "ar": "حتى 30 ثانية"
+        },
+        {
+          "en": "As long as it takes to be certain",
+          "ar": "المدة اللازمة حتى تتأكد تماماً"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Spend no more than 10 seconds. If you do not definitely feel a pulse, start CPR.",
+        "ar": "لا تتجاوز 10 ثوانٍ؛ وإن لم تتأكد من وجود النبض فابدأ الإنعاش القلبي الرئوي فوراً."
+      },
+      "sourceGuideline": "AHA 2020 Guidelines for CPR and ECC; ERC Guidelines 2021",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q05",
+      "bankId": "core-2026",
+      "topic": "resuscitation",
+      "prompt": {
+        "en": "Why should you allow full chest recoil after each compression?",
+        "ar": "لماذا يجب السماح للصدر بالعودة إلى وضعه الطبيعي كاملاً بعد كل ضغطة؟"
+      },
+      "options": [
+        {
+          "en": "It gives the rescuer time to rest",
+          "ar": "لأنه يمنح المسعف وقتاً للراحة"
+        },
+        {
+          "en": "It removes any risk of rib fractures",
+          "ar": "لأنه يُزيل أي خطر لكسور الأضلاع"
+        },
+        {
+          "en": "It allows the AED to analyse the rhythm",
+          "ar": "لأنه يتيح لجهاز الصدمات تحليل نظم القلب"
+        },
+        {
+          "en": "It lets the heart refill with blood before the next compression",
+          "ar": "لأن ذلك يتيح للقلب أن يمتلئ بالدم قبل الضغطة التالية"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Leaning on the chest stops it from fully re-expanding, so the heart fills less and each compression moves less blood.",
+        "ar": "الاتكاء على الصدر يمنع عودته الكاملة، فيقلّ امتلاء القلب وتقلّ كمية الدم التي تدفعها كل ضغطة."
+      },
+      "sourceGuideline": "AHA 2020 Guidelines for CPR and ECC; ERC Guidelines 2021",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q06",
+      "bankId": "core-2026",
+      "topic": "resuscitation",
+      "prompt": {
+        "en": "Why should pauses in chest compressions be kept as short as possible?",
+        "ar": "لماذا يجب أن تكون فترات التوقف عن الضغطات الصدرية أقصر ما يمكن؟"
+      },
+      "options": [
+        {
+          "en": "Pressure built up by compressions falls quickly in a pause and takes several compressions to rebuild",
+          "ar": "لأن الضغط الناتج عن الضغطات ينخفض بسرعة أثناء التوقف ويحتاج إلى عدة ضغطات لاستعادته"
+        },
+        {
+          "en": "Pauses increase the chance of vomiting",
+          "ar": "لأن التوقف يزيد احتمال القيء"
+        },
+        {
+          "en": "Long pauses only matter in children",
+          "ar": "لأن التوقف الطويل لا يهم إلا لدى الأطفال"
+        },
+        {
+          "en": "Rescuers tire faster after a pause",
+          "ar": "لأن المسعفين يتعبون أسرع بعد التوقف"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Coronary perfusion pressure drops as soon as compressions stop. Keep pauses under 10 seconds, for example for rhythm checks, shocks and breaths.",
+        "ar": "ينخفض ضغط التروية التاجية بمجرد توقف الضغطات؛ لذا اجعل فترات التوقف أقل من 10 ثوانٍ، كالتوقف لتحليل النظم أو إعطاء الصدمة أو أنفاس الإنقاذ."
+      },
+      "sourceGuideline": "AHA 2020 Guidelines for CPR and ECC; ERC Guidelines 2021",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q07",
+      "bankId": "core-2026",
+      "topic": "resuscitation",
+      "prompt": {
+        "en": "Where are AED pads placed on an adult in the standard position?",
+        "ar": "أين توضع وسادتا جهاز مزيل الرجفان على البالغ في الوضع القياسي؟"
+      },
+      "options": [
+        {
+          "en": "One below the right collarbone, one on the left side of the chest below the armpit",
+          "ar": "واحدة أسفل الترقوة اليمنى وأخرى على الجانب الأيسر من الصدر أسفل الإبط"
+        },
+        {
+          "en": "Both side by side in the centre of the chest",
+          "ar": "الوسادتان متجاورتان في منتصف الصدر"
+        },
+        {
+          "en": "One on the abdomen, one on the back of the neck",
+          "ar": "واحدة على البطن وأخرى على مؤخرة العنق"
+        },
+        {
+          "en": "One on each shoulder",
+          "ar": "واحدة على كل كتف"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "The anterolateral position puts the heart between the pads: right upper chest below the clavicle, and the left side in the mid-axillary line.",
+        "ar": "يجعل الوضع الأمامي الجانبي القلب بين الوسادتين: أعلى يمين الصدر أسفل الترقوة، وعلى الجانب الأيسر عند خط منتصف الإبط."
+      },
+      "sourceGuideline": "AHA 2020 Guidelines for CPR and ECC; ERC Guidelines 2021",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q08",
+      "bankId": "core-2026",
+      "topic": "resuscitation",
+      "prompt": {
+        "en": "Immediately after an AED delivers a shock, the rescuer should:",
+        "ar": "مباشرة بعد أن يعطي جهاز مزيل الرجفان صدمة، يجب على المسعف:"
+      },
+      "options": [
+        {
+          "en": "Check the pulse for 30 seconds",
+          "ar": "فحص النبض لمدة 30 ثانية"
+        },
+        {
+          "en": "Resume CPR, starting with chest compressions",
+          "ar": "استئناف الإنعاش القلبي الرئوي بدءاً بالضغطات الصدرية"
+        },
+        {
+          "en": "Give two rescue breaths first",
+          "ar": "إعطاء نفَسَي إنقاذ أولاً"
+        },
+        {
+          "en": "Wait for the AED to re-analyse",
+          "ar": "انتظار إعادة تحليل الجهاز للنظم"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Restart compressions straight away and continue for 2 minutes until the AED prompts the next rhythm check.",
+        "ar": "استأنف الضغطات فوراً واستمر لمدة دقيقتين حتى يطلب الجهاز فحص النظم التالي."
+      },
+      "sourceGuideline": "AHA 2020 Guidelines for CPR and ECC; ERC Guidelines 2021",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q09",
+      "bankId": "core-2026",
+      "topic": "infection_control",
+      "prompt": {
+        "en": "Which of these is one of the WHO 5 Moments for Hand Hygiene?",
+        "ar": "أيٌّ مما يلي من لحظات منظمة الصحة العالمية الخمس لنظافة اليدين؟"
+      },
+      "options": [
+        {
+          "en": "Before answering the ward telephone",
+          "ar": "قبل الرد على هاتف القسم"
+        },
+        {
+          "en": "After reading a paper chart at the nurses' station",
+          "ar": "بعد قراءة ملف ورقي في محطة التمريض"
+        },
+        {
+          "en": "Before a clean/aseptic procedure",
+          "ar": "قبل إجراء نظيف أو معقّم"
+        },
+        {
+          "en": "Before a shift handover meeting",
+          "ar": "قبل اجتماع تسليم المناوبة"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "The 5 Moments: before touching a patient, before a clean/aseptic procedure, after body fluid exposure risk, after touching a patient, and after touching patient surroundings.",
+        "ar": "اللحظات الخمس هي: قبل لمس المريض، وقبل الإجراء النظيف أو المعقّم، وبعد خطر التعرض لسوائل الجسم، وبعد لمس المريض، وبعد لمس محيط المريض."
+      },
+      "sourceGuideline": "WHO Guidelines on Hand Hygiene in Health Care (2009)",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q10",
+      "bankId": "core-2026",
+      "topic": "infection_control",
+      "prompt": {
+        "en": "How long should a hand rub with an alcohol-based product take?",
+        "ar": "كم ينبغي أن يستغرق فرك اليدين بمطهّر كحولي؟"
+      },
+      "options": [
+        {
+          "en": "5–10 seconds",
+          "ar": "5–10 ثوانٍ"
+        },
+        {
+          "en": "20–30 seconds",
+          "ar": "20–30 ثانية"
+        },
+        {
+          "en": "40–60 seconds",
+          "ar": "40–60 ثانية"
+        },
+        {
+          "en": "2 minutes",
+          "ar": "دقيقتان"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Rub all hand surfaces for 20–30 seconds until dry. 40–60 seconds is the time for washing with soap and water.",
+        "ar": "افرك جميع أسطح اليدين لمدة 20–30 ثانية حتى تجفّا؛ أما 40–60 ثانية فهي مدة غسل اليدين بالماء والصابون."
+      },
+      "sourceGuideline": "WHO Guidelines on Hand Hygiene in Health Care (2009)",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q11",
+      "bankId": "core-2026",
+      "topic": "infection_control",
+      "prompt": {
+        "en": "What should you do with a used needle after giving an injection?",
+        "ar": "ماذا تفعل بالإبرة المستعملة بعد إعطاء الحقنة؟"
+      },
+      "options": [
+        {
+          "en": "Put it in a sharps container immediately, without recapping",
+          "ar": "وضعها فوراً في حاوية الأدوات الحادة دون إعادة تغطيتها"
+        },
+        {
+          "en": "Recap it carefully with both hands, then dispose of it",
+          "ar": "إعادة غطائها بحذر باليدين ثم التخلص منها"
+        },
+        {
+          "en": "Leave it on the tray and dispose of it after the round",
+          "ar": "تركها على الصينية والتخلص منها بعد انتهاء الجولة"
+        },
+        {
+          "en": "Bend it to prevent reuse, then put it in the bin",
+          "ar": "ثنيها لمنع إعادة استخدامها ثم رميها في سلة النفايات"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Dispose of sharps at the point of use in an approved sharps container. Never recap, bend or break used needles.",
+        "ar": "تخلّص من الأدوات الحادة في مكان استخدامها داخل حاوية معتمدة، ولا تُعِد تغطية الإبر المستعملة أو تثنِها أو تكسرها أبداً."
+      },
+      "sourceGuideline": "WHO/CDC sharps safety guidance",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q12",
+      "bankId": "core-2026",
+      "topic": "infection_control",
+      "prompt": {
+        "en": "When removing PPE after patient care, which item is usually removed first?",
+        "ar": "عند خلع معدات الوقاية الشخصية بعد رعاية المريض، أيّ قطعة تُخلع أولاً عادةً؟"
+      },
+      "options": [
+        {
+          "en": "Mask or respirator",
+          "ar": "الكمامة أو جهاز التنفس"
+        },
+        {
+          "en": "Eye protection",
+          "ar": "واقي العينين"
+        },
+        {
+          "en": "Gloves",
+          "ar": "القفازات"
+        },
+        {
+          "en": "Gown",
+          "ar": "الرداء الواقي"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Gloves are the most contaminated item and come off first; the mask or respirator comes off last, after leaving the patient area. Perform hand hygiene after removing all PPE.",
+        "ar": "القفازات هي الأكثر تلوثاً فتُخلع أولاً، أما الكمامة أو جهاز التنفس فيُخلع أخيراً بعد مغادرة منطقة المريض، ثم تُجرى نظافة اليدين بعد خلع جميع المعدات."
+      },
+      "sourceGuideline": "CDC: Sequence for Donning and Removing PPE",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q13",
+      "bankId": "core-2026",
+      "topic": "infection_control",
+      "prompt": {
+        "en": "After removing gloves used for a wound dressing, what should you do?",
+        "ar": "بعد خلع القفازات المستخدمة في تغيير ضماد جرح، ماذا يجب أن تفعل؟"
+      },
+      "options": [
+        {
+          "en": "Nothing; the gloves protected your hands",
+          "ar": "لا شيء، فقد حمت القفازات يديك"
+        },
+        {
+          "en": "Put on new gloves for the next patient without hand hygiene",
+          "ar": "ارتداء قفازات جديدة للمريض التالي دون تنظيف اليدين"
+        },
+        {
+          "en": "Rinse with water only if your hands look dirty",
+          "ar": "شطف اليدين بالماء فقط إذا بدتا متسختين"
+        },
+        {
+          "en": "Perform hand hygiene",
+          "ar": "إجراء نظافة اليدين"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Gloves do not replace hand hygiene: hands can be contaminated through tiny defects or while taking the gloves off.",
+        "ar": "لا تُغني القفازات عن نظافة اليدين، إذ قد تتلوث اليدان عبر ثقوب دقيقة في القفازات أو أثناء خلعها."
+      },
+      "sourceGuideline": "WHO Guidelines on Hand Hygiene in Health Care (2009)",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q14",
+      "bankId": "core-2026",
+      "topic": "infection_control",
+      "prompt": {
+        "en": "When should a sharps container be closed and replaced?",
+        "ar": "متى يجب إغلاق حاوية الأدوات الحادة واستبدالها؟"
+      },
+      "options": [
+        {
+          "en": "When it is completely full",
+          "ar": "عندما تمتلئ تماماً"
+        },
+        {
+          "en": "When it reaches the fill line (about three-quarters full)",
+          "ar": "عندما تصل إلى خط الامتلاء (نحو ثلاثة أرباع سعتها)"
+        },
+        {
+          "en": "Once a week, however full it is",
+          "ar": "مرة أسبوعياً بغض النظر عن امتلائها"
+        },
+        {
+          "en": "When the lid no longer closes",
+          "ar": "عندما يتعذر إغلاق غطائها"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Overfilled containers cause needlestick injuries. Close and replace the container when it reaches the marked fill line.",
+        "ar": "تسبب الحاويات المفرطة الامتلاء إصابات الوخز بالإبر، لذا أغلق الحاوية واستبدلها عند وصولها إلى خط الامتلاء المحدد."
+      },
+      "sourceGuideline": "WHO/CDC sharps safety guidance",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q15",
+      "bankId": "core-2026",
+      "topic": "infection_control",
+      "prompt": {
+        "en": "Standard precautions should be applied to:",
+        "ar": "تُطبَّق الاحتياطات القياسية على:"
+      },
+      "options": [
+        {
+          "en": "All patients, whatever their known or suspected infection status",
+          "ar": "جميع المرضى بغض النظر عن حالة العدوى المعروفة أو المشتبه بها"
+        },
+        {
+          "en": "Only patients with a confirmed infection",
+          "ar": "المرضى المصابين بعدوى مؤكدة فقط"
+        },
+        {
+          "en": "Only patients in isolation rooms",
+          "ar": "المرضى في غرف العزل فقط"
+        },
+        {
+          "en": "Only during surgical procedures",
+          "ar": "أثناء العمليات الجراحية فقط"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Any patient may carry an infection without signs, so standard precautions apply to every patient, every time.",
+        "ar": "قد يحمل أي مريض عدوى دون ظهور علامات، لذا تُطبَّق الاحتياطات القياسية على كل مريض في كل مرة."
+      },
+      "sourceGuideline": "WHO/CDC Standard Precautions",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q16",
+      "bankId": "core-2026",
+      "topic": "medication_safety",
+      "prompt": {
+        "en": "Before giving a medication, how should you confirm the patient's identity?",
+        "ar": "قبل إعطاء الدواء، كيف تتأكد من هوية المريض؟"
+      },
+      "options": [
+        {
+          "en": "Check the room and bed number",
+          "ar": "التحقق من رقم الغرفة والسرير"
+        },
+        {
+          "en": "Say the patient's name and ask them to confirm it",
+          "ar": "ذكر اسم المريض وطلب تأكيده منه"
+        },
+        {
+          "en": "Use at least two patient identifiers, such as full name and date of birth",
+          "ar": "استخدام مُعرِّفَين اثنين للمريض على الأقل، مثل الاسم الكامل وتاريخ الميلاد"
+        },
+        {
+          "en": "Rely on recognising the patient from earlier in the shift",
+          "ar": "الاعتماد على تذكّر المريض من وقت سابق في المناوبة"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Use at least two identifiers (such as full name and date of birth or medical record number) and match them to the order and wristband. A room or bed number is never an identifier.",
+        "ar": "استخدم مُعرِّفَين على الأقل (مثل الاسم الكامل وتاريخ الميلاد أو رقم الملف الطبي) وطابقهما مع الوصفة وسوار المعصم، ولا يُعدّ رقم الغرفة أو السرير مُعرِّفاً أبداً."
+      },
+      "sourceGuideline": "Joint Commission NPSG.01.01.01; WHO Patient Safety Solutions",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q17",
+      "bankId": "core-2026",
+      "topic": "medication_safety",
+      "prompt": {
+        "en": "Which pair are both high-alert medications?",
+        "ar": "أيّ زوج مما يلي يضم دواءين عاليي الخطورة كليهما؟"
+      },
+      "options": [
+        {
+          "en": "Paracetamol and ibuprofen tablets",
+          "ar": "أقراص الباراسيتامول والإيبوبروفين"
+        },
+        {
+          "en": "Amoxicillin and cefalexin capsules",
+          "ar": "كبسولات الأموكسيسيلين والسيفالكسين"
+        },
+        {
+          "en": "Saline nasal spray and emollient cream",
+          "ar": "بخاخ الأنف الملحي والكريم المرطّب"
+        },
+        {
+          "en": "Insulin and concentrated IV potassium chloride",
+          "ar": "الإنسولين وكلوريد البوتاسيوم المركّز للحقن الوريدي"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "High-alert medications cause significant harm when used in error. Insulin and concentrated potassium chloride are on the ISMP list and need extra safeguards.",
+        "ar": "قد تسبب الأدوية عالية الخطورة ضرراً كبيراً عند استخدامها خطأً، والإنسولين وكلوريد البوتاسيوم المركّز مدرجان في قائمة معهد الممارسات الدوائية الآمنة (ISMP) ويحتاجان إلى ضمانات إضافية."
+      },
+      "sourceGuideline": "ISMP List of High-Alert Medications in Acute Care Settings",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q18",
+      "bankId": "core-2026",
+      "topic": "medication_safety",
+      "prompt": {
+        "en": "What makes a double check “independent”?",
+        "ar": "ما الذي يجعل التحقق المزدوج «مستقلاً»؟"
+      },
+      "options": [
+        {
+          "en": "A second qualified person checks the order, drug, dose, calculation and pump settings separately, without being told the expected result",
+          "ar": "أن يتحقق شخص ثانٍ مؤهل من الوصفة والدواء والجرعة والحساب وإعدادات المضخة بشكل منفصل، دون إخباره بالنتيجة المتوقعة"
+        },
+        {
+          "en": "The second person watches the first prepare the dose",
+          "ar": "أن يراقب الشخص الثاني الأول أثناء تحضير الجرعة"
+        },
+        {
+          "en": "The same nurse checks the dose twice",
+          "ar": "أن تتحقق الممرضة نفسها من الجرعة مرتين"
+        },
+        {
+          "en": "The pharmacist signs the chart at the end of the shift",
+          "ar": "أن يوقّع الصيدلي على الملف في نهاية المناوبة"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Independent checks catch errors because the second checker reaches their own result. Use them for high-alert drugs such as insulin, heparin and IV potassium.",
+        "ar": "يكشف التحقق المستقل الأخطاء لأن المتحقق الثاني يصل إلى نتيجته بنفسه، ويُستخدم مع الأدوية عالية الخطورة مثل الإنسولين والهيبارين والبوتاسيوم الوريدي."
+      },
+      "sourceGuideline": "ISMP: Independent Double Checks",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q19",
+      "bankId": "core-2026",
+      "topic": "medication_safety",
+      "prompt": {
+        "en": "Why are some drug names printed as hydrOXYzine and hydrALAZINE?",
+        "ar": "لماذا تُكتب أسماء بعض الأدوية بالشكل hydrOXYzine وhydrALAZINE؟"
+      },
+      "options": [
+        {
+          "en": "To show they are brand-name products",
+          "ar": "للإشارة إلى أنها منتجات تحمل أسماء تجارية"
+        },
+        {
+          "en": "To mark them as controlled drugs",
+          "ar": "لتمييزها بوصفها أدوية خاضعة للرقابة"
+        },
+        {
+          "en": "To highlight the letters that differ between look-alike, sound-alike names",
+          "ar": "لإبراز الأحرف المختلفة بين الأسماء المتشابهة في الشكل أو النطق"
+        },
+        {
+          "en": "To show they must be given intravenously",
+          "ar": "للإشارة إلى وجوب إعطائها وريدياً"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Tall Man lettering draws the eye to the differences between similar names and reduces selection errors.",
+        "ar": "تلفت الكتابة بالأحرف الكبيرة المميِّزة (Tall Man) الانتباه إلى الفروق بين الأسماء المتشابهة، فتقلّ أخطاء اختيار الدواء."
+      },
+      "sourceGuideline": "ISMP/FDA Tall Man lettering",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    },
+    {
+      "id": "q20",
+      "bankId": "core-2026",
+      "topic": "medication_safety",
+      "prompt": {
+        "en": "A nurse gives a scheduled dose one hour late and the patient is not harmed. What should she do?",
+        "ar": "أعطت ممرضة جرعة مجدولة متأخرة ساعة واحدة ولم يتضرر المريض. ماذا ينبغي أن تفعل؟"
+      },
+      "options": [
+        {
+          "en": "Nothing, because there was no harm",
+          "ar": "لا شيء، لأنه لم يحدث ضرر"
+        },
+        {
+          "en": "Change the documented time to match the schedule",
+          "ar": "تعديل الوقت الموثّق ليطابق الجدول"
+        },
+        {
+          "en": "Mention it only to a colleague",
+          "ar": "إخبار زميلة فقط"
+        },
+        {
+          "en": "Report it through the incident reporting system so the team can learn from it",
+          "ar": "الإبلاغ عنها عبر نظام الإبلاغ عن الحوادث ليتعلّم الفريق منها"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Reporting errors and near misses, including no-harm events, lets the organisation find system causes. A just culture focuses on learning, not blame.",
+        "ar": "يتيح الإبلاغ عن الأخطاء والحوادث الوشيكة، بما فيها الحوادث غير الضارة، اكتشاف الأسباب المرتبطة بالنظام، وتركّز ثقافة العدالة على التعلّم لا على اللوم."
+      },
+      "sourceGuideline": "WHO Global Patient Safety Challenge: Medication Without Harm (2017)",
+      "reviewStatus": "needs clinician and native-Arabic review"
+    }
+  ],
+  "history": [
+    {
+      "id": "att-001",
+      "userId": "u-layla",
+      "quizId": "bls",
+      "answers": [
+        2,
+        2,
+        1,
+        0,
+        3,
+        1,
+        1,
+        2
+      ],
+      "scorePct": 63,
+      "passed": false,
+      "submittedAt": "2026-10-02T19:40:00+04:00"
+    },
+    {
+      "id": "att-002",
+      "userId": "u-layla",
+      "quizId": "bls",
+      "answers": [
+        2,
+        2,
+        1,
+        0,
+        3,
+        0,
+        1,
+        2
+      ],
+      "scorePct": 75,
+      "passed": false,
+      "submittedAt": "2026-10-20T20:15:00+04:00"
+    }
+  ]
+}

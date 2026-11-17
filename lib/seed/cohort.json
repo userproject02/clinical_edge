@@ -1,0 +1,66 @@
+{
+  "demoFigures": true,
+  "demoLabel": {"en": "Demo figures", "ar": "أرقام تجريبية"},
+  "asOf": "2026-11-17",
+  "departments": [
+    {"id": "er", "label": {"en": "Emergency", "ar": "الطوارئ"}},
+    {"id": "icu", "label": {"en": "ICU", "ar": "العناية المركزة"}},
+    {"id": "maternity", "label": {"en": "Maternity", "ar": "الولادة"}},
+    {"id": "im", "label": {"en": "Internal Medicine", "ar": "الطب الباطني"}},
+    {"id": "surgery", "label": {"en": "Surgery", "ar": "الجراحة"}},
+    {"id": "education", "label": {"en": "Education", "ar": "التعليم"}}
+  ],
+  "kpis": {
+    "activeLearners": 142,
+    "nursing": 96,
+    "physicians": 46,
+    "avgCompletionPct": 68,
+    "avgCompletionDeltaPts": 6,
+    "deltaComparedTo": {"en": "vs Oct", "ar": "مقارنةً بأكتوبر"},
+    "certsExpiringWithin90Days": 17
+  },
+  "completionByCourse": [
+    {"courseId": "c1", "pct": 74},
+    {"courseId": "c2", "pct": 66},
+    {"courseId": "c3", "pct": 41}
+  ],
+  "progressByDepartment": [
+    {"departmentId": "er", "pct": 78},
+    {"departmentId": "icu", "pct": 71},
+    {"departmentId": "maternity", "pct": 64},
+    {"departmentId": "im", "pct": 69},
+    {"departmentId": "surgery", "pct": 55}
+  ],
+  "expiriesByMonth": [
+    {"month": "2026-12", "count": 6},
+    {"month": "2027-01", "count": 9},
+    {"month": "2027-02", "count": 4},
+    {"month": "2027-03", "count": 7},
+    {"month": "2027-04", "count": 3},
+    {"month": "2027-05", "count": 5}
+  ],
+  "learners": [
+    {"userId": "u-layla", "completionPct": 55, "certsExpiringSoon": 1},
+    {"userId": "u-aisha", "completionPct": 82, "certsExpiringSoon": 0},
+    {"userId": "u-mariam", "completionPct": 64, "certsExpiringSoon": 1},
+    {"userId": "u-yousef", "completionPct": 47, "certsExpiringSoon": 2},
+    {"userId": "u-priya", "completionPct": 71, "certsExpiringSoon": 0}
+  ],
+  "insights": {
+    "lessonViewsByCourse": [
+      {"courseId": "c1", "views": 412},
+      {"courseId": "c2", "views": 286},
+      {"courseId": "c3", "views": 154}
+    ],
+    "dropOff": {"courseId": "c1", "retainedPctByLesson": [100, 94, 86, 64, 58, 53]},
+    "firstAttemptPassRates": [
+      {"courseId": "c1", "pct": 78, "attempts": 212},
+      {"courseId": "c2", "pct": 86, "attempts": 164},
+      {"courseId": "c3", "pct": 81, "attempts": 71}
+    ],
+    "sessionsByPlatform": [
+      {"platform": "ios", "pct": 58},
+      {"platform": "android", "pct": 42}
+    ]
+  }
+}

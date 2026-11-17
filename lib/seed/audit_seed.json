@@ -1,0 +1,15 @@
+{
+  "note": "Historical audit events, oldest first. Loaded through AuditStore.append so the hash chain is computed, never stored here.",
+  "events": [
+    {"id": "ev-seed-01", "ts": "2026-09-07T10:12:00+04:00", "userId": "u-layla", "role": "learner", "action": "purchase", "target": "Infection Prevention & Control Essentials · AED 262.50 · CE-2026-001039", "platform": "ios"},
+    {"id": "ev-seed-02", "ts": "2026-10-01T08:45:00+04:00", "userId": "u-layla", "role": "learner", "action": "purchase", "target": "Basic Life Support Refresher · AED 367.50 · CE-2026-001040", "platform": "ios"},
+    {"id": "ev-seed-03", "ts": "2026-10-02T19:40:00+04:00", "userId": "u-layla", "role": "learner", "action": "quiz.score", "target": "BLS Assessment · 63% · fail", "platform": "ios"},
+    {"id": "ev-seed-04", "ts": "2026-10-18T09:20:00+04:00", "userId": "u-yousef", "role": "learner", "action": "signoff.request", "target": "Peripheral IV cannulation", "platform": "android"},
+    {"id": "ev-seed-05", "ts": "2026-10-20T15:45:00+04:00", "userId": "u-omar", "role": "supervisor", "action": "signoff.decision", "target": "Peripheral IV cannulation · Dr. Yousef Nasser · rejected", "platform": "ios"},
+    {"id": "ev-seed-06", "ts": "2026-10-20T20:15:00+04:00", "userId": "u-layla", "role": "learner", "action": "quiz.score", "target": "BLS Assessment · 75% · fail", "platform": "ios"},
+    {"id": "ev-seed-07", "ts": "2026-10-27T10:30:00+04:00", "userId": "u-layla", "role": "learner", "action": "signoff.request", "target": "Neonatal resuscitation skills", "platform": "ios"},
+    {"id": "ev-seed-08", "ts": "2026-10-28T14:10:00+04:00", "userId": "u-omar", "role": "supervisor", "action": "signoff.decision", "target": "Neonatal resuscitation skills · Dr. Layla Haddad · approved", "platform": "ios"},
+    {"id": "ev-seed-09", "ts": "2026-11-12T11:30:00+04:00", "userId": "u-sara", "role": "admin", "action": "role.change", "target": "learner → admin", "platform": "ios"},
+    {"id": "ev-seed-10", "ts": "2026-11-12T11:42:00+04:00", "userId": "u-sara", "role": "admin", "action": "audit.export", "target": "CSV · 9 events", "platform": "ios"}
+  ]
+}

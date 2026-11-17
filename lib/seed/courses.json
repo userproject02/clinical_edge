@@ -1,0 +1,79 @@
+{
+  "categories": [
+    {"id": "resuscitation", "label": {"en": "Resuscitation", "ar": "الإنعاش"}},
+    {"id": "infection_control", "label": {"en": "Infection control", "ar": "مكافحة العدوى"}},
+    {"id": "medication_safety", "label": {"en": "Medication safety", "ar": "سلامة الأدوية"}}
+  ],
+  "courses": [
+    {
+      "id": "c1",
+      "title": {"en": "Basic Life Support Refresher", "ar": "تحديث دعم الحياة الأساسي"},
+      "category": "resuscitation",
+      "cover": "bls",
+      "durationMin": 200,
+      "cpdCredits": 4,
+      "priceFils": 35000,
+      "lessons": [
+        {"id": "c1-l1", "order": 1, "title": {"en": "Chain of survival", "ar": "سلسلة النجاة"}, "type": "video", "minutes": 18, "assetRef": "video/c1-l1"},
+        {"id": "c1-l2", "order": 2, "title": {"en": "High-quality chest compressions", "ar": "الضغطات الصدرية عالية الجودة"}, "type": "video", "minutes": 24, "assetRef": "video/c1-l2"},
+        {"id": "c1-l3", "order": 3, "title": {"en": "Airway and rescue breaths", "ar": "مجرى الهواء وأنفاس الإنقاذ"}, "type": "reading", "minutes": 12, "assetRef": "reading/c1-l3"},
+        {"id": "c1-l4", "order": 4, "title": {"en": "Using an AED", "ar": "استخدام جهاز مزيل الرجفان الخارجي الآلي"}, "type": "video", "minutes": 20, "assetRef": "video/c1-l4"},
+        {"id": "c1-l5", "order": 5, "title": {"en": "Team dynamics in resuscitation", "ar": "ديناميكيات الفريق في الإنعاش"}, "type": "pdf", "minutes": 15, "assetRef": "pdf/c1-l5"},
+        {"id": "c1-l6", "order": 6, "title": {"en": "Skills check and summary", "ar": "تقييم المهارات والملخص"}, "type": "reading", "minutes": 10, "assetRef": "reading/c1-l6"}
+      ]
+    },
+    {
+      "id": "c2",
+      "title": {"en": "Infection Prevention & Control Essentials", "ar": "أساسيات الوقاية من العدوى ومكافحتها"},
+      "category": "infection_control",
+      "cover": "ipc",
+      "durationMin": 160,
+      "cpdCredits": 3,
+      "priceFils": 25000,
+      "lessons": [
+        {"id": "c2-l1", "order": 1, "title": {"en": "Standard precautions", "ar": "الاحتياطات القياسية"}, "type": "reading", "minutes": 14, "assetRef": "reading/c2-l1"},
+        {"id": "c2-l2", "order": 2, "title": {"en": "Hand hygiene: the 5 Moments", "ar": "نظافة اليدين: اللحظات الخمس"}, "type": "video", "minutes": 16, "assetRef": "video/c2-l2"},
+        {"id": "c2-l3", "order": 3, "title": {"en": "PPE donning and doffing", "ar": "ارتداء معدات الوقاية الشخصية وخلعها"}, "type": "video", "minutes": 22, "assetRef": "video/c2-l3"},
+        {"id": "c2-l4", "order": 4, "title": {"en": "Sharps safety", "ar": "السلامة من الأدوات الحادة"}, "type": "pdf", "minutes": 12, "assetRef": "pdf/c2-l4"},
+        {"id": "c2-l5", "order": 5, "title": {"en": "Environmental cleaning", "ar": "تنظيف البيئة المحيطة"}, "type": "reading", "minutes": 10, "assetRef": "reading/c2-l5"}
+      ]
+    },
+    {
+      "id": "c3",
+      "title": {"en": "Medication Safety & High-Alert Drugs", "ar": "سلامة الأدوية والأدوية عالية الخطورة"},
+      "category": "medication_safety",
+      "cover": "medication",
+      "durationMin": 125,
+      "cpdCredits": 2,
+      "priceFils": 30000,
+      "lessons": [
+        {"id": "c3-l1", "order": 1, "title": {"en": "The rights of medication administration", "ar": "قواعد إعطاء الدواء الصحيحة"}, "type": "video", "minutes": 18, "assetRef": "video/c3-l1"},
+        {"id": "c3-l2", "order": 2, "title": {"en": "High-alert medications", "ar": "الأدوية عالية الخطورة"}, "type": "reading", "minutes": 16, "assetRef": "reading/c3-l2"},
+        {"id": "c3-l3", "order": 3, "title": {"en": "Look-alike, sound-alike drugs", "ar": "الأدوية المتشابهة في الشكل أو النطق"}, "type": "pdf", "minutes": 12, "assetRef": "pdf/c3-l3"},
+        {"id": "c3-l4", "order": 4, "title": {"en": "Reporting medication incidents", "ar": "الإبلاغ عن الحوادث الدوائية"}, "type": "reading", "minutes": 10, "assetRef": "reading/c3-l4"}
+      ]
+    }
+  ],
+  "enrolments": [
+    {
+      "userId": "u-layla",
+      "courseId": "c1",
+      "owned": true,
+      "completed": [
+        {"lessonId": "c1-l1", "completedAt": "2026-10-05T18:20:00+04:00"},
+        {"lessonId": "c1-l2", "completedAt": "2026-10-12T19:05:00+04:00"},
+        {"lessonId": "c1-l3", "completedAt": "2026-10-26T20:10:00+04:00"},
+        {"lessonId": "c1-l4", "completedAt": "2026-11-09T21:00:00+04:00"}
+      ]
+    },
+    {
+      "userId": "u-layla",
+      "courseId": "c2",
+      "owned": true,
+      "completed": [
+        {"lessonId": "c2-l1", "completedAt": "2026-09-14T17:45:00+04:00"},
+        {"lessonId": "c2-l2", "completedAt": "2026-09-21T18:30:00+04:00"}
+      ]
+    }
+  ]
+}

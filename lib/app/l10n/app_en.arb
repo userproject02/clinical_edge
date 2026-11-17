@@ -1,129 +1,281 @@
 {
   "@@locale": "en",
-
   "appTitle": "ClinicalEdge",
-  "@appTitle": {"description": "Product name shown in the OS task switcher and brand areas."},
+  "@appTitle": {
+    "description": "Product name shown in the OS task switcher and brand areas."
+  },
   "brandTag": "Training · Certification · CPD",
-  "@brandTag": {"description": "Tagline under the product name on sign-in."},
+  "@brandTag": {
+    "description": "Tagline under the product name on sign-in."
+  },
   "tenant": "Demo Health Network · Dubai",
-  "@tenant": {"description": "Organisation name shown as the tab app bar subtitle."},
-
+  "@tenant": {
+    "description": "Organisation name shown as the tab app bar subtitle."
+  },
   "navHome": "Home",
-  "@navHome": {"description": "Bottom bar label: learner home tab."},
+  "@navHome": {
+    "description": "Bottom bar label: learner home tab."
+  },
   "navLearn": "Learn",
-  "@navLearn": {"description": "Bottom bar label: course catalogue tab."},
+  "@navLearn": {
+    "description": "Bottom bar label: course catalogue tab."
+  },
   "navAssess": "Assess",
-  "@navAssess": {"description": "Bottom bar label: assessments tab."},
+  "@navAssess": {
+    "description": "Bottom bar label: assessments tab."
+  },
   "navCerts": "Certs",
-  "@navCerts": {"description": "Bottom bar label: certifications tab."},
+  "@navCerts": {
+    "description": "Bottom bar label: certifications tab."
+  },
   "navSignoffs": "Sign-offs",
-  "@navSignoffs": {"description": "Bottom bar label: learner competency sign-offs tab."},
+  "@navSignoffs": {
+    "description": "Bottom bar label: learner competency sign-offs tab."
+  },
   "navQueue": "Queue",
-  "@navQueue": {"description": "Bottom bar label: supervisor sign-off queue tab."},
+  "@navQueue": {
+    "description": "Bottom bar label: supervisor sign-off queue tab."
+  },
   "navDecided": "Decided",
-  "@navDecided": {"description": "Bottom bar label: supervisor recently decided tab."},
+  "@navDecided": {
+    "description": "Bottom bar label: supervisor recently decided tab."
+  },
   "navCohort": "Cohort",
-  "@navCohort": {"description": "Bottom bar label: admin cohort dashboard tab."},
+  "@navCohort": {
+    "description": "Bottom bar label: admin cohort dashboard tab."
+  },
   "navAudit": "Audit",
-  "@navAudit": {"description": "Bottom bar label: admin audit log tab."},
+  "@navAudit": {
+    "description": "Bottom bar label: admin audit log tab."
+  },
   "navInsights": "Insights",
-  "@navInsights": {"description": "Bottom bar label: admin usage insights tab."},
-
+  "@navInsights": {
+    "description": "Bottom bar label: admin usage insights tab."
+  },
   "titleSignIn": "Sign in",
-  "@titleSignIn": {"description": "Screen title: sign-in."},
+  "@titleSignIn": {
+    "description": "Screen title: sign-in."
+  },
   "titleHome": "Home",
-  "@titleHome": {"description": "Screen title: learner home dashboard."},
+  "@titleHome": {
+    "description": "Screen title: learner home dashboard."
+  },
   "titleCourses": "Courses",
-  "@titleCourses": {"description": "Screen title: course catalogue."},
+  "@titleCourses": {
+    "description": "Screen title: course catalogue."
+  },
   "titleCourseDetail": "Course",
-  "@titleCourseDetail": {"description": "Screen title: course detail."},
+  "@titleCourseDetail": {
+    "description": "Screen title: course detail."
+  },
   "titleLesson": "Lesson",
-  "@titleLesson": {"description": "Screen title: lesson player."},
+  "@titleLesson": {
+    "description": "Screen title: lesson player."
+  },
   "titleCheckout": "Checkout",
-  "@titleCheckout": {"description": "Screen title: checkout."},
+  "@titleCheckout": {
+    "description": "Screen title: checkout."
+  },
   "titleReceipt": "Receipt",
-  "@titleReceipt": {"description": "Screen title: payment receipt."},
+  "@titleReceipt": {
+    "description": "Screen title: payment receipt."
+  },
   "titleAssessments": "Assessments",
-  "@titleAssessments": {"description": "Screen title: assessments and history."},
+  "@titleAssessments": {
+    "description": "Screen title: assessments and history."
+  },
   "titleQuiz": "Quiz",
-  "@titleQuiz": {"description": "Screen title: quiz in progress."},
+  "@titleQuiz": {
+    "description": "Screen title: quiz in progress."
+  },
   "titleCerts": "Certifications & CPD",
-  "@titleCerts": {"description": "Screen title: certifications and CPD credits."},
+  "@titleCerts": {
+    "description": "Screen title: certifications and CPD credits."
+  },
   "titleUploadCert": "Upload certificate",
-  "@titleUploadCert": {"description": "Title of the upload certificate bottom sheet."},
+  "@titleUploadCert": {
+    "description": "Title of the upload certificate bottom sheet."
+  },
   "titleCompetencies": "Competencies",
-  "@titleCompetencies": {"description": "Screen title: learner competency checklists."},
+  "@titleCompetencies": {
+    "description": "Screen title: learner competency checklists."
+  },
   "titleQueue": "Sign-off queue",
-  "@titleQueue": {"description": "Screen title: supervisor sign-off queue."},
+  "@titleQueue": {
+    "description": "Screen title: supervisor sign-off queue."
+  },
   "titleReview": "Review sign-off",
-  "@titleReview": {"description": "Screen title: supervisor review and decide."},
+  "@titleReview": {
+    "description": "Screen title: supervisor review and decide."
+  },
   "titleDecided": "Recently decided",
-  "@titleDecided": {"description": "Screen title: supervisor decision history."},
+  "@titleDecided": {
+    "description": "Screen title: supervisor decision history."
+  },
   "titleCohort": "Cohort dashboard",
-  "@titleCohort": {"description": "Screen title: admin cohort dashboard."},
+  "@titleCohort": {
+    "description": "Screen title: admin cohort dashboard."
+  },
   "titleAudit": "Audit log",
-  "@titleAudit": {"description": "Screen title: admin audit log."},
+  "@titleAudit": {
+    "description": "Screen title: admin audit log."
+  },
   "titleInsights": "Usage insights",
-  "@titleInsights": {"description": "Screen title: admin usage insights."},
+  "@titleInsights": {
+    "description": "Screen title: admin usage insights."
+  },
   "titleProfile": "Profile & settings",
-  "@titleProfile": {"description": "Screen title: profile and settings."},
-
+  "@titleProfile": {
+    "description": "Screen title: profile and settings."
+  },
   "placeholderBody": "This screen arrives in a later phase.",
-  "@placeholderBody": {"description": "Body text of a placeholder screen during the scaffold phase."},
-
+  "@placeholderBody": {
+    "description": "Body text of a placeholder screen during the scaffold phase."
+  },
   "actionBack": "Back",
-  "@actionBack": {"description": "Accessibility label of the app bar back button."},
+  "@actionBack": {
+    "description": "Accessibility label of the app bar back button."
+  },
   "actionClose": "Close",
-  "@actionClose": {"description": "Accessibility label for closing a sheet or dialog."},
+  "@actionClose": {
+    "description": "Accessibility label for closing a sheet or dialog."
+  },
   "actionNotifications": "Notifications",
-  "@actionNotifications": {"description": "Accessibility label of the bell button."},
+  "@actionNotifications": {
+    "description": "Accessibility label of the bell button."
+  },
   "actionProfile": "Profile and settings",
-  "@actionProfile": {"description": "Accessibility label of the avatar button."},
+  "@actionProfile": {
+    "description": "Accessibility label of the avatar button."
+  },
   "loading": "Loading",
-  "@loading": {"description": "Accessibility label while content or an action is loading."},
-
+  "@loading": {
+    "description": "Accessibility label while content or an action is loading."
+  },
   "roleLearner": "Learner",
-  "@roleLearner": {"description": "Role name: learner."},
+  "@roleLearner": {
+    "description": "Role name: learner."
+  },
   "roleSupervisor": "Supervisor",
-  "@roleSupervisor": {"description": "Role name: supervisor."},
+  "@roleSupervisor": {
+    "description": "Role name: supervisor."
+  },
   "roleAdmin": "Admin",
-  "@roleAdmin": {"description": "Role name: admin."},
-
+  "@roleAdmin": {
+    "description": "Role name: admin."
+  },
   "settingsTheme": "Theme",
-  "@settingsTheme": {"description": "Label for the theme picker."},
+  "@settingsTheme": {
+    "description": "Label for the theme picker."
+  },
   "themeSystem": "System",
-  "@themeSystem": {"description": "Theme option that follows the device setting."},
+  "@themeSystem": {
+    "description": "Theme option that follows the device setting."
+  },
   "themeLight": "Light",
-  "@themeLight": {"description": "Theme option: light."},
+  "@themeLight": {
+    "description": "Theme option: light."
+  },
   "themeDark": "Dark",
-  "@themeDark": {"description": "Theme option: dark."},
+  "@themeDark": {
+    "description": "Theme option: dark."
+  },
   "settingsLanguage": "Language",
-  "@settingsLanguage": {"description": "Label for the language picker."},
+  "@settingsLanguage": {
+    "description": "Label for the language picker."
+  },
   "languageEnglish": "English",
-  "@languageEnglish": {"description": "Language name, always shown in English."},
+  "@languageEnglish": {
+    "description": "Language name, always shown in English."
+  },
   "languageArabic": "العربية",
-  "@languageArabic": {"description": "Language name, always shown in Arabic."},
-
+  "@languageArabic": {
+    "description": "Language name, always shown in Arabic."
+  },
   "notificationAppName": "CLINICALEDGE",
-  "@notificationAppName": {"description": "App name line in a simulated push notification banner."},
+  "@notificationAppName": {
+    "description": "App name line in a simulated push notification banner."
+  },
   "notificationNow": "now",
-  "@notificationNow": {"description": "Time label of a notification that just arrived."},
+  "@notificationNow": {
+    "description": "Time label of a notification that just arrived."
+  },
   "notificationsEmptyTitle": "You're all caught up",
-  "@notificationsEmptyTitle": {"description": "Banner title when there are no notifications."},
+  "@notificationsEmptyTitle": {
+    "description": "Banner title when there are no notifications."
+  },
   "notificationsEmptyBody": "Expiry reminders will appear here.",
-  "@notificationsEmptyBody": {"description": "Banner body when there are no notifications."},
+  "@notificationsEmptyBody": {
+    "description": "Banner body when there are no notifications."
+  },
   "navBadge": "{count} new",
-  "@navBadge": {"description": "Accessibility label for a bottom bar badge.", "placeholders": {"count": {"type": "int"}}},
-
+  "@navBadge": {
+    "description": "Accessibility label for a bottom bar badge.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "aedAmount": "AED {amount}",
-  "@aedAmount": {"description": "Money amount in UAE dirham. amount is already formatted with two decimals.", "placeholders": {"amount": {"type": "String"}}},
-
+  "@aedAmount": {
+    "description": "Money amount in UAE dirham. amount is already formatted with two decimals.",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "debugMenu": "Debug menu",
-  "@debugMenu": {"description": "Title and button label of the temporary developer menu (debug builds only)."},
+  "@debugMenu": {
+    "description": "Title and button label of the temporary developer menu (debug builds only)."
+  },
   "debugSession": "Session",
-  "@debugSession": {"description": "Debug menu: section for the stub session."},
+  "@debugSession": {
+    "description": "Debug menu: section for the stub session."
+  },
   "debugSignedOut": "Signed out",
-  "@debugSignedOut": {"description": "Debug menu: signed-out session option."},
+  "@debugSignedOut": {
+    "description": "Debug menu: signed-out session option."
+  },
   "debugRoutes": "Jump to route",
-  "@debugRoutes": {"description": "Debug menu: section listing routes to open."}
+  "@debugRoutes": {
+    "description": "Debug menu: section listing routes to open."
+  },
+  "debugClock": "Clock",
+  "@debugClock": {
+    "description": "Debug menu: clock source section."
+  },
+  "debugClockDemo": "Demo date",
+  "@debugClockDemo": {
+    "description": "Debug menu: fixed demo clock (17 Nov 2026, 09:00 Dubai)."
+  },
+  "debugClockSystem": "Device",
+  "@debugClockSystem": {
+    "description": "Debug menu: real device clock."
+  },
+  "debugGateway": "Mock payment",
+  "@debugGateway": {
+    "description": "Debug menu: forced outcome of the mock payment gateway."
+  },
+  "debugGatewaySucceed": "Succeed",
+  "@debugGatewaySucceed": {
+    "description": "Mock payment outcome: success."
+  },
+  "debugGatewayFail": "Fail",
+  "@debugGatewayFail": {
+    "description": "Mock payment outcome: declined."
+  },
+  "debugGateway3ds": "3-D Secure",
+  "@debugGateway3ds": {
+    "description": "Mock payment outcome: 3-D Secure challenge."
+  },
+  "debugReset": "Reset demo data",
+  "@debugReset": {
+    "description": "Debug menu: wipe local data and reload the seed."
+  },
+  "debugResetDone": "Demo data reset",
+  "@debugResetDone": {
+    "description": "Snackbar after the demo data was reset."
+  }
 }

@@ -46,7 +46,8 @@ Resolved versions (pubspec.yaml uses caret ranges; pubspec.lock is committed). U
 | build_runner | 2.17.1 | code generation (dev) |
 | flutter_localizations (SDK) + intl | 0.20.3 | ARB strings, dates, numbers |
 | shared_preferences | 2.5.6 | persisted settings (theme, locale) |
-| hive_ce / hive_ce_generator | 2.23.3 / 1.12.1 | mock stores from Phase 2 (dev: generator) |
+| hive_ce / hive_ce_flutter | 2.23.3 / 2.5.0 | local persistence behind the mock repositories (`HiveLocalDb`, JSON in `Box<String>`) |
+| hive_ce_generator | 1.12.1 | type adapters if ever needed (dev; unused while boxes hold JSON) |
 | fl_chart | 1.3.1 | admin charts (still on `flutter/material`; bridged, see CLAUDE.md) |
 | file_picker | 13.4.0 | mocked certificate pick |
 | share_plus | 13.3.1 | CSV export, receipt share |
@@ -54,6 +55,7 @@ Resolved versions (pubspec.yaml uses caret ranges; pubspec.lock is committed). U
 | crypto | 3.0.8 | SHA-256 audit hash chain |
 | uuid | 4.6.0 | IDs |
 | mocktail | 1.0.5 | test doubles (dev) |
+| fake_async | 1.3.3 | time control in tests (dev) |
 | integration_test (SDK) | — | device journeys (dev) |
 | very_good_analysis | 11.0.0 | lint rules (dev) |
 
@@ -61,7 +63,8 @@ Not used, on purpose: `google_fonts` (fonts are bundled as pubspec families inst
 
 ## Coding conventions
 
-- Models are `freezed` + `json_serializable`; IDs are strings.
+- Models are `freezed` + `json_serializable`; IDs are strings. Seed strings are `LocalizedText {en, ar}`; calendar dates use `DateOnlyConverter`, instants `UtcDateTimeConverter` (`lib/core/json_converters.dart`).
+- Repositories: interface + `@riverpod` provider that throws in `features/<f>/data/<x>_repository.dart`; the mock implementation is wired in `lib/app/mock_overrides.dart` (used by `main.dart` and `test/helpers/test_container.dart`).
 - **Money is integer fils** (1 AED = 100 fils). VAT = `round(subtotal * 5 / 100)`. Never use `double` for money.
 - No hard-coded user-facing strings: everything goes through ARB files (`lib/app/l10n/app_en.arb`, `app_ar.arb`).
 - No hard-coded colours in widgets: use `Theme.of(context)` and the `AppColors` theme extension.
@@ -85,7 +88,7 @@ Not used, on purpose: `google_fonts` (fonts are bundled as pubspec families inst
 | Task | Command |
 | --- | --- |
 | Get packages | `flutter pub get` |
-| Code generation | `dart run build_runner build -d` |
+| Code generation | `dart run build_runner build` (build_runner 2.17 deletes conflicting outputs itself) |
 | Run (iOS simulator / Android emulator) | `flutter run -d <device>` |
 | Analyze | `flutter analyze` |
 | Format | `dart format .` (CI: `dart format --output=none --set-exit-if-changed .`) |

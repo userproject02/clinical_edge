@@ -1,0 +1,16 @@
+{
+  "cycle": "2026",
+  "target": 40,
+  "targetIsDemo": true,
+  "targetNote": {"en": "Demo target. Real targets depend on the licensing authority (DHA, DoH, MOHAP) and profession.", "ar": "هدف تجريبي؛ تعتمد الأهداف الفعلية على جهة الترخيص (هيئة الصحة بدبي أو دائرة الصحة أو وزارة الصحة ووقاية المجتمع) وعلى المهنة."},
+  "sources": [
+    {"id": "external", "label": {"en": "External", "ar": "خارجي"}},
+    {"id": "clinicaledge", "label": {"en": "ClinicalEdge", "ar": "ClinicalEdge"}}
+  ],
+  "ledger": [
+    {"id": "cpd-004", "userId": "u-layla", "date": "2026-11-04", "activity": {"en": "Sepsis recognition grand round", "ar": "جولة كبرى حول التعرّف على الإنتان"}, "source": "external", "credits": 2},
+    {"id": "cpd-003", "userId": "u-layla", "date": "2026-09-09", "activity": {"en": "Advanced airway workshop", "ar": "ورشة عمل إدارة مجرى الهواء المتقدمة"}, "source": "external", "credits": 6},
+    {"id": "cpd-002", "userId": "u-layla", "date": "2026-06-14", "activity": {"en": "Annual clinical conference", "ar": "المؤتمر السريري السنوي"}, "source": "external", "credits": 12},
+    {"id": "cpd-001", "userId": "u-layla", "date": "2026-03-03", "activity": {"en": "Antimicrobial stewardship module", "ar": "وحدة الإشراف على مضادات الميكروبات"}, "source": "clinicaledge", "credits": 6}
+  ]
+}

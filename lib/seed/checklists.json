@@ -1,0 +1,26 @@
+{
+  "checklists": [
+    {
+      "id": "cl1",
+      "name": {"en": "Peripheral IV cannulation", "ar": "تركيب القنية الوريدية الطرفية"},
+      "audience": {"en": "Nurses · Midwives · Residents", "ar": "الممرضون · القابلات · الأطباء المقيمون"},
+      "items": [
+        {"en": "Performs hand hygiene and prepares equipment", "ar": "يُجري نظافة اليدين ويجهّز المعدات"},
+        {"en": "Selects an appropriate site and cannula size", "ar": "يختار الموضع المناسب وحجم القنية الملائم"},
+        {"en": "Inserts the cannula using aseptic non-touch technique", "ar": "يُدخل القنية باستخدام تقنية عدم اللمس المعقّمة"},
+        {"en": "Secures, flushes and documents the device", "ar": "يثبّت القنية ويغسلها ويوثّقها"}
+      ]
+    },
+    {
+      "id": "cl2",
+      "name": {"en": "Neonatal resuscitation skills", "ar": "مهارات إنعاش حديثي الولادة"},
+      "audience": {"en": "Midwives · Paediatric residents", "ar": "القابلات · الأطباء المقيمون في طب الأطفال"},
+      "items": [
+        {"en": "Prepares the resuscitation area and equipment", "ar": "يجهّز منطقة الإنعاش ومعداتها"},
+        {"en": "Performs initial steps: warm, position, clear the airway", "ar": "يُجري الخطوات الأولية: التدفئة ووضعية الرأس وتنظيف مجرى الهواء"},
+        {"en": "Delivers effective positive-pressure ventilation", "ar": "يقدّم تهوية فعّالة بالضغط الإيجابي"},
+        {"en": "Assesses heart rate and escalates correctly", "ar": "يقيّم معدل نبض القلب ويصعّد الحالة بالشكل الصحيح"}
+      ]
+    }
+  ]
+}

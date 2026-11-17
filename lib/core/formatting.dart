@@ -15,14 +15,16 @@ String ltr(String value) => '$_lri$value$_pdi';
 /// Locale-aware formatting. Digits are always Western (0–9), as in the
 /// prototype, and every returned value is LTR-isolated.
 abstract final class Formats {
-  static final NumberFormat _money = NumberFormat('#,##0.00', 'en');
   static final NumberFormat _int = NumberFormat('#,##0', 'en');
 
   /// AED amount from integer fils: "AED 315.00" (en) or "315.00 د.إ" (ar).
+  /// Integer maths only (no doubles for money).
   static String aed(int fils, AppLocalizations l10n) {
-    final whole = fils ~/ 100;
-    final rest = (fils % 100).abs();
-    final amount = _money.format(whole + rest / 100);
+    final negative = fils < 0;
+    final abs = fils.abs();
+    final whole = _int.format(abs ~/ 100);
+    final cents = (abs % 100).toString().padLeft(2, '0');
+    final amount = '${negative ? '-' : ''}$whole.$cents';
     return ltr(l10n.aedAmount(amount));
   }
 

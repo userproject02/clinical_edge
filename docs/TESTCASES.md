@@ -16,23 +16,23 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-QZ-1-01 | QZ-1 | Widget | Answer a question | Answer locks; correct/incorrect shown with explanation | — | Planned |
 | TC-QZ-2-01 | QZ-2 | Unit | Score 7/8 and 6/8 | 88% pass, 75% fail; quiz.score audit event | — | Planned |
 | TC-QZ-3-01 | QZ-3 | Widget | Score history | Newest first; best score and attempt count | — | Planned |
-| TC-CERT-1-01 | CERT-1 | Unit | Expiry status at 91/90/1/0 days | Valid / Renew soon / Renew soon / Expired | — | Planned |
-| TC-CERT-2-01 | CERT-2 | Unit | CPD meter vs ledger | Ring total equals ledger sum; target from config | — | Planned |
+| TC-CERT-1-01 | CERT-1 | Unit | Expiry status at 91/90/1/0 days | Valid / Renew soon / Renew soon / Expired; BLS 56 days renew soon, ACLS 317 valid on the demo clock; uploaded → Verifying | `test/features/repositories_test.dart` | Passing |
+| TC-CERT-2-01 | CERT-2 | Unit | CPD meter vs ledger | Total (26) equals ledger sum; target 40 from cpd.json config | `test/features/repositories_test.dart` | Passing |
 | TC-CERT-3-01 | CERT-3 | Widget | Upload certificate | Appears as Verifying; cert.upload audit event | — | Planned |
 | TC-CERT-4-01 | CERT-4 | Unit | Reminder schedule and simulate | 90/60/30/7-day dates; banner shown; notify.reminder logged | — | Planned |
 | TC-COMP-1-01 | COMP-1 | Widget | Learner requests sign-off | None → Pending; appears in supervisor queue; signoff.request audit | — | Planned |
 | TC-COMP-2-01 | COMP-2 | Widget | Supervisor rejects without comment, then approves | Reject blocked; decision + comment on learner card; signoff.decision audit | — | Planned |
-| TC-PAY-1-01 | PAY-1 | Unit | VAT and totals | AED 350→367.50, 250→262.50, 300→315.00 | — | Planned |
+| TC-PAY-1-01 | PAY-1 | Unit | VAT and totals (fils) | 35000→1750→36750, 25000→1250→26250, 30000→1500→31500 | `test/core/money_clock_test.dart` | Passing |
 | TC-PAY-2-01 | PAY-2 | Widget | Successful purchase | Receipt with invoice no. and VAT line; course unlocks; purchase audit | — | Planned |
 | TC-ADM-1-01 | ADM-1 | Widget | Cohort dashboard | KPIs and charts from repository data; live pending count | — | Planned |
 | TC-ADM-2-01 | ADM-2 | Widget | Audit log filters | User, action, kind and date filters combine; hash link shown | — | Planned |
 | TC-ADM-3-01 | ADM-3 | Unit | CSV export | RFC 4180 CSV of filtered rows; audit.export logged | — | Planned |
 | TC-ADM-4-01 | ADM-4 | Unit | Usage insights | Built from usage events only, never audit events | — | Planned |
 | TC-SET-1-01 | SET-1 | Widget | Language, theme, notifications | Apply instantly and persist across restarts | — | Planned |
-| TC-LOG-01 | Audit | Unit | Edit a stored audit event | AuditChain.verify() reports the first broken event | — | Planned |
+| TC-LOG-01 | Audit | Unit | Append, verify, edit and remove stored audit events | Chain verifies; an edited event is reported as content break, a removed one as link break, at the right index | `test/core/logging_test.dart` | Passing |
 | TC-E2E-01 | All | Integration | Full demo journey across three roles | Every audit action appears in the log with a verified chain | — | Planned |
 | TC-PH0-01 | Phase 0 | Script | context_guard.sh: app change without CLAUDE.md | Blocked in worktree, staged and range modes; passes when CLAUDE.md changes | `tool/ci/context_guard.sh` (manual + CI) | Passing |
-| TC-PH0-02 | Phase 0 | Widget | App smoke test | App boots to the sign-in placeholder with the ClinicalEdge title (updated in Phase 1) | `test/app_smoke_test.dart` | Passing |
+| TC-PH0-02 | Phase 0 | Widget | App smoke test | App boots with the mock overrides to the sign-in placeholder (updated in Phases 1 and 2) | `test/app_smoke_test.dart` | Passing |
 | TC-PH1-01 | NFR Localisation | Unit | AED formatting | AED 315.00 (en), 315.00 د.إ (ar), LTR-isolated | `test/core/formatting_and_motion_test.dart` | Passing |
 | TC-PH1-02 | NFR Localisation | Unit | Percent, integer, dates | Western digits, locale month names | `test/core/formatting_and_motion_test.dart` | Passing |
 | TC-PH1-03 | NFR Motion | Widget | Reduced motion | Motion.duration returns zero when disableAnimations | `test/core/formatting_and_motion_test.dart` | Passing |
@@ -85,3 +85,45 @@ One row per test case, linked to a requirement ID in `docs/REQUIREMENTS.md`. Tes
 | TC-PH1-50 | Phase 1 routing | Widget | Sign out | Returns to sign-in | `test/app/router_test.dart` | Passing |
 | TC-PH1-51 | Phase 1 | Integration | On device | Roles, dark mode and Arabic RTL on a simulator/emulator | `integration_test/scaffold_test.dart` | Planned (device) |
 | TC-PH1-52 | NFR Design system | Golden | 18 shared-widget compositions × light/dark × LTR/RTL (72 images) | Pixel match within 0.5 % | `test/core/widgets/*_test.dart` → `test/core/widgets/goldens/` | Passing |
+| TC-AUTH-1-03 | AUTH-1 | Unit | Mock auth repository | Empty fields → InvalidCredentials; any password signs in as the role's seed user; session persists; sign-out clears | `test/features/repositories_test.dart` | Passing |
+| TC-HOME-1-02 | HOME-1 | Unit | Seed progress for the learner | Owns c1, c2; 6 of 11 lessons done; markComplete is idempotent and stamps the clock | `test/features/repositories_test.dart` | Passing |
+| TC-QZ-1-02 | QZ-1 | Unit | BLS quiz draw | 8 resuscitation questions q01–q08, same order every time | `test/features/repositories_test.dart` | Passing |
+| TC-QZ-2-02 | QZ-2 | Unit | Scoring rule | 7/8 = 88 % pass, 6/8 = 75 % fail, 5/8 = 63 %; pass mark 80 % | `test/features/repositories_test.dart` | Passing |
+| TC-QZ-3-02 | QZ-3 | Unit | Attempt history | Seed 75 %, 63 % newest first; a new attempt goes on top | `test/features/repositories_test.dart` | Passing |
+| TC-CERT-3-02 | CERT-3 | Unit | Upload repository | Uploaded certificate stored as Verifying | `test/features/repositories_test.dart` | Passing |
+| TC-COMP-1-02 | COMP-1 | Unit | Request repository | none → pending, joins the queue; pending/approved cannot be re-requested | `test/features/repositories_test.dart` | Passing |
+| TC-COMP-2-02 | COMP-2 | Unit | Decide repository | Reject without (or with blank) comment fails; approve records supervisor and time; decided list updated | `test/features/repositories_test.dart` | Passing |
+| TC-PAY-1-02 | PAY-1 | Unit | Odd-fils VAT rounding | Half up (0.50 → 1, 1.45 → 1, 1.50 → 2), integer maths | `test/core/money_clock_test.dart` | Passing |
+| TC-PAY-1-03 | PAY-1 | Unit | Money formatting | AED 315.00 (en), 315.00 د.إ (ar), grouping, negatives | `test/core/money_clock_test.dart` | Passing |
+| TC-PAY-1-04 | PAY-1 | Unit | MockGateway default | Intent for the order total in AED; succeeds after exactly 1.5 s | `test/core/payments_test.dart` | Passing |
+| TC-PAY-1-05 | PAY-1 | Unit | MockGateway debug modes | Forced Failed and Needs3ds results | `test/core/payments_test.dart` | Passing |
+| TC-PAY-1-06 | PAY-1 | Unit | Order JSON | Order round-trips through JSON | `test/core/payments_test.dart` | Passing |
+| TC-PAY-2-02 | PAY-2 | Unit | Checkout repository | Order 30000/1500/31500 fils; invoice CE-2026-001041 then 001042; seller TRN placeholder | `test/features/repositories_test.dart` | Passing |
+| TC-ADM-1-02 | ADM-1 | Unit | Cohort repository | Stats load, labelled demo figures | `test/features/repositories_test.dart` | Passing |
+| TC-LOG-02 | Audit | Unit | Sanitiser rejects sensitive targets | Card numbers (13–19 digits, spaced or dashed), CVC, email, password rejected | `test/core/logging_test.dart` | Passing |
+| TC-LOG-03 | Audit | Unit | Sanitiser passes labels | Invoice/amount/score labels pass; capped at 120 chars; exception never echoes the value | `test/core/logging_test.dart` | Passing |
+| TC-LOG-04 | Audit | Unit | Hash formula | SHA-256 hex of prevHash|ts|userId|role|action|target|platform; ts normalised to UTC | `test/core/logging_test.dart` | Passing |
+| TC-LOG-05 | Audit | Unit | Concurrent appends | 10 parallel appends keep one valid chain | `test/core/logging_test.dart` | Passing |
+| TC-LOG-06 | Audit | Unit | Logger stamping | Logger fills id, ts (Clock), user, role, platform; audit and usage go to separate stores | `test/core/logging_test.dart` | Passing |
+| TC-LOG-07 | Audit | Unit | Sensitive targets via logger | audit() throws; usage() drops and reports to CrashReporter | `test/core/logging_test.dart` | Passing |
+| TC-LOG-08 | Audit | Unit | Action names | Wire names match the contract lists | `test/core/logging_test.dart` | Passing |
+| TC-LOG-09 | Audit | Unit | Usage store is lossy | Keeps the newest N events | `test/core/logging_test.dart` | Passing |
+| TC-SEED-01 | Seed | Unit | Seed files parse | Every file loads into its models; counts and totals match the brief | `test/seed/seed_test.dart` | Passing |
+| TC-SEED-02 | Seed | Unit | Bilingual strings | Every {en, ar} pair non-empty; Arabic text present (pure numbers excepted) | `test/seed/seed_test.dart` | Passing |
+| TC-SEED-03 | Seed | Unit | Required questions | The 8 specified questions are present with the right answers | `test/seed/seed_test.dart` | Passing |
+| TC-SEED-04 | Seed | Unit | Demo time | demo.json demoNow equals the code constant | `test/seed/seed_test.dart` | Passing |
+| TC-SEED-05 | Seed | Unit | No patient data | Staff-only users on the example domain; no identifiers such as MRN or Emirates ID | `test/seed/seed_test.dart` | Passing |
+| TC-SEED-06 | Seed | Unit | Seeding | 10 historical audit events loaded through the store with a valid chain | `test/features/repositories_test.dart` | Passing |
+| TC-PH2-01 | Phase 2 | Unit | Demo clock | 17 Nov 2026 09:00 Dubai = 05:00 UTC; Dubai calendar date | `test/core/money_clock_test.dart` | Passing |
+| TC-PH2-02 | Phase 2 | Unit | Day counting | 56 days to 12 Jan 2027, 317 to 30 Sep 2027 | `test/core/money_clock_test.dart` | Passing |
+| TC-PH2-03 | Phase 2 | Unit | SystemClock | Returns UTC | `test/core/money_clock_test.dart` | Passing |
+| TC-PH2-04 | Phase 2 | Unit | Logger wiring | Session actor and demo clock stamped; chain stays valid | `test/features/repositories_test.dart` | Passing |
+| TC-PH2-05 | Phase 2 | Unit | Persistence and reset | State survives a restart on the same DB; reset restores the seed and the audit chain | `test/features/repositories_test.dart` | Passing |
+| TC-PH2-06 | Phase 2 | Unit | Clock switch | Debug clock mode switches to the device clock | `test/features/repositories_test.dart` | Passing |
+| TC-PH2-07 | Phase 2 | Unit | Hive persistence | Seeded Hive boxes survive reopen; clearAll empties them | `test/core/hive_local_db_test.dart` | Passing |
+
+## Review notes
+
+- **Clinical review needed:** every question in `lib/seed/question_bank.json` (q01–q20, `reviewStatus` field), the explanations and the competency checklist items in `lib/seed/checklists.json` were written from the cited guidelines (AHA 2020 / ERC 2021, WHO hand hygiene 2009, CDC PPE and sharps guidance, ISMP, Joint Commission NPSG.01.01.01, WHO Medication Without Harm). A clinician must review them before any real use.
+- **Arabic review needed:** all Arabic in `lib/seed/*.json` and `lib/app/l10n/app_ar.arb` is Modern Standard Arabic written for this prototype; a native-speaking medical translator should review it, especially clinical terms (الإنعاش القلبي الرئوي، مزيل الرجفان الخارجي الآلي، معدات الوقاية الشخصية، الأدوية عالية الخطورة).
+- **Demo figures:** `lib/seed/cohort.json` (KPIs, charts, learner completion) and the CPD target of 40 are invented demo values and are labelled as such in the data (`demoFigures`, `targetIsDemo`).

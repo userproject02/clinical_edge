@@ -1,0 +1,26 @@
+{
+  "statusRule": "days <= 0: expired; days <= 90: renew soon; else valid; uploaded and unverified: verifying",
+  "reminderDays": [90, 60, 30, 7],
+  "certifications": [
+    {
+      "id": "cert-bls",
+      "userId": "u-layla",
+      "name": {"en": "BLS Provider", "ar": "مقدّم دعم الحياة الأساسي (BLS)"},
+      "issuer": {"en": "American Heart Association", "ar": "جمعية القلب الأمريكية"},
+      "issuedOn": "2025-01-12",
+      "expiresOn": "2027-01-12",
+      "verification": "verified",
+      "fileRef": null
+    },
+    {
+      "id": "cert-acls",
+      "userId": "u-layla",
+      "name": {"en": "ACLS Provider", "ar": "مقدّم دعم الحياة القلبي المتقدم (ACLS)"},
+      "issuer": {"en": "American Heart Association", "ar": "جمعية القلب الأمريكية"},
+      "issuedOn": "2025-09-30",
+      "expiresOn": "2027-09-30",
+      "verification": "verified",
+      "fileRef": null
+    }
+  ]
+}

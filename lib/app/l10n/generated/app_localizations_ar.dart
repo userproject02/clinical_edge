@@ -186,4 +186,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get debugRoutes => 'الانتقال إلى مسار';
+
+  @override
+  String get debugClock => 'الساعة';
+
+  @override
+  String get debugClockDemo => 'تاريخ العرض';
+
+  @override
+  String get debugClockSystem => 'الجهاز';
+
+  @override
+  String get debugGateway => 'الدفع التجريبي';
+
+  @override
+  String get debugGatewaySucceed => 'نجاح';
+
+  @override
+  String get debugGatewayFail => 'فشل';
+
+  @override
+  String get debugGateway3ds => 'التحقق ثلاثي الأبعاد';
+
+  @override
+  String get debugReset => 'إعادة ضبط البيانات التجريبية';
+
+  @override
+  String get debugResetDone => 'تمت إعادة ضبط البيانات التجريبية';
 }

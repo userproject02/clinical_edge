@@ -1,5 +1,6 @@
 import 'package:clinical_edge/app/app.dart';
-import 'package:clinical_edge/app/state/preferences.dart';
+import 'package:clinical_edge/app/mock_overrides.dart';
+import 'package:clinical_edge/core/persistence/hive_local_db.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,10 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
+  final db = await HiveLocalDb.init();
   runApp(
     ProviderScope(
-      // Mock implementations are chosen here (Firebase later, AGENTS.md).
-      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+      // v1: every data source is a mock (AGENTS.md → Architecture rules).
+      overrides: mockOverrides(db: db, prefs: prefs),
       child: const ClinicalEdgeApp(),
     ),
   );
