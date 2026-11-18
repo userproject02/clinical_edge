@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -94,7 +95,7 @@ class PluginLocalNotifier implements LocalNotifier {
   @override
   Future<bool> requestPermission() async {
     await _ready();
-    if (Platform.isIOS) {
+    if (!kIsWeb && Platform.isIOS) {
       return await _plugin
               .resolvePlatformSpecificImplementation<
                 IOSFlutterLocalNotificationsPlugin

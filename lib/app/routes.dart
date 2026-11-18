@@ -62,6 +62,9 @@ abstract final class AppRoutes {
   /// Profile and settings (all roles, pushed from the avatar).
   static const String profile = '/profile';
 
+  /// Help & user guide for the signed-in role (all roles, from Profile).
+  static const String help = '/help';
+
   /// Home route of a role.
   static String homeFor(Role role) => switch (role) {
     Role.learner => home,
@@ -96,7 +99,7 @@ abstract final class RouteAccess {
 
   /// Whether [role] may open [path].
   static bool allows(Role role, String path) {
-    if (path == AppRoutes.profile) return true;
+    if (path == AppRoutes.profile || path == AppRoutes.help) return true;
     final roots = switch (role) {
       Role.learner => _learner,
       Role.supervisor => _supervisor,

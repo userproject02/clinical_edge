@@ -19,8 +19,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// `/profile`: user card, demo role, language, theme, notifications, the
-/// "under the hood" card, sign out and version (AUTH-2, AUTH-3, SET-1).
+/// `/profile`: user card, demo role, language, theme, notifications, help,
+/// the "under the hood" card, sign out and version (AUTH-2, AUTH-3, SET-1).
 class ProfileScreen extends ConsumerWidget {
   /// Creates the screen.
   const new({super.key});
@@ -42,6 +42,7 @@ class ProfileScreen extends ConsumerWidget {
           for (final (i, w) in <Widget>[
             _UserCard(session: session),
             _SettingsCard(session: session),
+            const _HelpCard(),
             const _HoodCard(),
             _SignOutButton(label: l.signOut),
             Text(
@@ -280,6 +281,62 @@ class _SettingsCard extends ConsumerWidget {
       message: l.roleSwitchedBody(next.user.name.of(navContext)),
       tone: StatusTone.blue,
       bottomInset: 24,
+    );
+  }
+}
+
+class _HelpCard extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final c = context.colors;
+    return Semantics(
+      button: true,
+      child: Material(
+        color: c.surface,
+        borderRadius: BorderRadius.circular(AppRadii.cardLarge),
+        child: InkWell(
+          key: const Key('profile.help'),
+          borderRadius: BorderRadius.circular(AppRadii.cardLarge),
+          onTap: () => unawaited(context.push(AppRoutes.help)),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: <Widget>[
+                ExcludeSemantics(
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: c.brandSoft,
+                      borderRadius: BorderRadius.circular(AppRadii.field),
+                    ),
+                    child: Icon(Icons.help_outline_rounded, color: c.brand),
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(l.titleHelp, style: context.cardTitle),
+                      Text(
+                        l.helpEntryBody,
+                        style: context.caption.copyWith(color: c.muted),
+                      ),
+                    ],
+                  ),
+                ),
+                ExcludeSemantics(
+                  child: Icon(Icons.chevron_right_rounded, color: c.muted),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

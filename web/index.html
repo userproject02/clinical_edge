@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="ClinicalEdge: courses, certifications and CPD for UAE healthcare professionals (demo).">
+
+  <!--
+    Uncomment the tag below to lay the app out underneath the parts of the
+    screen that the device obstructs, such as a display cutout, the rounded
+    corners of the screen, or a home indicator.
+
+    Without it, the browser keeps the app clear of them, and `SafeArea` and
+    `MediaQuery.paddingOf` report no padding. With it, the app covers the whole
+    screen, and it is up to the app to keep its own content out of the way,
+    which is what `SafeArea` is for.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A6E73">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="ClinicalEdge">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>ClinicalEdge</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #F3F6F6; overscroll-behavior: none; }
+    @media (prefers-color-scheme: dark) { html, body { background: #0B1415; } }
+    #loading { position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px;
+      font: 600 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #0A6E73; }
+    #loading .ring { width: 36px; height: 36px; border-radius: 50%;
+      border: 3px solid rgba(10, 110, 115, 0.2); border-top-color: #0A6E73;
+      animation: spin 0.9s linear infinite; }
+    @media (prefers-color-scheme: dark) { #loading { color: #5FD0CB; }
+      #loading .ring { border-color: rgba(95, 208, 203, 0.2); border-top-color: #5FD0CB; } }
+    @media (prefers-reduced-motion: reduce) { #loading .ring { animation: none; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <!-- Shown while the app downloads; removed on Flutter's first frame. -->
+  <div id="loading" role="status" aria-live="polite">
+    <div class="ring" aria-hidden="true"></div>
+    <div>ClinicalEdge · Loading…</div>
+  </div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var el = document.getElementById('loading');
+      if (el) el.remove();
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

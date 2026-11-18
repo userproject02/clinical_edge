@@ -270,12 +270,6 @@ class _Hero extends ConsumerWidget {
       color: c.hero,
       child: Stack(
         children: <Widget>[
-          const PositionedDirectional(
-            start: 0,
-            end: 0,
-            bottom: 10,
-            child: EcgLine(),
-          ),
           SafeArea(
             bottom: false,
             child: Padding(

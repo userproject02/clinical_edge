@@ -8,4 +8,5 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - lib/app/l10n/generated/**
+    - web/**
 

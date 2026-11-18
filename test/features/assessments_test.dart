@@ -323,6 +323,26 @@ void main() {
         ),
         findsWidgets,
       );
+      // Bars grow from the chart's bottom (heights match the 80% line) and
+      // never cover the pass label.
+      await tester.pumpAndSettle();
+      final bars = <Rect>[];
+      for (var i = 0; ; i++) {
+        final bar = find.byKey(Key('home.scores.bar.$i'));
+        if (bar.evaluate().isEmpty) break;
+        bars.add(tester.getRect(bar));
+      }
+      expect(bars, isNotEmpty);
+      for (final b in bars) {
+        expect(b.bottom, closeTo(bars.first.bottom, 0.01));
+      }
+      expect(bars.last.height, closeTo(96 * 0.88, 0.5));
+      final pass = tester.getRect(
+        find.byKey(const Key('home.scores.passLabel')),
+      );
+      for (final b in bars) {
+        expect(b.overlaps(pass), isFalse);
+      }
 
       // Retake starts a fresh attempt.
       await _go(tester, c, AppRoutes.quiz('bls'));

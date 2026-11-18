@@ -1195,4 +1195,218 @@ class AppLocalizationsEn extends AppLocalizations {
   String platformShare(String platform, String pct) {
     return '$platform $pct';
   }
+
+  @override
+  String get inboxTitle => 'Notifications';
+
+  @override
+  String get inboxEmptyTitle => 'You\'re all caught up';
+
+  @override
+  String get inboxEmptyBody => 'New reminders and updates appear here.';
+
+  @override
+  String get inboxNew => 'New';
+
+  @override
+  String inboxCertExpired(String code) {
+    return '$code certificate has expired';
+  }
+
+  @override
+  String inboxCertExpiredBody(String date) {
+    return 'Expired on $date. Upload a renewed certificate.';
+  }
+
+  @override
+  String inboxCertVerifying(String name) {
+    return '$name is being verified';
+  }
+
+  @override
+  String get inboxCertVerifyingBody =>
+      'Your training office will check it shortly.';
+
+  @override
+  String inboxSignOffApproved(String checklist) {
+    return '$checklist approved';
+  }
+
+  @override
+  String inboxSignOffRejected(String checklist) {
+    return '$checklist: changes requested';
+  }
+
+  @override
+  String inboxSignOffDecidedBody(String name, String date) {
+    return 'Decided by $name on $date.';
+  }
+
+  @override
+  String inboxSignOffRequest(String name) {
+    return '$name requested sign-off';
+  }
+
+  @override
+  String inboxSignOffRequestBody(String checklist, String date) {
+    return '$checklist · requested $date';
+  }
+
+  @override
+  String inboxCohortExpiry(String name, String code, int days) {
+    return '$name: $code expires in $days days';
+  }
+
+  @override
+  String get inboxCohortExpiryBody => 'Remind them to renew before it lapses.';
+
+  @override
+  String inboxCohortPending(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sign-offs awaiting supervisors',
+      one: '1 sign-off awaiting a supervisor',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get inboxCohortPendingBody => 'See the cohort dashboard for details.';
+
+  @override
+  String get titleHelp => 'Help & user guide';
+
+  @override
+  String get helpEntryBody => 'Step-by-step guide for your role';
+
+  @override
+  String get helpIntroLearner =>
+      'How to take courses and quizzes, keep certificates current and get competencies signed off.';
+
+  @override
+  String get helpIntroSupervisor =>
+      'How to review learners\' competency sign-off requests and record your decisions.';
+
+  @override
+  String get helpIntroAdmin =>
+      'How to follow cohort progress, check the audit log and read usage insights.';
+
+  @override
+  String helpGuideFor(String role) {
+    return 'Guide for: $role';
+  }
+
+  @override
+  String get helpLearnerHomeTitle => 'Your home dashboard';
+
+  @override
+  String get helpLearnerHomeBody =>
+      'See your overall progress and tap Resume to continue the last lesson.\nThe orange banner warns you when a certificate is close to expiry.\nThe CPD/CME card shows credits earned this year against your target.';
+
+  @override
+  String get helpLearnerLearnTitle => 'Courses and lessons';
+
+  @override
+  String get helpLearnerLearnBody =>
+      'Open Learn to browse the catalogue and filter by category.\nOpen a course to see its lessons, then tap a lesson to study it.\nTap Mark complete at the end of each lesson. Finishing a course awards CPD credits.\nFor a paid course tap Buy, pay by card or Apple Pay, and keep the PDF receipt.';
+
+  @override
+  String get helpLearnerAssessTitle => 'Quizzes';
+
+  @override
+  String get helpLearnerAssessBody =>
+      'Open Assess to see the available quizzes and your best score.\nEach answer shows instant feedback with an explanation.\nYou pass with 80% or more, and you can retake a quiz at any time.\nSome quizzes unlock only after you finish the related course.';
+
+  @override
+  String get helpLearnerCertsTitle => 'Certifications and CPD';
+
+  @override
+  String get helpLearnerCertsBody =>
+      'Certs lists each certificate with its status: Valid, Renew soon, Verifying or Expired.\nTap Upload to add a certificate (PDF or photo); it shows as Verifying until checked.\nTurn on expiry reminders to be told 90, 60, 30 and 7 days before a certificate expires.\nThe CPD ring and ledger show where your credits came from.';
+
+  @override
+  String get helpLearnerSignoffsTitle => 'Competency sign-off';
+
+  @override
+  String get helpLearnerSignoffsBody =>
+      'Open Sign-offs to see your competency checklists.\nWhen you are ready, tap Request sign-off; it goes to your supervisor\'s queue.\nYou will see Approved or Changes requested, with your supervisor\'s comment.';
+
+  @override
+  String get helpLearnerBellBody =>
+      'Tap the bell to see certificate reminders and sign-off decisions.\nA dot on the bell means there is something you have not seen yet. Tap an item to open it.';
+
+  @override
+  String get helpSupervisorQueueTitle => 'Your sign-off queue';
+
+  @override
+  String get helpSupervisorQueueBody =>
+      'Your home shows pending requests, oldest first.\nThe cards at the top show how many are pending, how many arrived this month and your average turnaround.';
+
+  @override
+  String get helpSupervisorReviewTitle => 'Reviewing a request';
+
+  @override
+  String get helpSupervisorReviewBody =>
+      'Tap a request to see the learner, the checklist and each skill.\nTap Approve (a standard comment is filled in for you) or Reject and explain what to practise.\nYour decision is recorded in the audit log; your comment is not.';
+
+  @override
+  String get helpSupervisorDecidedTitle => 'Decided requests';
+
+  @override
+  String get helpSupervisorDecidedBody =>
+      'Open Decided to see your past decisions, newest first.';
+
+  @override
+  String get helpSupervisorLearnTitle => 'Browsing courses';
+
+  @override
+  String get helpSupervisorLearnBody =>
+      'Open Learn to browse the same catalogue your learners use.\nLessons, quizzes and purchases are for learners only.';
+
+  @override
+  String get helpSupervisorBellBody =>
+      'Tap the bell to see new sign-off requests.\nTap a request to open its review.';
+
+  @override
+  String get helpAdminCohortTitle => 'Cohort dashboard';
+
+  @override
+  String get helpAdminCohortBody =>
+      'Your home shows key figures, course completion, progress by department and upcoming certificate expiries.\nThe learner list shows each person\'s progress and next expiring certificate.\nFigures labelled demo come from sample data.';
+
+  @override
+  String get helpAdminAuditTitle => 'Audit log';
+
+  @override
+  String get helpAdminAuditBody =>
+      'Important actions (quiz scores, sign-offs, purchases, uploads, role changes) are recorded and chained, so any tampering shows.\nThe banner at the top confirms the chain is intact.\nFilter by kind, period, user or action, or search by target.\nTap Export CSV to share the filtered log.';
+
+  @override
+  String get helpAdminInsightsTitle => 'Usage insights';
+
+  @override
+  String get helpAdminInsightsBody =>
+      'See lesson views by course, where learners drop off in BLS, pass rates and the iOS/Android split.\nInsights use usage events only, never the audit log.';
+
+  @override
+  String get helpAdminBellBody =>
+      'Tap the bell to see cohort certificates that expire soon and sign-offs waiting for supervisors.';
+
+  @override
+  String get helpBellTitle => 'Notifications';
+
+  @override
+  String get helpSettingsTitle => 'Profile and settings';
+
+  @override
+  String get helpSettingsBody =>
+      'Tap your initials at the top of any tab to open Profile & settings.\nChoose English or العربية, and a light or dark theme.\nTurn expiry reminders on or off, and sign out.';
+
+  @override
+  String get helpDemoTitle => 'About this demo';
+
+  @override
+  String get helpDemoBody =>
+      'This demo uses sample data: any password works and no real payments are made.\nUse Demo role on the sign-in screen or in Profile to try the learner, supervisor and admin views.';
 }

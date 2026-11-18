@@ -97,7 +97,7 @@ final class CohortLearnersProvider
   }
 }
 
-String _$cohortLearnersHash() => r'14b824b70e8a9bdd533ef9f2e0cc066feaf865c8';
+String _$cohortLearnersHash() => r'70faaa01e76a7b8d4e3d25e873dff5ccf2961dbd';
 
 /// Audit events in chain order (oldest first).
 
@@ -385,13 +385,13 @@ final class AuditFilterOptionsProvider
 String _$auditFilterOptionsHash() =>
     r'a065574b1a73ea5f14215f888b1f2c6d85e645f5';
 
-/// Exports [events] as CSV through the share sheet and writes
+/// Exports events as CSV through the share sheet and writes
 /// `audit.export` ("CSV · N rows"). Returns the row count.
 
 @ProviderFor(exportAuditCsv)
 final exportAuditCsvProvider = ExportAuditCsvProvider._();
 
-/// Exports [events] as CSV through the share sheet and writes
+/// Exports events as CSV through the share sheet and writes
 /// `audit.export` ("CSV · N rows"). Returns the row count.
 
 final class ExportAuditCsvProvider
@@ -405,7 +405,7 @@ final class ExportAuditCsvProvider
         $Provider<
           Future<int> Function(List<ActivityEvent> events, {Rect? origin})
         > {
-  /// Exports [events] as CSV through the share sheet and writes
+  /// Exports events as CSV through the share sheet and writes
   /// `audit.export` ("CSV · N rows"). Returns the row count.
   ExportAuditCsvProvider._()
     : super(

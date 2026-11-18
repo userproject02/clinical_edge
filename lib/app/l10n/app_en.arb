@@ -1853,5 +1853,292 @@
         "type": "String"
       }
     }
+  },
+  "inboxTitle": "Notifications",
+  "@inboxTitle": {
+    "description": "Notifications sheet title."
+  },
+  "inboxEmptyTitle": "You're all caught up",
+  "@inboxEmptyTitle": {
+    "description": "Empty notifications title."
+  },
+  "inboxEmptyBody": "New reminders and updates appear here.",
+  "@inboxEmptyBody": {
+    "description": "Empty notifications body."
+  },
+  "inboxNew": "New",
+  "@inboxNew": {
+    "description": "Tag on an unseen notification."
+  },
+  "inboxCertExpired": "{code} certificate has expired",
+  "@inboxCertExpired": {
+    "description": "Expired certificate notification title.",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxCertExpiredBody": "Expired on {date}. Upload a renewed certificate.",
+  "@inboxCertExpiredBody": {
+    "description": "Expired certificate notification body.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxCertVerifying": "{name} is being verified",
+  "@inboxCertVerifying": {
+    "description": "Uploaded certificate pending verification.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxCertVerifyingBody": "Your training office will check it shortly.",
+  "@inboxCertVerifyingBody": {
+    "description": "Pending verification body."
+  },
+  "inboxSignOffApproved": "{checklist} approved",
+  "@inboxSignOffApproved": {
+    "description": "Sign-off approved notification title.",
+    "placeholders": {
+      "checklist": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxSignOffRejected": "{checklist}: changes requested",
+  "@inboxSignOffRejected": {
+    "description": "Sign-off rejected notification title.",
+    "placeholders": {
+      "checklist": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxSignOffDecidedBody": "Decided by {name} on {date}.",
+  "@inboxSignOffDecidedBody": {
+    "description": "Sign-off decision notification body.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxSignOffRequest": "{name} requested sign-off",
+  "@inboxSignOffRequest": {
+    "description": "Supervisor: new request title.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxSignOffRequestBody": "{checklist} · requested {date}",
+  "@inboxSignOffRequestBody": {
+    "description": "Supervisor: new request body.",
+    "placeholders": {
+      "checklist": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxCohortExpiry": "{name}: {code} expires in {days} days",
+  "@inboxCohortExpiry": {
+    "description": "Admin: cohort certificate expiring.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "inboxCohortExpiryBody": "Remind them to renew before it lapses.",
+  "@inboxCohortExpiryBody": {
+    "description": "Admin: cohort expiry body."
+  },
+  "inboxCohortPending": "{count, plural, =1{1 sign-off awaiting a supervisor} other{{count} sign-offs awaiting supervisors}}",
+  "@inboxCohortPending": {
+    "description": "Admin: pending sign-offs.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "inboxCohortPendingBody": "See the cohort dashboard for details.",
+  "@inboxCohortPendingBody": {
+    "description": "Admin: pending sign-offs body."
+  },
+  "titleHelp": "Help & user guide",
+  "@titleHelp": {
+    "description": "Help screen title."
+  },
+  "helpEntryBody": "Step-by-step guide for your role",
+  "@helpEntryBody": {
+    "description": "Profile: help card subtitle."
+  },
+  "helpIntroLearner": "How to take courses and quizzes, keep certificates current and get competencies signed off.",
+  "@helpIntroLearner": {
+    "description": "Help intro for learners."
+  },
+  "helpIntroSupervisor": "How to review learners' competency sign-off requests and record your decisions.",
+  "@helpIntroSupervisor": {
+    "description": "Help intro for supervisors."
+  },
+  "helpIntroAdmin": "How to follow cohort progress, check the audit log and read usage insights.",
+  "@helpIntroAdmin": {
+    "description": "Help intro for admins."
+  },
+  "helpGuideFor": "Guide for: {role}",
+  "@helpGuideFor": {
+    "description": "Help: role chip.",
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "helpLearnerHomeTitle": "Your home dashboard",
+  "@helpLearnerHomeTitle": {
+    "description": "Help topic title."
+  },
+  "helpLearnerHomeBody": "See your overall progress and tap Resume to continue the last lesson.\nThe orange banner warns you when a certificate is close to expiry.\nThe CPD/CME card shows credits earned this year against your target.",
+  "@helpLearnerHomeBody": {
+    "description": "Help topic body (one step per line)."
+  },
+  "helpLearnerLearnTitle": "Courses and lessons",
+  "@helpLearnerLearnTitle": {
+    "description": "Help topic title."
+  },
+  "helpLearnerLearnBody": "Open Learn to browse the catalogue and filter by category.\nOpen a course to see its lessons, then tap a lesson to study it.\nTap Mark complete at the end of each lesson. Finishing a course awards CPD credits.\nFor a paid course tap Buy, pay by card or Apple Pay, and keep the PDF receipt.",
+  "@helpLearnerLearnBody": {
+    "description": "Help topic body."
+  },
+  "helpLearnerAssessTitle": "Quizzes",
+  "@helpLearnerAssessTitle": {
+    "description": "Help topic title."
+  },
+  "helpLearnerAssessBody": "Open Assess to see the available quizzes and your best score.\nEach answer shows instant feedback with an explanation.\nYou pass with 80% or more, and you can retake a quiz at any time.\nSome quizzes unlock only after you finish the related course.",
+  "@helpLearnerAssessBody": {
+    "description": "Help topic body."
+  },
+  "helpLearnerCertsTitle": "Certifications and CPD",
+  "@helpLearnerCertsTitle": {
+    "description": "Help topic title."
+  },
+  "helpLearnerCertsBody": "Certs lists each certificate with its status: Valid, Renew soon, Verifying or Expired.\nTap Upload to add a certificate (PDF or photo); it shows as Verifying until checked.\nTurn on expiry reminders to be told 90, 60, 30 and 7 days before a certificate expires.\nThe CPD ring and ledger show where your credits came from.",
+  "@helpLearnerCertsBody": {
+    "description": "Help topic body."
+  },
+  "helpLearnerSignoffsTitle": "Competency sign-off",
+  "@helpLearnerSignoffsTitle": {
+    "description": "Help topic title."
+  },
+  "helpLearnerSignoffsBody": "Open Sign-offs to see your competency checklists.\nWhen you are ready, tap Request sign-off; it goes to your supervisor's queue.\nYou will see Approved or Changes requested, with your supervisor's comment.",
+  "@helpLearnerSignoffsBody": {
+    "description": "Help topic body."
+  },
+  "helpLearnerBellBody": "Tap the bell to see certificate reminders and sign-off decisions.\nA dot on the bell means there is something you have not seen yet. Tap an item to open it.",
+  "@helpLearnerBellBody": {
+    "description": "Help topic body."
+  },
+  "helpSupervisorQueueTitle": "Your sign-off queue",
+  "@helpSupervisorQueueTitle": {
+    "description": "Help topic title."
+  },
+  "helpSupervisorQueueBody": "Your home shows pending requests, oldest first.\nThe cards at the top show how many are pending, how many arrived this month and your average turnaround.",
+  "@helpSupervisorQueueBody": {
+    "description": "Help topic body."
+  },
+  "helpSupervisorReviewTitle": "Reviewing a request",
+  "@helpSupervisorReviewTitle": {
+    "description": "Help topic title."
+  },
+  "helpSupervisorReviewBody": "Tap a request to see the learner, the checklist and each skill.\nTap Approve (a standard comment is filled in for you) or Reject and explain what to practise.\nYour decision is recorded in the audit log; your comment is not.",
+  "@helpSupervisorReviewBody": {
+    "description": "Help topic body."
+  },
+  "helpSupervisorDecidedTitle": "Decided requests",
+  "@helpSupervisorDecidedTitle": {
+    "description": "Help topic title."
+  },
+  "helpSupervisorDecidedBody": "Open Decided to see your past decisions, newest first.",
+  "@helpSupervisorDecidedBody": {
+    "description": "Help topic body."
+  },
+  "helpSupervisorLearnTitle": "Browsing courses",
+  "@helpSupervisorLearnTitle": {
+    "description": "Help topic title."
+  },
+  "helpSupervisorLearnBody": "Open Learn to browse the same catalogue your learners use.\nLessons, quizzes and purchases are for learners only.",
+  "@helpSupervisorLearnBody": {
+    "description": "Help topic body."
+  },
+  "helpSupervisorBellBody": "Tap the bell to see new sign-off requests.\nTap a request to open its review.",
+  "@helpSupervisorBellBody": {
+    "description": "Help topic body."
+  },
+  "helpAdminCohortTitle": "Cohort dashboard",
+  "@helpAdminCohortTitle": {
+    "description": "Help topic title."
+  },
+  "helpAdminCohortBody": "Your home shows key figures, course completion, progress by department and upcoming certificate expiries.\nThe learner list shows each person's progress and next expiring certificate.\nFigures labelled demo come from sample data.",
+  "@helpAdminCohortBody": {
+    "description": "Help topic body."
+  },
+  "helpAdminAuditTitle": "Audit log",
+  "@helpAdminAuditTitle": {
+    "description": "Help topic title."
+  },
+  "helpAdminAuditBody": "Important actions (quiz scores, sign-offs, purchases, uploads, role changes) are recorded and chained, so any tampering shows.\nThe banner at the top confirms the chain is intact.\nFilter by kind, period, user or action, or search by target.\nTap Export CSV to share the filtered log.",
+  "@helpAdminAuditBody": {
+    "description": "Help topic body."
+  },
+  "helpAdminInsightsTitle": "Usage insights",
+  "@helpAdminInsightsTitle": {
+    "description": "Help topic title."
+  },
+  "helpAdminInsightsBody": "See lesson views by course, where learners drop off in BLS, pass rates and the iOS/Android split.\nInsights use usage events only, never the audit log.",
+  "@helpAdminInsightsBody": {
+    "description": "Help topic body."
+  },
+  "helpAdminBellBody": "Tap the bell to see cohort certificates that expire soon and sign-offs waiting for supervisors.",
+  "@helpAdminBellBody": {
+    "description": "Help topic body."
+  },
+  "helpBellTitle": "Notifications",
+  "@helpBellTitle": {
+    "description": "Help topic title."
+  },
+  "helpSettingsTitle": "Profile and settings",
+  "@helpSettingsTitle": {
+    "description": "Help topic title."
+  },
+  "helpSettingsBody": "Tap your initials at the top of any tab to open Profile & settings.\nChoose English or العربية, and a light or dark theme.\nTurn expiry reminders on or off, and sign out.",
+  "@helpSettingsBody": {
+    "description": "Help topic body."
+  },
+  "helpDemoTitle": "About this demo",
+  "@helpDemoTitle": {
+    "description": "Help topic title."
+  },
+  "helpDemoBody": "This demo uses sample data: any password works and no real payments are made.\nUse Demo role on the sign-in screen or in Profile to try the learner, supervisor and admin views.",
+  "@helpDemoBody": {
+    "description": "Help topic body."
   }
 }

@@ -4,6 +4,7 @@ import 'package:clinical_edge/app/router.dart';
 import 'package:clinical_edge/app/state/locale.dart';
 import 'package:clinical_edge/app/state/theme_mode.dart';
 import 'package:clinical_edge/app/theme/app_theme.dart';
+import 'package:clinical_edge/app/web_frame.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
@@ -46,10 +47,12 @@ class ClinicalEdgeApp extends ConsumerWidget {
       // package:flutter/material.dart (fl_chart). Remove when they migrate.
       // ignore: deprecated_member_use
       builder: (context, child) => MaterialUiCompatibilityBridge(
-        child: DebugMenuOverlay(
-          enabled: showDebugMenu,
-          router: router,
-          child: child ?? const SizedBox.shrink(),
+        child: WebFrame(
+          child: DebugMenuOverlay(
+            enabled: showDebugMenu,
+            router: router,
+            child: child ?? const SizedBox.shrink(),
+          ),
         ),
       ),
     );

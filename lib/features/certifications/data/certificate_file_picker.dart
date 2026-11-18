@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'certificate_file_picker.g.dart';
@@ -46,7 +47,9 @@ class PlatformCertificateFilePicker implements CertificateFilePicker {
   const new();
 
   static bool get _simulator =>
-      Platform.isIOS && Platform.environment.containsKey('SIMULATOR_UDID');
+      !kIsWeb &&
+      Platform.isIOS &&
+      Platform.environment.containsKey('SIMULATOR_UDID');
 
   @override
   Future<PickedFile?> pick() async {

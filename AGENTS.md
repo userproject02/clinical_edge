@@ -5,12 +5,12 @@ Read this file and `CLAUDE.md` before every change. These rules apply to any age
 ## Product
 
 - ClinicalEdge is a training, certification and CPD/CME progress app for healthcare professionals in the UAE (physicians, residents, nurses, midwives).
-- Flutter, one codebase, **iOS and Android only**. There is no web, desktop or macOS target.
+- Flutter, one codebase, **iOS and Android**. A web build exists only as a phone-sized demo preview (`WebFrame`, mock notifier/picker on web); there is no desktop or macOS target.
 - v1 is a clickable prototype on **mock, local data**: no real backend, authentication, payments or push delivery.
 - Roles: **Learner** (courses, quizzes, certifications, credits), **Supervisor** (signs off competencies), **Admin** (cohort progress, audit log). A demo role switcher is part of v1.
 - Full requirements: `docs/REQUIREMENTS.md` (requirement IDs such as AUTH-1, CRS-3, PAY-1 are the source of truth).
 
-**Out of scope for v1:** web build, real backend or auth, offline sync, real payments, MFA, security rules, compliance work, real push delivery (reminders are simulated in-app plus local notifications).
+**Out of scope for v1:** a web product (the web preview is for demos), real backend or auth, offline sync, real payments, MFA, security rules, compliance work, real push delivery (reminders are simulated in-app plus local notifications).
 
 ## Architecture rules
 
@@ -105,6 +105,8 @@ Not used, on purpose: `google_fonts` (fonts are bundled as pubspec families inst
 | Context check (same as CI) | `tool/ci/context_guard.sh worktree` |
 | App icon + splash | `flutter test tool/icon/render_icon_test.dart`, then `dart run flutter_launcher_icons` and `dart run flutter_native_splash:create` |
 | Goldens on Linux | GitHub Actions → *Update goldens (Linux)* (manual) |
+| Web preview (local) | `flutter build web --release`, then serve `build/web` |
+| Web demo on Cloud Run (public) | `bash tool/deploy_web_gcp.sh --project <id> [--region europe-west1]` |
 
 ## Change protocol (every session, every change)
 

@@ -14,7 +14,7 @@ ClinicalEdge v1 is a clickable Flutter prototype for iOS and Android that runs e
 
 **In scope:** mobile only (phones first, tablets reflow), mocked sign-in, courses and lessons, quizzes, certifications and CPD, competency sign-off, mock checkout with AED pricing and 5% VAT, admin cohort dashboard, audit and usage logging, seed data.
 
-**Out of scope for v1:** web build, real backend or auth, offline sync, real payments, MFA, security rules, compliance work, push notification delivery (reminders are simulated in-app).
+**Out of scope for v1:** a web product (a phone-sized web preview exists for demos only), real backend or auth, offline sync, real payments, MFA, security rules, compliance work, push notification delivery (reminders are simulated in-app).
 
 The interactive design lives on the ClinicalEdge canvas; screen references below (01–14, S1–S3, A1–A3) match its storyboard.
 
@@ -259,8 +259,9 @@ class PaymentNeeds3ds extends PaymentResult { final Uri challengeUrl; }
 | `/audit` | Audit log | Admin | Tab | A2 |
 | `/insights` | Usage insights | Admin | Tab | A3 |
 | `/profile` | Profile and settings | All | Push from the avatar | 13 |
+| `/help` | Help & user guide (per role) | All | Push from Profile | — |
 
-Transitions: tabs use the Material 3 fade-through and pushes use a shared-axis horizontal slide that mirrors in RTL. Sheets slide up over a scrim. Snackbars are used for confirmations and a top banner for simulated push notifications.
+Transitions: tabs use the Material 3 fade-through and pushes use a shared-axis horizontal slide that mirrors in RTL. Sheets slide up over a scrim. The bell opens a notifications sheet for the current role (reminders, sign-off requests and decisions, cohort alerts). Snackbars are used for confirmations and a top banner for simulated push notifications.
 
 ## Testing and delivery
 

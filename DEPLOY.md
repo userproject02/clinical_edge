@@ -15,9 +15,23 @@ The script installs Flutter 3.50.0 (pinned, same as CI), lefthook and CocoaPods 
 
 Then run `flutter run -d <device>`.
 
+## Web demo (Cloud Run, public URL)
+
+Anyone with the link can try the app in a browser (phone-sized; on desktop it is centred in a phone column). Demo data lives in each visitor's browser.
+
+```
+bash tool/deploy_web_gcp.sh --project <gcp-project-id> [--region europe-west1] [--service clinicaledge-web] [--skip-build]
+```
+
+The script builds `build/web`, packs it with `tool/web/Dockerfile` (nginx, SPA fallback, `no-cache`) and runs `gcloud run deploy --source … --allow-unauthenticated` (256 MiB, scales 0–3). On a new project it enables Cloud Run, Cloud Build and Artifact Registry and grants `roles/run.builder` to the Compute Engine default service account (Cloud Build needs it). Re-run the same command to publish a new version.
+
+Current demo: project `clinicaledge-demo-1kicb4`, region `europe-west1`: https://clinicaledge-web-665747333105.europe-west1.run.app
+
+The first visit takes a few seconds (cold start + download); a loading spinner shows meanwhile. Native-only features (device notifications, file picker, share sheet) fall back to mocks on the web.
+
 ## Deploy to Google Cloud
 
-ClinicalEdge is an iOS and Android app with no web build, so "deploy" means building the app in the cloud and handing it to testers:
+ClinicalEdge is an iOS and Android app. There are two ways to share it: a public **web demo** on Cloud Run (below), or Android builds handed to testers:
 
 ```
 GitHub ──► Cloud Build (cloudbuild.yaml) ──► Cloud Storage bucket ──► (optional) Firebase App Distribution

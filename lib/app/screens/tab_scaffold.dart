@@ -6,7 +6,8 @@ import 'package:clinical_edge/core/clock.dart';
 import 'package:clinical_edge/core/widgets/widgets.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/certifications/presentation/cert_providers.dart';
-import 'package:clinical_edge/features/certifications/presentation/certs_screen.dart';
+import 'package:clinical_edge/features/notifications/presentation/inbox_providers.dart';
+import 'package:clinical_edge/features/notifications/presentation/inbox_sheet.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -21,7 +22,7 @@ String greetingFor(DateTime instant, AppLocalizations l) {
 }
 
 /// Scaffold for every tab screen: the real tab app bar for the signed-in
-/// user (subtitle, title, bell, avatar → `/profile`).
+/// user (subtitle, title, bell → notifications sheet, avatar → `/profile`).
 ///
 /// On a role's home tab ([isHome]) the subtitle is the greeting and the
 /// title the user's first name; elsewhere the subtitle is the tenant.
@@ -61,8 +62,8 @@ class TabScaffold extends ConsumerWidget {
           ? session.user.shortName.of(context)
           : title,
       actions: actions,
-      hasUnread: true,
-      onBellPressed: () => unawaited(showExpiryReminder(context, ref)),
+      hasUnread: ref.watch(inboxUnreadProvider),
+      onBellPressed: () => unawaited(showInbox(context)),
       avatarInitials: session?.user.initials ?? '',
       onAvatarPressed: () => unawaited(context.push(AppRoutes.profile)),
       body: body,

@@ -350,8 +350,8 @@ void main() {
       );
     });
 
-    testWidgets('TC-CERT-4-05 simulate and bell: banner, local notification, '
-        'notify.reminder', (tester) async {
+    testWidgets('TC-CERT-4-05 simulate: banner, local notification, '
+        'notify.reminder; bell lists the reminder', (tester) async {
       final c = await pumpClinicalEdge(tester, signedInAs: Role.learner);
       await _go(tester, c, AppRoutes.certs);
       await _tap(tester, find.byKey(const Key('certs.simulate')));
@@ -360,18 +360,26 @@ void main() {
       expect(_notifier(c).shown, hasLength(1));
       await _drainOverlays(tester);
 
+      // The bell opens the notifications sheet (no device notification).
       await _go(tester, c, AppRoutes.home);
       await _tap(tester, find.byTooltip('Notifications'));
-      expect(find.text('BLS certificate expires in 56 days'), findsOneWidget);
-      expect(_notifier(c).shown, hasLength(2));
-      await _drainOverlays(tester);
+      expect(
+        find.descendant(
+          of: find.byKey(const Key('inbox.sheet')),
+          matching: find.text('BLS certificate expires in 56 days'),
+        ),
+        findsOneWidget,
+      );
+      expect(_notifier(c).shown, hasLength(1));
+      await tester.tapAt(const Offset(20, 20));
+      await settle(tester);
 
       // Switch off: banner only, no device notification.
       await c.read(notificationsEnabledProvider.notifier).set(enabled: false);
       await _go(tester, c, AppRoutes.certs);
       await _tap(tester, find.byKey(const Key('certs.simulate')));
       expect(find.text('BLS certificate expires in 56 days'), findsOneWidget);
-      expect(_notifier(c).shown, hasLength(2));
+      expect(_notifier(c).shown, hasLength(1));
       await _drainOverlays(tester);
 
       final usage = await tester.runAsync(
@@ -379,7 +387,7 @@ void main() {
       );
       expect(
         usage!.where((e) => e.action == 'notify.reminder').map((e) => e.target),
-        ['BLS · 56 days', 'BLS · 56 days', 'BLS · 56 days'],
+        ['BLS · 56 days', 'BLS · 56 days'],
       );
     });
   });

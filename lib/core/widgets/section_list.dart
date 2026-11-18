@@ -5,8 +5,8 @@ import 'package:material_ui/material_ui.dart';
 const double twoColumnBreakpoint = 700;
 
 /// Scrolling list of dashboard sections with the staggered fade-up
-/// entrance. On wide screens (tablets) sections reflow into two columns,
-/// filled row by row in reading order (mirrors in RTL).
+/// entrance. On wide screens (tablets) sections reflow into two independent
+/// columns, alternating start/end in reading order (mirrors in RTL).
 class SectionList extends StatelessWidget {
   /// Creates the list.
   const new({
@@ -48,22 +48,28 @@ class SectionList extends StatelessWidget {
         ],
       );
     }
+    // Two independent columns (start: 1st, 3rd, …; end: 2nd, 4th, …), so a
+    // short section never leaves a gap beside a tall one.
+    Widget column(int parity) => Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        for (var i = parity; i < items.length; i += 2) ...<Widget>[
+          if (i > parity) SizedBox(height: gap),
+          items[i],
+        ],
+      ],
+    );
     return ListView(
       padding: padding,
       children: <Widget>[
-        for (var r = 0; r < items.length; r += 2) ...<Widget>[
-          if (r > 0) SizedBox(height: gap),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(child: items[r]),
-              SizedBox(width: gap),
-              Expanded(
-                child: r + 1 < items.length ? items[r + 1] : const SizedBox(),
-              ),
-            ],
-          ),
-        ],
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(child: column(0)),
+            SizedBox(width: gap),
+            Expanded(child: column(1)),
+          ],
+        ),
       ],
     );
   }

@@ -109,12 +109,6 @@ class _Hero extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          const PositionedDirectional(
-            start: 0,
-            end: 0,
-            bottom: 0,
-            child: EcgLine(height: 70, opacity: 0.3),
-          ),
           Padding(
             padding: const EdgeInsets.all(18),
             child: Column(
@@ -485,56 +479,89 @@ class _ScoreBars extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     const chartH = 96.0;
-    return Column(
+    const passLine = 0.8;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(
-          height: chartH,
-          child: Stack(
+        Expanded(
+          child: Column(
             children: <Widget>[
-              PositionedDirectional(
-                start: 0,
-                end: 0,
-                bottom: chartH * 0.8,
-                child: Row(
+              SizedBox(
+                height: chartH,
+                child: Stack(
                   children: <Widget>[
-                    Expanded(
+                    // Fills the chart so bars grow from its bottom edge and
+                    // their heights line up with the pass line.
+                    Positioned.fill(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          for (final (i, (_, s)) in scores.indexed)
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                child: TweenAnimationBuilder<double>(
+                                  tween: Tween<double>(begin: 0, end: s / 100),
+                                  duration: Motion.duration(
+                                    context,
+                                    Motion.barGrow +
+                                        Motion.listStagger * (i * 2),
+                                  ),
+                                  curve: Motion.standard,
+                                  builder: (context, v, _) => Container(
+                                    key: Key('home.scores.bar.$i'),
+                                    height: chartH * v,
+                                    decoration: BoxDecoration(
+                                      color: s >= 80 ? c.ok : c.brand,
+                                      borderRadius: const BorderRadius.vertical(
+                                        top: Radius.circular(6),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    // Drawn over the bars so the line stays visible.
+                    PositionedDirectional(
+                      start: 0,
+                      end: 0,
+                      bottom: chartH * passLine,
                       child: CustomPaint(
                         size: const Size.fromHeight(1),
                         painter: _DashPainter(color: c.muted),
                       ),
                     ),
-                    const SizedBox(width: 6),
-                    Text(
-                      passLabel,
-                      style: context.micro.copyWith(color: c.muted),
-                    ),
                   ],
                 ),
               ),
+              const SizedBox(height: 6),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  for (final (i, (_, s)) in scores.indexed)
+                  for (final (d, s) in scores)
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: TweenAnimationBuilder<double>(
-                          tween: Tween<double>(begin: 0, end: s / 100),
-                          duration: Motion.duration(
-                            context,
-                            Motion.barGrow + Motion.listStagger * (i * 2),
-                          ),
-                          curve: Motion.standard,
-                          builder: (context, v, _) => Container(
-                            height: chartH * v,
-                            decoration: BoxDecoration(
-                              color: s >= 80 ? c.ok : c.brand,
-                              borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(6),
-                              ),
+                      child: Column(
+                        children: <Widget>[
+                          LtrText(
+                            '$s%',
+                            textAlign: TextAlign.center,
+                            style: context.caption.copyWith(
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
-                        ),
+                          Text(
+                            d,
+                            textAlign: TextAlign.center,
+                            style: context.micro.copyWith(
+                              color: c.muted,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                 ],
@@ -542,32 +569,25 @@ class _ScoreBars extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 6),
-        Row(
-          children: <Widget>[
-            for (final (d, s) in scores)
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    LtrText(
-                      '$s%',
-                      textAlign: TextAlign.center,
-                      style: context.caption.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Text(
-                      d,
-                      textAlign: TextAlign.center,
-                      style: context.micro.copyWith(
-                        color: c.muted,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+        const SizedBox(width: 6),
+        // Pass label in its own gutter, centred on the line, so bars never
+        // cover it.
+        SizedBox(
+          height: chartH,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              FractionalTranslation(
+                translation: const Offset(0, 0.5),
+                child: Text(
+                  passLabel,
+                  key: const Key('home.scores.passLabel'),
+                  style: context.micro.copyWith(color: c.muted),
                 ),
               ),
-          ],
+              const SizedBox(height: chartH * passLine),
+            ],
+          ),
         ),
       ],
     );

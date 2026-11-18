@@ -2131,6 +2131,336 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{platform} {pct}'**
   String platformShare(String platform, String pct);
+
+  /// Notifications sheet title.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get inboxTitle;
+
+  /// Empty notifications title.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re all caught up'**
+  String get inboxEmptyTitle;
+
+  /// Empty notifications body.
+  ///
+  /// In en, this message translates to:
+  /// **'New reminders and updates appear here.'**
+  String get inboxEmptyBody;
+
+  /// Tag on an unseen notification.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get inboxNew;
+
+  /// Expired certificate notification title.
+  ///
+  /// In en, this message translates to:
+  /// **'{code} certificate has expired'**
+  String inboxCertExpired(String code);
+
+  /// Expired certificate notification body.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired on {date}. Upload a renewed certificate.'**
+  String inboxCertExpiredBody(String date);
+
+  /// Uploaded certificate pending verification.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is being verified'**
+  String inboxCertVerifying(String name);
+
+  /// Pending verification body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your training office will check it shortly.'**
+  String get inboxCertVerifyingBody;
+
+  /// Sign-off approved notification title.
+  ///
+  /// In en, this message translates to:
+  /// **'{checklist} approved'**
+  String inboxSignOffApproved(String checklist);
+
+  /// Sign-off rejected notification title.
+  ///
+  /// In en, this message translates to:
+  /// **'{checklist}: changes requested'**
+  String inboxSignOffRejected(String checklist);
+
+  /// Sign-off decision notification body.
+  ///
+  /// In en, this message translates to:
+  /// **'Decided by {name} on {date}.'**
+  String inboxSignOffDecidedBody(String name, String date);
+
+  /// Supervisor: new request title.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} requested sign-off'**
+  String inboxSignOffRequest(String name);
+
+  /// Supervisor: new request body.
+  ///
+  /// In en, this message translates to:
+  /// **'{checklist} · requested {date}'**
+  String inboxSignOffRequestBody(String checklist, String date);
+
+  /// Admin: cohort certificate expiring.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {code} expires in {days} days'**
+  String inboxCohortExpiry(String name, String code, int days);
+
+  /// Admin: cohort expiry body.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind them to renew before it lapses.'**
+  String get inboxCohortExpiryBody;
+
+  /// Admin: pending sign-offs.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 sign-off awaiting a supervisor} other{{count} sign-offs awaiting supervisors}}'**
+  String inboxCohortPending(int count);
+
+  /// Admin: pending sign-offs body.
+  ///
+  /// In en, this message translates to:
+  /// **'See the cohort dashboard for details.'**
+  String get inboxCohortPendingBody;
+
+  /// Help screen title.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & user guide'**
+  String get titleHelp;
+
+  /// Profile: help card subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Step-by-step guide for your role'**
+  String get helpEntryBody;
+
+  /// Help intro for learners.
+  ///
+  /// In en, this message translates to:
+  /// **'How to take courses and quizzes, keep certificates current and get competencies signed off.'**
+  String get helpIntroLearner;
+
+  /// Help intro for supervisors.
+  ///
+  /// In en, this message translates to:
+  /// **'How to review learners\' competency sign-off requests and record your decisions.'**
+  String get helpIntroSupervisor;
+
+  /// Help intro for admins.
+  ///
+  /// In en, this message translates to:
+  /// **'How to follow cohort progress, check the audit log and read usage insights.'**
+  String get helpIntroAdmin;
+
+  /// Help: role chip.
+  ///
+  /// In en, this message translates to:
+  /// **'Guide for: {role}'**
+  String helpGuideFor(String role);
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your home dashboard'**
+  String get helpLearnerHomeTitle;
+
+  /// Help topic body (one step per line).
+  ///
+  /// In en, this message translates to:
+  /// **'See your overall progress and tap Resume to continue the last lesson.\nThe orange banner warns you when a certificate is close to expiry.\nThe CPD/CME card shows credits earned this year against your target.'**
+  String get helpLearnerHomeBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Courses and lessons'**
+  String get helpLearnerLearnTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Learn to browse the catalogue and filter by category.\nOpen a course to see its lessons, then tap a lesson to study it.\nTap Mark complete at the end of each lesson. Finishing a course awards CPD credits.\nFor a paid course tap Buy, pay by card or Apple Pay, and keep the PDF receipt.'**
+  String get helpLearnerLearnBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes'**
+  String get helpLearnerAssessTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Assess to see the available quizzes and your best score.\nEach answer shows instant feedback with an explanation.\nYou pass with 80% or more, and you can retake a quiz at any time.\nSome quizzes unlock only after you finish the related course.'**
+  String get helpLearnerAssessBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Certifications and CPD'**
+  String get helpLearnerCertsTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Certs lists each certificate with its status: Valid, Renew soon, Verifying or Expired.\nTap Upload to add a certificate (PDF or photo); it shows as Verifying until checked.\nTurn on expiry reminders to be told 90, 60, 30 and 7 days before a certificate expires.\nThe CPD ring and ledger show where your credits came from.'**
+  String get helpLearnerCertsBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Competency sign-off'**
+  String get helpLearnerSignoffsTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Sign-offs to see your competency checklists.\nWhen you are ready, tap Request sign-off; it goes to your supervisor\'s queue.\nYou will see Approved or Changes requested, with your supervisor\'s comment.'**
+  String get helpLearnerSignoffsBody;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the bell to see certificate reminders and sign-off decisions.\nA dot on the bell means there is something you have not seen yet. Tap an item to open it.'**
+  String get helpLearnerBellBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your sign-off queue'**
+  String get helpSupervisorQueueTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your home shows pending requests, oldest first.\nThe cards at the top show how many are pending, how many arrived this month and your average turnaround.'**
+  String get helpSupervisorQueueBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing a request'**
+  String get helpSupervisorReviewTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a request to see the learner, the checklist and each skill.\nTap Approve (a standard comment is filled in for you) or Reject and explain what to practise.\nYour decision is recorded in the audit log; your comment is not.'**
+  String get helpSupervisorReviewBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Decided requests'**
+  String get helpSupervisorDecidedTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Decided to see your past decisions, newest first.'**
+  String get helpSupervisorDecidedBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Browsing courses'**
+  String get helpSupervisorLearnTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Learn to browse the same catalogue your learners use.\nLessons, quizzes and purchases are for learners only.'**
+  String get helpSupervisorLearnBody;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the bell to see new sign-off requests.\nTap a request to open its review.'**
+  String get helpSupervisorBellBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Cohort dashboard'**
+  String get helpAdminCohortTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your home shows key figures, course completion, progress by department and upcoming certificate expiries.\nThe learner list shows each person\'s progress and next expiring certificate.\nFigures labelled demo come from sample data.'**
+  String get helpAdminCohortBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Audit log'**
+  String get helpAdminAuditTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Important actions (quiz scores, sign-offs, purchases, uploads, role changes) are recorded and chained, so any tampering shows.\nThe banner at the top confirms the chain is intact.\nFilter by kind, period, user or action, or search by target.\nTap Export CSV to share the filtered log.'**
+  String get helpAdminAuditBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage insights'**
+  String get helpAdminInsightsTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'See lesson views by course, where learners drop off in BLS, pass rates and the iOS/Android split.\nInsights use usage events only, never the audit log.'**
+  String get helpAdminInsightsBody;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the bell to see cohort certificates that expire soon and sign-offs waiting for supervisors.'**
+  String get helpAdminBellBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get helpBellTitle;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile and settings'**
+  String get helpSettingsTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap your initials at the top of any tab to open Profile & settings.\nChoose English or العربية, and a light or dark theme.\nTurn expiry reminders on or off, and sign out.'**
+  String get helpSettingsBody;
+
+  /// Help topic title.
+  ///
+  /// In en, this message translates to:
+  /// **'About this demo'**
+  String get helpDemoTitle;
+
+  /// Help topic body.
+  ///
+  /// In en, this message translates to:
+  /// **'This demo uses sample data: any password works and no real payments are made.\nUse Demo role on the sign-in screen or in Profile to try the learner, supervisor and admin views.'**
+  String get helpDemoBody;
 }
 
 class _AppLocalizationsDelegate

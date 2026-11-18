@@ -182,7 +182,9 @@ void main() {
       final c = await pumpClinicalEdge(tester, db: db, signedInAs: Role.admin);
       await tester.tap(find.bySemanticsLabel('Profile and settings'));
       await settle(tester);
+      // Profile scrolls (help card); let the scroll settle before tapping.
       await tester.ensureVisible(find.byKey(const Key('profile.signOut')));
+      await settle(tester);
       await tester.tap(find.byKey(const Key('profile.signOut')));
       await settle(tester);
       expect(_location(c), AppRoutes.signIn);

@@ -9,6 +9,7 @@ import 'package:clinical_edge/core/persistence/latency_local_db.dart';
 import 'package:clinical_edge/core/sharing/file_sharer.dart';
 import 'package:clinical_edge/features/auth/presentation/session.dart';
 import 'package:clinical_edge/features/certifications/data/certificate_file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,10 +24,14 @@ Future<void> main() async {
       // 300–900 ms on list queries so loading states show (NFR).
       db: LatencyLocalDb(db, random: Random()),
       prefs: prefs,
-      notifier: PluginLocalNotifier(
-        channelName: lookupAppLocalizations(const Locale('en')).reminderChannel,
-      ),
-      filePicker: const PlatformCertificateFilePicker(),
+      // Web preview: no native notifications or picker; mocks stay in place.
+      notifier: kIsWeb
+          ? null
+          : PluginLocalNotifier(
+              channelName: lookupAppLocalizations(const Locale('en'))
+                  .reminderChannel,
+            ),
+      filePicker: kIsWeb ? null : const PlatformCertificateFilePicker(),
       sharer: const PluginFileSharer(),
     ),
   );

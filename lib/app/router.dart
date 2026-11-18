@@ -26,6 +26,7 @@ import 'package:clinical_edge/features/courses/presentation/catalogue_screen.dar
 import 'package:clinical_edge/features/courses/presentation/course_detail_screen.dart';
 import 'package:clinical_edge/features/courses/presentation/lesson_screen.dart';
 import 'package:clinical_edge/features/home/presentation/home_screen.dart';
+import 'package:clinical_edge/features/settings/presentation/help_screen.dart';
 import 'package:clinical_edge/features/settings/presentation/profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -120,6 +121,12 @@ List<RouteBase> buildRoutes({
       parentNavigatorKey: rootKey,
       pageBuilder: (context, state) =>
           pushPage(context, state, const ProfileScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.help,
+      parentNavigatorKey: rootKey,
+      pageBuilder: (context, state) =>
+          pushPage(context, state, const HelpScreen()),
     ),
   ];
 }

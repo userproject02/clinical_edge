@@ -1193,4 +1193,219 @@ class AppLocalizationsAr extends AppLocalizations {
   String platformShare(String platform, String pct) {
     return '$platform $pct';
   }
+
+  @override
+  String get inboxTitle => 'الإشعارات';
+
+  @override
+  String get inboxEmptyTitle => 'لا جديد لديك';
+
+  @override
+  String get inboxEmptyBody => 'ستظهر هنا التذكيرات والتحديثات الجديدة.';
+
+  @override
+  String get inboxNew => 'جديد';
+
+  @override
+  String inboxCertExpired(String code) {
+    return 'انتهت صلاحية شهادة $code';
+  }
+
+  @override
+  String inboxCertExpiredBody(String date) {
+    return 'انتهت في $date. ارفع شهادة مجدَّدة.';
+  }
+
+  @override
+  String inboxCertVerifying(String name) {
+    return 'جارٍ التحقق من $name';
+  }
+
+  @override
+  String get inboxCertVerifyingBody => 'سيراجعها مكتب التدريب قريبًا.';
+
+  @override
+  String inboxSignOffApproved(String checklist) {
+    return 'تم اعتماد $checklist';
+  }
+
+  @override
+  String inboxSignOffRejected(String checklist) {
+    return '$checklist: مطلوب تعديلات';
+  }
+
+  @override
+  String inboxSignOffDecidedBody(String name, String date) {
+    return 'قرار $name بتاريخ $date.';
+  }
+
+  @override
+  String inboxSignOffRequest(String name) {
+    return 'طلب $name اعتماد كفاءة';
+  }
+
+  @override
+  String inboxSignOffRequestBody(String checklist, String date) {
+    return '$checklist · طُلب في $date';
+  }
+
+  @override
+  String inboxCohortExpiry(String name, String code, int days) {
+    return '$name: تنتهي شهادة $code خلال $days يومًا';
+  }
+
+  @override
+  String get inboxCohortExpiryBody => 'ذكّرهم بالتجديد قبل انتهاء الصلاحية.';
+
+  @override
+  String inboxCohortPending(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count طلب اعتماد بانتظار المشرفين',
+      few: '$count طلبات اعتماد بانتظار المشرفين',
+      two: 'طلبا اعتماد بانتظار المشرفين',
+      one: 'طلب اعتماد واحد بانتظار المشرف',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get inboxCohortPendingBody => 'راجع لوحة الدفعة لمعرفة التفاصيل.';
+
+  @override
+  String get titleHelp => 'المساعدة ودليل الاستخدام';
+
+  @override
+  String get helpEntryBody => 'دليل خطوة بخطوة لدورك';
+
+  @override
+  String get helpIntroLearner =>
+      'كيف تتابع الدورات والاختبارات، وتحافظ على شهاداتك سارية، وتحصل على اعتماد كفاءاتك.';
+
+  @override
+  String get helpIntroSupervisor =>
+      'كيف تراجع طلبات اعتماد الكفاءات من المتدربين وتسجّل قراراتك.';
+
+  @override
+  String get helpIntroAdmin =>
+      'كيف تتابع تقدّم الدفعة، وتراجع سجل التدقيق، وتقرأ تحليلات الاستخدام.';
+
+  @override
+  String helpGuideFor(String role) {
+    return 'دليل: $role';
+  }
+
+  @override
+  String get helpLearnerHomeTitle => 'لوحتك الرئيسية';
+
+  @override
+  String get helpLearnerHomeBody =>
+      'اطّلع على تقدّمك العام واضغط «متابعة» لإكمال آخر درس.\nينبّهك الشريط البرتقالي عند اقتراب انتهاء صلاحية شهادة.\nتعرض بطاقة CPD/CME الساعات المكتسبة هذا العام مقارنةً بهدفك.';
+
+  @override
+  String get helpLearnerLearnTitle => 'الدورات والدروس';
+
+  @override
+  String get helpLearnerLearnBody =>
+      'افتح «التعلّم» لتصفّح الدورات وتصفيتها حسب الفئة.\nافتح دورة لترى دروسها، ثم اضغط على درس لدراسته.\nاضغط «وضع علامة مكتمل» في نهاية كل درس. إكمال الدورة يمنحك ساعات CPD.\nللدورات المدفوعة اضغط «شراء»، وادفع بالبطاقة أو Apple Pay، واحتفظ بإيصال PDF.';
+
+  @override
+  String get helpLearnerAssessTitle => 'الاختبارات';
+
+  @override
+  String get helpLearnerAssessBody =>
+      'افتح «التقييم» لترى الاختبارات المتاحة وأفضل نتيجة لك.\nتظهر لكل إجابة ملاحظة فورية مع شرح.\nتنجح بنسبة 80% أو أكثر، ويمكنك إعادة الاختبار في أي وقت.\nبعض الاختبارات لا تُفتح إلا بعد إكمال الدورة المرتبطة بها.';
+
+  @override
+  String get helpLearnerCertsTitle => 'الشهادات وساعات CPD';
+
+  @override
+  String get helpLearnerCertsBody =>
+      'تعرض «الشهادات» كل شهادة مع حالتها: سارية، أو جدّد قريبًا، أو قيد التحقق، أو منتهية.\nاضغط «رفع» لإضافة شهادة (PDF أو صورة)؛ تبقى «قيد التحقق» حتى تتم مراجعتها.\nفعّل تذكيرات الانتهاء لتصلك قبل 90 و60 و30 و7 أيام من انتهاء الشهادة.\nتوضح حلقة CPD والسجل مصدر ساعاتك.';
+
+  @override
+  String get helpLearnerSignoffsTitle => 'اعتماد الكفاءات';
+
+  @override
+  String get helpLearnerSignoffsBody =>
+      'افتح «الاعتمادات» لترى قوائم كفاءاتك.\nعندما تكون جاهزًا اضغط «طلب الاعتماد»؛ يصل الطلب إلى قائمة مشرفك.\nستظهر لك «معتمد» أو «مطلوب تعديلات» مع تعليق المشرف.';
+
+  @override
+  String get helpLearnerBellBody =>
+      'اضغط على الجرس لرؤية تذكيرات الشهادات وقرارات الاعتماد.\nتعني النقطة على الجرس وجود ما لم تطّلع عليه بعد. اضغط على أي عنصر لفتحه.';
+
+  @override
+  String get helpSupervisorQueueTitle => 'قائمة طلبات الاعتماد';
+
+  @override
+  String get helpSupervisorQueueBody =>
+      'تعرض صفحتك الرئيسية الطلبات المعلّقة، الأقدم أولًا.\nتوضح البطاقات في الأعلى عدد الطلبات المعلّقة، وما وصل هذا الشهر، ومتوسط مدة الإنجاز.';
+
+  @override
+  String get helpSupervisorReviewTitle => 'مراجعة طلب';
+
+  @override
+  String get helpSupervisorReviewBody =>
+      'اضغط على طلب لترى المتدرب وقائمة الكفاءة وكل مهارة.\nاضغط «اعتماد» (يُملأ تعليق قياسي تلقائيًا) أو «رفض» ووضّح ما يجب التدرّب عليه.\nيُسجَّل قرارك في سجل التدقيق، أما تعليقك فلا يُسجَّل.';
+
+  @override
+  String get helpSupervisorDecidedTitle => 'الطلبات المحسومة';
+
+  @override
+  String get helpSupervisorDecidedBody =>
+      'افتح «المنجزة» لترى قراراتك السابقة، الأحدث أولًا.';
+
+  @override
+  String get helpSupervisorLearnTitle => 'تصفّح الدورات';
+
+  @override
+  String get helpSupervisorLearnBody =>
+      'افتح «التعلّم» لتصفّح الدورات نفسها التي يستخدمها المتدربون.\nالدروس والاختبارات والشراء متاحة للمتدربين فقط.';
+
+  @override
+  String get helpSupervisorBellBody =>
+      'اضغط على الجرس لرؤية طلبات الاعتماد الجديدة.\nاضغط على طلب لفتح مراجعته.';
+
+  @override
+  String get helpAdminCohortTitle => 'لوحة الدفعة';
+
+  @override
+  String get helpAdminCohortBody =>
+      'تعرض صفحتك الرئيسية المؤشرات الرئيسية، ونسب إكمال الدورات، والتقدّم حسب القسم، والشهادات التي تقترب من الانتهاء.\nتعرض قائمة المتدربين تقدّم كل شخص وأقرب شهادة تنتهي لديه.\nالأرقام الموسومة بـ«تجريبي» مأخوذة من بيانات نموذجية.';
+
+  @override
+  String get helpAdminAuditTitle => 'سجل التدقيق';
+
+  @override
+  String get helpAdminAuditBody =>
+      'تُسجَّل الإجراءات المهمة (نتائج الاختبارات، والاعتمادات، والمشتريات، ورفع الشهادات، وتغيير الأدوار) في سلسلة مترابطة تكشف أي تلاعب.\nيؤكد الشريط في الأعلى سلامة السلسلة.\nصفِّ حسب النوع أو الفترة أو المستخدم أو الإجراء، أو ابحث في الهدف.\nاضغط «تصدير CSV» لمشاركة السجل بعد التصفية.';
+
+  @override
+  String get helpAdminInsightsTitle => 'تحليلات الاستخدام';
+
+  @override
+  String get helpAdminInsightsBody =>
+      'اطّلع على مشاهدات الدروس حسب الدورة، ومواضع توقف المتدربين في BLS، ونسب النجاح، وتوزيع iOS وAndroid.\nتعتمد التحليلات على أحداث الاستخدام فقط، ولا تقرأ سجل التدقيق.';
+
+  @override
+  String get helpAdminBellBody =>
+      'اضغط على الجرس لرؤية شهادات الدفعة التي تقترب من الانتهاء وطلبات الاعتماد التي تنتظر المشرفين.';
+
+  @override
+  String get helpBellTitle => 'الإشعارات';
+
+  @override
+  String get helpSettingsTitle => 'الملف الشخصي والإعدادات';
+
+  @override
+  String get helpSettingsBody =>
+      'اضغط على الأحرف الأولى من اسمك أعلى أي تبويب لفتح «الملف والإعدادات».\nاختر English أو العربية، والمظهر الفاتح أو الداكن.\nفعّل تذكيرات الانتهاء أو أوقفها، وسجّل الخروج.';
+
+  @override
+  String get helpDemoTitle => 'عن هذا الإصدار التجريبي';
+
+  @override
+  String get helpDemoBody =>
+      'يستخدم هذا الإصدار بيانات نموذجية: أي كلمة مرور تعمل ولا تتم أي مدفوعات حقيقية.\nاستخدم «دور تجريبي» في شاشة الدخول أو في الملف الشخصي لتجربة واجهات المتدرب والمشرف والمسؤول.';
 }
