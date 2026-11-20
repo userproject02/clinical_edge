@@ -262,7 +262,11 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   Expanded(
                     child: Text(
                       l.checkoutLockNote,
-                      style: context.caption.copyWith(color: c.muted),
+                      // 500 keeps 4.5:1 on FreeType (Android, Linux CI).
+                      style: context.caption.copyWith(
+                        color: c.muted,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],

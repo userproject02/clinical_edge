@@ -204,7 +204,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       Text(
         l.signInDemoNote,
         textAlign: TextAlign.center,
-        style: context.caption.copyWith(color: c.muted),
+        // 500, not the caption's 400: thin 12 px muted strokes render too
+        // light on FreeType (Android, Linux CI) to keep 4.5:1.
+        style: context.caption.copyWith(
+          color: c.muted,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     ];
     return Container(
